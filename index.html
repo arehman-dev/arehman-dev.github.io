@@ -2,218 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ironman's Portfolio</title>
-  <style>
-    :root {
-      --bg-color: #fdfdfd;
-      --text-color: #111;
-      --primary-color: #0f0;
-      --accent-color: #555;
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #0a0a0a;
-      --text-color: #eee;
-      --primary-color: #0f0;
-      --accent-color: #999;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: monospace;
-      background: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    nav {
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: var(--bg-color);
-      border-bottom: 1px solid var(--accent-color);
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0.5rem 2rem;
-      z-index: 999;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .nav-buttons a {
-      text-decoration: none;
-      color: var(--text-color);
-      border: 1px solid transparent;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-
-    .nav-buttons a:hover {
-      border-color: var(--text-color);
-    }
-
-    .resume-button {
-      border: 1px solid var(--text-color);
-      background: none;
-      color: var(--text-color);
-    }
-
-    .resume-button:hover {
-      background: var(--text-color);
-      color: var(--bg-color);
-    }
-
-    .theme-toggle {
-      margin-left: 1rem;
-      background: none;
-      border: none;
-      color: var(--text-color);
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    section {
-      padding: 6rem 2rem 4rem 6rem;
-      min-height: 100vh;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    /* Social Icons */
-    .social-bar {
-      position: fixed;
-      bottom: 2rem;
-      left: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .social-bar a {
-      font-size: 1.5rem;
-      color: var(--text-color);
-      border: 1px solid var(--text-color);
-      border-radius: 50%;
-      width: 2.2rem;
-      height: 2.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
-    }
-
-    .social-bar a:hover {
-      transform: scale(1.15);
-    }
-
-    /* Simple Slide Animation (Fast Start, Slow End) */
-    .slide-in {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.5s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.4, 1);
-    }
-
-    .slide-in.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ironman's Landing Page</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body data-theme="dark">
+  <!-- THEME TOGGLE BUTTON -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-buttons">
-      <a href="#about">About Me</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">SkillSet</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-      <a href="resume.pdf" class="resume-button" target="_blank">Resume</a>
-    </div>
-    <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon">🌙</button>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#about" class="nav-link">About Me</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#skills" class="nav-link">SkillSet</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a href="resume.pdf" target="_blank" class="resume-button">Resume</a></li>
+    </ul>
   </nav>
 
-  <!-- Social Icons -->
-  <div class="social-bar">
-    <a href="#" title="GitHub" target="_blank">🐙</a>
-    <a href="#" title="LinkedIn" target="_blank">💼</a>
-    <a href="#" title="Twitter" target="_blank">🐦</a>
-    <a href="#" title="Dev.to" target="_blank">💻</a>
-    <a href="#" title="Medium" target="_blank">✍️</a>
-    <a href="#" title="Reddit" target="_blank">👽</a>
-    <a href="#" title="CodePen" target="_blank">🧪</a>
+  <!-- SOCIAL ICONS -->
+  <div class="social-icons">
+    <a href="#" aria-label="GitHub" class="icon github"></a>
+    <a href="#" aria-label="LinkedIn" class="icon linkedin"></a>
+    <a href="#" aria-label="Twitter" class="icon twitter"></a>
+    <a href="#" aria-label="Dev.to" class="icon devto"></a>
+    <a href="#" aria-label="Medium" class="icon medium"></a>
+    <a href="#" aria-label="Reddit" class="icon reddit"></a>
+    <a href="#" aria-label="Codepen" class="icon codepen"></a>
   </div>
 
-  <!-- Sections -->
-  <section id="about" class="slide-in">
-    <h1>About Me</h1>
-    <p>I'm Ironman, a resilient developer and a servant of purpose. This space reflects my digital and moral journey.</p>
+  <!-- SECTIONS -->
+  <section id="about" class="page-section"><h1>About Me</h1></section>
+  <section id="projects" class="page-section"><h1>Projects</h1></section>
+  <section id="skills" class="page-section"><h1>SkillSet</h1></section>
+  <section id="experience" class="page-section"><h1>Experience</h1></section>
+  <section id="contact" class="page-section"><h1>Contact</h1></section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Ironman. Built with 💻, Strength, and Sincerity. | <a href="#privacy">Privacy</a></p>
+  </footer>
+
+  <!-- PRIVACY SECTION -->
+  <section id="privacy" class="page-section">
+    <h2>Privacy Policy</h2>
+    <p>This is a personal portfolio website. No cookies or personal data are collected. Any links to external services (e.g., GitHub, LinkedIn) are governed by their respective policies.</p>
   </section>
 
-  <section id="projects" class="slide-in">
-    <h1>Projects</h1>
-    <p>Coming soon: A showcase of hand-built tools, apps, and pages.</p>
-  </section>
-
-  <section id="skills" class="slide-in">
-    <h1>SkillSet</h1>
-    <p>HTML, CSS, JS, Git, Linux, and strong fundamentals in discipline and logic.</p>
-  </section>
-
-  <section id="experience" class="slide-in">
-    <h1>Experience</h1>
-    <p>From battles with trauma to mastering systems — a journey of strength and survival.</p>
-  </section>
-
-  <section id="contact" class="slide-in">
-    <h1>Contact</h1>
-    <p>Reach me through the icons below, or email me directly.</p>
-  </section>
-
-  <!-- JavaScript: Theme + Animation -->
-  <script>
-    // THEME LOGIC
-    const icon = document.getElementById('theme-icon');
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    icon.textContent = savedTheme === 'light' ? '🌙' : '🌞';
-
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      icon.textContent = next === 'light' ? '🌙' : '🌞';
-    }
-
-    // SCROLL SLIDE-IN ANIMATION
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.slide-in').forEach(section => {
-      observer.observe(section);
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
