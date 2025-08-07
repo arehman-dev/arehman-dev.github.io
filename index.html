@@ -1,46 +1,50 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Ironman's Portfolio</title>
   <style>
     :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --accent-color: #0f0;
+      --bg-color: #fdfdfd;
+      --text-color: #111;
+      --primary-color: #0f0;
+      --accent-color: #555;
     }
 
     [data-theme="dark"] {
-      --bg-color: #000000;
-      --text-color: #ffffff;
-      --accent-color: #0f0;
+      --bg-color: #0a0a0a;
+      --text-color: #eee;
+      --primary-color: #0f0;
+      --accent-color: #999;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
       font-family: monospace;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* Top Navbar */
     nav {
       width: 100%;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--text-color);
-      position: sticky;
+      position: fixed;
       top: 0;
-      background-color: var(--bg-color);
-      z-index: 1000;
+      left: 0;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--accent-color);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0.5rem 2rem;
+      z-index: 999;
     }
 
     .nav-buttons {
@@ -51,100 +55,165 @@
     .nav-buttons a {
       text-decoration: none;
       color: var(--text-color);
+      border: 1px solid transparent;
       padding: 0.5rem 1rem;
-      border: 1px solid var(--text-color);
-      border-radius: 5px;
-      transition: background 0.2s;
+      border-radius: 4px;
+      transition: all 0.2s;
     }
 
     .nav-buttons a:hover {
-      background-color: var(--text-color);
+      border-color: var(--text-color);
+    }
+
+    .resume-button {
+      border: 1px solid var(--text-color);
+      background: none;
+      color: var(--text-color);
+    }
+
+    .resume-button:hover {
+      background: var(--text-color);
       color: var(--bg-color);
     }
 
     .theme-toggle {
+      margin-left: 1rem;
       background: none;
       border: none;
       color: var(--text-color);
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       cursor: pointer;
-      padding: 0.5rem;
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 4rem 2rem 2rem 6rem; /* Added left padding to avoid social overlap */
+    section {
+      padding: 6rem 2rem 4rem 6rem;
+      min-height: 100vh;
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    h1 {
+      font-size: 2.5rem;
     }
 
-    .hero p {
-      font-size: 1.25rem;
-      line-height: 1.8;
-    }
-
-    /* Social Icons - bottom left */
+    /* Social Icons */
     .social-bar {
       position: fixed;
       bottom: 2rem;
       left: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
-      z-index: 999;
+      gap: 1rem;
     }
 
     .social-bar a {
-      text-decoration: none;
-      color: var(--text-color);
       font-size: 1.5rem;
-      transition: transform 0.2s;
+      color: var(--text-color);
+      border: 1px solid var(--text-color);
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
     }
 
     .social-bar a:hover {
-      transform: scale(1.2);
+      transform: scale(1.15);
+    }
+
+    /* Simple Slide Animation (Fast Start, Slow End) */
+    .slide-in {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.5s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.4, 1);
+    }
+
+    .slide-in.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <!-- Top Navbar -->
-  <nav>
-    <!-- Left: Theme Toggle Icon -->
-    <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon">🌙</button>
 
-    <!-- Right: Nav Buttons -->
+  <!-- Navbar -->
+  <nav>
     <div class="nav-buttons">
       <a href="#about">About Me</a>
       <a href="#projects">Projects</a>
-      <a href="#resume">Resume</a>
+      <a href="#skills">SkillSet</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a href="resume.pdf" class="resume-button" target="_blank">Resume</a>
     </div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon">🌙</button>
   </nav>
 
-  <!-- Left Social Icons (near bottom) -->
+  <!-- Social Icons -->
   <div class="social-bar">
-    <a href="https://github.com/ironm51" title="GitHub" target="_blank">🐙</a>
-    <a href="https://linkedin.com" title="LinkedIn" target="_blank">💼</a>
-    <a href="https://twitter.com" title="Twitter" target="_blank">🐦</a>
-    <a href="mailto:ironman@example.com" title="Email" target="_blank">✉️</a>
+    <a href="#" title="GitHub" target="_blank">🐙</a>
+    <a href="#" title="LinkedIn" target="_blank">💼</a>
+    <a href="#" title="Twitter" target="_blank">🐦</a>
+    <a href="#" title="Dev.to" target="_blank">💻</a>
+    <a href="#" title="Medium" target="_blank">✍️</a>
+    <a href="#" title="Reddit" target="_blank">👽</a>
+    <a href="#" title="CodePen" target="_blank">🧪</a>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Hi, I’m Ironman 👋</h1>
-    <p>Welcome to my digital space where I showcase my work, thoughts, and aspirations. I'm building things that matter and refining my character with purpose.</p>
+  <!-- Sections -->
+  <section id="about" class="slide-in">
+    <h1>About Me</h1>
+    <p>I'm Ironman, a resilient developer and a servant of purpose. This space reflects my digital and moral journey.</p>
   </section>
 
+  <section id="projects" class="slide-in">
+    <h1>Projects</h1>
+    <p>Coming soon: A showcase of hand-built tools, apps, and pages.</p>
+  </section>
+
+  <section id="skills" class="slide-in">
+    <h1>SkillSet</h1>
+    <p>HTML, CSS, JS, Git, Linux, and strong fundamentals in discipline and logic.</p>
+  </section>
+
+  <section id="experience" class="slide-in">
+    <h1>Experience</h1>
+    <p>From battles with trauma to mastering systems — a journey of strength and survival.</p>
+  </section>
+
+  <section id="contact" class="slide-in">
+    <h1>Contact</h1>
+    <p>Reach me through the icons below, or email me directly.</p>
+  </section>
+
+  <!-- JavaScript: Theme + Animation -->
   <script>
-    // Apply saved theme
+    // THEME LOGIC
+    const icon = document.getElementById('theme-icon');
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('theme-icon').textContent = savedTheme === 'light' ? '🌙' : '🌞';
+    icon.textContent = savedTheme === 'light' ? '🌙' : '🌞';
 
-    // Toggle theme + icon
     function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      cons
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      icon.textContent = next === 'light' ? '🌙' : '🌞';
+    }
+
+    // SCROLL SLIDE-IN ANIMATION
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.slide-in').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
