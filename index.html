@@ -1,56 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ironman's Landing Page</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body data-theme="dark">
-  <!-- THEME TOGGLE BUTTON -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ironman's Portfolio - Purpose-driven developer committed to excellence">
+  <meta name="author" content="Ironman">
+  <meta name="keywords" content="developer, portfolio, web development, HTML, CSS, JavaScript, Linux, system administration">
+  <meta property="og:title" content="Ironman's Portfolio">
+  <meta property="og:description" content="Purpose-driven developer committed to excellence">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ironm51.github.io">
+  <meta property="og:image" content="https://ironm51.github.io/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ironman's Portfolio">
+  <meta name="twitter:description" content="Purpose-driven developer committed to excellence">
+  <meta name="twitter:image" content="https://ironm51.github.io/og-image.jpg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <title>Ironman's Portfolio</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #fdfdfd;
+      --text-color: #111;
+      --accent-color: #555;
+    }
 
-  <!-- NAVIGATION BAR -->
-  <nav class="navbar">
-    <ul>
-      <li><a href="#about" class="nav-link">About Me</a></li>
-      <li><a href="#projects" class="nav-link">Projects</a></li>
-      <li><a href="#skills" class="nav-link">SkillSet</a></li>
-      <li><a href="#experience" class="nav-link">Experience</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-      <li><a href="resume.pdf" target="_blank" class="resume-button">Resume</a></li>
-    </ul>
+    [data-theme="dark"] {
+      --bg-color: #0a0a0a;
+      --text-color: #eee;
+      --accent-color: #999;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: monospace;
+      font-display: swap;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--accent-color);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0.5rem 2rem;
+      z-index: 999;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-buttons a {
+      text-decoration: none;
+      color: var(--text-color);
+      border: 2px solid transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .nav-buttons a:focus,
+    .nav-buttons a:hover {
+      border-color: var(--text-color);
+      outline: none;
+    }
+
+    .resume-button {
+      border: 2px solid var(--text-color);
+      background: none;
+      color: var(--text-color);
+    }
+
+    .resume-button:hover {
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
+
+    .theme-toggle {
+      margin-left: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.3rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .theme-toggle:focus {
+      outline: none;
+    }
+
+    .theme-toggle:active {
+      outline: none;
+    }
+
+    section {
+      padding: 6rem 2rem 4rem 6rem;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    /* Social Icons - FIXED */
+    .social-bar {
+      position: fixed;
+      bottom: 4rem;
+      left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 100;
+    }
+
+    .social-bar a {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      border: 1px solid var(--text-color);
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform: scale(1);
+    }
+
+    .social-bar a i {
+      font-family: "Font Awesome 6 Brands" !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      pointer-events: none;
+    }
+
+    .social-bar a:hover {
+      transform: scale(1.2);
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border-color: var(--text-color);
+    }
+
+    .social-bar a:active {
+      transform: scale(0.95);
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 700px) {
+      nav {
+        padding: 0.5rem 1rem;
+      }
+
+      section {
+        padding: 5rem 1rem 2rem 1rem;
+      }
+
+      .social-bar {
+        left: 0.5rem;
+        bottom: 2rem;
+      }
+    }
+
+    /* Simple Slide Animation (Fast Start, Slow End) */
+    .slide-in {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.5s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.4, 1);
+    }
+
+    .slide-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      padding: 8px;
+      text-decoration: none;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      z-index: 1000;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-buttons">
+      <a href="#about">About Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skill Set</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a href="resume.pdf" class="resume-button" target="_blank" rel="noopener">Resume</a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon" aria-label="Toggle dark/light theme"
+      aria-pressed="false">🌙</button>
   </nav>
 
-  <!-- SOCIAL ICONS -->
-  <div class="social-icons">
-    <a href="#" aria-label="GitHub" class="icon github"></a>
-    <a href="#" aria-label="LinkedIn" class="icon linkedin"></a>
-    <a href="#" aria-label="Twitter" class="icon twitter"></a>
-    <a href="#" aria-label="Dev.to" class="icon devto"></a>
-    <a href="#" aria-label="Medium" class="icon medium"></a>
-    <a href="#" aria-label="Reddit" class="icon reddit"></a>
-    <a href="#" aria-label="Codepen" class="icon codepen"></a>
+  <!-- Social Icons -->
+  <div class="social-bar">
+    <a href="https://github.com/ironm51" aria-label="GitHub" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://linkedin.com/in/ironm51" aria-label="LinkedIn" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://twitter.com/ironm51" aria-label="Twitter" target="_blank" rel="noopener">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://dev.to/ironm51" aria-label="Dev.to" target="_blank" rel="noopener">
+      <i class="fab fa-dev"></i>
+    </a>
+    <a href="https://medium.com/@ironm51" aria-label="Medium" target="_blank" rel="noopener">
+      <i class="fab fa-medium"></i>
+    </a>
+    <a href="https://reddit.com/u/ironm51" aria-label="Reddit" target="_blank" rel="noopener">
+      <i class="fab fa-reddit"></i>
+    </a>
+    <a href="https://codepen.io/ironm51" aria-label="CodePen" target="_blank" rel="noopener">
+      <i class="fab fa-codepen"></i>
+    </a>
   </div>
 
-  <!-- SECTIONS -->
-  <section id="about" class="page-section"><h1>About Me</h1></section>
-  <section id="projects" class="page-section"><h1>Projects</h1></section>
-  <section id="skills" class="page-section"><h1>SkillSet</h1></section>
-  <section id="experience" class="page-section"><h1>Experience</h1></section>
-  <section id="contact" class="page-section"><h1>Contact</h1></section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Ironman. Built with 💻, Strength, and Sincerity. | <a href="#privacy">Privacy</a></p>
-  </footer>
-
-  <!-- PRIVACY SECTION -->
-  <section id="privacy" class="page-section">
-    <h2>Privacy Policy</h2>
-    <p>This is a personal portfolio website. No cookies or personal data are collected. Any links to external services (e.g., GitHub, LinkedIn) are governed by their respective policies.</p>
+  <!-- Sections -->
+  <section id="about" class="slide-in">
+    <main id="main">
+      <h1>About Me</h1>
+      <p>
+        I am Ironman — a purpose-driven individual, committed to living as a conscious ʿabd of Allah, guided by the
+        Qur'ān and the authentic Sunnah. My values are anchored in moral clarity, modesty (ḥayāʾ), and the pursuit of
+        excellence (iḥsān) in every sphere of life. Through discipline, resilience, and a refusal to compromise on
+        principles, I strive to cultivate a life built upon purpose and integrity. I approach technology as I approach
+        life —
+        precise in execution, principled in decisions, and steadfast in responsibility.
+      </p>
+    </main>
   </section>
 
-  <script src="script.js"></script>
+  <section id="projects" class="slide-in">
+    <h1>Projects</h1>
+    <p>My projects are designed with intentional simplicity, technical efficiency, and clean design principles. Each
+      project is crafted to serve a meaningful purpose — whether it is solving practical problems, enhancing
+      productivity, or creating resources for others to benefit from. I focus on maintainability, performance, and a
+      user-first mindset.</p>
+  </section>
+
+  <section id="skills" class="slide-in">
+    <h1>Skill Set</h1>
+    <p>My core competencies include HTML, CSS, JavaScript, Git, and Linux, alongside growing proficiency in modern web
+      development practices. In addition, I bring strong expertise in system administration — managing Linux-based
+      environments, configuring services, ensuring security, and maintaining operational reliability. My approach blends
+      technical skill with structured thinking, disciplined planning, and an ability to adapt to evolving challenges.
+    </p>
+  </section>
+
+  <section id="experience" class="slide-in">
+    <h1>Experience</h1>
+    <p>My professional and personal journey has been shaped by overcoming significant adversity and transforming
+      challenges into growth. I have navigated the demands of high-responsibility roles, mastered complex systems, and
+      maintained composure in high-pressure situations. This resilience allows me to consistently deliver dependable
+      results while upholding my values.</p>
+  </section>
+
+  <section id="contact" class="slide-in">
+    <h1>Contact</h1>
+    <p>If you value purposeful work, principled conduct, and technical precision, I welcome meaningful collaboration.
+      Whether discussing projects, sharing knowledge, or exploring opportunities, I seek connections grounded in
+      mutual respect and a shared commitment to excellence.</p>
+  </section>
+
+  <!-- JavaScript: Theme + Animation -->
+  <script>
+    // THEME LOGIC
+    document.addEventListener('DOMContentLoaded', function () {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      icon.textContent = savedTheme === 'light' ? '🌙' : '💡';
+
+      window.toggleTheme = function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        icon.textContent = next === 'light' ? '🌙' : '💡';
+        icon.setAttribute('aria-pressed', next === 'dark');
+      };
+
+      // SCROLL SLIDE-IN ANIMATION
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.slide-in').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
+
 </html>
