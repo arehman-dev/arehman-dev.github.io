@@ -1,6 +1,6 @@
 # Abdul Rehman - Portfolio
 
-A modern, responsive portfolio website showcasing my journey as a purpose-driven developer committed to excellence.
+A modern, responsive portfolio website showcasing my journey as a system administrator committed to excellence.
 
 ## 🌟 Features
 
@@ -92,10 +92,10 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **Email**: contact@arehman-dev.com
+- **Email**: arehman.sysadm@proton.me
 - **LinkedIn**: [arehman-dev](https://linkedin.com/in/arehman-dev)
 - **GitHub**: [arehman-dev](https://github.com/arehman-dev)
 
 ---
 
-*Built with ❤️ and commitment to excellence*
+*Built with 🤍 and commitment to excellence*
