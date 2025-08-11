@@ -723,3 +723,42 @@ section:first-of-type {
         left: 100%;
     }
 }
+
+/* Footer Styles */
+.footer {
+    padding: var(--spacing-3xl) var(--container-padding);
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+}
+
+.footer-text {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    margin-bottom: 0;
+    font-family: var(--font-mono);
+}
+
+.footer-text .text-accent {
+    color: var(--accent-color);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Dark theme footer adjustments */
+[data-theme="dark"] .footer {
+    background: var(--bg-secondary);
+    border-top-color: var(--border-color);
+}
