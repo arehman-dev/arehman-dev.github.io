@@ -200,7 +200,8 @@ p {
 }
 
 .contact-header {
-    margin-bottom: var(--spacing-2xl); /* Changed from --spacing-5xl to --spacing-2xl */
+    margin-bottom: var(--spacing-2xl);
+    /* Changed from --spacing-5xl to --spacing-2xl */
 }
 
 /* Enhanced Badge System */
