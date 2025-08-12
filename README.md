@@ -92,7 +92,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **Email**: arehman.sysadm@proton.me
+- **Email**: arehman.sysadm@pm.me
 - **LinkedIn**: [arehman-dev](https://linkedin.com/in/arehman-dev)
 - **GitHub**: [arehman-dev](https://github.com/arehman-dev)
 
