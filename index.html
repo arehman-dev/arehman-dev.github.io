@@ -137,75 +137,138 @@
   <section id="projects" class="slide-in">
     <div class="container">
       <h2 class="text-center">Featured Projects</h2>
-      <p class="text-center mb-lg">Crafted with intentional simplicity, technical efficiency, and clean design
-        principles.</p>
+      <p class="text-center mb-lg">Crafted with intentional simplicity, technical efficiency, and clean design principles.</p>
 
-      <div class="grid grid-2">
-        <div class="card project-card slide-in stagger-1">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Portfolio Website</h3>
-              <p class="project-description">
-                A responsive, accessible portfolio built with semantic HTML, modern CSS, and vanilla JavaScript.
-                Features dark/light theme switching and smooth animations.
-              </p>
+      <!-- Carousel Container -->
+      <div class="projects-carousel-wrapper">
+        <button class="carousel-nav carousel-nav-left" id="prevBtn" aria-label="Previous project">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="projects-carousel" id="projectsCarousel">
+          <!-- Project Card 1 - Portfolio Website (Current/Latest) -->
+          <div class="project-card slide-in">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">Portfolio Website</h3>
+                <p class="project-description">
+                  A responsive, accessible portfolio built with semantic HTML, modern CSS, and vanilla JavaScript. 
+                  Features dark/light theme switching and smooth animations.
+                </p>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="badge tech-frontend">HTML5</span>
+              <span class="badge tech-frontend">CSS3</span>
+              <span class="badge tech-backend">JavaScript</span>
+              <span class="badge">Responsive</span>
+              <span class="badge">A11y</span>
+            </div>
+            <div class="project-links">
+              <a href="https://arehman-dev.github.io" class="btn btn-primary" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="https://github.com/arehman-dev/arehman-dev.github.io" class="btn btn-outline" target="_blank">
+                <i class="fab fa-github"></i> Source
+              </a>
             </div>
           </div>
-          <div class="project-tags">
-            <span class="badge tech-frontend">HTML5</span>
-            <span class="badge tech-frontend">CSS3</span>
-            <span class="badge tech-backend">JavaScript</span>
-            <span class="badge">Responsive</span>
-            <span class="badge">A11y</span>
-          </div>
-          <div class="project-links">
-            <a href="https://arehman-dev.github.io" class="btn btn-primary" target="_blank">
-              <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-            <a href="https://github.com/arehman-dev/arehman-dev.github.io" class="btn btn-outline" target="_blank">
-              <i class="fab fa-github"></i> Source
-            </a>
-          </div>
-        </div>
 
-        <div class="card project-card slide-in stagger-2">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Linux System Scripts</h3>
-              <p class="project-description">
-                Collection of bash scripts for system administration, automation, and development workflow
-                optimization. Focus on security and reliability.
-              </p>
+          <!-- Project Card 2 - My Scripts Collection -->
+          <div class="project-card slide-in">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">🛠️ My Scripts Collection</h3>
+                <p class="project-description">
+                  A well-organized repository of automation scripts and utilities across multiple programming languages. 
+                  Features structured naming conventions and organized directories for development workflow optimization.
+                </p>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="badge tech-backend">Bash</span>
+              <span class="badge tech-backend">Python</span>
+              <span class="badge tech-backend">JavaScript</span>
+              <span class="badge tech-backend">C++</span>
+              <span class="badge">Automation</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/arehman-dev/my-scripts" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> View Repository
+              </a>
             </div>
           </div>
-          <div class="project-tags">
-            <span class="badge tech-backend">Bash</span>
-            <span class="badge tech-backend">Linux</span>
-            <span class="badge">SysAdmin</span>
-            <span class="badge">Automation</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/arehman-dev" class="btn btn-secondary" target="_blank">
-              <i class="fab fa-github"></i> View Scripts
-            </a>
-          </div>
-        </div>
 
-        <div class="card project-card slide-in stagger-3">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Coming Soon</h3>
-              <p class="project-description">
-                Currently working on new projects that align with my values and technical goals.
-                Stay tuned for updates on meaningful digital solutions.
-              </p>
+          <!-- Project Card 3 - Weather Extension (Upcoming) -->
+          <div class="project-card slide-in">
+            <div class="project-status upcoming">Planning Phase</div>
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">🌤️ Weather Extension</h3>
+                <p class="project-description">
+                  Browser extension providing real-time weather updates and forecasts. Clean interface with 
+                  location-based weather data and customizable notification settings.
+                </p>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="badge tech-frontend">JavaScript</span>
+              <span class="badge">Web APIs</span>
+              <span class="badge">Browser Extension</span>
+              <span class="badge secondary">Upcoming</span>
             </div>
           </div>
-          <div class="project-tags">
-            <span class="badge">In Development</span>
-            <span class="badge">Planning</span>
+
+          <!-- Project Card 4 - Home Server (Upcoming) -->
+          <div class="project-card slide-in">
+            <div class="project-status development">In Development</div>
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">🏠 Home Server Setup</h3>
+                <p class="project-description">
+                  Personal home server infrastructure for media streaming, file sharing, and network services. 
+                  Focus on security, automation, and efficient resource management.
+                </p>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="badge tech-backend">Linux</span>
+              <span class="badge">Docker</span>
+              <span class="badge">Networking</span>
+              <span class="badge">Security</span>
+              <span class="badge secondary">In Progress</span>
+            </div>
+          </div>
+
+          <!-- Project Card 5 - Muslim Toolkit Android App (Upcoming) -->
+          <div class="project-card slide-in">
+            <div class="project-status concept">Concept Phase</div>
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">📱 Muslim Toolkit</h3>
+                <p class="project-description">
+                  Android application providing Islamic utilities including prayer times, Qibla direction, and 
+                  digital dhikr counter. Clean, user-friendly interface with offline capabilities.
+                </p>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="badge tech-mobile">Android</span>
+              <span class="badge tech-backend">Java/Kotlin</span>
+              <span class="badge">Material Design</span>
+              <span class="badge secondary">Concept</span>
+            </div>
           </div>
         </div>
+        
+        <button class="carousel-nav carousel-nav-right" id="nextBtn" aria-label="Next project">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators" id="carouselIndicators">
+        <!-- Dots will be generated by JavaScript -->
       </div>
     </div>
   </section>

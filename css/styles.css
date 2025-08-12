@@ -678,6 +678,209 @@ section:first-of-type {
     display: flex;
 }
 
+/* Projects Carousel Styles */
+.projects-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: var(--spacing-2xl) 0;
+}
+
+.projects-carousel {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    margin: 0 auto;
+    max-width: 100%;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.projects-carousel::-webkit-scrollbar {
+    display: none; /* WebKit */
+}
+
+.projects-carousel .project-card {
+    flex: 0 0 auto;
+    width: 350px;
+    min-height: 400px;
+    scroll-snap-align: center;
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: var(--border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.projects-carousel .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-elevated);
+}
+
+/* Carousel Navigation Buttons */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
+    color: var(--text-color);
+    font-size: 18px;
+}
+
+.carousel-nav:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-left {
+    left: 10px;
+}
+
+.carousel-nav-right {
+    right: 10px;
+}
+
+.carousel-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.carousel-nav:disabled:hover {
+    transform: translateY(-50%);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+}
+
+.carousel-indicator.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.carousel-indicator:hover {
+    background: var(--accent-color);
+    opacity: 0.8;
+}
+
+/* Project Status Badges */
+.project-status {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 20px;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: white;
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+.project-status.upcoming {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.project-status.development {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.project-status.concept {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* Mobile Tech Badge */
+.badge.tech-mobile {
+    background: linear-gradient(135deg, var(--purple-lightest), rgba(186, 159, 239, 0.2));
+    color: var(--purple-dark);
+    border-color: var(--purple-light);
+}
+
+[data-theme="dark"] .badge.tech-mobile {
+    background: var(--purple-lightest);
+    color: var(--purple-dark);
+    border-color: var(--purple-light);
+}
+
+/* Responsive Carousel */
+@media (max-width: 768px) {
+    .projects-carousel-wrapper {
+        margin: var(--spacing-xl) 0;
+    }
+    
+    .projects-carousel {
+        padding: var(--spacing-md);
+        gap: var(--spacing-lg);
+    }
+    
+    .projects-carousel .project-card {
+        width: 280px;
+        min-height: 380px;
+    }
+    
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .carousel-nav-left {
+        left: 5px;
+    }
+    
+    .carousel-nav-right {
+        right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-carousel .project-card {
+        width: 260px;
+        min-height: 360px;
+    }
+    
+    .project-links {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
+
 .items-center {
     align-items: center;
 }
