@@ -884,12 +884,15 @@ section:first-of-type {
     padding: var(--spacing-lg);
     margin: 0 auto;
     max-width: 100%;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
 }
 
 .projects-carousel::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
+    /* WebKit */
 }
 
 .projects-carousel .project-card {
@@ -1031,27 +1034,27 @@ section:first-of-type {
     .projects-carousel-wrapper {
         margin: var(--spacing-xl) 0;
     }
-    
+
     .projects-carousel {
         padding: var(--spacing-md);
         gap: var(--spacing-lg);
     }
-    
+
     .projects-carousel .project-card {
         width: 280px;
         min-height: 380px;
     }
-    
+
     .carousel-nav {
         width: 40px;
         height: 40px;
         font-size: 16px;
     }
-    
+
     .carousel-nav-left {
         left: 5px;
     }
-    
+
     .carousel-nav-right {
         right: 5px;
     }
@@ -1062,7 +1065,7 @@ section:first-of-type {
         width: 260px;
         min-height: 360px;
     }
-    
+
     .project-links {
         flex-direction: column;
         gap: var(--spacing-sm);
@@ -1122,13 +1125,14 @@ section:first-of-type {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .skill-item {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
-    .skill-level, .learning-status {
+
+    .skill-level,
+    .learning-status {
         order: 3;
         flex-basis: 100%;
         text-align: center;
