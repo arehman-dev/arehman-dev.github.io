@@ -143,10 +143,6 @@
 
       <!-- Carousel Container -->
       <div class="projects-carousel-wrapper">
-        <button class="carousel-nav carousel-nav-left" id="prevBtn" aria-label="Previous project">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-
         <div class="projects-carousel" id="projectsCarousel">
           <!-- Project Card 1 - Portfolio Website (Current/Latest) -->
           <div class="project-card slide-in">
@@ -204,7 +200,7 @@
 
           <!-- Project Card 3 - Weather Extension (Upcoming) -->
           <div class="project-card slide-in">
-            <div class="project-status upcoming">Planning Phase</div>
+            <!-- <div class="project-status upcoming">Planning Phase</div> -->
             <div class="project-header">
               <div>
                 <h3 class="project-title">🌤️ Weather Extension</h3>
@@ -220,11 +216,15 @@
               <span class="badge">Browser Extension</span>
               <span class="badge secondary">Upcoming</span>
             </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> making in progress
+              </a>
+            </div>
           </div>
-
           <!-- Project Card 4 - Home Server (Upcoming) -->
           <div class="project-card slide-in">
-            <div class="project-status development">In Development</div>
+            <!-- <div class="project-status development">In Development</div> -->
             <div class="project-header">
               <div>
                 <h3 class="project-title">🏠 Home Server Setup</h3>
@@ -241,11 +241,16 @@
               <span class="badge">Security</span>
               <span class="badge secondary">In Progress</span>
             </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> Under construction
+              </a>
+            </div>
           </div>
 
           <!-- Project Card 5 - Muslim Toolkit Android App (Upcoming) -->
           <div class="project-card slide-in">
-            <div class="project-status concept">Concept Phase</div>
+            <!-- <div class="project-status concept">Concept Phase</div> -->
             <div class="project-header">
               <div>
                 <h3 class="project-title">📱 Muslim Toolkit</h3>
@@ -261,13 +266,23 @@
               <span class="badge">Material Design</span>
               <span class="badge secondary">Concept</span>
             </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> Under construction
+              </a>
+            </div>
           </div>
         </div>
-
-        <button class="carousel-nav carousel-nav-right" id="nextBtn" aria-label="Next project">
-          <i class="fas fa-chevron-right"></i>
-        </button>
       </div>
+
+      <!-- Navigation buttons outside wrapper -->
+      <button class="carousel-nav carousel-nav-left" id="prevBtn" aria-label="Previous project">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <button class="carousel-nav carousel-nav-right" id="nextBtn" aria-label="Next project">
+        <i class="fas fa-chevron-right"></i>
+      </button>
 
       <!-- Carousel Indicators -->
       <div class="carousel-indicators" id="carouselIndicators">
