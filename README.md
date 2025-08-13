@@ -90,7 +90,7 @@ A modern, responsive portfolio website showcasing my journey as a system adminis
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 📞 Contact
+## 🖧 Contact
 
 - **Email**: arehman.sysadm@pm.me
 - **LinkedIn**: [arehman-dev](https://linkedin.com/in/arehman-dev)
