@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing my journey as a system administrator committed to excellence.
 
-⚡ **Live at** : : [arehman-dev.github.io](https://arehman-dev.github.io)
+⚡ **Live at** : [arehman-dev.github.io](https://arehman-dev.github.io)
 
 ## 🌟 Features
 
