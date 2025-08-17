@@ -2,6 +2,8 @@
 
 A modern, responsive portfolio website showcasing my journey as a system administrator committed to excellence.
 
+[🌐 Live Site](https://arehman-dev.github.io)
+
 ## 🌟 Features
 
 - **Theme Switching**: Beautiful light/dark theme with user preference memory
@@ -95,6 +97,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Email**: arehman.sysadm@pm.me
 - **LinkedIn**: [arehman-dev](https://linkedin.com/in/arehman-dev)
 - **GitHub**: [arehman-dev](https://github.com/arehman-dev)
+- **Live Site**: [arehman-dev.github.io](https://arehman-dev.github.io)
 
 ---
 
