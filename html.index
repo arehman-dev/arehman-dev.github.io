@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abu Ibrahim</title>
+    <style>
+        /* Solarized Light Palette */
+        body {
+            background-color: #fdf6e3;
+            color: #657b83;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 { color: #073642; margin-bottom: 2rem; font-size: 2.5rem; }
+        .btn-container { display: flex; gap: 20px; }
+        .button {
+            background-color: #eee8d5;
+            color: #268bd2;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 1px solid #93a1a1;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .button:hover {
+            background-color: #93a1a1;
+            color: #fdf6e3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Abu Ibrahim</h1>
+    <div class="btn-container">
+        <a href="/" class="button">Home</a>
+        <a href="https://arehman-dev.github.io/portfolio/" class="button">Portfolio</a>
+    </div>
+</body>
+</html>
