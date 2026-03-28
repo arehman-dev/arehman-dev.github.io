@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}" dir="{{ page.dir | default: 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+</head>
+<body class="{{ page.dir }}">
+  {% include navigation.html %}
+  
+  <main class="wrapper">
+    {{ content }}
+  </main>
+
+  <footer>
+    <p>&copy; {{ site.time | date: '%Y' }} — Built with discipline.</p>
+  </footer>
+</body>
+</html>
