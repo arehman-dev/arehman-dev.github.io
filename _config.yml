@@ -1,7 +1,7 @@
 title: a.rehman
 description: Digital Resilience & 'Ilm
-baseurl: "" 
-url: "http://127.0.0.1:4000"
+baseurl: "" # Keep this empty if using a custom domain or username.github.io
+url: "https://arehman-dev.github.io" # Your production URL
 
 # Permalink Fix: This ensures about.md renders at /about/
 permalink: /:title/
