@@ -1,0 +1,12 @@
+# Jekyll temporary folders
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Local Ruby dependencies (the 2800+ files you saw)
+vendor/
+.bundle/
+
+# OS generated files
+.DS_Store
+thumbs.db

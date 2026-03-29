@@ -1,0 +1,210 @@
+---
+---
+/* --- 1. SYSTEM VARIABLES & THEMES --- */
+:root {
+    --bg-grad-1: #f8fbff;
+    --bg-grad-2: #f4fbf7; 
+    --text-main: #071e61;
+    --text-muted: #397bc9;
+    --accent: #01ac6a;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(7, 30, 97, 0.1);
+    --glass-shadow: 0 10px 30px rgba(7, 30, 97, 0.05);
+}
+
+.dark {
+    --bg-grad-1: #030b1c;
+    --bg-grad-2: #05140d;
+    --text-main: #f0f9f4;
+    --text-muted: #8ed5ab;
+    --accent: #00ff9d;
+    --glass-bg: rgba(10, 15, 25, 0.6);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- 2. BASE ARCHITECTURE --- */
+html, body { min-height: 100vh; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-grad-1);
+    background-image: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--text-main); }
+p { font-family: 'Lora', serif; max-width: 70ch; }
+
+/* --- 3. SIDEBAR & TOOLS --- */
+.sidebar {
+    position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+    /* width: 64px; min-height: 480px; padding: 30px 0; border-radius: 40px; */
+    width: 56px; min-height: 480px; padding: 30px 0; border-radius: 40px;
+    background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border); box-shadow: var(--glass-shadow); z-index: 1000;
+    display: flex; flex-direction: column; justify-content: center;
+}
+
+.sidebar-icons { display: flex; flex-direction: column; align-items: center; gap: 1.8rem; width: 100%; }
+
+.sidebar-icons a, .nav-btn {
+    display: flex; justify-content: center; align-items: center;
+    /* width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; */
+    width: 38px; height: 38px; background: transparent; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); color: var(--text-muted);
+}
+
+.sidebar-icons a svg, .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; }
+
+.sidebar-icons a:hover, .nav-btn:hover { transform: scale(1.15); color: var(--accent); }
+
+/* Theme Toggle Visibility */
+.sun-icon { display: none; }
+.dark .moon-icon { display: none; }
+.dark .sun-icon { display: block; }
+
+/* --- 4. TOP BAR (CENTERED WITHIN VIEWPORT) --- */
+.main-viewport {
+    flex: 1;
+    margin-left: 88px;
+    margin-right: 88px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures header/footer center within this space */
+}
+
+.top-bar-container {
+    position: sticky;
+    top: 20px;
+    z-index: 900;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.glass-top-bar {
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.8rem 2.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 15px 35px rgba(7, 30, 97, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.brand-logo { 
+    font-family: 'Playfair Display', serif; 
+    font-weight: 700; font-style: italic; 
+    font-size: 1.4rem; text-decoration: none; 
+    color: var(--text-main); 
+}
+.top-links { display: flex; gap: 2rem; align-items: center; }
+
+.top-links a { 
+    text-decoration: none; 
+    font-weight: 500; 
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.top-links a[href] {
+    color: var(--text-muted);
+}
+
+.glass-top-bar:hover { transform: translateY(-3px); box-shadow: var(--glass-shadow); }
+
+/* --- 5. CARDS & GRID REFINEMENT --- */
+.wrapper { 
+    width: 100%;
+    max-width: 1100px; 
+    padding: 3rem 2rem; 
+    box-sizing: border-box; 
+}
+
+.card-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 2.5rem; 
+    margin: 2rem 0;
+}
+
+.content-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 30px rgba(7, 30, 97, 0.08); /* Increased Shadow */
+}
+
+.content-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(1, 172, 106, 0.2);
+    border-color: var(--accent);
+}
+
+/* --- 6. TASWEER-KAHANI GRID & HOVER --- */
+.photo-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 1.5rem; 
+    margin-top: 2rem;
+}
+
+.photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+}
+
+.photo-card img { 
+    width: 100%; 
+    height: 400px; 
+    object-fit: cover; 
+    border-radius: 16px; 
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.photo-card:hover img {
+    transform: scale(1.08); /* Re-implemented zoom effect */
+}
+
+/* --- 7. CENTERED FOOTER (LORA ITALIC) --- */
+.site-footer { 
+    width: 100%;
+    text-align: center; 
+    padding: 4rem 1rem; 
+    font-family: 'Lora', serif; 
+    font-style: italic; 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    display: flex;
+    justify-content: center;
+}
+
+/* --- ANIMATIONS --- */
+.has-animation { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.has-animation.is-visible { opacity: 1; transform: translateY(0); }
