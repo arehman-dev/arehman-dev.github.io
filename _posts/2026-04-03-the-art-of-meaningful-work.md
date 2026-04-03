@@ -6,7 +6,7 @@ category: perspective
 tags: [philosophy, work, ethics, meaning, craftsmanship]
 lang: en
 dir: ltr
-excerpt: Exploring what makes work meaningful and how to cultivate purpose in our daily endeavors.
+excerpt: "Exploring what makes work meaningful and how to cultivate purpose in our daily endeavors."
 ---
 
 # The Art of Meaningful Work

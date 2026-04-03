@@ -10,10 +10,10 @@ A collection of verse exploring the self, discipline, resilience, and the eterna
 ## Featured Works
 
 <div class="card-grid">
-  <a href="/poetry/iqbal-01" class="content-card" dir="rtl">
+  <a href="/poetry/alamah-iqbal-khudi" class="content-card" dir="rtl">
     <span class="card-meta" style="text-align: right; font-family: 'Noto Nastaliq Urdu', serif;">Ashaar • شاعری</span>
-    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">خودی اور نظم و ضبط</h3>
-    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کی تربیت کے لیے استقامت اور حیا لازمی عناصر ہیں۔</p>
+    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">علامہ اقبال: خودی</h3>
+    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
   </a>
 </div>
 

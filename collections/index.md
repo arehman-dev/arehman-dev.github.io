@@ -10,10 +10,10 @@ Curated resources, tools, and knowledge bases for digital resilience, privacy, o
 ## Featured Collections
 
 <div class="card-grid">
-  <a href="/collections/linux-tools" class="content-card">
+  <a href="/collections/foss-tools-privacy" class="content-card">
     <span class="card-meta">Tools & Resources</span>
-    <h3>FOSS Tools for Privacy & Freedom</h3>
-    <p style="font-family: 'Lora', serif;">A selection of open-source tools for maintaining digital sovereignty and privacy.</p>
+    <h3>FOSS Tools for Privacy</h3>
+    <p style="font-family: 'Lora', serif;">A curated selection of open-source tools for maintaining digital sovereignty and privacy.</p>
   </a>
 </div>
 

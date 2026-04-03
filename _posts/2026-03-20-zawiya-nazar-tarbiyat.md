@@ -1,10 +1,12 @@
 ---
 layout: default
 title: "زاویہ نظر: تربیت"
+date: 2026-03-20
 category: perspective
 tags: [اردو, مربی, نظم]
 lang: ur
 dir: rtl
+excerpt: "تربیت انسان کے کردار کی بنیاد ہے"
 ---
 
 <div style="font-family: 'Noto Nastaliq Urdu', serif;">

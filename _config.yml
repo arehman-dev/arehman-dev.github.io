@@ -19,8 +19,8 @@ url: "https://arehman-dev.github.io" # Your production URL
 theme: null
 remote_theme: null
 
-# Permalink Fix: This ensures about.md renders at /about/
-permalink: /:title/
+# Permalink Fix: This ensures posts render at /category/title/ to match current structure
+permalink: /:categories/:title/
 
 # Collections
 collections:

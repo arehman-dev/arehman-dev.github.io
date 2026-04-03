@@ -12,16 +12,16 @@ _This space is a collection of my writings and perspectives: a humble effort to 
 ## Featured Writings
 
 <div class="card-grid">
-  <a href="/perspective/post-1" class="content-card">
+  <a href="/perspective/on-intellectual-honesty" class="content-card">
     <span class="card-meta">Zawiya e Nazar • Perspective</span>
-    <h3>On Intellectual Honesty in the Digital Age</h3>
-    <p style="font-family: 'Lora', serif;">Exploring how algorithmic environments challenge our commitment to objective truth and discipline.</p>
+    <h3>On Intellectual Honesty</h3>
+    <p style="font-family: 'Lora', serif;">Exploring the foundation of growth and the commitment to objective truth.</p>
   </a>
 
-  <a href="/poetry/iqbal-01" class="content-card" dir="rtl">
+  <a href="/poetry/alamah-iqbal-khudi" class="content-card" dir="rtl">
     <span class="card-meta" style="text-align: right;">Ashaar • Poetry</span>
-    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">خودی اور نظم و ضبط</h3>
-    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کی تربیت کے لیے استقامت اور حیا لازمی عناصر ہیں۔</p>
+    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">علامہ اقبال: خودی</h3>
+    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
   </a>
 </div>
 

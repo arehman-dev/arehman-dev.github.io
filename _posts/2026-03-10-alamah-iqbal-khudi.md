@@ -1,10 +1,12 @@
 ---
 layout: default
 title: "علامہ اقبال: خودی"
+date: 2026-03-10
 category: poetry
 tags: [iqbal, urdu-poetry, philosophy, خودی]
 lang: ur
 dir: rtl
+excerpt: "خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے"
 ---
 
 <div style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.1rem; line-height: 2;">
