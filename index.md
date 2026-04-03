@@ -25,6 +25,26 @@ _This space is a collection of my writings and perspectives: a humble effort to 
   </a>
 </div>
 
+## All Writings
+
+<div class="posts-carousel">
+  <div class="carousel-track">
+    {% for post in site.posts limit: 10 %}
+      <a href="{{ post.url }}" class="carousel-card">
+        <span class="card-meta">{{ post.category | capitalize }} • {{ post.date | date: "%b %d" }}</span>
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+  <button class="carousel-nav prev" title="Scroll left">
+    <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+  </button>
+  <button class="carousel-nav next" title="Scroll right">
+    <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+  </button>
+</div>
+
 ## Tasweer-kahani (Stories from the Lens)
 
 *A collection of moments capturing architecture, nature, and perspective.*
