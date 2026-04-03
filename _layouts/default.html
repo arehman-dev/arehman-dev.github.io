@@ -72,15 +72,6 @@
       </nav>
     </header>
 
-    <!-- Breadcrumb Navigation -->
-    {% if page.title %}
-    <nav class="breadcrumb" aria-label="breadcrumb">
-      <a href="{{ '/' | relative_url }}">home</a>
-      {% if page.category %}<span>/</span><a href="{{ '/' | append: page.category | relative_url }}">{{ page.category }}</a>{% endif %}
-      <span>/</span><span class="breadcrumb-current">{{ page.title | downcase }}</span>
-    </nav>
-    {% endif %}
-
     <main class="wrapper">
       <!-- Share & Print Buttons (for posts) -->
       {% if page.date %}
