@@ -2,6 +2,5 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
-
-gem "jekyll", "~> 4.4"
+# Use github-pages gem to match GitHub Pages environment
+gem "github-pages", "~> 228"

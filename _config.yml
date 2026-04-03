@@ -3,6 +3,10 @@ description: Digital Resilience & 'Ilm
 baseurl: "" # Keep this empty if using a custom domain or username.github.io
 url: "https://arehman-dev.github.io" # Your production URL
 
+# Disable GitHub Pages default theme
+theme: null
+remote_theme: null
+
 # Permalink Fix: This ensures about.md renders at /about/
 permalink: /:title/
 
