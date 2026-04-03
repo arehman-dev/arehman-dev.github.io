@@ -15,6 +15,19 @@ A minimalist, hand-crafted Jekyll-based portfolio and blog exploring technology,
 - **Performance-First**: No build tools, pure HTML/CSS/JavaScript
 - **Privacy-Conscious**: No tracking, analytics, or third-party scripts (except Google Fonts & Lucide Icons)
 
+### New Features (v2.0)
+- 🔗 **Breadcrumb Navigation** — Easy navigation hierarchy
+- 📋 **Copy Link & Print Buttons** — Quick sharing and saving
+- 💬 **Giscus Comments** — GitHub Discussions-powered comments
+- 📧 **Newsletter Signup** — Simple email form for subscribers
+- 📚 **Archive by Date** — Browse posts chronologically with tags
+- ⏭️ **Post Navigation** — Previous/Next post links
+- 🔍 **RSS Feed** — Subscribe to updates
+- ⌨️ **Keyboard Navigation** — `h` (home), `p` (perspective), `a` (about)
+- 📱 **Social Share** — Copy link button + print/PDF
+- ✨ **Stagger Animations** — Smooth card grid reveal
+- 🤖 **SEO Optimized** — Meta tags, Open Graph, structured data
+
 ---
 
 ## 📁 Project Structure
@@ -22,31 +35,36 @@ A minimalist, hand-crafted Jekyll-based portfolio and blog exploring technology,
 ```
 arehman-dev.github.io/
 ├── _layouts/
-│   └── default.html          # Main layout template
+│   └── default.html              # Main layout (breadcrumb, comments, newsletter, etc.)
 ├── _includes/
-│   └── navigation.html       # Navigation component
-├── _posts/                   # Blog posts (currently unused)
+│   └── navigation.html           # Navigation component
+├── _posts/                       # Blog posts
 ├── assets/
 │   └── css/
-│       └── style.css         # Main stylesheet (SCSS-like with variables)
+│       └── style.css             # Main stylesheet + new components
 ├── perspective/
-│   ├── index.md              # Perspective collection index
-│   ├── post-1.md             # Sample essay
-│   └── post-2.md             # Urdu content sample
+│   ├── index.md                  # Perspective collection
+│   ├── post-1.md                 # Sample essay
+│   └── post-2.md                 # Urdu content
 ├── poetry/
-│   ├── index.md              # Poetry collection index
-│   └── iqbal-01.md           # Classical Urdu poetry
+│   ├── index.md                  # Poetry collection
+│   └── iqbal-01.md               # Classical Urdu poetry
 ├── collections/
-│   ├── index.md              # Collections index
-│   └── linux-tools.md        # FOSS tools collection
-├── about.md                  # About page
-├── contact.md                # Contact page (empty)
+│   ├── index.md                  # Collections index
+│   └── linux-tools.md            # FOSS tools collection
+├── about.md                      # About page
+├── archive.md                    # Archive by date with tags
+├── 404.md                        # Custom 404 page
+├── contact.md                    # Contact page
 ├── portfolio/
-│   └── index.md              # Portfolio page
-├── index.md                  # Homepage
-├── _config.yml               # Jekyll configuration
-├── Gemfile                   # Ruby dependencies
-└── README.md                 # This file
+│   └── index.md                  # Portfolio page
+├── index.md                      # Homepage
+├── feed.xml                      # RSS feed
+├── robots.txt                    # SEO robots file
+├── favicon.svg                   # Favicon (serif "a.")
+├── _config.yml                   # Jekyll configuration
+├── Gemfile                       # Ruby dependencies
+└── README.md                     # This file
 ```
 
 ---
@@ -57,12 +75,13 @@ arehman-dev.github.io/
 - **Hosting**: GitHub Pages
 - **CSS**: Custom, no frameworks
 - **Fonts**: 
-  - **Inter** (sans-serif) - UI, tags
+  - **Inter** (sans-serif) - UI, tags, metadata
   - **Playfair Display** (serif) - Headings
   - **Lora** (serif) - Body, prose
   - **Noto Nastaliq Urdu** (serif) - Urdu content
 - **Icons**: Lucide Icons (unpkg CDN)
-- **Theme**: CSS custom properties (variables) with system color-scheme detection
+- **Comments**: Giscus (GitHub Discussions)
+- **Theme**: CSS custom properties with system color-scheme detection
 
 ---
 
@@ -86,10 +105,14 @@ arehman-dev.github.io/
 
 - **Sidebar**: Fixed left navigation with glassmorphic icons
 - **Top Bar**: Sticky navigation with brand logo and links
-- **Card Grid**: Flexible content cards with hover animations
+- **Breadcrumb**: Subtle navigation hierarchy
+- **Card Grid**: Flexible content cards with stagger animations
+- **Post Navigation**: Previous/Next buttons for easy browsing
+- **Newsletter**: End-of-post subscription form
+- **Comments**: GitHub Discussions integration
+- **Share Buttons**: Copy link + Print/PDF
+- **Archive**: Timeline view of all posts with tags
 - **Photo Grid**: Responsive image gallery (Tasweer-kahani)
-- **Typography**: Semantic HTML with careful font pairing
-- **Theme Toggle**: Smooth dark/light mode switch with localStorage persistence
 
 ---
 
@@ -116,8 +139,10 @@ bundle exec jekyll build
 
 Edit `_config.yml` to customize:
 - Site title, description, URL
-- Permalink structure
-- Build settings
+- Author name and email
+- Social media handles
+- RSS feed settings
+- Collection paths
 
 ---
 
@@ -126,17 +151,23 @@ Edit `_config.yml` to customize:
 ### Adding a New Section
 
 1. Create folder: `mkdir section_name`
-2. Add `index.md` with content
-3. Link in navigation/sidebar
+2. Add `index.md` with front matter
+3. Add posts as `post-name.md`
+4. Update navigation in default.html
 
-Example `index.md`:
+### Creating Blog Posts
+
+Create file in `perspective/`, `poetry/`, or `collections/`:
+
 ```markdown
 ---
 layout: default
-title: Section Title
+title: Post Title
+category: perspective
+tags: [tag1, tag2, tag3]
+lang: en
+dir: ltr
 ---
-
-# Section Title
 
 Content here...
 ```
@@ -150,19 +181,47 @@ Use inline styles for Urdu fonts:
 </div>
 ```
 
-### Adding Blog Posts
-
-Place in `perspective/`, `poetry/`, or `collections/` with YAML front matter:
-```markdown
----
-layout: default
-title: Post Title
-lang: en
-dir: ltr
 ---
 
-Content...
-```
+## 📚 New Features Documentation
+
+### Breadcrumb Navigation
+Automatically generated based on page hierarchy. Shows path from home to current page.
+
+### Keyboard Shortcuts
+- `h` — Go to Home
+- `p` — Go to Perspective
+- `a` — Go to About
+
+### Copy Link Button
+Copies current page URL to clipboard with visual feedback.
+
+### Print/PDF Button
+Opens browser print dialog to save as PDF.
+
+### Newsletter Form
+Simple email form. Backend integration required (e.g., Mailchimp, ConvertKit).
+
+### Comments (Giscus)
+- Requires GitHub repository
+- Uses GitHub Discussions
+- Supports reactions and threading
+- Auto-switches light/dark theme
+
+### RSS Feed
+Located at `/feed.xml` — Subscribe for updates with RSS reader.
+
+### Archive Page
+Browse all posts:
+- Organized by year and date
+- Tags shown inline
+- Sortable by category
+
+### SEO Meta Tags
+- Open Graph (social media preview)
+- Twitter Card
+- Meta descriptions
+- Structured data ready
 
 ---
 
@@ -179,43 +238,50 @@ Edit CSS variables in `assets/css/style.css`:
 ```
 
 ### Typography
-Modify font families and sizes in the main stylesheet:
+Modify font families and sizes:
 - Body: `font-family: 'Inter', sans-serif;`
 - Headings: `font-family: 'Playfair Display', serif;`
+- Breadcrumb: `font-family: 'Inter', sans-serif;`
 
-### Layout
-Key spacing values (commented with old values for reference):
-- Left/Right margins: `88px`
-- Max content width: `1100px`
-- Sidebar width: `56px`
-- Card gap: `2.5rem`
+### Newsletter Service
+Currently shows placeholder. Integrate:
+- Mailchimp (forms API)
+- Substack
+- ConvertKit
+- Or custom email backend
+
+### Giscus Setup
+Already configured but needs repo ID. To customize:
+1. Visit [giscus.app](https://giscus.app)
+2. Configure your GitHub repo
+3. Update `data-repo-id` and `data-category-id` in layout
 
 ---
 
 ## 📊 Performance Notes
 
 - **CSS**: Embedded in HTML (no separate requests)
-- **Fonts**: Google Fonts (preconnect + preload for speed)
-- **Icons**: Lucide via CDN (SVG rendering, no webfont bloat)
-- **Images**: Lazy loading enabled on photo cards
-- **No JavaScript**: Zero custom JS overhead beyond theme toggle
+- **Fonts**: Google Fonts (preconnect + preload)
+- **Icons**: Lucide via CDN (SVG rendering)
+- **Images**: Lazy loading on photo cards
+- **JS**: Minimal (theme toggle, copy button, animations)
+- **Build**: Static site generated at deploy time
 
 ---
 
 ## 🌍 Deployment
 
-This site is deployed to GitHub Pages:
+Deployed to GitHub Pages with Jekyll 4.4:
 
 1. **Repository**: arehman-dev/arehman-dev.github.io
-2. **Branch**: `main` (automatically published)
-3. **Theme**: Disabled (custom theme only)
-4. **Build**: Jekyll 4.4
+2. **Branch**: `main` (automatic deployment)
+3. **Theme**: Disabled (custom only)
 
-### Deploy Steps
+### Deploy Changes
 
 ```bash
 git add .
-git commit -m "message"
+git commit -m "description"
 git push origin main
 ```
 
@@ -223,13 +289,26 @@ GitHub Pages rebuilds automatically (~1-2 minutes).
 
 ---
 
-## 🐛 Known Issues & Improvements
+## 🐛 Known Issues & Roadmap
 
-- [ ] Light theme glows (90% zoom) — investigate CSS selector specificity
-- [ ] Add Tasweer-kahani photography index
-- [ ] Expand blog collections with more posts
-- [ ] Add search functionality
-- [ ] SEO optimization (meta tags, structured data)
+### Current
+- [x] Dark/Light theme
+- [x] Breadcrumb navigation
+- [x] Comments system
+- [x] Newsletter form
+- [x] Post navigation
+- [x] RSS feed
+- [x] Archive page
+- [x] Keyboard navigation
+- [x] Stagger animations
+
+### TODO
+- [ ] Search functionality (Lunr.js)
+- [ ] Social analytics (Plausible)
+- [ ] PWA support
+- [ ] Reading time estimate
+- [ ] More sample posts
+- [ ] Image optimization
 - [ ] Accessibility audit (WCAG 2.1)
 
 ---
@@ -246,6 +325,8 @@ This site and its content are personal. Code structure available for reference/i
 **Role**: I.T. Professional & Digital Craftsman  
 **Philosophy**: Conscious servitude, intellectual honesty, pursuit of *al-ʿIlm*
 
+**Inspired by**: [Paul Stamatiou](https://paulstamatiou.com), [Dario Amodei](https://darioamodei.com)
+
 **Connect**:
 - Email: arehman.dev@protonmail.com
 - GitHub: [@arehman-dev](https://github.com/arehman-dev)
@@ -259,8 +340,9 @@ This site and its content are personal. Code structure available for reference/i
 - [GitHub Pages Docs](https://pages.github.com/)
 - [Lucide Icons](https://lucide.dev/)
 - [Google Fonts](https://fonts.google.com/)
+- [Giscus Docs](https://giscus.app/)
 - [CSS Variables Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
 
 ---
 
-*Handcrafted with perfectionism. Built for resilience.*
+*Handcrafted with perfectionism. Built for resilience. Inspired by the pursuit of excellence.*

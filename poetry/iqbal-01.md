@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "علامہ اقبال: خودی"
+category: poetry
+tags: [iqbal, urdu-poetry, philosophy, خودی]
 lang: ur
 dir: rtl
 ---

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "زاویہ نظر: تربیت"
+category: perspective
+tags: [اردو, مربی, نظم]
 lang: ur
 dir: rtl
 ---

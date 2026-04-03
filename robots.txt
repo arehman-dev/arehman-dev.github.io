@@ -1,0 +1,13 @@
+robots.txt
+# www.robotstxt.org/
+
+# Allow all bots
+User-agent: *
+Allow: /
+
+# Disallow private/admin paths
+Disallow: /_*
+Disallow: /.git*
+
+# Sitemap
+Sitemap: https://arehman-dev.github.io/sitemap.xml

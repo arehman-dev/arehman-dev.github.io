@@ -4,8 +4,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }} | a.rehman</title>
   
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncatewords: 30 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}{% else %}technology, ethics, philosophy{% endif %}">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncatewords: 30 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image" content="{{ site.logo | absolute_url }}">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncatewords: 30 }}{% else %}{{ site.description }}{% endif %}">
+  
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,9 +65,6 @@
       <nav class="glass-top-bar">
         <a href="/" class="brand-logo">a.rehman</a>
         <div class="top-links">
-            <!-- <a href="{{ '/' | relative_url }}" class="brand-logo">a.rehman</a>
-            <a href="{{ '/collections/' | relative_url }}">Collections</a> -->
-            
             <a href="{{ '/perspective/' | relative_url }}" class="top-link">perspective</a>
             <a href="{{ '/portfolio/' | relative_url }}" class="top-link">portfolio</a>
             <a href="{{ '/about/' | relative_url }}" class="top-link">about</a>
@@ -55,13 +72,88 @@
       </nav>
     </header>
 
+    <!-- Breadcrumb Navigation -->
+    {% if page.title %}
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="{{ '/' | relative_url }}">home</a>
+      {% if page.category %}<span>/</span><a href="{{ '/' | append: page.category | relative_url }}">{{ page.category }}</a>{% endif %}
+      <span>/</span><span class="breadcrumb-current">{{ page.title | downcase }}</span>
+    </nav>
+    {% endif %}
+
     <main class="wrapper">
+      <!-- Share & Print Buttons (for posts) -->
+      {% if page.date %}
+      <div class="post-actions">
+        <button class="action-btn" id="copy-link-btn" title="Copy link to clipboard">
+          <i data-lucide="link"></i> Copy Link
+        </button>
+        <button class="action-btn" id="print-btn" title="Print or save as PDF">
+          <i data-lucide="printer"></i> Print
+        </button>
+      </div>
+      {% endif %}
+
       {{ content }}
+
+      <!-- Previous / Next Post Navigation -->
+      {% if page.date %}
+      <nav class="post-nav">
+        {% if page.previous %}
+        <a href="{{ page.previous.url }}" class="post-nav-link prev">
+          <span class="nav-label">← Previous</span>
+          <span class="nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% endif %}
+        
+        {% if page.next %}
+        <a href="{{ page.next.url }}" class="post-nav-link next">
+          <span class="nav-label">Next →</span>
+          <span class="nav-title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+
+      <!-- Newsletter Signup Form -->
+      <section class="newsletter-signup">
+        <h3>Subscribe for more</h3>
+        <p>Get notified when I publish new essays, poetry, and reflections.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+      </section>
+
+      <!-- Giscus Comments Section -->
+      <section class="comments-section" id="comments">
+        <h3>Thoughts & Responses</h3>
+        <script src="https://giscus.app/client.js"
+                data-repo="arehman-dev/arehman-dev.github.io"
+                data-repo-id="R_kgDOJQyNfw"
+                data-category="Discussions"
+                data-category-id="DIC_kwDOJQyNf84CZtly"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </section>
+      {% endif %}
     </main>
 
     <footer class="site-footer">
       <p>&copy; 2026 — a digital window to my life. handcrafted with perfectionism.</p>
-    </footer>
+      <p class="footer-credits">
+        inspired by 
+        <a href="https://paulstamatiou.com" target="_blank" rel="noopener noreferrer">paul stamatiou</a>, 
+        <a href="https://darioamodei.com" target="_blank" rel="noopener noreferrer">dario amodei</a>
+      </p>
     </footer>
   </div>
 
@@ -76,12 +168,64 @@
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 
-    // Content Animation
+    // Copy Link Button
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const originalText = copyLinkBtn.innerHTML;
+          copyLinkBtn.innerHTML = '<i data-lucide="check"></i> Copied!';
+          lucide.createIcons();
+          setTimeout(() => {
+            copyLinkBtn.innerHTML = originalText;
+            lucide.createIcons();
+          }, 2000);
+        });
+      });
+    }
+
+    // Print Button
+    const printBtn = document.getElementById('print-btn');
+    if (printBtn) {
+      printBtn.addEventListener('click', () => {
+        window.print();
+      });
+    }
+
+    // Newsletter Form Handler
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        /* Simple email form - user would implement backend or use service like Mailchimp */
+        alert('Thank you for your interest! Feature coming soon.');
+        newsletterForm.reset();
+      });
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      // Skip if user is typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      
+      // 'h' key - go home
+      if (e.key === 'h' || e.key === 'H') window.location.href = '/';
+      
+      // 'p' key - go to perspective
+      if (e.key === 'p' || e.key === 'P') window.location.href = '/perspective/';
+      
+      // 'a' key - go to about
+      if (e.key === 'a' || e.key === 'A') window.location.href = '/about/';
+    });
+
+    // Content Animation - Stagger effect for cards
     document.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('is-visible'), index * 100);
+            /* Stagger animation - each card appears with delay */
+            setTimeout(() => entry.target.classList.add('is-visible'), index * 80);
             observer.unobserve(entry.target);
           }
         });

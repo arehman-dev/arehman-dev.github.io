@@ -1,5 +1,17 @@
 title: a.rehman
 description: Digital Resilience & 'Ilm
+author: A. Rehman
+email: arehman.dev@protonmail.com
+
+# SEO & Meta
+twitter:
+  username: arehman-dev
+facebook:
+  app_id: 
+  publisher: 
+logo: /favicon.svg
+
+# URLs
 baseurl: "" # Keep this empty if using a custom domain or username.github.io
 url: "https://arehman-dev.github.io" # Your production URL
 
@@ -10,8 +22,49 @@ remote_theme: null
 # Permalink Fix: This ensures about.md renders at /about/
 permalink: /:title/
 
+# Collections
+collections:
+  posts:
+    output: true
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Feed settings
+feed:
+  path: /feed.xml
+  collections:
+    posts:
+      path: /feed.xml
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Build settings
+future: false
+keep_files: [".git", "robots.txt", "feed.xml"]
+
 defaults:
   - scope:
       path: ""
     values:
       layout: "default"
+      image: /favicon.svg
+  - scope:
+      path: "perspective"
+    values:
+      category: "perspective"
+  - scope:
+      path: "poetry"
+    values:
+      category: "poetry"
+  - scope:
+      path: "collections"
+    values:
+      category: "collections"
