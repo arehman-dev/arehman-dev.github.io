@@ -176,8 +176,11 @@
     const carousels = document.querySelectorAll('.posts-carousel');
     carousels.forEach(carousel => {
       const track = carousel.querySelector('.carousel-track');
-      const prevBtn = carousel.querySelector('.carousel-nav.prev');
-      const nextBtn = carousel.querySelector('.carousel-nav.next');
+      
+      // Find buttons in the preceding .carousel-header element
+      const header = carousel.previousElementSibling;
+      const prevBtn = header ? header.querySelector('.carousel-nav.prev') : null;
+      const nextBtn = header ? header.querySelector('.carousel-nav.next') : null;
       
       const scroll = (direction) => {
         const cardWidth = track.querySelector('.carousel-card').offsetWidth + 20; // card width + gap
