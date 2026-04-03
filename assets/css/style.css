@@ -9,7 +9,7 @@
     --accent: #01ac6a;
     --glass-bg: rgba(255, 255, 255, 0.7);
     --card-border: rgba(7, 30, 97, 0.1);
-    --glass-shadow: 0 10px 30px rgba(7, 30, 97, 0.05);
+    --glass-shadow: 0 10px 30px rgba(7, 30, 97, 0.15);
 }
 
 .dark {
