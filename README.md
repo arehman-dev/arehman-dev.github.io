@@ -345,4 +345,150 @@ This site and its content are personal. Code structure available for reference/i
 
 ---
 
+## 📋 Complete Development Changelog
+
+This section documents all improvements made during the latest development cycle (v0.9 → v0.9g+).
+
+### v0.9 — Comprehensive Feature Release (Initial)
+**14 Major Features Implemented:**
+- ✅ 404 custom error page with navigation
+- ✅ SEO metadata (meta descriptions, keywords, OG tags, Twitter Card)
+- ✅ Keyboard navigation shortcuts (h/p/a keys)
+- ✅ Giscus comments integration (GitHub Discussions)
+- ✅ Share buttons: Copy link (with feedback) + Print/PDF
+- ✅ Newsletter signup form (placeholder backend)
+- ✅ Archive page with date-based filtering & tags
+- ✅ Previous/Next post navigation
+- ✅ Tags & categories on all posts
+- ✅ RSS feed generation (/feed.xml)
+- ✅ Breadcrumb navigation
+- ✅ Stagger animations (80ms interval)
+- ✅ Footer credits with inspiration links
+- ✅ Comprehensive README documentation
+
+### v0.9a — Sample Post & Styling Fixes
+- ✅ Removed breadcrumb navigation (per user request)
+- ✅ Improved footer styling (italic, center-aligned, uniform font size)
+- ✅ Added comprehensive sample post ("The Art of Meaningful Work") with full metadata
+
+### v0.9b — Carousel & Final Touches
+- ✅ Removed newsletter form completely
+- ✅ Added footer bottom padding (breathing room)
+- ✅ Implemented horizontal carousel for all posts
+- ✅ Added carousel on collection pages: perspective, poetry, collections
+- ✅ Added carousel on home page (latest 10 posts)
+- ✅ JavaScript carousel navigation (2-card scroll per click)
+
+### v0.9c — Posts Directory Migration
+- ✅ **MAJOR**: Moved all posts from collection folders to `_posts/` (Jekyll standard)
+- ✅ Updated `_config.yml` permalink to `/:categories/:title/`
+- ✅ Created 5 posts in `_posts/` with proper Jekyll naming (YYYY-MM-DD)
+- ✅ Updated featured post links on all collection pages
+- ✅ Carousel now works properly with `site.posts` collection
+
+### v0.9d — Carousel Typography & Styling
+- ✅ Matched carousel cards to featured cards styling
+- ✅ Increased border radius (16px → 24px) - reverted in next version
+- ✅ Increased padding (1.2rem → 2.5rem) - reverted in next version
+- ✅ Enhanced animations (smooth cubic-bezier easing)
+- ✅ Added box shadows for depth
+
+### v0.9e — Spacing & Animation Refinement
+- ✅ Reverted carousel cards to original smaller dimensions (1.2rem, 16px radius)
+- ✅ **Kept smooth 0.4s animations** (key improvement from v0.9d)
+- ✅ Added proper spacing for shadow breathing room
+- ✅ Increased wrapper bottom padding (4rem)
+- ✅ Increased card grid gap (4rem) for better spacing
+- ✅ Removed default box-shadow from carousel cards
+
+### v0.9f — Card Grid Spacing & Hover
+- ✅ Increased card grid gap to 4rem (more bottom margin on posts)
+- ✅ Removed hover "up" animation from carousel cards
+- ✅ Hover now only shows accent border + glow shadow
+
+### v0.9g — Carousel Navigation UI Overhaul
+- ✅ **DESIGN CHANGE**: Moved carousel buttons inline with section titles (right-aligned)
+- ✅ Changed button structure: `.carousel-nav` inside `.carousel-controls` inside `.carousel-header`
+- ✅ Made buttons more subtle: 32px → 40px, reduced opacity (0.6 default)
+- ✅ Updated on all 4 pages: home, perspective, poetry, collections
+- ✅ Buttons now appear above carousel with heading
+- ✅ Improved visual hierarchy and layout cleanliness
+
+### v0.9g-fix — JavaScript Carousel Button Fix
+- ✅ Fixed carousel navigation JavaScript
+- ✅ Updated to find buttons in `.carousel-header` (preceding sibling)
+- ✅ Used `previousElementSibling` to locate controls
+- ✅ Restored carousel scroll functionality
+
+### v0.9g+ — Final Polish & Documentation
+- ✅ Added comprehensive header comments to `_layouts/default.html`
+- ✅ Documented all JavaScript functionality with inline comments
+- ✅ Clean repository (no debris/unused files)
+- ✅ Updated README.md with detailed feature docs
+- ✅ Added code comments for future review & understanding
+
+---
+
+### Architecture Decisions
+
+**Why Jekyll Standard Post Structure?**
+- `_posts/` is Jekyll convention for blog collections
+- Automatic recognition by `site.posts`
+- Cleaner separation: content vs. pages
+- Better plugin compatibility
+
+**Why Carousel Over Pagination?**
+- Modern UX pattern for content discovery
+- Smooth horizontal scrolling more engaging
+- Mobile-friendly gesture-like interaction
+- Visual preview before clicking
+
+**CSS Custom Properties (No Framework)?**
+- Minimal footprint (~430 lines)
+- Full control over design system
+- Better performance than framework
+- Easy theme switching with CSS variables
+
+**Giscus Over Other Comments?**
+- GitHub Discussions = no separate infrastructure
+- Works with existing GitHub authentication
+- Supports reactions & threading natively
+- Privacy-respecting (no tracking)
+
+---
+
+### Code Statistics
+
+- **HTML (default.html)**: ~230 lines
+- **CSS (style.css)**: ~430 lines
+- **JavaScript (inline)**: ~80 lines
+- **Total Post Count**: 5 comprehensive posts
+- **Collection Pages**: 4 (home, perspective, poetry, collections)
+- **Special Pages**: 4 (404, archive, contact, about)
+
+---
+
+### Key Technical Components
+
+**Frontend Architecture:**
+- HTML5 semantic markup
+- CSS3 with custom properties
+- Vanilla JavaScript (no dependencies)
+- Responsive grid & flexbox layout
+
+**Jekyll Configuration:**
+- Permalink: `/:categories/:title/` (organized by category)
+- Collections: perspective, poetry, collections
+- Plugins: jekyll-feed, jekyll-seo-tag, jekyll-sitemap
+- Theme: Disabled (`theme: null`)
+
+**Performance Features:**
+- No external JavaScript (except Lucide)
+- CSS embedded in HTML
+- FontPreach + preload for fonts
+- Lazy loading on images
+- Static generation optimization
+
+---
+
 *Handcrafted with perfectionism. Built for resilience. Inspired by the pursuit of excellence.*

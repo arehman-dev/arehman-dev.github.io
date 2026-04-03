@@ -1,4 +1,30 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<!--
+  a.rehman — Digital Portfolio & Blog
+  
+  LAYOUT: default.html (Master template for all pages)
+  
+  KEY COMPONENTS:
+  1. SEO Meta Tags (OG, Twitter Card, descriptions)
+  2. Theme System (Dark/Light with localStorage)
+  3. Navigation (Sidebar + Top Bar)
+  4. Main Content Area
+  5. Post Features (if page.date exists):
+     - Copy Link & Print Buttons
+     - Previous/Next Post Navigation
+     - Carousel of All Posts
+     - Giscus Comments Section
+  6. Footer with Credits
+  
+  JAVASCRIPT FUNCTIONALITY:
+  - Theme Toggle: Switches dark/light theme and persists to localStorage
+  - Copy Link Button: Copies page URL to clipboard with visual feedback
+  - Print Button: Opens browser print dialog
+  - Carousel Navigation: Smooth horizontal scrolling through post collections
+  - Keyboard Navigation: h=home, p=perspective, a=about
+  - Stagger Animations: Cards fade in with 80ms interval on scroll
+-->
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
