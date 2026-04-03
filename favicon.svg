@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="white"/>
+  
+  <!-- Letter "a" in serif font -->
+  <text x="50" y="75" font-family="Georgia, 'Playfair Display', serif" font-size="70" font-weight="bold" text-anchor="middle" fill="black">a</text>
+</svg>
