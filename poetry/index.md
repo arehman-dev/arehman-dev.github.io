@@ -19,6 +19,17 @@ A collection of verse exploring the self, discipline, resilience, and the eterna
 
 ## All Works
 
+<div class="carousel-header">
+  <div class="carousel-controls">
+    <button class="carousel-nav prev" title="Scroll left">
+      <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+    </button>
+    <button class="carousel-nav next" title="Scroll right">
+      <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+    </button>
+  </div>
+</div>
+
 <div class="posts-carousel">
   <div class="carousel-track">
     {% for post in site.posts %}
@@ -31,10 +42,4 @@ A collection of verse exploring the self, discipline, resilience, and the eterna
       {% endif %}
     {% endfor %}
   </div>
-  <button class="carousel-nav prev" title="Scroll left">
-    <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
-  </button>
-  <button class="carousel-nav next" title="Scroll right">
-    <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
-  </button>
 </div>
