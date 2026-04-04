@@ -7,6 +7,7 @@ title: About
 
 Assalamu alaikum,
 
+
 I am **Abdul Rehman**, known in digital space as _a.rehman_.
 
 A student of knowledge, pursuing career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.
@@ -28,13 +29,14 @@ spans transitions from college life to career, from photography to writings, fro
 I endeavor to embody objective morality, Ḥayāʾ (modesty), and Iḥsān (excellence) as my guiding principles.
 
 
-## Get in touch
+## Contact
 
 I welcome conversations,
 
 <!-- - **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me) -->
-**Whatsapp**: [+92 339 669 0006](wa.me/+923396690006)
-**X**: [arehman_dev](https://twitter.com/arehman_dev)
+
+- **Whatsapp**: [_+92 339 669 0006_](wa.me/+923396690006)
+- **X**: [arehman_dev](https://twitter.com/arehman_dev)
 
 ---
 

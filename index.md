@@ -7,7 +7,7 @@ title: Home
 
 _Welcome to my corner of the web. I am a man who speaks less, thinks far more._
 
-_A student of knowledge pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me._
+_A student of knowledge, pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me._
 
 
 _This space is a collection of my writings and perspectives: an effort to document my life—a window into how I observe, what I ponder._
