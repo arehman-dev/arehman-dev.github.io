@@ -3,11 +3,20 @@ layout: default
 title: Home
 ---
 
-# Digital Resilience & ʿIlm
+# half artist & half thinker
 
-_Welcome to my corner of the web. I am an I.T. professional anchored by the pursuit of al-ʿIlm and the reality of ʿubūdiyyah—living as a conscious servant of the Creator. My journey is defined by a commitment to objective morality, traditional virtues, and the discipline of continuous learning. I strive for Iḥsān (excellence) in every execution._
+_Welcome to my corner of the web. I am a man who speaks less, thinks far more._
 
-_This space is a collection of my writings and perspectives: a humble effort to document a life lived with purpose, resilience, and a steadfast rejection of ideologies that contradict the truth._
+_A student of knowledge pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me._
+
+
+_This space is a collection of my writings and perspectives: an effort to document my life—a window into how I observe, what I ponder._
+
+<!-- _Welcome to my corner of the web. I am a man who speak less, thinks far more. Student of knowledge pursuing a career in I.T._
+_I occasionally writes here, share visuals from my lens, and reflect on art that resonates with me._
+
+_This space is a collection of my writings and perspectives: a humble effort to document a life._
+_a window of my life_ -->
 
 ## Featured Writings
 
@@ -52,7 +61,7 @@ _This space is a collection of my writings and perspectives: a humble effort to 
 
 ## Tasweer-kahani (Stories from the Lens)
 
-*A collection of moments capturing architecture, nature, and perspective.*
+*Perspective & visuals through my lens.*
 
 <div class="photo-grid">
   <div class="photo-card">

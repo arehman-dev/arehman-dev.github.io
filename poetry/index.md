@@ -6,8 +6,11 @@ title: Poetry — ashaar
 # Poetry — ashaar
 
 A collection of poems, verses exploring the self, discipline, resilience, and the eternal struggle between comfort and excellence.
+
 _For me, Poetry is where the soul finds voice in silence_.
+
 _For me, Poetry is an art of speaking volumes through minimal words that echos_.
+
 _For me, poetry is form of catharsis where we reflect, resonate and express our heart out_.
 
 ## Featured Works
@@ -20,7 +23,7 @@ _For me, poetry is form of catharsis where we reflect, resonate and express our 
   </a>
 </div>
 
-## All Works
+## Curated Works
 
 <div class="carousel-header">
   <div class="carousel-controls">

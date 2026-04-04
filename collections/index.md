@@ -5,7 +5,9 @@ title: Collections
 
 # Collections
 
-Curated resources, tools, and knowledge bases for digital resilience, privacy, open-source, and conscious computing.
+_A curated archive of Poetry, Quotes, excerpts & other resources_.
+
+<!-- Curated resources, tools, and knowledge bases for digital resilience, privacy, open-source, and conscious computing. -->
 
 ## Featured Collections
 

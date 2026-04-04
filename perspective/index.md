@@ -5,7 +5,12 @@ title: Perspective
 
 # Perspective — Zawiya e Nazar
 
-A collection of essays exploring intellectual honesty, technology, ethics, and the struggle to maintain principles in an age of compromise.
+I am a man, who speak less, thinks far more, observes and ponder.
+here are my writings, where i use words to reflect my innerself, thoughts & my ideas.
+
+_Collection spannig from college times to now._
+
+<!-- A collection of essays exploring intellectual honesty, technology, ethics, and the struggle to maintain principles in an age of compromise. -->
 
 ## Featured Essays
 
