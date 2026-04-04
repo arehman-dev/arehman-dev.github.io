@@ -29,17 +29,17 @@ spans transitions from college life to career, from photography to writings, fro
 I endeavor to embody objective morality, Ḥayāʾ (modesty), and Iḥsān (excellence) as my guiding principles.
 
 
-## Contact
+## Get in touch:
 
 I welcome conversations,
 
 <!-- - **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me) -->
 
-- **Whatsapp**: [_+92 339 669 0006_](wa.me/+923396690006)
+- **Whatsapp**: [+92 339 669 0006](wa.me/+923396690006)
 - **X**: [arehman_dev](https://twitter.com/arehman_dev)
 
 ---
 
 *"The heart's need for knowledge is like the body's need for food; rather, it is even greater, for a man needs food once or twice a day, but he needs knowledge with every breath he takes."*
 
-_Imam Ibn al Qayyim r.a_
+_Imam Ibn ul Qayyim r.a_

@@ -6,7 +6,7 @@ title: Perspective
 # Perspective — Zawiya e Nazar
 
 I am a man, who speak less, thinks far more, observes and ponder.
-here are my writings, where i use words to reflect my innerself, thoughts & my ideas.
+Here are my writings, where i use words to reflect my innerself, thoughts & my ideas.
 
 _Collection spannig from college times to now._
 
