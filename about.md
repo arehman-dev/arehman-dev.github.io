@@ -35,7 +35,7 @@ I welcome conversations,
 
 <!-- - **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me) -->
 
-- **Whatsapp**: [+92 339 669 0006](wa.me/+923396690006)
+- **Whatsapp**: [+92 339 669 0006](https://wa.me/923396690006)
 - **X**: [arehman_dev](https://twitter.com/arehman_dev)
 
 ---

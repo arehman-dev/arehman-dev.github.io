@@ -151,6 +151,77 @@ html.dark body {
     color: var(--text-muted);
 }
 
+/* Dropdown Menu Styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    color: var(--accent);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 0.8rem 0;
+    margin-top: 0.5rem;
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 10px 30px rgba(7, 30, 97, 0.15);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+    color: var(--accent);
+    background: rgba(1, 172, 106, 0.08);
+    padding-left: 1.4rem;
+}
+
 .glass-top-bar:hover { transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 
 /* --- 5. CARDS & GRID REFINEMENT --- */
