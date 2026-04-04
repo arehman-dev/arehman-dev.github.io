@@ -5,7 +5,7 @@ title: About
 
 # About
 
-Assalamu alaikum wa rahmatullahi wa barakatuh.
+Assalamu alaikum,
 
 I am **Abdul Rehman**, known in digital space as _a.rehman_. A student of knowledge pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.
 
@@ -26,7 +26,7 @@ I endeavor to embody objective morality, Ḥayāʾ (modesty), and Iḥsān (exce
 
 ## Get in touch
 
-I welcome conversations:
+I welcome conversations,
 
 - **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me)
 - **X**: [@arehman_dev](https://twitter.com/arehman_dev)
