@@ -7,12 +7,13 @@ title: About
 
 Assalamu alaikum,
 
-I am **Abdul Rehman**, known in digital space as _a.rehman_. A student of knowledge pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.
+I am **Abdul Rehman**, known in digital space as _a.rehman_.
+A student of knowledge pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.
 
-## Journey Through Life:
+## Life's Journey:
 
-life is a journey, spans transitions 
-from college life to career, from photography to writings, from contemporary sciences to the Islamic sciences, from Western influence to traditional family values.
+life is a journey,
+spans transitions from college life to career, from photography to writings, from contemporary sciences to the Islamic sciences, from Western influence to traditional family values.
 
 
 
@@ -28,12 +29,12 @@ I endeavor to embody objective morality, Ḥayāʾ (modesty), and Iḥsān (exce
 
 I welcome conversations,
 
-- **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me)
-- **X**: [@arehman_dev](https://twitter.com/arehman_dev)
-- **Whatsapp**: [+92 339 669 0006](wa.me/+923396690006)
+<!-- - **Email**: [arehman.dev@proton.me](mailto:arehman.dev@proton.me) -->
 
+**Whatsapp**: _[+92 339 669 0006]_(wa.me/+923396690006)
+**X**: [arehman_dev](https://twitter.com/arehman_dev)
 ---
 
 *"The heart's need for knowledge is like the body's need for food; rather, it is even greater, for a man needs food once or twice a day, but he needs knowledge with every breath he takes."*
 
-    _Imam Ibn al-Qayyim r.a_
+_Imam Ibn al Qayyim r.a_
