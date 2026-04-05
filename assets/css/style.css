@@ -52,8 +52,7 @@ p { font-family: 'Lora', serif; max-width: 70ch; }
 /* --- 3. SIDEBAR & TOOLS --- */
 .sidebar {
     position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
-    /* width: 64px; min-height: 480px; padding: 30px 0; border-radius: 40px; */
-    width: 56px; min-height: 480px; padding: 30px 0; border-radius: 40px;
+    width: 56px; height: auto; padding: 30px 0; border-radius: 40px;
     background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--card-border); box-shadow: var(--glass-shadow); z-index: 1000;
     display: flex; flex-direction: column; justify-content: center;
