@@ -65,12 +65,21 @@ _a window of my life_ -->
 
 <div class="photo-grid">
   <div class="photo-card">
-    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210616-191114-370.jpg" alt="Urban Geometry" loading="lazy">
+    <img src="/tasweer-kahani/home-page-grid/img-20200611-121355-293-01.jpeg" alt="Home Grid 1" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184609-655.jpg" alt="Natural Landscape" loading="lazy">
+    <img src="/tasweer-kahani/home-page-grid/img-20201203-121229-218-01-01.jpeg" alt="Home Grid 2" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184619-635.jpg" alt="Nature Reflection" loading="lazy">
+    <img src="/tasweer-kahani/home-page-grid/img-20201216-171244-316-01-03.jpeg" alt="Home Grid 3" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/home-page-grid/img-20201216-172211-623-01-02.jpeg" alt="Home Grid 4" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/home-page-grid/img-20201220-142717-864-01-01.jpeg" alt="Home Grid 5" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/home-page-grid/img-20210306-160401-942-01.jpeg" alt="Home Grid 6" loading="lazy">
   </div>
 </div>

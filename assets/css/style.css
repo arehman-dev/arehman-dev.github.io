@@ -195,7 +195,7 @@ html.dark body {
     transform: translateY(-5px);
     transition: all 0.3s ease;
     z-index: 1001;
-    box-shadow: 0 10px 30px rgba(7, 30, 97, 0.15);
+    box-shadow: var(--glass-shadow);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -219,6 +219,32 @@ html.dark body {
     color: var(--accent);
     background: rgba(1, 172, 106, 0.08);
     padding-left: 1.4rem;
+}
+
+/* --- 5.5 PORTRAIT WITH GRADIENT BORDER --- */
+.about-portrait-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 2rem auto;
+}
+
+.about-portrait {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(1, 172, 106, 0.3), rgba(0, 255, 157, 0.2));
+    padding: 3px;
+    box-shadow: 0 15px 40px rgba(1, 172, 106, 0.15);
+}
+
+.about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 13px;
+    display: block;
 }
 
 .glass-top-bar:hover { transform: translateY(-3px); box-shadow: var(--glass-shadow); }

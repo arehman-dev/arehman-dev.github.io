@@ -12,6 +12,12 @@ I am **Abdul Rehman**, known in digital space as _a.rehman_.
 
 A student of knowledge, pursuing career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.
 
+<div class="about-portrait-wrapper">
+  <div class="about-portrait">
+    <img src="/about/images/portrait.jpeg" alt="Abdul Rehman">
+  </div>
+</div>
+
 ## Life's Journey:
 
 life is a journey,

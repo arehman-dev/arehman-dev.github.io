@@ -70,6 +70,37 @@ _Natural landscapes, greenery, and moments of contemplation._
   </div>
 </div>
 
+## Moments
+
+_Unframed observations: candid scenes, details, and everyday beauty._
+
+<div class="photo-grid">
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20200611-121355-293-01.jpeg" alt="Moments 1" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/ed-img-20201216-165631-552.jpg" alt="Moments 2" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20200626-115345-367-01.jpg" alt="Moments 3" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20200628-060544-069-01.jpeg" alt="Moments 4" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20200809-181805-258-01.jpg" alt="Moments 5" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20200919-173643-832-01.jpg" alt="Moments 6" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20201203-113950-450-01.jpeg" alt="Moments 7" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/more/img-20201209-142249-937-01.jpeg" alt="Moments 8" loading="lazy">
+  </div>
+</div>
+
 ---
 
 _Photography reminds me that the world is always offering itself—we just need to slow down enough to notice._
