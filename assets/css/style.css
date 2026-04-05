@@ -195,9 +195,9 @@ html.dark body {
     right: 0;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--card-border);
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(7, 30, 97, 0.1);
@@ -209,10 +209,6 @@ html.dark body {
     transform: translateY(-5px);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 1001;
-}
-
-.dark .dropdown-menu {
-    background: rgba(10, 15, 25, 0.75);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -234,7 +230,7 @@ html.dark body {
 .dropdown-menu a:hover {
     color: var(--accent);
     background: rgba(255, 255, 255, 0.05);
-    padding-right: 1.4rem;
+    padding-left: 1.4rem;
 }
 
 /* --- 5.5 PORTRAIT WITH GRADIENT BORDER --- */
