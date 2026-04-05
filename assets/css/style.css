@@ -112,13 +112,13 @@ html.dark body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Ensures header/footer center within this space */
+    align-items: center; 
 }
 
 .top-bar-container {
     position: sticky;
     top: 20px;
-    z-index: 900;
+    z-index: 9999; /* Increased to prevent page text from overlapping the dropdown */
     width: 100%;
     max-width: 1400px;
     padding: 0 40px;
@@ -144,11 +144,18 @@ html.dark body {
 
 .brand-logo { 
     font-family: 'Playfair Display', serif; 
-    font-weight: 700; font-style: italic; 
-    font-size: 1.4rem; text-decoration: none; 
+    font-weight: 700; 
+    font-style: italic; 
+    font-size: 1.4rem; 
+    text-decoration: none; 
     color: var(--text-main); 
 }
-.top-links { display: flex; gap: 2rem; align-items: center; }
+
+.top-links { 
+    display: flex; 
+    gap: 2rem; 
+    align-items: center; 
+}
 
 .top-links a { 
     text-decoration: none; 
@@ -163,7 +170,7 @@ html.dark body {
     color: var(--text-muted);
 }
 
-/* Dropdown Menu Styling */
+/* --- Dropdown Menu Styling --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -174,9 +181,6 @@ html.dark body {
     border: none;
     padding: 0;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     font-family: 'Lora', serif;
     font-weight: 400;
     font-style: italic;
@@ -195,23 +199,29 @@ html.dark body {
     right: 0;
     display: flex;
     flex-direction: column;
+    
+    /* Exact match to .glass-top-bar */
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--card-border);
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(7, 30, 97, 0.1);
+    
     padding: 0.8rem 0;
     margin-top: 0.5rem;
     min-width: 160px;
-    opacity: 1;
+    
+    /* Animation Initialization */
+    opacity: 0;
     visibility: hidden;
-    transform: translateY(-5px);
+    transform: translateY(10px);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 1001;
 }
 
 .dropdown:hover .dropdown-menu {
+    opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
@@ -230,7 +240,6 @@ html.dark body {
 .dropdown-menu a:hover {
     color: var(--accent);
     background: rgba(255, 255, 255, 0.05);
-    padding-left: 1.4rem;
 }
 
 /* --- 5.5 PORTRAIT WITH GRADIENT BORDER --- */
