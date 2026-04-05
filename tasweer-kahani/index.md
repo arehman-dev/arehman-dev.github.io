@@ -16,9 +16,9 @@ These images are drawn from moments of travel, contemplation, and the everyday. 
 
 _{{ gallery[1].description }}_
 
-<div class="photo-grid">
+<div class="photo-grid" data-gallery="{{ gallery[0] }}">
   {% for image in gallery[1].images %}
-  <div class="photo-card" data-image="{{ image.path }}" data-alt="{{ image.alt }}" role="button" tabindex="0">
+  <div class="photo-card" data-gallery="{{ gallery[0] }}" data-image="{{ image.path }}" data-alt="{{ image.alt }}" role="button" tabindex="0">
     <img src="{{ image.path }}" alt="{{ image.alt }}" loading="lazy">
   </div>
   {% endfor %}
