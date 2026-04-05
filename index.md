@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-# half artist & half thinker
+# Blend of thought & craft
 
 _Welcome to my corner of the web. I am a man who speaks less, thinks far more._
 
@@ -34,7 +34,7 @@ _a window of my life_ -->
   </a>
 </div>
 
-## All Writings
+## [Archive](/archive/)
 
 <div class="carousel-header">
   <div class="carousel-controls">

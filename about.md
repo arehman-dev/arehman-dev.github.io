@@ -14,7 +14,7 @@ A student of knowledge, pursuing career in I.T. I occasionally write here, share
 
 <div class="about-portrait-wrapper">
   <div class="about-portrait">
-    <img src="/about/images/portrait.jpeg" alt="Abdul Rehman">
+    {<!-- <img src="/about/images/portrait.jpeg" alt="Abdul Rehman"> */}
   </div>
 </div>
 

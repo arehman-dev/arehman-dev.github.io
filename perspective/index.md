@@ -28,7 +28,7 @@ _Collection spannig from college times to now._
   </a>
 </div>
 
-## All Essays
+## [Archive](/archive/)
 
 <div class="carousel-header">
   <div class="carousel-controls">
