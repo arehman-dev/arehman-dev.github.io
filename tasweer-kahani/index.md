@@ -11,26 +11,62 @@ Photography, for me, is a practice of observation. It's about pausing long enoug
 
 These images are drawn from moments of travel, contemplation, and the everyday. They're imperfect, sincere attempts to translate what I observe into something shareable, grounded in the belief that how we see shapes how we think.
 
-## Visual Archive
+## Blues & Purple
+
+_Urban geometry, architectural reflections, and introspective moods._
 
 <div class="photo-grid">
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80" alt="Architecture Sample 1" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20201216-164519-421-01-02.jpeg" alt="Blues & Purple 1" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Architecture Sample 2" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20201216-165238-255-01.jpeg" alt="Blues & Purple 2" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=80" alt="Nature Sample" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20201216-165631-552-01.jpeg" alt="Blues & Purple 3" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Mountain Sample" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210103-162331-885-01.jpeg" alt="Blues & Purple 4" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=600&q=80" alt="Urban Landscape" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210423-050004-434.jpg" alt="Blues & Purple 5" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1495543786519-5d0d478d6709?w=600&q=80" alt="Landscape" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210616-191114-370.jpg" alt="Blues & Purple 6" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210709-192821-864-02.jpeg" alt="Blues & Purple 7" loading="lazy">
+  </div>
+</div>
+
+## Walk Into Nature
+
+_Natural landscapes, greenery, and moments of contemplation._
+
+<div class="photo-grid">
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20201203-141012-001-01.jpeg" alt="Walk Into Nature 1" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20201213-154022-084-02.jpeg" alt="Walk Into Nature 2" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20201218-114604-397-01-01.jpeg" alt="Walk Into Nature 3" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210306-160401-942-01.jpeg" alt="Walk Into Nature 4" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210328-175306-794-01.jpeg" alt="Walk Into Nature 5" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210328-182309-944-01.jpeg" alt="Walk Into Nature 6" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184609-655.jpg" alt="Walk Into Nature 7" loading="lazy">
+  </div>
+  <div class="photo-card">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184619-635.jpg" alt="Walk Into Nature 8" loading="lazy">
   </div>
 </div>
 

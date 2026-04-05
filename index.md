@@ -59,18 +59,18 @@ _a window of my life_ -->
   </div>
 </div>
 
-## Tasweer-kahani (Stories from the Lens)
+## [Tasweer-kahani (Stories from the Lens)](/tasweer-kahani/)
 
 *Perspective & visuals through my lens.*
 
 <div class="photo-grid">
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80" alt="Architecture Sample 1" loading="lazy">
+    <img src="/tasweer-kahani/theme-blues-and-purple/img-20210616-191114-370.jpg" alt="Urban Geometry" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Architecture Sample 2" loading="lazy">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184609-655.jpg" alt="Natural Landscape" loading="lazy">
   </div>
   <div class="photo-card">
-    <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=80" alt="Nature Sample" loading="lazy">
+    <img src="/tasweer-kahani/theme-walk-into-nature/img-20210712-184619-635.jpg" alt="Nature Reflection" loading="lazy">
   </div>
 </div>
