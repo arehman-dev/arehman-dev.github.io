@@ -279,36 +279,41 @@
       const alt = img.alt;
       const src = img.src;
       
-      // Group by parent gallery section
-      const section = card.closest('div').parentElement;
-      const sectionTitle = section.querySelector('h2')?.textContent || 'Gallery';
+      // Group by parent photo-grid and find section title
+      const photoGrid = card.closest('.photo-grid');
+      const sectionTitle = photoGrid ? photoGrid.previousElementSibling?.textContent || 'Gallery' : 'Gallery';
       
       if (!galleries[sectionTitle]) {
         galleries[sectionTitle] = [];
       }
       
-      galleries[sectionTitle].push({
+      const imageObj = {
         src: src,
         alt: alt,
         element: card
-      });
+      };
+      
+      galleries[sectionTitle].push(imageObj);
 
-      // Add click listener to open modal
+      // Add click listener to open modal with correct index
       card.addEventListener('click', () => {
-        openModal(galleries[sectionTitle], galleries[sectionTitle].indexOf({ src, alt, element: card }));
+        const index = galleries[sectionTitle].findIndex(img => img.src === src && img.alt === alt);
+        openModal(galleries[sectionTitle], Math.max(0, index));
       });
 
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          openModal(galleries[sectionTitle], galleries[sectionTitle].indexOf({ src, alt, element: card }));
+          const index = galleries[sectionTitle].findIndex(img => img.src === src && img.alt === alt);
+          openModal(galleries[sectionTitle], Math.max(0, index));
         }
       });
     });
 
     function openModal(gallery, index) {
+      if (!gallery || gallery.length === 0) return;
       currentGallery = gallery;
-      currentIndex = index;
+      currentIndex = Math.max(0, index);
       showImage();
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -320,6 +325,7 @@
     }
 
     function showImage() {
+      if (currentGallery.length === 0) return;
       const image = currentGallery[currentIndex];
       modalImage.src = image.src;
       modalImage.alt = image.alt;
