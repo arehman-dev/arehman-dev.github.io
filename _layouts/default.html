@@ -280,15 +280,22 @@
     const prevBtn = document.getElementById('modal-prev');
     const nextBtn = document.getElementById('modal-next');
 
+    console.log('Modal elements:', { modal, modalImage, modalCaption, modalClose, prevBtn, nextBtn });
+
     let currentGallery = [];
     let currentIndex = 0;
 
     // Build galleries from data attributes - much simpler!
     const galleries = {};
-    document.querySelectorAll('.photo-card[data-gallery]').forEach(card => {
+    const photoCards = document.querySelectorAll('.photo-card[data-gallery]');
+    console.log('Found photo cards:', photoCards.length);
+
+    photoCards.forEach(card => {
       const galleryKey = card.dataset.gallery;
       const imageSrc = card.dataset.image;
       const imageAlt = card.dataset.alt;
+
+      console.log('Processing card:', { galleryKey, imageSrc, imageAlt });
 
       if (!galleries[galleryKey]) {
         galleries[galleryKey] = [];
@@ -301,10 +308,15 @@
       });
     });
 
+    console.log('Galleries built:', Object.keys(galleries));
+
     // Attach click listeners to all photo cards
     Object.keys(galleries).forEach(galleryKey => {
       galleries[galleryKey].forEach((image, imageIndex) => {
+        console.log('Adding click listener to image:', imageIndex, 'in gallery:', galleryKey);
+        
         image.element.addEventListener('click', () => {
+          console.log('Image clicked! Gallery:', galleryKey, 'Index:', imageIndex);
           currentGallery = galleries[galleryKey];
           currentIndex = imageIndex;
           showImage();
@@ -326,8 +338,12 @@
     });
 
     function showImage() {
-      if (!currentGallery || currentGallery.length === 0) return;
+      if (!currentGallery || currentGallery.length === 0) {
+        console.error('showImage called but no gallery!');
+        return;
+      }
       const image = currentGallery[currentIndex];
+      console.log('Showing image:', image);
       modalImage.src = image.src;
       modalImage.alt = image.alt;
       modalCaption.textContent = image.alt;
