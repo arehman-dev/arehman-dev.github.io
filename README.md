@@ -16,8 +16,9 @@ A minimalist, hand-crafted Jekyll-based portfolio exploring technology, ethics, 
 - **Responsive** — Mobile-friendly grid layouts
 - **Stagger Animations** — Cards cascade on scroll
 - **Copy & Print** — One-click link sharing + PDF export
+- **Shared Design System** — Coordinated color palette with portfolio
 
----
+**🎨 Color Documentation:** See [COLOR_PALETTE.md](../portfolio/COLOR_PALETTE.md) for complete color system (hex codes, gradients, usage guidelines)
 
 ## � Quick Start
 
