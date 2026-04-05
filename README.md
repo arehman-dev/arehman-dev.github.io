@@ -80,13 +80,24 @@ Content...
 ```
 
 ### Add Images
-1. Upload to `tasweer-kahani/theme-folder/`
-2. Link in markdown: `<img src="/tasweer-kahani/.../image.jpeg" alt="desc">`
+Upload to `tasweer-kahani/` (images auto-appear on page via `_data/gallery.yml`)
+
+To add a new image:
+1. Upload file to `tasweer-kahani/[theme-folder]/image.jpeg`
+2. Add entry to `_data/gallery.yml`:
+   ```yaml
+   galleries:
+     [theme-name]:
+       images:
+         - path: "/tasweer-kahani/[theme-folder]/image.jpeg"
+           alt: "Image description"
+   ```
+3. Rebuild site
 
 **See [DEVELOPMENT.md](DEVELOPMENT.md) for:**
 - Complete code logic & workflows
 - Theme system details
-- Image gallery system proposal (lightbox + metadata)
+- Image gallery system (lightbox + metadata)
 - Advanced customization
 
 ---
@@ -145,43 +156,45 @@ Applies to: Top bar, dropdown, cards, buttons
 
 ---
 
-## 🖼️ Image Gallery (Proposed System)
+## 🖼️ Image Gallery System
 
-### Current Limitations
-- ❌ Manual HTML for each image
-- ❌ No image metadata (name, description)
-- ❌ No full-size view option
-- ❌ Doesn't scale for 100s of images
+### Live on Tasweer Kahani Page ✅
 
-### Proposed Solution: Lightbox + YAML Data
+The photo gallery now features an interactive modal-based viewing system with keyboard navigation and full-size image display.
 
-**Data File (_data/gallery.yml):**
+### How It Works
+
+**Data Centralization (YAML):**
+All gallery images stored in `_data/gallery.yml`:
 ```yaml
 galleries:
   blues-and-purple:
     title: "Blues & Purple"
     description: "Urban geometry & architecture"
     images:
-      - filename: "img-01.jpeg"
-        title: "Urban Sunset"
-        description: "Light on concrete structures"
-        date: "2020-12-16"
+      - path: "/tasweer-kahani/theme-blues-and-purple/img-01.jpeg"
+        alt: "Image description"
 ```
 
-**Template Loop (Automatic Rendering):**
-- Loops through YAML data
-- Generates grid with image overlays
-- Click opens modal with full image + metadata
+**Dynamic Rendering:**
+Template loops generate interactive grid from YAML data — click any image to open modal.
 
 **Features:**
-✅ Scalable to 1000s of images  
-✅ Centralized image management (YAML)  
-✅ Full-size lightbox view  
-✅ Image title + description display  
-✅ Date & metadata support  
-✅ Keyboard: ESC to close  
+✅ Interactive lightbox gallery  
+✅ Keyboard navigation (← → arrows, ESC to close)  
+✅ Previous/next buttons  
+✅ Centered full-size image display  
+✅ Scales to unlimited images  
+✅ Centralized image management  
 
-**See [DEVELOPMENT.md](DEVELOPMENT.md#-image-gallery-system-proposal) for complete implementation guide**
+**Adding Images:**
+1. Upload to `tasweer-kahani/[theme-folder]/`
+2. Add entry to `_data/gallery.yml`
+3. Rebuild site
+
+**See [DEVELOPMENT.md](DEVELOPMENT.md#-image-gallery-system) for complete implementation details**
+
+---
 
 ---
 

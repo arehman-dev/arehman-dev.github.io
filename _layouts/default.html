@@ -258,6 +258,115 @@
         observer.observe(el);
       });
     });
+
+    // Photo Gallery Modal
+    const modal = document.getElementById('photo-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-caption');
+    const modalClose = document.getElementById('modal-close');
+    const prevBtn = document.getElementById('modal-prev');
+    const nextBtn = document.getElementById('modal-next');
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    // Get all photo cards and group by gallery
+    const photoCards = document.querySelectorAll('.photo-card[data-image]');
+    const galleries = {};
+
+    photoCards.forEach(card => {
+      const img = card.querySelector('img');
+      const alt = img.alt;
+      const src = img.src;
+      
+      // Group by parent gallery section
+      const section = card.closest('div').parentElement;
+      const sectionTitle = section.querySelector('h2')?.textContent || 'Gallery';
+      
+      if (!galleries[sectionTitle]) {
+        galleries[sectionTitle] = [];
+      }
+      
+      galleries[sectionTitle].push({
+        src: src,
+        alt: alt,
+        element: card
+      });
+
+      // Add click listener to open modal
+      card.addEventListener('click', () => {
+        openModal(galleries[sectionTitle], galleries[sectionTitle].indexOf({ src, alt, element: card }));
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(galleries[sectionTitle], galleries[sectionTitle].indexOf({ src, alt, element: card }));
+        }
+      });
+    });
+
+    function openModal(gallery, index) {
+      currentGallery = gallery;
+      currentIndex = index;
+      showImage();
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showImage() {
+      const image = currentGallery[currentIndex];
+      modalImage.src = image.src;
+      modalImage.alt = image.alt;
+      modalCaption.textContent = image.alt;
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % currentGallery.length;
+      showImage();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      showImage();
+    }
+
+    // Event listeners
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (nextBtn) nextBtn.addEventListener('click', nextImage);
+    if (prevBtn) prevBtn.addEventListener('click', prevImage);
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+      if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      }
+    });
+
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
   </script>
+
+  <!-- Photo Modal -->
+  <div id="photo-modal" class="photo-modal">
+    <div class="photo-modal-content">
+      <button id="modal-close" class="photo-modal-close">&times;</button>
+      <img id="modal-image" class="photo-modal-image" src="" alt="">
+      <button id="modal-prev" class="photo-modal-nav prev">❮</button>
+      <button id="modal-next" class="photo-modal-nav next">❯</button>
+      <div id="modal-caption" class="photo-modal-caption"></div>
+    </div>
+  </div>
 </body>
 </html>
