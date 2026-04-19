@@ -5,7 +5,7 @@ title: Home
 
 # Blend of thought & craft
 
-_Welcome to my corner of the web. I am a man who speaks less, thinks far more._
+_Welcome to my corner of the web. An ordinary man of calculated speech and deep thoughts._
 
 _A student of knowledge, pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me._
 
