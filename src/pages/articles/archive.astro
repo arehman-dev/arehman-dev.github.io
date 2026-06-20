@@ -6,6 +6,7 @@ import { articles } from '../../data/articles';
 const sortedArticles = [...articles].sort((a, b) => {
   return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
 });
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout 
@@ -14,7 +15,7 @@ const sortedArticles = [...articles].sort((a, b) => {
 >
   <div class="archive-container">
     <div class="back-nav mb-lg">
-      <a href={`${import.meta.env.BASE_URL}articles`} class="back-link">
+      <a href={`${base}articles`} class="back-link">
         <i class="fas fa-arrow-left"></i> Back to Articles
       </a>
     </div>
@@ -35,10 +36,10 @@ const sortedArticles = [...articles].sort((a, b) => {
           
           <div class="archive-content">
             <h2 class="archive-title">
-              <a href={`${import.meta.env.BASE_URL}articles/${article.slug}`}>{article.title}</a>
+              <a href={`${base}articles/${article.slug}`}>{article.title}</a>
             </h2>
             <p class="archive-excerpt">{article.excerpt}</p>
-            <a href={`${import.meta.env.BASE_URL}articles/${article.slug}`} class="archive-read-more">
+            <a href={`${base}articles/${article.slug}`} class="archive-read-more">
               Read post <i class="fas fa-arrow-right arrow-icon"></i>
             </a>
           </div>

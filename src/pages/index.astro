@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout title="Abdul Rehman - Python & C++ Developer | Linux Automation">
@@ -57,10 +58,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         
         <div class="hero-ctas flex gap-md mt-lg">
-          <a href={`${import.meta.env.BASE_URL}projects`} class="btn btn-primary" id="hero-view-projects">
+          <a href={`${base}projects`} class="btn btn-primary" id="hero-view-projects">
             <i class="fas fa-terminal"></i> View Projects
           </a>
-          <a href={`${import.meta.env.BASE_URL}hire-me`} class="btn btn-secondary" id="hero-connect">
+          <a href={`${base}hire-me`} class="btn btn-secondary" id="hero-connect">
             <i class="fas fa-handshake"></i> Let's Connect
           </a>
         </div>

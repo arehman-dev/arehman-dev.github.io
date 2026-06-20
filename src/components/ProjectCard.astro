@@ -22,6 +22,7 @@ const getProjectIcon = (title: string, tags: string[]) => {
 };
 
 const iconClass = getProjectIcon(project.title, project.tags);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <article class="project-card card">
@@ -43,7 +44,7 @@ const iconClass = getProjectIcon(project.title, project.tags);
     </div>
     
     <div class="card-footer mt-lg">
-      <a href={`${import.meta.env.BASE_URL}projects/${project.slug}`} class="btn btn-primary btn-sm">
+      <a href={`${base}projects/${project.slug}`} class="btn btn-primary btn-sm">
         <i class="fas fa-eye"></i> View Details
       </a>
       {project.sourceLink && (

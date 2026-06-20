@@ -16,6 +16,7 @@ interface Props {
 
 const { certificate } = Astro.props;
 const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-')}`;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout 
@@ -24,7 +25,7 @@ const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-
 >
   <div class="cert-detail-container">
     <div class="back-nav mb-lg">
-      <a href={`${import.meta.env.BASE_URL}certificates`} class="back-link">
+      <a href={`${base}certificates`} class="back-link">
         <i class="fas fa-arrow-left"></i> Back to Certificates
       </a>
     </div>

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { articles } from '../data/articles';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout 
@@ -15,7 +16,7 @@ import { articles } from '../data/articles';
           <span class="eyebrow">Sharing Knowledge</span>
           <h1>Technical Articles</h1>
         </div>
-        <a href={`${import.meta.env.BASE_URL}articles/archive`} class="btn btn-outline btn-sm archive-btn">
+        <a href={`${base}articles/archive`} class="btn btn-outline btn-sm archive-btn">
           <i class="fas fa-box-archive"></i> Archive Mode
         </a>
       </div>
