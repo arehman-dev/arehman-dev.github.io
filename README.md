@@ -1,4 +1,4 @@
-# a.rehman — Digital Window to My Life
+# Abdul Rehman — Digital Window to My Life
 
 A minimalist, hand-crafted Jekyll-based portfolio exploring technology, ethics, philosophy, and digital resilience with glass morphism UI.
 
