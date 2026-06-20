@@ -43,6 +43,7 @@ The following parameters have been fully integrated into the production version 
 * **Technical Shift**: Moved away from RHEL/RHCSA configurations to emphasize general Linux systems management (focusing on **Debian & Ubuntu**), **C++**, **Python**, **software testing**, and **automation**.
 * **Active Tracks**: Structured both *Google IT Automation with Python* and *Scientific Computing with Python* as actively ongoing professional certificates (targeted for completion in 2026).
 * **Creative Footer**: Embedded a custom developer loop: `while(alive) { write_code(); automate_systems(); test_everything(); }` in the layout, representing core skills in development, systems administration, and quality assurance.
+* **Hosting Compatibility**: Configured the site with `base: '/portfolio'` and normalized all internal page links to end with trailing slashes (`/`), ensuring seamless static routing on GitHub Pages.
 
 ---
 

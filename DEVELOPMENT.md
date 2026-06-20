@@ -20,7 +20,7 @@ All content is loaded dynamically from typescript models in the `src/data/` dire
 
 ### 1. Projects Data Schema
 - **File**: [src/data/projects.ts](file:///home/arehman/00-code/portfolio/src/data/projects.ts)
-- **Routing**: Renders lists at `/projects` and individual sub-detail pages at `/projects/[slug]` via `src/pages/projects/[slug].astro`.
+- **Routing**: Renders lists at `/projects/` and individual sub-detail pages at `/projects/[slug]/` via `src/pages/projects/[slug].astro`.
 - **Model structure**:
   ```typescript
   export interface Project {
@@ -41,7 +41,7 @@ All content is loaded dynamically from typescript models in the `src/data/` dire
 
 ### 2. Certifications Data Schema
 - **File**: [src/data/certificates.ts](file:///home/arehman/00-code/portfolio/src/data/certificates.ts)
-- **Routing**: Renders grid components on `/certificates` and dynamic details at `/certificates/[slug]` via `src/pages/certificates/[slug].astro`.
+- **Routing**: Renders grid components on `/certificates/` and dynamic details at `/certificates/[slug]/` via `src/pages/certificates/[slug].astro`.
 - **Model structure**:
   ```typescript
   export interface Certificate {
@@ -61,7 +61,7 @@ All content is loaded dynamically from typescript models in the `src/data/` dire
 
 ### 3. Technical Skills Schema
 - **File**: [src/data/skills.ts](file:///home/arehman/00-code/portfolio/src/data/skills.ts)
-- **Rendering**: Directly maps onto `/skills-experience` under structural grid divisions.
+- **Rendering**: Directly maps onto `/skills-experience/` under structural grid divisions.
 - **Model structure**:
   ```typescript
   export interface Skill {
@@ -77,7 +77,7 @@ All content is loaded dynamically from typescript models in the `src/data/` dire
 
 ### 4. Technical Articles Schema
 - **File**: [src/data/articles.ts](file:///home/arehman/00-code/portfolio/src/data/articles.ts)
-- **Routing**: Populates the `/articles` feed page and dynamic local routes at `/articles/[slug]`. Archive page sorts entries chronologically by their `publishDate` property.
+- **Routing**: Populates the `/articles/` feed page and dynamic local routes at `/articles/[slug]/`. The archive page is served at `/articles/archive/` and sorts entries chronologically by their `publishDate` property.
 - **Model structure**:
   ```typescript
   export interface Article {
@@ -104,6 +104,10 @@ All content is loaded dynamically from typescript models in the `src/data/` dire
 - **Creative Footer**: The footer is declared inside `BaseLayout.astro`. If modified, maintain a creative, technical tagline layout.
 - **Anti-FOUC Init**: To prevent the screen from flashing during light/dark transitions, a script is embedded directly in `<head>` inside `BaseLayout.astro`. Avoid modifying this unless optimizing theme load scripts.
 - **Social Dock**: The floating dock inside `SocialDock.astro` reveals links on hover. If adding platforms, keep their respective brand colors inside `SocialDock.astro` `<style>` definitions.
+- **Trailing Slash Enforce**: GitHub Pages static hosting under project subfolders does not reliably map extensionless directory endpoints. Always append trailing slashes `/` to internal link triggers (e.g. use `${base}about/` instead of `${base}about`). Use the normalized `base` helper initialized in templates to guarantee paths work locally and on GitHub Pages:
+  ```typescript
+  const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  ```
 
 ---
 
