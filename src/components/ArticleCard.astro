@@ -1,0 +1,155 @@
+---
+import type { Article } from '../data/articles';
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="article-card card">
+  <div class="article-image-container">
+    <div class="article-category-badge">{article.category}</div>
+    <!-- Clean abstract styling gradient fallback since actual local images may not be copied yet -->
+    <div class="article-gradient-fallback">
+      <i class="fas fa-book-open fallback-icon"></i>
+    </div>
+  </div>
+  
+  <div class="card-body">
+    <div class="meta-row">
+      <span class="meta-item"><i class="far fa-calendar"></i> {article.date}</span>
+      <span class="meta-item"><i class="far fa-clock"></i> {article.readTime}</span>
+    </div>
+    
+    <h3 class="article-title">{article.title}</h3>
+    <p class="article-excerpt">{article.excerpt}</p>
+    
+    <div class="card-footer mt-lg">
+      <a href={`/articles/${article.slug}`} class="read-link">
+        Read Article <i class="fas fa-arrow-right arrow-icon"></i>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 0; /* Let visual content go to edges */
+  }
+
+  .article-image-container {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  .article-category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .article-gradient-fallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--green-900) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+  }
+
+  [data-theme="light"] .article-gradient-fallback {
+    background: linear-gradient(135deg, #e3f2fd 0%, #e2fbf0 100%);
+  }
+
+  .fallback-icon {
+    font-size: 3rem;
+    color: var(--secondary);
+    opacity: 0.7;
+    transition: all 0.5s ease;
+  }
+
+  .article-card:hover .article-gradient-fallback {
+    transform: scale(1.08);
+  }
+
+  .article-card:hover .fallback-icon {
+    transform: rotate(-5deg) scale(1.1);
+    color: var(--primary);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+  }
+
+  .meta-item i {
+    margin-right: 0.25rem;
+  }
+
+  .article-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .article-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .read-link {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.2s ease;
+  }
+
+  .read-link:hover {
+    color: var(--secondary);
+  }
+
+  .article-card:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  .arrow-icon {
+    transition: transform 0.2s ease;
+  }
+</style>

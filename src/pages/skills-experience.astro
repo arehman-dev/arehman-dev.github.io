@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkillBadge from '../components/SkillBadge.astro';
+import { skillsData } from '../data/skills';
+---
+
+<BaseLayout 
+  title="Skills & Experience | Abdul Rehman Portfolio"
+  description="A comprehensive view of Abdul Rehman's technical skill set (Linux, Bash, Python, Security) and value-driven experience journey."
+>
+  <div class="skills-page-container">
+    <header class="page-header">
+      <span class="eyebrow">Technical Capability &amp; History</span>
+      <h1>Skills &amp; Experience</h1>
+      <p class="tagline">A detailed breakdown of my technical proficiencies and the values shaping my professional journey.</p>
+    </header>
+
+    <!-- SECTION A: TECHNICAL SKILLS -->
+    <section class="skills-section mb-lg">
+      <h2 class="section-title-left">Technical Skill Set</h2>
+      
+      <div class="skills-grid-main">
+        {skillsData.map((category) => (
+          <div class="skill-category-block">
+            <h3 class="category-header">{category.title}</h3>
+            <div class="skills-list">
+              {category.skills.map((skill) => (
+                <SkillBadge 
+                  name={skill.name} 
+                  level={skill.level} 
+                  icon={skill.icon} 
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SECTION B: WORK EXPERIENCE -->
+    <section class="experience-section mb-lg">
+      <h2 class="section-title-left">Work Experience</h2>
+      <div class="experience-timeline">
+        <div class="card experience-card-main">
+          <div class="exp-header-row">
+            <div class="exp-role-company">
+              <h3>Python Developer &amp; Systems Administrator</h3>
+              <p class="company-name"><i class="far fa-building"></i> InfraLayers</p>
+            </div>
+            <span class="badge badge-active">2023 - Present</span>
+          </div>
+          <div class="exp-body mt-md">
+            <p>
+              Leading the development of secure Python automation scripts, optimizing server configurations, and managing infrastructure monitoring suites. Designed RESTful API channels using FastAPI to monitor and harden Linux-based service logs.
+            </p>
+            <ul class="exp-bullet-points">
+              <li>Created an internal deployment automation library in Python, reducing manual server provisioning time by 60%.</li>
+              <li>Configured and maintained container configurations using Docker on Debian, Ubuntu, and standard Linux environments.</li>
+              <li>Wrote custom log parsers and alerts metrics routines integrated with Discord notifications.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION C: JOURNEY -->
+    <section class="journey-section">
+      <h2 class="section-title-left">Journey</h2>
+      
+      <div class="grid grid-3">
+        <div class="card journey-card">
+          <div class="journey-icon"><i class="fas fa-mountain"></i></div>
+          <h3>Overcoming Adversity</h3>
+          <p>
+            My journey has been defined by transforming significant challenges into opportunities for growth. Through navigating high-pressure situations and complex problems, I've developed the resilience and structured thinking that drives my approach to technology.
+          </p>
+          <div class="journey-tags flex flex-wrap gap-md">
+            <span class="badge">Resilience</span>
+            <span class="badge">Adaptability</span>
+          </div>
+        </div>
+
+        <div class="card journey-card">
+          <div class="journey-icon"><i class="fas fa-terminal"></i></div>
+          <h3>Technical Excellence</h3>
+          <p>
+            Experience in managing complex systems, ensuring operational reliability, and maintaining security standards. I bring a methodical approach to development, emphasizing maintainable code and user-focused solutions.
+          </p>
+          <div class="journey-tags flex flex-wrap gap-md">
+            <span class="badge">System Architecture</span>
+            <span class="badge">Code Quality</span>
+          </div>
+        </div>
+
+        <div class="card journey-card">
+          <div class="journey-icon"><i class="fas fa-code-branch"></i></div>
+          <h3>Value-Driven Approach</h3>
+          <p>
+            Every project and decision is filtered through my core values of integrity, excellence, and purpose. I seek opportunities that align with meaningful goals and contribute positively to the digital landscape.
+          </p>
+          <div class="journey-tags flex flex-wrap gap-md">
+            <span class="badge badge-secondary">Purpose-Driven</span>
+            <span class="badge">Continuous Improvement</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .skills-page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .section-title-left {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Skills Category Blocks Layout */
+  .skills-grid-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .category-header {
+    font-size: 1.35rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--primary);
+    padding-left: 0.75rem;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 639px) {
+    .skills-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Work Experience Styling */
+  .experience-card-main {
+    border-left: 4px solid var(--secondary);
+  }
+
+  .exp-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .exp-role-company h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.35rem;
+  }
+
+  .company-name {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .exp-bullet-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .exp-bullet-points li {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .exp-bullet-points li::before {
+    content: '→';
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  /* Journey Cards */
+  .journey-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .journey-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .journey-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .journey-card p {
+    font-size: 0.9rem;
+    flex-grow: 1;
+  }
+
+  .journey-tags {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+</style>

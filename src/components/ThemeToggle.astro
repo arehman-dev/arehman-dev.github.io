@@ -1,0 +1,65 @@
+---
+---
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
+  <span class="sun-icon">☀️</span>
+  <span class="moon-icon">🌙</span>
+</button>
+
+<style>
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    color: var(--text-main);
+  }
+
+  .theme-toggle:hover {
+    background-color: var(--gray-100);
+    transform: scale(1.05);
+    border-color: var(--primary);
+  }
+
+  [data-theme="dark"] .theme-toggle:hover {
+    background-color: #2b2b2b;
+  }
+
+  .sun-icon {
+    display: none;
+  }
+  .moon-icon {
+    display: block;
+  }
+
+  :global([data-theme="dark"]) .sun-icon {
+    display: block;
+  }
+  :global([data-theme="dark"]) .moon-icon {
+    display: none;
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('theme-toggle');
+  
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    const currentTheme = element.getAttribute('data-theme');
+    const isDark = currentTheme === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    
+    element.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', handleToggleClick);
+  }
+</script>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articles } from '../../data/articles';
+
+// Sort articles by publishDate descending (newest first)
+const sortedArticles = [...articles].sort((a, b) => {
+  return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
+});
+---
+
+<BaseLayout 
+  title="Articles Archive | Abdul Rehman"
+  description="Chronological archive of technical articles written by Python Developer Abdul Rehman."
+>
+  <div class="archive-container">
+    <div class="back-nav mb-lg">
+      <a href="/articles" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Articles
+      </a>
+    </div>
+
+    <header class="page-header">
+      <span class="eyebrow">Technical Repository</span>
+      <h1>Articles Archive</h1>
+      <p class="tagline">A chronological indexing of all published guides, notes, and technical writeups.</p>
+    </header>
+
+    <div class="archive-list mt-lg">
+      {sortedArticles.map((article) => (
+        <div class="archive-item card">
+          <div class="archive-meta">
+            <span class="archive-date"><i class="far fa-calendar"></i> {article.date}</span>
+            <span class="badge badge-completed">{article.category}</span>
+          </div>
+          
+          <div class="archive-content">
+            <h2 class="archive-title">
+              <a href={`/articles/${article.slug}`}>{article.title}</a>
+            </h2>
+            <p class="archive-excerpt">{article.excerpt}</p>
+            <a href={`/articles/${article.slug}`} class="archive-read-more">
+              Read post <i class="fas fa-arrow-right arrow-icon"></i>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-container {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .archive-item {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 2rem;
+    align-items: start;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 639px) {
+    .archive-item {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .archive-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .archive-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .archive-title::after {
+    display: none;
+  }
+
+  .archive-title a {
+    color: var(--text-main);
+  }
+
+  .archive-title a:hover {
+    color: var(--primary);
+  }
+
+  .archive-excerpt {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .archive-read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.2s ease;
+  }
+
+  .archive-item:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  .arrow-icon {
+    transition: transform 0.2s ease;
+  }
+</style>

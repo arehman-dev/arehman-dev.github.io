@@ -1,0 +1,144 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+// Determine status badge class
+const statusClass = `badge-${project.status.toLowerCase().replace(/\s+/g, '-')}`;
+
+// Determine project icon based on title/tags
+const getProjectIcon = (title: string, tags: string[]) => {
+  const t = title.toLowerCase();
+  if (t.includes('server') || tags.includes('Linux') || tags.includes('Debian')) return 'fa-server';
+  if (t.includes('weather')) return 'fa-cloud-sun';
+  if (t.includes('portfolio')) return 'fa-user-tie';
+  if (t.includes('script') || tags.includes('Bash')) return 'fa-terminal';
+  if (t.includes('prayer') || t.includes('notifier')) return 'fa-bell';
+  return 'fa-code';
+};
+
+const iconClass = getProjectIcon(project.title, project.tags);
+---
+
+<article class="project-card card">
+  <div class="card-image-fallback">
+    <i class={`fas ${iconClass} fallback-icon`}></i>
+  </div>
+  
+  <div class="card-body">
+    <div class="card-status-container">
+      <span class={`badge ${statusClass}`}>{project.status}</span>
+    </div>
+    <h3 class="card-title">{project.title}</h3>
+    <p class="card-description">{project.description}</p>
+    
+    <div class="tech-stack flex flex-wrap gap-md">
+      {project.tags.map(tag => (
+        <span class="tech-tag">{tag}</span>
+      ))}
+    </div>
+    
+    <div class="card-footer mt-lg">
+      <a href={`/projects/${project.slug}`} class="btn btn-primary btn-sm">
+        <i class="fas fa-eye"></i> View Details
+      </a>
+      {project.sourceLink && (
+        <a href={project.sourceLink} class="btn btn-outline btn-sm" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> Code
+        </a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 0; /* Override default card padding to let image fill top */
+  }
+
+  .card-image-fallback {
+    height: 160px;
+    background: linear-gradient(135deg, var(--green-900) 0%, var(--blue-900) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  [data-theme="light"] .card-image-fallback {
+    background: linear-gradient(135deg, #e0f2f1 0%, #e3f2fd 100%);
+  }
+
+  .fallback-icon {
+    font-size: 3.5rem;
+    color: var(--primary);
+    opacity: 0.85;
+    transition: transform 0.5s ease;
+  }
+
+  .project-card:hover .fallback-icon {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-status-container {
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .tech-stack {
+    margin-bottom: auto;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background-color: var(--gray-50);
+    color: var(--text-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-card);
+  }
+
+  [data-theme="dark"] .tech-tag {
+    background-color: #2b2b2b;
+    border-color: #3b3b3b;
+    color: #cbd5e1;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+</style>

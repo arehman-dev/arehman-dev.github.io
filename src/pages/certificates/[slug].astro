@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { certificates } from '../../data/certificates';
+import type { Certificate } from '../../data/certificates';
+
+export async function getStaticPaths() {
+  return certificates.map((certificate) => ({
+    params: { slug: certificate.slug },
+    props: { certificate }
+  }));
+}
+
+interface Props {
+  certificate: Certificate;
+}
+
+const { certificate } = Astro.props;
+const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<BaseLayout 
+  title={`${certificate.title} | Abdul Rehman Credentials`}
+  description={certificate.description}
+>
+  <div class="cert-detail-container">
+    <div class="back-nav mb-lg">
+      <a href="/certificates" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Certificates
+      </a>
+    </div>
+
+    <header class="detail-header card mb-lg">
+      <div class="header-top">
+        <span class={`badge ${statusClass}`}>{certificate.status}</span>
+        <span class="cert-date">{certificate.date}</span>
+      </div>
+      <h1 class="cert-title">{certificate.title}</h1>
+      <p class="cert-issuer"><i class="far fa-building"></i> {certificate.issuer}</p>
+      
+      {certificate.credentialId && (
+        <p class="cert-id"><i class="fas fa-id-card"></i> Credential ID: <code>{certificate.credentialId}</code></p>
+      )}
+    </header>
+
+    <div class="detail-content grid">
+      <div class="main-details">
+        <section class="section card mb-lg">
+          <h2>Overview &amp; Purpose</h2>
+          <p class="narrative-text">{certificate.overview}</p>
+        </section>
+
+        {certificate.skillsAcquired && certificate.skillsAcquired.length > 0 && (
+          <section class="section card mb-lg">
+            <h2>Topics &amp; Capabilities Covered</h2>
+            <ul class="skills-acquired-list">
+              {certificate.skillsAcquired.map((skill) => (
+                <li>
+                  <i class="fas fa-check-circle list-bullet-icon"></i>
+                  <span>{skill}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+
+      <div class="sidebar-details">
+        <section class="section card action-card mb-lg">
+          <h3>Verification</h3>
+          <p class="verification-desc">This certification can be verified directly via the issuer's credential portal.</p>
+          <div class="action-buttons flex flex-wrap gap-md mt-lg">
+            {certificate.link ? (
+              <a href={certificate.link} target="_blank" rel="noopener" class="btn btn-primary w-full justify-center">
+                <i class="fas fa-external-link-alt"></i> Verify Credential
+              </a>
+            ) : (
+              <span class="btn btn-outline w-full justify-center disabled-btn">
+                <i class="fas fa-lock"></i> Verification Pending
+              </span>
+            )}
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .cert-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  .detail-header {
+    border-left: 6px solid var(--secondary);
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .cert-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .cert-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-issuer {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-id {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Layout */
+  .detail-content {
+    grid-template-columns: 1.8fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .detail-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .narrative-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .skills-acquired-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skills-acquired-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .list-bullet-icon {
+    color: var(--primary);
+    font-size: 1.05rem;
+    margin-top: 0.25rem;
+  }
+
+  .verification-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .disabled-btn {
+    opacity: 0.6;
+    cursor: not-allowed;
+    width: 100%;
+    text-align: center;
+  }
+
+  .action-card {
+    background-color: var(--secondary-light);
+    border-color: var(--secondary);
+  }
+
+  [data-theme="dark"] .action-card {
+    background-color: rgba(57, 123, 201, 0.05);
+    border-color: var(--secondary-dark);
+  }
+
+  .action-card h3 {
+    margin-bottom: 0.5rem;
+  }
+</style>

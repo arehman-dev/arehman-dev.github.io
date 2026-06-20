@@ -1,163 +1,58 @@
-# Color Palette — arehman-dev Portfolio
+# Color System & Styling Guidelines — V2 Evolved
 
-Professional color system designed for system administration & development portfolio.
-
----
-
-## 🎨 Brand Colors (Primary)
-
-### Green Suite (System Administration)
-Primary accent color representing infrastructure, stability, and growth.
-
-| Shade | Hex | RGB | Usage |
-|-------|-----|-----|-------|
-| Lightest | `#f0f9f4` | rgb(240, 249, 244) | Backgrounds, light fills |
-| Light | `#8ed5ab` | rgb(142, 213, 171) | Accent, hover states, soft UI |
-| **Medium** | `#01ac6a` | rgb(1, 172, 106) | **Primary accent, buttons, main branding** |
-| Dark | `#00833f` | rgb(0, 131, 63) | Dark hover states |
-| Darker | `#1c5c39` | rgb(28, 92, 57) | Deep accents, active states |
-
-### Blue Suite (Python & Development)
-Secondary accent color representing technology, trust, and innovation.
-
-| Shade | Hex | RGB | Usage |
-|-------|-----|-----|-------|
-| Lightest | `#f0f6ff` | rgb(240, 246, 255) | Backgrounds, light fills |
-| Light | `#a3c4ef` | rgb(163, 196, 239) | Accent, hover states, soft UI |
-| **Medium** | `#397bc9` | rgb(57, 123, 201) | **Secondary accent, links, navigation** |
-| Dark | `#1b25ab` | rgb(27, 37, 171) | Dark hover states |
-| Darker | `#071e61` | rgb(7, 30, 97) | Deep accents, active states |
+This document defines the custom variables, color weights, semantic aliases, and guidelines implemented in the design system of the portfolio website.
 
 ---
 
-## 🌈 Gradients
+## 🎨 Color System Variables
 
-### Primary Gradient
-`linear-gradient(135deg, #8ed5ab 0%, #01ac6a 100%)`
-- **Used for:** Primary buttons, hero elements, "View Projects" CTA
-- **Direction:** Top-left to bottom-right (135°)
-- **Effect:** Light green → vibrant green
+The color variables are declared globally in `src/styles/global.css`.
 
-### Secondary Gradient
-`linear-gradient(135deg, #a3c4ef 0%, #397bc9 100%)`
-- **Used for:** Secondary buttons, "Get in Touch" CTA
-- **Direction:** Top-left to bottom-right (135°)
-- **Effect:** Light blue → vibrant blue
+### 1. Primary Colors: Green Suite
+Used for positive feedback, primary buttons, logo highlight, action buttons, and active text link highlights.
+*   **Green-50 (Light Backgrounds)**: `#f0f9f4` (Light backgrounds, highlights)
+*   **Green-500 (Primary Brand)**: `#01ac6a` (Main action button background, headings gradient)
+*   **Green-900 (Dark Accent)**: `#1c5c39` (Deep background, dark overlays, gradient endings)
 
-### Accent Gradient (Combined)
-`linear-gradient(135deg, #01ac6a 0%, #397bc9 100%)`
-- **Used for:** Card top borders, hover effects, brand gradient
-- **Direction:** Top-left to bottom-right (135°)
-- **Effect:** Green → Blue blend
+### 2. Secondary Colors: Blue Suite
+Used for info states, contact button triggers, secondary anchors, and visual structure accents.
+*   **Blue-50 (Light backgrounds)**: `#f0f6ff` (Secondary container backgrounds)
+*   **Blue-500 (Secondary Accent)**: `#397bc9` (Secondary CTAs, email triggers, gradient overlays)
+*   **Blue-900 (Dark Accent)**: `#071e61` (Deep dark cards details, text shadows in dark theme)
 
-### Hero Background Gradient
-`linear-gradient(135deg, rgba(142, 213, 171, 0.05) 0%, rgba(163, 196, 239, 0.05) 50%, rgba(142, 213, 171, 0.03) 100%)`
-- **Used for:** Section backgrounds, subtle texturing
-- **Effect:** Very subtle green-blue blend with transparency
+### 3. Accent Colors: Neon Suite
+Used cautiously to make status tags pop, border glows, active indicators, and blinking cursor effects.
+*   **Neon-50 (Light Accent Backgrounds)**: `#f1ffcc` (Subtle learning highlights)
+*   **Neon-500 (Bold Highlights)**: `#c0ff14` (Status tags text, active outline halos, blinking icons)
+*   **Neon-900 (Dark Neon Text)**: `#4c6800` (Contrast text on light backgrounds)
 
 ---
 
-## 🎯 Usage Guidelines
+## 🌓 Theme Styles & Background Textures
 
-### Buttons
-| Type | Background | Text | Border | Hover |
-|------|-----------|------|--------|-------|
-| Primary (`.btn-primary`) | `linear-gradient(135deg, #8ed5ab, #01ac6a)` | White | None | Shadow boost |
-| Secondary (`.btn-secondary`) | `linear-gradient(135deg, #a3c4ef, #397bc9)` | White | None | Shadow boost |
-| Outline (`.btn-outline`) | `rgba(1, 172, 106, 0.1)` | #01ac6a | 2px #01ac6a | Solid #01ac6a |
-| Nav Outline (`.btn-nav-outline`) | `rgba(255,255,255, 0.05)` | #397bc9 | 2px #397bc9 | #f0f6ff light fill |
+### Light Theme
+-   **Main Background**: `#f7f9fa` (Clean off-white)
+-   **Main Text**: `#212529` (High-contrast dark gray)
+-   **Containers**: `rgba(255, 255, 255, 0.75)` with `backdrop-filter: blur(12px)`
+-   **Gradients**: Smooth subtle colors to establish visual depth.
 
-### Text & Typography
-| Element | Color | Usage |
-|---------|-------|-------|
-| Headings (h1-h4) | `linear-gradient(text)` | Gradient text with `-webkit-background-clip: text` |
-| Primary Text | `#4a5568` (light), `#f7fafc` (dark) | Body text |
-| Secondary Text | `#4a5568` (light), `#cbd5e0` (dark) | Descriptions |
-| Muted Text | `#718096` (light), `#a0aec0` (dark) | Captions, metadata |
-| Accents | `#01ac6a` | Links, emphasis |
-
-### Interactive Elements
-| Element | Color | Hover |
-|---------|-------|-------|
-| Links | `#01ac6a` | Darker shade + underline |
-| Social Icons | `#4a5568` | `linear-gradient(135deg, #01ac6a 0%, #397bc9 100%)` |
-| Cards | `rgba(255, 255, 255, 0.7)` | Border: #01ac6a, Shadow boost |
-| Badges | Green/Blue light backgrounds | Green/Blue solid on hover |
-
-### Shadows & Effects
-- **Card Shadow:** `0 2px 4px -1px rgba(142, 213, 171, 0.1), 0 1px 2px -1px rgba(163, 196, 239, 0.1)`
-- **Hover Shadow:** `0 10px 15px -3px rgba(1, 172, 106, 0.2)`
-- **Top Border (Card Hover):** `gradient-accent` (Green → Blue)
+### Dark Theme (OLED Optimized)
+-   **Main Background**: `#161616` (Deep dark gray, NOT pitch black to avoid visual fatigue)
+-   **Main Text**: `#f3f4f6` (Off-white reading text)
+-   **Borders**: `rgba(255, 255, 255, 0.08)`
+-   **Grid & Noise Texture**:
+    -   Fine fractal noise SVG image overlay at `0.018` opacity.
+    -   Repeating 36px linear grid lines at `0.012` opacity.
+    -   Radial green glow centered at top-center (`rgba(1, 172, 106, 0.07)`).
 
 ---
 
-## 🌙 Dark Theme Adjustments
+## 🛠️ Usage Guidelines
 
-### Dark Theme Overrides
-| Element | Light Theme | Dark Theme |
-|---------|------------|-----------|
-| Accent | `#01ac6a` (green) | `#8ed5ab` (light green) |
-| Secondary | `#397bc9` (blue) | `#a3c4ef` (light blue) |
-| Text | `#4a5568` (dark) | `#f7fafc` (light) |
-| Background | `#fdfdfd` (white) | `#0a0a0a` (black) |
-
----
-
-## 📐 Implementation
-
-### CSS Variables
-```css
-:root {
-    /* Green Suite */
-    --green-lightest: #f0f9f4;
-    --green-light: #8ed5ab;
-    --green-medium: #01ac6a;
-    --green-dark: #00833f;
-    --green-darker: #1c5c39;
-
-    /* Blue Suite */
-    --blue-lightest: #f0f6ff;
-    --blue-light: #a3c4ef;
-    --blue-medium: #397bc9;
-    --blue-dark: #1b25ab;
-    --blue-darker: #071e61;
-
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--green-light) 0%, var(--green-medium) 100%);
-    --gradient-secondary: linear-gradient(135deg, var(--blue-light) 0%, var(--blue-medium) 100%);
-    --gradient-accent: linear-gradient(135deg, var(--green-medium) 0%, var(--blue-medium) 100%);
-}
-
-[data-theme="dark"] {
-    --accent-color: var(--green-light);
-    --accent-color2: var(--blue-light);
-}
-```
-
----
-
-## ✨ Examples
-
-### Landing CTA Button
-```css
-background: var(--gradient-primary);  /* Green gradient */
-color: white;
-box-shadow: 0 4px 12px rgba(1, 172, 106, 0.3);
-```
-
-### Social Icon Hover
-```css
-background: var(--gradient-accent);   /* Green → Blue */
-border-color: var(--gradient-accent);
-```
-
-### Card Top Border (Hover)
-```css
-background: var(--gradient-accent);
-transform: scaleX(0 → 1);             /* Animated reveal */
-```
-
----
-
-**Last Updated:** April 5, 2026  
-**Version:** 1.0
+1.  **Semantic Mapping**:
+    -   Use `var(--primary)` for primary CTAs and active indicators.
+    -   Use `var(--secondary)` for secondary actions (e.g. Email links, details views).
+    -   Use `var(--accent)` for dynamic highlights (e.g. "In Progress" or "Learning" badges).
+2.  **Contrast & Accessibility**:
+    -   Ensure text on button hover maintains its contrast.
+    -   Avoid putting bright neon text directly on pure white backgrounds without employing `--neon-900`.
