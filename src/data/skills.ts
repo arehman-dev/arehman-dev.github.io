@@ -11,32 +11,36 @@ export interface SkillCategory {
 
 export const skillsData: SkillCategory[] = [
   {
+    title: "Currently Learning & Specializing",
+    skills: [
+      { name: "Linux Masterclass (Imran Afzal)", level: "Learning", icon: "🐧" },
+      { name: "Intro to C++ Specialization (MS)", level: "Learning", icon: "⚡" },
+      { name: "Python for Everybody (Py4E)", level: "Learning", icon: "🐍" },
+      { name: "Google Cybersecurity Track", level: "Learning", icon: "🛡️" },
+      { name: "Scientific Computing (FCC)", level: "Learning", icon: "📊" },
+      { name: "Machine Learning (FCC)", level: "Learning", icon: "🤖" }
+    ]
+  },
+  {
     title: "Programming & Automation",
     skills: [
-      { name: "Python", level: "Advanced", icon: "🐍" },
-      { name: "C++", level: "Intermediate", icon: "⚡" },
+      { name: "Python Programming", level: "Advanced", icon: "🐍" },
+      { name: "C++ Development", level: "Intermediate", icon: "⚡" },
       { name: "Bash Scripting", level: "Advanced", icon: ">_" },
       { name: "Automation Workflows", level: "Advanced", icon: "⚙️" },
-      { name: "Markdown & Docs", level: "Intermediate", icon: "📝" }
+      { name: "Algorithms & Data Structures", level: "Intermediate", icon: "🧩" },
+      { name: "Version Control (Git/GitHub)", level: "Intermediate", icon: "🐙" }
     ]
   },
   {
     title: "System Administration & Testing",
     skills: [
       { name: "Linux System Administration", level: "Advanced", icon: "🐧" },
-      { name: "Software Testing", level: "Intermediate", icon: "🧪" },
-      { name: "Security & Hardening", level: "Intermediate", icon: "🔐" },
-      { name: "Docker Containers", level: "Intermediate", icon: "📦" },
-      { name: "Network Configuration (TCP/IP, DNS)", level: "Intermediate", icon: "🌐" }
-    ]
-  },
-  {
-    title: "Currently Learning & Specializing",
-    skills: [
-      { name: "Google IT Automation with Python", level: "Exam Prep", icon: "📜" },
-      { name: "Scientific Computing with Python", level: "Learning", icon: "📊" },
-      { name: "Ansible & Ansible Playbooks", level: "Learning", icon: "🔄" },
-      { name: "Vim Mastery", level: "Learning", icon: "⌨️" }
+      { name: "Software Testing & QA", level: "Intermediate", icon: "🧪" },
+      { name: "Security & System Hardening", level: "Intermediate", icon: "🔐" },
+      { name: "Docker Containerization", level: "Intermediate", icon: "📦" },
+      { name: "Network Configuration (TCP/IP)", level: "Intermediate", icon: "🌐" },
+      { name: "Incident Response & Logging", level: "Intermediate", icon: "📋" }
     ]
   }
 ];

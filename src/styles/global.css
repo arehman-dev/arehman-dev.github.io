@@ -268,20 +268,24 @@ code, pre {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--green-500) 0%, #00965a 100%);
-  color: var(--white);
+  color: var(--white) !important;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(.disabled-btn) {
+  background: linear-gradient(135deg, #02c379 0%, #00b36b 100%) !important;
+  color: var(--white) !important;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 20px rgba(1, 172, 106, 0.35);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, var(--blue-500) 0%, #2f6cb5 100%);
-  color: var(--white);
+  color: var(--white) !important;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(.disabled-btn) {
+  background: linear-gradient(135deg, #4b8de2 0%, #3577c6 100%) !important;
+  color: var(--white) !important;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 20px rgba(57, 123, 201, 0.35);
 }
@@ -290,17 +294,48 @@ code, pre {
   background: var(--glass-bg);
   backdrop-filter: var(--card-blur);
   border: 1px solid var(--border-color);
-  color: var(--text-main);
+  color: var(--text-main) !important;
 }
 
-.btn-outline:hover {
-  background-color: var(--gray-100);
-  border-color: var(--text-main);
+.btn-outline:hover:not(.disabled-btn) {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--white) !important;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(1, 172, 106, 0.25);
 }
 
-[data-theme="dark"] .btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+[data-theme="dark"] .btn-outline:hover:not(.disabled-btn) {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--white) !important;
+  box-shadow: 0 4px 15px rgba(1, 172, 106, 0.4);
+}
+
+/* Disabled button state overrides to prevent hover styles and maintain readability */
+.disabled-btn,
+.disabled-btn:hover,
+.disabled-btn:active,
+.disabled-btn:focus {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+}
+
+.btn-outline.disabled-btn,
+.btn-outline.disabled-btn:hover {
+  background: var(--glass-bg) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .btn-outline.disabled-btn,
+[data-theme="dark"] .btn-outline.disabled-btn:hover {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-muted) !important;
 }
 
 /* Responsive Grid layouts */
@@ -510,8 +545,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background-color: var(--accent-dark);
+  background-color: var(--primary);
   border-radius: 50%;
+  box-shadow: 0 0 8px var(--primary);
 }
 
 [data-theme="dark"] .badge-status::before {

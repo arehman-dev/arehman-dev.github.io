@@ -2,6 +2,29 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillBadge from '../components/SkillBadge.astro';
 import { skillsData } from '../data/skills';
+
+const softSkills = [
+  {
+    name: "Critical & Analytical Thinking",
+    description: "Deconstructing complex programmatic problems and systemic system errors into manageable components to determine optimal, logical solutions.",
+    icon: "🧠"
+  },
+  {
+    name: "Continuous Learning",
+    description: "Driven by deep technical curiosity to independently master new environments, compiler workflows, and system utilities.",
+    icon: "📚"
+  },
+  {
+    name: "Resilience & Adaptation",
+    description: "Thriving under high-pressure scenarios, debugging issues in real-time, and adapting swiftly to changing operational demands.",
+    icon: "🛡️"
+  },
+  {
+    name: "Attention to Detail & Perfectionism",
+    description: "Applying meticulous security audits, verifying code assertions, and ensuring system configurations are perfectly optimized and robust.",
+    icon: "🔍"
+  }
+];
 ---
 
 <BaseLayout 
@@ -31,6 +54,23 @@ import { skillsData } from '../data/skills';
                   icon={skill.icon} 
                 />
               ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SECTION A-2: SOFT SKILLS -->
+    <section class="soft-skills-section mb-lg">
+      <h2 class="section-title-left">Professional Soft Skills</h2>
+      
+      <div class="soft-skills-grid">
+        {softSkills.map((skill) => (
+          <div class="soft-skill-card">
+            <div class="soft-skill-icon">{skill.icon}</div>
+            <div class="soft-skill-content">
+              <h3>{skill.name}</h3>
+              <p>{skill.description}</p>
             </div>
           </div>
         ))}
@@ -236,5 +276,72 @@ import { skillsData } from '../data/skills';
   .journey-tags {
     margin-top: auto;
     padding-top: 1rem;
+  }
+
+  /* Soft Skills Grid & Card Styles */
+  .soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .soft-skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .soft-skill-card {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .soft-skill-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  [data-theme="dark"] .soft-skill-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .soft-skill-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 10px;
+    background-color: var(--secondary-light);
+    color: var(--secondary);
+    flex-shrink: 0;
+  }
+
+  [data-theme="dark"] .soft-skill-icon {
+    background-color: rgba(57, 123, 201, 0.1);
+    color: var(--secondary-dark);
+  }
+
+  .soft-skill-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    color: var(--text-main);
+  }
+
+  .soft-skill-content p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-muted);
   }
 </style>

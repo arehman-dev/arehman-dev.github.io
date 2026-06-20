@@ -28,20 +28,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
     <div class="archive-list mt-lg">
       {sortedArticles.map((article) => (
-        <div class="archive-item card">
-          <div class="archive-meta">
-            <span class="archive-date"><i class="far fa-calendar"></i> {article.date}</span>
-            <span class="badge badge-completed">{article.category}</span>
-          </div>
-          
-          <div class="archive-content">
-            <h2 class="archive-title">
+        <div class="archive-row">
+          <div class="archive-left">
+            <span class="archive-date-col">{article.publishDate}</span>
+            <span class="archive-divider">|</span>
+            <h2 class="archive-title-col">
               <a href={`${base}articles/${article.slug}/`}>{article.title}</a>
             </h2>
-            <p class="archive-excerpt">{article.excerpt}</p>
-            <a href={`${base}articles/${article.slug}/`} class="archive-read-more">
-              Read post <i class="fas fa-arrow-right arrow-icon"></i>
-            </a>
+          </div>
+          <div class="archive-right">
+            <span class="badge badge-completed">{article.category}</span>
           </div>
         </div>
       ))}
@@ -90,80 +86,101 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .archive-list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    border-top: 1px solid var(--border-color);
   }
 
-  .archive-item {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr;
+  .archive-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.25s ease;
     gap: 2rem;
-    align-items: start;
-    padding: 1.5rem;
   }
 
-  @media (max-width: 639px) {
-    .archive-item {
-      grid-template-columns: 1fr;
+  .archive-row:hover {
+    background-color: rgba(1, 172, 106, 0.02);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 6px;
+  }
+
+  [data-theme="dark"] .archive-row:hover {
+    background-color: rgba(192, 255, 20, 0.02);
+  }
+
+  .archive-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-grow: 1;
+  }
+
+  .archive-date-col {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    width: 90px; /* Exact width for standard YYYY-MM-DD monospace digits */
+    flex-shrink: 0;
+  }
+
+  .archive-divider {
+    color: var(--border-color);
+    font-weight: 300;
+    font-size: 0.9rem;
+    margin: 0 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .archive-title-col {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .archive-title-col a {
+    color: var(--text-main);
+    transition: color 0.2s ease;
+  }
+
+  .archive-title-col a:hover {
+    color: var(--primary);
+  }
+
+  .archive-right {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .archive-row {
       gap: 1rem;
     }
   }
 
-  .archive-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
+  @media (max-width: 639px) {
+    .archive-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1.25rem 0.25rem;
+    }
+    
+    .archive-row:hover {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      background: none;
+    }
 
-  .archive-date {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
+    .archive-left {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
 
-  .archive-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .archive-title::after {
-    display: none;
-  }
-
-  .archive-title a {
-    color: var(--text-main);
-  }
-
-  .archive-title a:hover {
-    color: var(--primary);
-  }
-
-  .archive-excerpt {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .archive-read-more {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: gap 0.2s ease;
-  }
-
-  .archive-item:hover .arrow-icon {
-    transform: translateX(4px);
-  }
-
-  .arrow-icon {
-    transition: transform 0.2s ease;
+    .archive-divider {
+      display: inline;
+    }
   }
 </style>

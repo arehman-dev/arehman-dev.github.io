@@ -17,7 +17,12 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   
   <div class="card-content">
     <div class="card-header-row">
-      <span class={`badge ${statusClass}`}>{certificate.status}</span>
+      <div class="flex items-center gap-md">
+        <span class={`badge ${statusClass}`}>{certificate.status}</span>
+        {certificate.duration && (
+          <span class="badge badge-duration"><i class="far fa-clock"></i> {certificate.duration}</span>
+        )}
+      </div>
       <span class="cert-date">{certificate.date}</span>
     </div>
     
@@ -81,6 +86,22 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     margin-bottom: 0.5rem;
     flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .badge-duration {
+    background-color: var(--secondary-light);
+    color: var(--secondary);
+    border: 1px solid rgba(57, 123, 201, 0.15);
+  }
+
+  [data-theme="dark"] .badge-duration {
+    background-color: rgba(57, 123, 201, 0.1);
+    color: var(--secondary-dark);
+    border-color: rgba(57, 123, 201, 0.2);
+  }
+
+  .badge-duration i {
+    margin-right: 0.25rem;
   }
 
   .cert-date {
