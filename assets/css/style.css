@@ -1,4 +1,5 @@
 ---
+layout: null
 ---
 /* --- 1. SYSTEM VARIABLES & THEMES --- */
 :root {
@@ -7,7 +8,8 @@
     --text-main: #071e61;
     --text-muted: #397bc9;
     --accent: #01ac6a;
-    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --dropdown-bg: rgba(255, 255, 255, 0.95);
     --card-border: rgba(7, 30, 97, 0.1);
     --glass-shadow: 0 10px 30px rgba(7, 30, 97, 0.15);
 }
@@ -18,7 +20,8 @@
     --text-main: #f0f9f4;
     --text-muted: #8ed5ab;
     --accent: #00ff9d;
-    --glass-bg: rgba(10, 15, 25, 0.6);
+    --glass-bg: rgba(10, 15, 25, 0.8);
+    --dropdown-bg: rgba(10, 15, 25, 0.92);
     --card-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
@@ -130,8 +133,8 @@ html.dark body {
 .glass-top-bar {
     width: 100%;
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     padding: 0.8rem 2.5rem;
     border-radius: 20px;
     border: 1px solid var(--card-border);
@@ -149,39 +152,37 @@ html.dark body {
     color: var(--text-main); 
     transition: color 0.3s ease;
 }
-.top-links { display: flex; gap: 2rem; align-items: center; }
+.top-links { display: flex; gap: 1.2rem; align-items: center; }
 
-.top-links a { 
+.top-links a, .dropdown-toggle { 
     text-decoration: none; 
     font-family: 'Lora', serif;
     font-weight: 400; 
     font-style: italic;
     font-size: 1.05rem;
-    transition: all 0.2s ease;
+    color: var(--text-muted);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
-    padding-bottom: 4px;
-}
-
-.top-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: var(--accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.top-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 
 .top-links a[href] {
     color: var(--text-muted);
+}
+
+.top-links a:hover, .top-links a[href]:hover, .dropdown-toggle:hover {
+    color: var(--accent);
+    background: rgba(1, 172, 106, 0.08);
+}
+
+.dark .top-links a:hover, .dark .top-links a[href]:hover, .dark .dropdown-toggle:hover {
+    background: rgba(0, 255, 157, 0.08);
 }
 
 /* Dropdown Menu Styling */
@@ -190,58 +191,18 @@ html.dark body {
     display: inline-block;
 }
 
-.dropdown-toggle {
-    background: none;
-    border: none;
-    padding: 0;
-    padding-bottom: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'Lora', serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: var(--accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.dropdown-toggle:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.dropdown-toggle:hover {
-    color: var(--accent);
-}
-
 .dropdown-menu {
     position: absolute;
     top: 100%;
     right: 0;
     display: flex;
     flex-direction: column;
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: var(--dropdown-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--card-border);
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(7, 30, 97, 0.1);
+    box-shadow: 0 15px 35px rgba(7, 30, 97, 0.15);
     padding: 0.8rem 0;
     margin-top: 0.5rem;
     min-width: 160px;
