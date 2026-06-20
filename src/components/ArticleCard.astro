@@ -28,7 +28,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <p class="article-excerpt">{article.excerpt}</p>
     
     <div class="card-footer mt-lg">
-      <a href={`${base}articles/${article.slug}`} class="read-link">
+      <a href={`${base}articles/${article.slug}/`} class="read-link">
         Read Article <i class="fas fa-arrow-right arrow-icon"></i>
       </a>
     </div>

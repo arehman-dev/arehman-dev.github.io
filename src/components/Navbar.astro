@@ -1,32 +1,31 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, ""); // base path without trailing slash
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash
+const currentPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
 
 const navItems = [
-  { label: 'Home', path: base === "" ? "/" : base },
-  { label: 'About', path: `${base}/about` },
-  { label: 'Projects', path: `${base}/projects` },
-  { label: 'Certificates', path: `${base}/certificates` },
-  { label: 'Skills & Exp', path: `${base}/skills-experience` },
-  { label: 'Articles', path: `${base}/articles` },
-  { label: 'Hire Me', path: `${base}/hire-me` }
+  { label: 'Home', path: base },
+  { label: 'About', path: `${base}about/` },
+  { label: 'Projects', path: `${base}projects/` },
+  { label: 'Certificates', path: `${base}certificates/` },
+  { label: 'Skills & Exp', path: `${base}skills-experience/` },
+  { label: 'Articles', path: `${base}articles/` },
+  { label: 'Hire Me', path: `${base}hire-me/` }
 ];
 
 const isActive = (path: string) => {
-  const homePath = base === "" ? "/" : base;
-  if (path === homePath) {
-    return currentPath === base || currentPath === `${base}/index.html`;
+  if (path === base) {
+    return currentPath === base || currentPath === `${base}index.html/` || currentPath === `${base}index.html`;
   }
-  return currentPath === path || currentPath.startsWith(path + '/');
+  return currentPath === path || currentPath.startsWith(path);
 };
 ---
 
 <header class="navbar" id="navbar">
   <div class="nav-container">
-    <a href={base === "" ? "/" : base} class="nav-logo">
+    <a href={base} class="nav-logo">
       <span class="logo-term">&gt;_</span> Abdul Rehman
     </a>
 

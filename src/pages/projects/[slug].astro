@@ -31,7 +31,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 >
   <div class="project-detail-container">
     <div class="back-nav mb-lg">
-      <a href={`${base}projects`} class="back-link">
+      <a href={`${base}projects/`} class="back-link">
         <i class="fas fa-arrow-left"></i> Back to Projects
       </a>
     </div>
@@ -115,7 +115,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           <h3>Related Projects</h3>
           <div class="related-list">
             {relatedProjects.map((p) => (
-              <a href={`${base}projects/${p.slug}`} class="related-item">
+              <a href={`${base}projects/${p.slug}/`} class="related-item">
                 <h4>{p.title}</h4>
                 <p>{p.description}</p>
                 <span class="related-link-text">View Project <i class="fas fa-chevron-right"></i></span>
