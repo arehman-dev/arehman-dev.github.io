@@ -57,10 +57,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         
         <div class="hero-ctas flex gap-md mt-lg">
-          <a href="/projects" class="btn btn-primary" id="hero-view-projects">
+          <a href={`${import.meta.env.BASE_URL}projects`} class="btn btn-primary" id="hero-view-projects">
             <i class="fas fa-terminal"></i> View Projects
           </a>
-          <a href="/hire-me" class="btn btn-secondary" id="hero-connect">
+          <a href={`${import.meta.env.BASE_URL}hire-me`} class="btn btn-secondary" id="hero-connect">
             <i class="fas fa-handshake"></i> Let's Connect
           </a>
         </div>

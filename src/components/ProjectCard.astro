@@ -43,7 +43,7 @@ const iconClass = getProjectIcon(project.title, project.tags);
     </div>
     
     <div class="card-footer mt-lg">
-      <a href={`/projects/${project.slug}`} class="btn btn-primary btn-sm">
+      <a href={`${import.meta.env.BASE_URL}projects/${project.slug}`} class="btn btn-primary btn-sm">
         <i class="fas fa-eye"></i> View Details
       </a>
       {project.sourceLink && (

@@ -23,7 +23,7 @@ const { article } = Astro.props;
 >
   <div class="article-detail-container">
     <div class="back-nav mb-lg">
-      <a href="/articles" class="back-link">
+      <a href={`${import.meta.env.BASE_URL}articles`} class="back-link">
         <i class="fas fa-arrow-left"></i> Back to Articles
       </a>
     </div>

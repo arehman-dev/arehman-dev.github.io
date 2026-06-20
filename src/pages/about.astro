@@ -25,10 +25,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="cta-box mt-lg">
           <p class="cta-text">Interested in how I work?</p>
           <div class="flex gap-md">
-            <a href="/skills-experience" class="btn btn-primary">
+            <a href={`${import.meta.env.BASE_URL}skills-experience`} class="btn btn-primary">
               <i class="fas fa-arrow-right"></i> Skills & Experience
             </a>
-            <a href="/hire-me" class="btn btn-outline">
+            <a href={`${import.meta.env.BASE_URL}hire-me`} class="btn btn-outline">
               Get in Touch
             </a>
           </div>

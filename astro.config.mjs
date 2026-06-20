@@ -3,4 +3,5 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://arehman-dev.github.io',
+  base: '/portfolio',
 });

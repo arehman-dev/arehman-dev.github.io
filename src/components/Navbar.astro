@@ -1,22 +1,24 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, ""); // base path without trailing slash
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash
 
 const navItems = [
-  { label: 'Home', path: '' },
-  { label: 'About', path: '/about' },
-  { label: 'Projects', path: '/projects' },
-  { label: 'Certificates', path: '/certificates' },
-  { label: 'Skills & Exp', path: '/skills-experience' },
-  { label: 'Articles', path: '/articles' },
-  { label: 'Hire Me', path: '/hire-me' }
+  { label: 'Home', path: base === "" ? "/" : base },
+  { label: 'About', path: `${base}/about` },
+  { label: 'Projects', path: `${base}/projects` },
+  { label: 'Certificates', path: `${base}/certificates` },
+  { label: 'Skills & Exp', path: `${base}/skills-experience` },
+  { label: 'Articles', path: `${base}/articles` },
+  { label: 'Hire Me', path: `${base}/hire-me` }
 ];
 
 const isActive = (path: string) => {
-  if (path === '') {
-    return currentPath === '' || currentPath === '/index.html';
+  const homePath = base === "" ? "/" : base;
+  if (path === homePath) {
+    return currentPath === base || currentPath === `${base}/index.html`;
   }
   return currentPath === path || currentPath.startsWith(path + '/');
 };
@@ -24,7 +26,7 @@ const isActive = (path: string) => {
 
 <header class="navbar" id="navbar">
   <div class="nav-container">
-    <a href="/" class="nav-logo">
+    <a href={base === "" ? "/" : base} class="nav-logo">
       <span class="logo-term">&gt;_</span> Abdul Rehman
     </a>
 
@@ -34,7 +36,7 @@ const isActive = (path: string) => {
         {navItems.map((item) => (
           <li>
             <a 
-              href={item.path === '' ? '/' : item.path} 
+              href={item.path} 
               class={`nav-link ${isActive(item.path) ? 'active' : ''}`}
             >
               {item.label}
@@ -62,7 +64,7 @@ const isActive = (path: string) => {
       {navItems.map((item) => (
         <li>
           <a 
-            href={item.path === '' ? '/' : item.path} 
+            href={item.path} 
             class={`mobile-nav-link ${isActive(item.path) ? 'active' : ''}`}
           >
             {item.label}

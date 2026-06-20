@@ -25,7 +25,7 @@ const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-
     <p class="cert-description">{certificate.description}</p>
     
     <div class="card-footer mt-lg">
-      <a href={`/certificates/${certificate.slug}`} class="btn btn-outline btn-sm">
+      <a href={`${import.meta.env.BASE_URL}certificates/${certificate.slug}`} class="btn btn-outline btn-sm">
         <i class="fas fa-info-circle"></i> View Details
       </a>
     </div>
