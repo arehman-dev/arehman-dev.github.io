@@ -106,37 +106,41 @@
     </header>
 
     <main class="wrapper">
-      <!-- Share & Print Buttons (for posts) -->
       {% if page.date %}
-      <div class="post-actions">
-        <button class="action-btn" id="copy-link-btn" title="Copy link to clipboard">
-          <i data-lucide="link"></i> Copy Link
-        </button>
-        <button class="action-btn" id="print-btn" title="Print or save as PDF">
-          <i data-lucide="printer"></i> Print
-        </button>
-      </div>
-      {% endif %}
+      <article class="post-container">
+        <!-- Share & Print Buttons (for posts) -->
+        <div class="post-actions">
+          <button class="action-btn" id="copy-link-btn" title="Copy link to clipboard">
+            <i data-lucide="link"></i> Copy Link
+          </button>
+          <button class="action-btn" id="print-btn" title="Print or save as PDF">
+            <i data-lucide="printer"></i> Print
+          </button>
+        </div>
 
-      {{ content }}
+        <div class="post-content">
+          {{ content }}
+        </div>
 
-      <!-- Previous / Next Post Navigation -->
-      {% if page.date %}
-      <nav class="post-nav">
-        {% if page.previous %}
-        <a href="{{ page.previous.url }}" class="post-nav-link prev">
-          <span class="nav-label">← Previous</span>
-          <span class="nav-title">{{ page.previous.title }}</span>
-        </a>
-        {% endif %}
-        
-        {% if page.next %}
-        <a href="{{ page.next.url }}" class="post-nav-link next">
-          <span class="nav-label">Next →</span>
-          <span class="nav-title">{{ page.next.title }}</span>
-        </a>
-        {% endif %}
-      </nav>
+        <!-- Previous / Next Post Navigation -->
+        <nav class="post-nav">
+          {% if page.previous %}
+          <a href="{{ page.previous.url }}" class="post-nav-link prev">
+            <span class="nav-label">← Previous</span>
+            <span class="nav-title">{{ page.previous.title }}</span>
+          </a>
+          {% endif %}
+          
+          {% if page.next %}
+          <a href="{{ page.next.url }}" class="post-nav-link next">
+            <span class="nav-label">Next →</span>
+            <span class="nav-title">{{ page.next.title }}</span>
+          </a>
+          {% endif %}
+        </nav>
+      </article>
+      {% else %}
+        {{ content }}
       {% endif %}
 
       <!-- Giscus Comments Section - TEMPORARILY DISABLED -->

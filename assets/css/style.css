@@ -746,3 +746,41 @@ p.urdu-text, .urdu-text p, div.urdu-text, span.urdu-text {
     font-size: 1.2rem;
     line-height: 2.2 !important;
 }
+
+/* --- 14. ARTICLE READING CANVAS --- */
+.post-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    padding: 3rem 4rem;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 2.5rem;
+}
+
+/* Ensure comfortable paragraph styling inside posts */
+.post-content p {
+    font-size: 1.125rem;
+    line-height: 1.85;
+    margin-bottom: 1.6rem;
+    color: var(--text-main);
+}
+
+.post-content h2, .post-content h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for reading canvas on mobile */
+@media (max-width: 768px) {
+    .post-container {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+    
+    .post-content p {
+        font-size: 1.05rem;
+        line-height: 1.75;
+    }
+}
