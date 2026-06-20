@@ -279,6 +279,8 @@ html.dark body {
 
 .content-card {
     background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--card-border);
     border-radius: 24px;
     padding: 2.5rem;
@@ -593,6 +595,8 @@ html.dark body {
     flex: 0 0 280px;
     padding: 1.2rem;
     background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--card-border);
     border-radius: 16px;
     text-decoration: none;
@@ -782,5 +786,35 @@ p.urdu-text, .urdu-text p, div.urdu-text, span.urdu-text {
     .post-content p {
         font-size: 1.05rem;
         line-height: 1.75;
+    }
+}
+
+/* Post Header & Titles legibility styles */
+.post-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 1.5rem;
+}
+
+.post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-main);
+    line-height: 1.25;
+}
+
+.post-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Adjust heading size inside media query for mobile screens */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.8rem;
     }
 }

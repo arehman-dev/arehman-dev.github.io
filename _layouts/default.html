@@ -108,6 +108,13 @@
     <main class="wrapper">
       {% if page.date %}
       <article class="post-container">
+        <header class="post-header {% if page.dir == 'rtl' or page.lang == 'ur' %}urdu-text{% endif %}">
+          <h1 class="post-title">{{ page.title }}</h1>
+          <div class="post-meta">
+            {{ page.date | date: "%B %d, %Y" }} • {{ page.category | capitalize }}
+          </div>
+        </header>
+
         <!-- Share & Print Buttons (for posts) -->
         <div class="post-actions">
           <button class="action-btn" id="copy-link-btn" title="Copy link to clipboard">
