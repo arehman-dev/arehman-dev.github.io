@@ -9,8 +9,6 @@ dir: ltr
 excerpt: "Exploring what makes work meaningful and how to cultivate purpose in our daily endeavors."
 ---
 
-# The Art of Meaningful Work
-
 In an era of infinite options and constant distraction, the question of what constitutes meaningful work has become increasingly profound. We find ourselves caught between societal expectations, financial pressures, and an inner longing for purpose. This essay explores the intersection of these forces and offers some reflection on what makes work truly meaningful.
 
 ## On Purpose and Intention
