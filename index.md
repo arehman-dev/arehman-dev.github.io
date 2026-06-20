@@ -27,10 +27,10 @@ _a window of my life_ -->
     <p style="font-family: 'Lora', serif;">Exploring the foundation of growth and the commitment to objective truth.</p>
   </a>
 
-  <a href="/poetry/alamah-iqbal-khudi" class="content-card" dir="rtl">
-    <span class="card-meta" style="text-align: right;">Ashaar • Poetry</span>
-    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">علامہ اقبال: خودی</h3>
-    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
+  <a href="/poetry/alamah-iqbal-khudi" class="content-card urdu-text">
+    <span class="card-meta" style="text-align: right; font-family: 'Inter', sans-serif;">Ashaar • Poetry</span>
+    <h3>علامہ اقبال: خودی</h3>
+    <p>خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
   </a>
 </div>
 

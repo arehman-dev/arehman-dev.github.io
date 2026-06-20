@@ -12,10 +12,10 @@ _For me, Poetry is where the soul finds voice in silence. It is an art of speaki
 ## Featured Works
 
 <div class="card-grid">
-  <a href="/poetry/alamah-iqbal-khudi" class="content-card" dir="rtl">
-    <span class="card-meta" style="text-align: right; font-family: 'Noto Nastaliq Urdu', serif;">Ashaar • شاعری</span>
-    <h3 style="font-family: 'Noto Nastaliq Urdu', serif;">علامہ اقبال: خودی</h3>
-    <p style="font-family: 'Noto Nastaliq Urdu', serif;">خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
+  <a href="/poetry/alamah-iqbal-khudi" class="content-card urdu-text">
+    <span class="card-meta" style="text-align: right; font-family: 'Inter', sans-serif;">Ashaar • شاعری</span>
+    <h3>علامہ اقبال: خودی</h3>
+    <p>خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے</p>
   </a>
 </div>
 
