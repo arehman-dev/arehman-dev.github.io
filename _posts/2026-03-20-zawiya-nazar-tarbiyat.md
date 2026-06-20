@@ -9,7 +9,7 @@ dir: rtl
 excerpt: "تربیت انسان کے کردار کی بنیاد ہے"
 ---
 
-<div style="font-family: 'Noto Nastaliq Urdu', serif;">
+<div class="urdu-text">
 
 تربیت انسان کے کردار کی بنیاد ہے۔۔۔
 

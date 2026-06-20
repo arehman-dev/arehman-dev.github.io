@@ -22,10 +22,10 @@ _Collection spannig from college times to now._
     <p style="font-family: 'Lora', serif;">Exploring the foundation of growth and the commitment to objective truth.</p>
   </a>
 
-  <a href="/perspective/zawiya-nazar-tarbiyat" class="content-card">
-    <span class="card-meta">Zawiya e Nazar • Perspective</span>
+  <a href="/perspective/zawiya-nazar-tarbiyat" class="content-card urdu-text">
+    <span class="card-meta" style="font-family: 'Inter', sans-serif;">Zawiya e Nazar • Perspective</span>
     <h3>زاویہ نظر: تربیت</h3>
-    <p style="font-family: 'Noto Nastaliq Urdu', serif;">تربیت انسان کے کردار کی بنیاد ہے۔۔۔</p>
+    <p>تربیت انسان کے کردار کی بنیاد ہے۔۔۔</p>
   </a>
 </div>
 

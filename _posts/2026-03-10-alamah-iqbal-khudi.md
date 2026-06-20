@@ -9,7 +9,7 @@ dir: rtl
 excerpt: "خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے"
 ---
 
-<div style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.1rem; line-height: 2;">
+<div class="urdu-text">
 
 خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے
 خدا بندے سے خود یہ کہے: بتا تیری رضا کیا ہے

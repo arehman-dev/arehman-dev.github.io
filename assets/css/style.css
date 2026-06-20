@@ -158,6 +158,26 @@ html.dark body {
     font-style: italic;
     font-size: 1.05rem;
     transition: all 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.top-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.top-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .top-links a[href] {
@@ -174,6 +194,7 @@ html.dark body {
     background: none;
     border: none;
     padding: 0;
+    padding-bottom: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -184,6 +205,25 @@ html.dark body {
     font-size: 1.05rem;
     color: var(--text-muted);
     transition: all 0.2s ease;
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dropdown-toggle:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .dropdown-toggle:hover {
@@ -711,4 +751,32 @@ html.dark body {
 .has-animation.is-visible { 
     opacity: 1; 
     transform: translateY(0); 
+}
+
+/* --- 13. URDU TYPOGRAPHY SYSTEM --- */
+.urdu-text {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Nastaliq naturally has tall ascenders/descenders, requiring extra spacing & height */
+h1.urdu-text, .urdu-text h1 {
+    font-size: 2.2rem;
+    line-height: 2.4 !important;
+}
+
+h2.urdu-text, .urdu-text h2 {
+    font-size: 1.8rem;
+    line-height: 2.2 !important;
+}
+
+h3.urdu-text, .urdu-text h3 {
+    font-size: 1.5rem;
+    line-height: 2.2 !important;
+}
+
+p.urdu-text, .urdu-text p, div.urdu-text, span.urdu-text {
+    font-size: 1.2rem;
+    line-height: 2.2 !important;
 }
