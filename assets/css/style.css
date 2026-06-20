@@ -147,6 +147,7 @@ html.dark body {
     font-weight: 700; font-style: italic; 
     font-size: 1.4rem; text-decoration: none; 
     color: var(--text-main); 
+    transition: color 0.3s ease;
 }
 .top-links { display: flex; gap: 2rem; align-items: center; }
 
