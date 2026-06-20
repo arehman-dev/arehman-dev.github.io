@@ -35,14 +35,14 @@ body {
     background-color: var(--bg-grad-1);
     background-image: 
         /* Subtle grain overlay */
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px),
-        repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 2px),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 2px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 1px, transparent 1px, transparent 2px),
         /* Radial glow - VIBRANT BLUE accent (top-left) */
-        radial-gradient(ellipse 900px 700px at 15% 20%, rgba(30, 100, 200, 0.5) 0%, rgba(100, 150, 255, 0.25) 35%, transparent 60%),
+        radial-gradient(ellipse 900px 700px at 15% 20%, rgba(30, 100, 200, 0.12) 0%, rgba(100, 150, 255, 0.05) 35%, transparent 60%),
         /* Radial glow - VIBRANT GREEN accent (bottom-right) */
-        radial-gradient(ellipse 900px 700px at 85% 85%, rgba(20, 150, 100, 0.45) 0%, rgba(100, 200, 150, 0.2) 35%, transparent 60%),
+        radial-gradient(ellipse 900px 700px at 85% 85%, rgba(20, 150, 100, 0.10) 0%, rgba(100, 200, 150, 0.04) 35%, transparent 60%),
         /* Main gradient */
-        linear-gradient(135deg, var(--bg-grad-1) 0%, #f0f8fb 40%, var(--bg-grad-2) 100%);
+        linear-gradient(135deg, var(--bg-grad-1) 0%, #f5fafd 40%, var(--bg-grad-2) 100%);
     background-attachment: fixed;
     background-size: cover;
     display: flex;
