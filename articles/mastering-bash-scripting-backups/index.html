@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v6.4.8"><!-- SEO Meta Tags --><title>Mastering Bash Scripting for Automated Backups &amp; File Hygiene | Abdul Rehman Articles</title><meta name="description" content="A deep dive into writing bulletproof Bash automation scripts with robust error handling, exit codes, and standardized kebab-case/snake_case file naming."><meta name="keywords" content="arehman-dev, Abdul Rehman, Python developer, system administrator, Linux, Python, C++, DevOps, automation"><meta name="author" content="Abdul Rehman"><meta name="robots" content="index, follow"><!-- Open Graph --><meta property="og:title" content="Mastering Bash Scripting for Automated Backups &amp; File Hygiene | Abdul Rehman Articles"><meta property="og:description" content="A deep dive into writing bulletproof Bash automation scripts with robust error handling, exit codes, and standardized kebab-case/snake_case file naming."><meta property="og:type" content="website"><meta property="og:url" content="https://arehman-dev.github.io/articles/mastering-bash-scripting-backups/"><meta property="og:image" content="https://arehman-dev.github.io/portfolio/assets/images/og-image.jpg"><meta property="og:site_name" content="arehman-dev Portfolio"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Mastering Bash Scripting for Automated Backups &amp; File Hygiene | Abdul Rehman Articles"><meta name="twitter:description" content="A deep dive into writing bulletproof Bash automation scripts with robust error handling, exit codes, and standardized kebab-case/snake_case file naming."><meta name="twitter:image" content="https://arehman-dev.github.io/portfolio/assets/images/og-image.jpg"><!-- Favicons --><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2301ac6a'><text x='2' y='20' font-size='20' font-family='monospace' font-weight='bold' fill='%2301ac6a'>%3E_</text></svg>"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet"><!-- Font Awesome Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><!-- Theme Inline Initialization (Anti-FOUC) --><script>
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const theme = getThemePreference();
+      document.documentElement.setAttribute('data-theme', theme);
+    </script><link rel="stylesheet" href="/_astro/_slug_.Dyr0eKGn.css"><link rel="stylesheet" href="/_astro/BaseLayout.DHJfOkch.css"></head> <body> <div class="app-layout"> <header class="navbar" id="navbar" data-astro-cid-5blmo7yk> <div class="nav-container" data-astro-cid-5blmo7yk> <a href="/" class="nav-logo" data-astro-cid-5blmo7yk> <span class="logo-term" data-astro-cid-5blmo7yk>&gt;_</span> Abdul Rehman
+</a> <!-- Desktop Navigation --> <nav class="nav-links-desktop" data-astro-cid-5blmo7yk> <ul data-astro-cid-5blmo7yk> <li data-astro-cid-5blmo7yk> <a href="/" class="nav-link " data-astro-cid-5blmo7yk> Home </a> </li><li data-astro-cid-5blmo7yk> <a href="/about/" class="nav-link " data-astro-cid-5blmo7yk> About </a> </li><li data-astro-cid-5blmo7yk> <a href="/projects/" class="nav-link " data-astro-cid-5blmo7yk> Projects </a> </li><li data-astro-cid-5blmo7yk> <a href="/certificates/" class="nav-link " data-astro-cid-5blmo7yk> Certificates </a> </li><li data-astro-cid-5blmo7yk> <a href="/skills-experience/" class="nav-link " data-astro-cid-5blmo7yk> Skills &amp; Exp </a> </li><li data-astro-cid-5blmo7yk> <a href="/articles/" class="nav-link active" data-astro-cid-5blmo7yk> Articles </a> </li><li data-astro-cid-5blmo7yk> <a href="/hire-me/" class="nav-link " data-astro-cid-5blmo7yk> Hire Me </a> </li> </ul> </nav> <div class="nav-actions" data-astro-cid-5blmo7yk> <a href="/me/" class="personal-space-pill" aria-label="Personal Space" data-astro-cid-5blmo7yk> <i class="fas fa-pen" data-astro-cid-5blmo7yk></i> <span data-astro-cid-5blmo7yk>/me</span> </a> <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" data-astro-cid-x3pjskd3> <span class="sun-icon" data-astro-cid-x3pjskd3>☀️</span> <span class="moon-icon" data-astro-cid-x3pjskd3>🌙</span> </button>  <script type="module">const n=document.getElementById("theme-toggle"),c=()=>{const e=document.documentElement,t=e.getAttribute("data-theme")==="dark"?"light":"dark";e.setAttribute("data-theme",t),localStorage.setItem("theme",t)};n&&n.addEventListener("click",c);</script> <!-- Hamburger Toggle for Mobile --> <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" data-astro-cid-5blmo7yk> <span class="bar" data-astro-cid-5blmo7yk></span> <span class="bar" data-astro-cid-5blmo7yk></span> <span class="bar" data-astro-cid-5blmo7yk></span> </button> </div> </div> <!-- Mobile Dropdown Menu --> <nav class="nav-mobile-dropdown" id="nav-mobile-dropdown" data-astro-cid-5blmo7yk> <ul data-astro-cid-5blmo7yk> <li data-astro-cid-5blmo7yk> <a href="/" class="mobile-nav-link " data-astro-cid-5blmo7yk> Home </a> </li><li data-astro-cid-5blmo7yk> <a href="/about/" class="mobile-nav-link " data-astro-cid-5blmo7yk> About </a> </li><li data-astro-cid-5blmo7yk> <a href="/projects/" class="mobile-nav-link " data-astro-cid-5blmo7yk> Projects </a> </li><li data-astro-cid-5blmo7yk> <a href="/certificates/" class="mobile-nav-link " data-astro-cid-5blmo7yk> Certificates </a> </li><li data-astro-cid-5blmo7yk> <a href="/skills-experience/" class="mobile-nav-link " data-astro-cid-5blmo7yk> Skills &amp; Exp </a> </li><li data-astro-cid-5blmo7yk> <a href="/articles/" class="mobile-nav-link active" data-astro-cid-5blmo7yk> Articles </a> </li><li data-astro-cid-5blmo7yk> <a href="/hire-me/" class="mobile-nav-link " data-astro-cid-5blmo7yk> Hire Me </a> </li> <li data-astro-cid-5blmo7yk> <a href="/me/" class="mobile-nav-link" data-astro-cid-5blmo7yk> <i class="fas fa-pen" data-astro-cid-5blmo7yk></i> Personal Space
+</a> </li> </ul> </nav> </header>  <script type="module">const e=document.getElementById("nav-mobile-toggle"),t=document.getElementById("nav-mobile-dropdown"),i=()=>{t?.classList.toggle("active"),e?.classList.toggle("active")},o=()=>{t?.classList.remove("active"),e?.classList.remove("active")};e&&e.addEventListener("click",i);const c=document.querySelectorAll(".mobile-nav-link");c.forEach(n=>{n.addEventListener("click",o)});window.addEventListener("resize",()=>{window.innerWidth>=1024&&o()});</script> <div class="social-bar" id="social-bar" data-astro-cid-5wri42tx> <a href="https://github.com/arehman-dev" aria-label="GitHub" target="_blank" rel="noopener" class="social-link github" data-astro-cid-5wri42tx> <i class="fab fa-github" data-astro-cid-5wri42tx></i> </a> <a href="https://linkedin.com/in/arehman-dev" aria-label="LinkedIn" target="_blank" rel="noopener" class="social-link linkedin" data-astro-cid-5wri42tx> <i class="fab fa-linkedin" data-astro-cid-5wri42tx></i> </a> <a href="https://twitter.com/arehman_dev" aria-label="X (Twitter)" target="_blank" rel="noopener" class="social-link x-twitter" data-astro-cid-5wri42tx> <i class="fab fa-x-twitter" data-astro-cid-5wri42tx></i> </a> <a href="mailto:arehman.dev@proton.me" aria-label="Email" class="social-link email" data-astro-cid-5wri42tx> <i class="fas fa-envelope" data-astro-cid-5wri42tx></i> </a> </div> <main class="page-content" id="main-content">  <div class="article-detail-container" data-astro-cid-xw3clhsd> <div class="back-nav mb-lg" data-astro-cid-xw3clhsd> <a href="/articles/" class="back-link" data-astro-cid-xw3clhsd> <i class="fas fa-arrow-left" data-astro-cid-xw3clhsd></i> Back to Articles
+</a> </div> <article class="article-main card" id="reader-article-surface" data-reader-theme="default" data-astro-cid-xw3clhsd> <header class="article-header" data-astro-cid-xw3clhsd> <div class="header-top-bar" data-astro-cid-xw3clhsd> <span class="badge badge-completed" data-astro-cid-xw3clhsd>Automation</span> <!-- Reading Comfort Theme Switcher --> <div class="reader-theme-bar" role="group" aria-label="Reading comfort theme" data-astro-cid-xw3clhsd> <span class="reader-label" data-astro-cid-xw3clhsd><i class="fas fa-eye" data-astro-cid-xw3clhsd></i> Reading:</span> <button type="button" class="reader-theme-btn active" data-set-reader="default" data-astro-cid-xw3clhsd>Default</button> <button type="button" class="reader-theme-btn" data-set-reader="sepia" data-astro-cid-xw3clhsd>Sepia</button> <button type="button" class="reader-theme-btn" data-set-reader="sepia-contrast" data-astro-cid-xw3clhsd>Sepia Dark</button> <button type="button" class="reader-theme-btn" data-set-reader="soft-contrast" data-astro-cid-xw3clhsd>Soft Contrast</button> </div> </div> <h1 class="article-title" data-astro-cid-xw3clhsd>Mastering Bash Scripting for Automated Backups &amp; File Hygiene</h1> <div class="meta-row" data-astro-cid-xw3clhsd> <span class="meta-item" data-astro-cid-xw3clhsd><i class="far fa-calendar" data-astro-cid-xw3clhsd></i> May 28, 2026</span> <span class="meta-item" data-astro-cid-xw3clhsd><i class="far fa-clock" data-astro-cid-xw3clhsd></i> 6 min read</span> </div> </header> <!-- Render the hosted article body --> <div class="article-body-content" data-astro-cid-xw3clhsd>
+      <p>Automation is the cornerstone of reliable system administration. Writing a quick shell one-liner is easy, but engineering production-grade Bash utilities that safely manipulate thousands of files or run unattended backups requires strict defensive patterns.</p>
+      
+      <h3>1. Always Enforce Strict Mode Flags</h3>
+      <p>Start every script with strict execution flags so silent failures never cascade into corrupted backups or unintended deletions:</p>
+      <pre><code>#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'
+	'</code></pre>
+      <ul>
+        <li><code>-e</code>: Exit immediately if any command exits with a non-zero status.</li>
+        <li><code>-u</code>: Treat unset variables and parameters as an immediate error.</li>
+        <li><code>-o pipefail</code>: Return the exit code of the rightmost failed command in a pipeline rather than masking errors.</li>
+      </ul>
+
+      <h3>2. Automating Filesystem Naming Conventions (kebab-case &amp; snake_case)</h3>
+      <p>Spaces, uppercase characters, and special symbols in filenames frequently break CLI pipelines. Using Bash parameter expansion and regular expressions, we can automatically normalize messy directory trees into clean <code>kebab-case</code> or <code>snake_case</code> standards:</p>
+      <pre><code>normalize_filename() {
+  local raw_name="$1"
+  # Lowercase, replace spaces/underscores with hyphens, strip non-alphanumeric chars
+  echo "$raw_name" \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed -E 's/[ _]+/-/g; s/[^a-z0-9.-]//g; s/-+/-/g'
+}</code></pre>
+
+      <h3>3. Atomic, Timestamped Backup Archives</h3>
+      <p>When backing up critical partitions to <code>/mnt/backup</code>, verify destination mount availability first, write to a timestamped archive, and verify checksums:</p>
+      <pre><code>BACKUP_ROOT="/mnt/backup/snapshots"
+TIMESTAMP="$(date +%Y-%m-%d_%H%M%S)"
+ARCHIVE="${BACKUP_ROOT}/workstation-etc-${TIMESTAMP}.tar.gz"
+
+mountpoint -q /mnt/backup || { echo "Error: /mnt/backup is not mounted" >&2; exit 1; }
+tar -czf "$ARCHIVE" /etc/fstab /etc/ssh/sshd_config
+sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"</code></pre>
+    </div> </article> </div>  </main> <footer class="footer"> <div class="footer-container"> <p>© 2026 Abdul Rehman • Portfolio &amp; Credentials • Islamabad / Remote • <a href="/me/" class="footer-personal-link">Personal Space</a></p> </div> </footer> </div> </body></html> <script>
+  (function () {
+    const surface = document.getElementById('reader-article-surface');
+    const buttons = document.querySelectorAll('.reader-theme-btn[data-set-reader]');
+    if (!surface || !buttons.length) return;
+
+    const applyReaderTheme = (mode) => {
+      surface.setAttribute('data-reader-theme', mode);
+      buttons.forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-set-reader') === mode);
+      });
+    };
+
+    const savedMode = typeof localStorage !== 'undefined' ? localStorage.getItem('reader-theme') : null;
+    if (savedMode && ['default', 'sepia', 'sepia-contrast', 'soft-contrast'].includes(savedMode)) {
+      applyReaderTheme(savedMode);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-set-reader') || 'default';
+        applyReaderTheme(mode);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('reader-theme', mode);
+        }
+      });
+    });
+  })();
+</script>

@@ -1,218 +1,61 @@
-# Abdul Rehman — Digital Window to My Life
+# Abdul Rehman — Unified Engineering Portfolio & Personal Space (`v3.0`)
 
-A minimalist, hand-crafted Jekyll-based portfolio exploring technology, ethics, philosophy, and digital resilience with glass morphism UI.
+A unified, high-performance static web architecture built with **Astro (v6)** combining the **Technical Engineering Portfolio (`/`)** and the **Personal Editorial Space (`/me/`)** under a single cohesive design system (**Pitch Black OLED + Frosted Acrylic Glass + Dual Blue-Green Editorial Accents**).
 
-🌐 **Live:** [arehman-dev.github.io](https://arehman-dev.github.io)
+- 🌐 **Live Site**: [https://arehman-dev.github.io/](https://arehman-dev.github.io/) & [https://arehman-dev.github.io/me/](https://arehman-dev.github.io/me/)
+- 📖 **Full Architecture & Working Guide**: See **[`DOCUMENTATION.md`](file:///home/arehman/00-code/portfolio/DOCUMENTATION.md)** and **[`COLOR_PALETTE.md`](file:///home/arehman/00-code/portfolio/COLOR_PALETTE.md)**.
 
 ---
 
-## ✨ Key Features
+## 🏛️ Version History & Zero-Bloat Repository Archive
 
-- **Glass Morphism Design** — Smooth blur effects, dark/light theme
-- **No Build Tools** — Pure HTML, CSS, JavaScript + Jekyll
-- **Privacy-First** — No tracking, only Google Fonts & Lucide Icons
-- **Keyboard Shortcuts** — `h` (home), `p` (perspective), `a` (about)
-- **SEO Optimized** — Meta tags, OG, RSS feed, XML sitemap
-- **Responsive** — Mobile-friendly grid layouts
-- **Stagger Animations** — Cards cascade on scroll
-- **Copy & Print** — One-click link sharing + PDF export
-- **Shared Design System** — Coordinated color palette with portfolio
+Previous major versions (`v1` and `v2`) are permanently preserved in Git history using **annotated Git tags** and **lightweight archive branches**—keeping the working tree clean with **zero extra repository bloat**:
 
-**🎨 Color Documentation:** See [COLOR_PALETTE.md](../portfolio/COLOR_PALETTE.md) for complete color system (hex codes, gradients, usage guidelines)
+| Version | Milestone Description | Git Tag | Archive Branch | How to Inspect / Restore |
+| :--- | :--- | :--- | :--- | :--- |
+| **`v3.0`** *(Current)* | Unified Astro Architecture: Technical Portfolio (`/`) + Personal Space (`/me/`), Pitch Black OLED theme, Reader Comfort modes, Urdu Nastaliq engine, & expanded Toolbelt | `v3.0` *(HEAD)* | `main` | `git checkout main` |
+| **`v2.0`** | Multi-Page Astro E-Portfolio (8 technical routes, Neofetch terminal, dynamic slugs) | `v2.0` | `archive/v2` | `git checkout v2.0` or `git checkout archive/v2` |
+| **`v1.1` / `v1.0`** | Original Single-Page Vanilla HTML/CSS/JS Portfolio with swipeable carousels | `v1.1` / `v1.0` | `archive/v1` | `git checkout v1.1` or `git checkout archive/v1` |
 
-## � Quick Start
+---
 
-### Prerequisites
+## 🌟 Key Highlights of `v3.0`
+
+- **Dual-Domain Unified Architecture (`49` Static Pages)**:
+  - **Technical Portfolio (`/`)**: Interactive Neofetch terminal hero, Developer Architecture Project Cards (`/projects/`), categorized Toolbelt with **Python, Bash, C++, Systemd & CLI, and Local Llama/AI Evaluation** (`/skills-experience/`), self-hosted technical articles (`/articles/`), credentials (`/certificates/`), and resume (`/hire-me/`).
+  - **Personal Digital Window (`/me/`)**: Expandable bio drawer, Featured Writings, 3-card Recent Writings carousel, 12-photo lens grid, *Perspective* essays (`/me/perspective/`), *Ashaar* Urdu/English poetry (`/me/poetry/`), *Tasweer-Kahani* filterable Bento/Journal gallery (`/me/tasweer-kahani/`), merged Collections & Chronological Archive (`/me/archive/`), and an open-canvas About page (`/me/about/`).
+- **Open-Canvas Bilingual Reader & Eye-Comfort Engine**:
+  - Dario Amodei-inspired card-free reading layout with a sticky **Left-Most (English LTR)** / **Right-Most (Urdu RTL)** Table of Contents rail, 4 persistent reading comfort themes (*Default*, *Sepia*, *Sepia Dark*, *Soft Contrast*), and classical Diwan centered couplets for Urdu poetry in `Noto Nastaliq Urdu`.
+- **Ultra-Fast Static Performance**:
+  - `0 KB` client-side JS framework overhead, `~18 KB` CSS on `/`, `~43 KB` CSS on `/me/`, and 65 Lanczos-optimized progressive JPEGs (`245 MB` → `15.17 MB`, **93.8% reduction**).
+
+---
+
+## 📁 Directory Structure
+
+```
+portfolio/
+├── dist/                     # Compiled production static bundle (49 pages)
+├── public/                   # Static assets, optimized tasweer-kahani/ photos & .nojekyll
+├── src/
+│   ├── components/           # Reusable Astro components (Navbar, ProjectCard, ArticleCard, SocialDock)
+│   ├── data/                 # Typed content engines (projects.ts, skills.ts, articles.ts, certificates.ts, personal.ts)
+│   ├── layouts/              # BaseLayout.astro (/) and PersonalLayout.astro (/me/)
+│   ├── pages/                # File-based routes for / and /me/ + dynamic [slug].astro routes
+│   └── styles/               # global.css (/) and personal.css (/me/)
+├── DOCUMENTATION.md          # Comprehensive technical & editorial architecture reference
+├── COLOR_PALETTE.md          # Unified color tokens, glass surfaces & reader theme specs
+├── DEVELOPMENT.md            # Contributor & content update guide
+└── astro.config.mjs          # Astro root-domain configuration (https://arehman-dev.github.io)
+```
+
+---
+
+## 🚀 Setup & Local Development
+
 ```bash
-Ruby 3.2+, Bundler
+npm install        # Install dependencies
+npm run dev        # Start local dev server at http://localhost:4321/ and http://localhost:4321/me/
+npm run build      # Compile static production bundle into dist/
+npm run preview    # Preview production bundle locally
 ```
-
-### Local Development
-```bash
-bundle install
-bundle exec jekyll serve
-# → http://localhost:4000
-```
-
-### Deploy
-```bash
-git push origin main
-# GitHub Pages auto-deploys in 30-60 seconds
-```
-
----
-
-## 📁 Structure
-
-```
-_layouts/default.html       # Master template
-_posts/                     # Blog posts (auto-collected)
-perspective/                # Essays collection
-poetry/                     # Poetry collection
-tasweer-kahani/             # Photo gallery
-assets/css/style.css        # All styling
-_config.yml                 # Jekyll config
-```
-
----
-
-## 📝 Adding Content
-
-### New Blog Post
-Create `_posts/YYYY-MM-DD-title.md`:
-```markdown
----
-layout: default
-title: "Title"
-category: perspective
-tags: [tag1, tag2]
----
-Content...
-```
-
-### New Collection Item
-Create `perspective/title.md` or `poetry/title.md`:
-```markdown
----
-layout: default
-title: "Title"
----
-Content...
-```
-
-### Add Images
-Upload to `tasweer-kahani/` (images auto-appear on page via `_data/gallery.yml`)
-
-To add a new image:
-1. Upload file to `tasweer-kahani/[theme-folder]/image.jpeg`
-2. Add entry to `_data/gallery.yml`:
-   ```yaml
-   galleries:
-     [theme-name]:
-       images:
-         - path: "/tasweer-kahani/[theme-folder]/image.jpeg"
-           alt: "Image description"
-   ```
-3. Rebuild site
-
-**See [DEVELOPMENT.md](DEVELOPMENT.md) for:**
-- Complete code logic & workflows
-- Theme system details
-- Image gallery system (lightbox + metadata)
-- Advanced customization
-
----
-
-## 🎨 Design
-
-**Colors:**
-- Light: `#f8fbff` bg, `#071e61` text, `#01ac6a` accent
-- Dark: `#030b1c` bg, `#f0f9f4` text, `#00ff9d` accent
-
-**Fonts:**
-- Headings: Playfair Display (serif)
-- Body: Lora (serif)
-- UI: Inter (sans)
-- Urdu: Noto Nastaliq
-
-**Components:** Glass morphism cards, sticky nav, sidebar, photo grid
-
----
-
-## 🛠️ Tech Stack
-
-- **Generator:** Jekyll 4.4
-- **Hosting:** GitHub Pages
-- **CSS:** Custom, no frameworks
-- **JS:** Vanilla (Intersection Observer, localStorage, modals)
-- **CDN:** Google Fonts, Lucide Icons
-
----
-
-## 📚 Documentation
-
-- **DEVELOPMENT.md** — Full guide (code logic, workflows, gallery proposal)
-- **_config.yml** — Customize site settings
-- **Assets/css/style.css** — Theming & components
-
----
-
-## 🔧 For Developers
-
-### Theme System
-Uses CSS variables for instant light/dark switching:
-```css
-:root { --text-main: #071e61; /* Light */ }
-.dark { --text-main: #f0f9f4; /* Dark */ }
-```
-
-### Glass Components
-```css
-background: var(--glass-bg);
-backdrop-filter: blur(16px);
-border-radius: 20px;
-```
-
-Applies to: Top bar, dropdown, cards, buttons
-
----
-
-## 🖼️ Image Gallery System
-
-### ✅ Fully Implemented & Working
-
-Interactive modal-based photo gallery on tasweer-kahani page with complete keyboard navigation.
-
-### Features (All Verified)
-
-| Feature | Status |
-|---------|--------|
-| Click image → fullscreen modal | ✅ |
-| Previous/Next buttons | ✅ |
-| Arrow key navigation (← →) | ✅ |
-| ESC to close | ✅ |
-| Click background to close | ✅ |
-| Image captions | ✅ |
-| Dark theme support | ✅ |
-| Responsive design | ✅ |
-| Unlimited images | ✅ |
-
-### How It Works
-
-**Data File (`_data/gallery.yml`):**
-```yaml
-galleries:
-  blues-and-purple:
-    title: "Blues & Purple"
-    description: "Urban geometry & architecture"
-    images:
-      - path: "/tasweer-kahani/theme-blues-and-purple/img-01.jpeg"
-        alt: "Image description"
-```
-
-**Template (`tasweer-kahani/index.md`):**
-Liquid loops render images from YAML — click to open modal.
-
-### Adding Images
-
-1. Upload to `tasweer-kahani/[theme-folder]/image.jpeg`
-2. Add to `_data/gallery.yml` (3 lines)
-3. Done! Site auto-renders
-
-**See [DEVELOPMENT.md](DEVELOPMENT.md#-image-gallery-system) for technical details**
-
----
-
----
-
-## 📚 Additional Resources
-
-- **DEVELOPMENT.md** — Complete code documentation
-- [Jekyll Docs](https://jekyllrb.com/docs/)
-- [GitHub Pages](https://pages.github.com/)
-- [CSS Variables Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
-
----
-
-**Last Updated:** April 5, 2026  
-**Version:** 2.0+
