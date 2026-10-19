@@ -1,0 +1,281 @@
+---
+import PersonalLayout from '../../layouts/PersonalLayout.astro';
+import { personalPosts } from '../../data/personal';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const meBase = `${base}me/`;
+
+const sortedPosts = [...personalPosts].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+
+const collectionPosts = sortedPosts.filter((p) => p.category === 'collections');
+
+// Group by year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  if (!acc[post.year]) acc[post.year] = [];
+  acc[post.year].push(post);
+  return acc;
+}, {} as Record<string, typeof personalPosts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<PersonalLayout title="Archive & Collections">
+  <span class="me-eyebrow">Complete Index &amp; Commonplace Book</span>
+  <h1>Archive &amp; Collections</h1>
+  <p>Browse curated collections, commonplace references, essays, and Urdu poetry organized by theme and date.</p>
+
+  <!-- Merged Collections Section -->
+  <section class="archive-collections-section">
+    <h2>Curated Collections</h2>
+    <div class="card-grid collections-merged-grid">
+      {collectionPosts.map((post) => (
+        <a
+          href={`${meBase}collections/${post.slug}/`}
+          class="content-card"
+          data-category="collections"
+        >
+          <span class="card-meta">{post.categoryLabel} • {post.displayDate} • {post.readTime}</span>
+          <h3>{post.title}</h3>
+          <p style="font-family: 'Lora', serif;">{post.excerpt}</p>
+          <div class="card-read-footer" style="font-family: 'Inter', sans-serif;">
+            <span>Explore collection →</span>
+            <span class="card-date-chip">{post.shortDate}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <h2>Chronological Index ({sortedPosts.length})</h2>
+
+  <!-- Interactive Category & Language Filter Bar -->
+  <div class="gallery-filter-bar archive-filter-bar" role="tablist" aria-label="Filter archive entries">
+    <button type="button" class="gallery-filter-pill active" data-archive-filter="all">
+      All ({sortedPosts.length})
+    </button>
+    <button type="button" class="gallery-filter-pill" data-archive-filter="perspective">
+      Perspective ({sortedPosts.filter((p) => p.category === 'perspective').length})
+    </button>
+    <button type="button" class="gallery-filter-pill" data-archive-filter="poetry">
+      Poetry · <span class="urdu-inline">شاعری</span> ({sortedPosts.filter((p) => p.category === 'poetry').length})
+    </button>
+    <button type="button" class="gallery-filter-pill" data-archive-filter="collections">
+      Collections ({collectionPosts.length})
+    </button>
+    <button type="button" class="gallery-filter-pill" data-archive-filter="lang:ur">
+      <span class="urdu-inline">اردو</span> ({sortedPosts.filter((p) => p.lang === 'ur').length})
+    </button>
+    <button type="button" class="gallery-filter-pill" data-archive-filter="lang:en">
+      English ({sortedPosts.filter((p) => p.lang === 'en').length})
+    </button>
+  </div>
+
+  <div id="archive-container">
+    {years.map((year) => (
+      <section class="archive-year-section">
+        <h3>{year}</h3>
+        <ul>
+          {postsByYear[year].map((post) => (
+            <li
+              class="archive-row-item"
+              data-category={post.category}
+              data-lang={post.lang}
+              data-tags={post.tags.join(',')}
+            >
+              <span class="archive-date">{post.shortDate}</span>
+              <span class={`archive-cat-dot dot-${post.category}`} title={post.category}></span>
+              <a
+                href={`${meBase}${post.category}/${post.slug}/`}
+                class={`archive-link ${post.dir === 'rtl' ? 'urdu-text' : ''}`}
+              >
+                {post.title}
+              </a>
+              <span class="archive-read-time">{post.readTime}</span>
+              <span class="archive-tags">
+                {post.tags.map((tag) => (
+                  <button
+                    type="button"
+                    class={`tag tag-filter-btn ${/[\u0600-\u06FF]/.test(tag) ? 'urdu-inline' : ''}`}
+                    data-tag={tag}
+                  ><span class="hash-mark">#</span>{tag}</button>
+                ))}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <script is:inline>
+    const filterBtns = document.querySelectorAll('[data-archive-filter]');
+    const tagBtns = document.querySelectorAll('.tag-filter-btn[data-tag]');
+    const rows = document.querySelectorAll('.archive-row-item');
+
+    const applyArchiveFilter = (criteria) => {
+      rows.forEach((row) => {
+        const cat = row.getAttribute('data-category');
+        const lang = row.getAttribute('data-lang');
+        const tags = (row.getAttribute('data-tags') || '').split(',');
+        let show = true;
+        if (criteria === 'all') show = true;
+        else if (criteria.startsWith('lang:')) show = lang === criteria.split(':')[1];
+        else if (criteria.startsWith('tag:')) show = tags.includes(criteria.split(':')[1]);
+        else show = cat === criteria;
+
+        row.style.display = show ? 'flex' : 'none';
+      });
+    };
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        tagBtns.forEach((t) => t.classList.remove('active'));
+        btn.classList.add('active');
+        applyArchiveFilter(btn.getAttribute('data-archive-filter') || 'all');
+      });
+    });
+
+    tagBtns.forEach((tBtn) => {
+      tBtn.addEventListener('click', () => {
+        const tag = tBtn.getAttribute('data-tag');
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        tagBtns.forEach((t) => t.classList.toggle('active', t.getAttribute('data-tag') === tag));
+        applyArchiveFilter(`tag:${tag}`);
+      });
+    });
+
+    // Support arriving from article #hashtag links (?tag=...)
+    const params = new URLSearchParams(window.location.search);
+    const initialTag = params.get('tag');
+    if (initialTag) {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      tagBtns.forEach((t) => t.classList.toggle('active', t.getAttribute('data-tag') === initialTag));
+      applyArchiveFilter(`tag:${initialTag}`);
+    }
+  </script>
+</PersonalLayout>
+
+<style>
+  .archive-collections-section {
+    margin-bottom: 2.5rem;
+  }
+
+  #archive-container h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.35rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.45rem;
+    display: block;
+  }
+
+  #archive-container ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .archive-row-item {
+    padding: 0.9rem 0.5rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px dashed var(--card-border);
+    border-radius: 8px;
+    transition: background 0.2s ease, padding 0.2s ease;
+  }
+
+  .archive-row-item:hover {
+    background: rgba(57, 123, 201, 0.05);
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .archive-date {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    min-width: 65px;
+  }
+
+  .archive-cat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-perspective { background-color: var(--secondary); }
+  .dot-poetry { background-color: var(--accent); }
+  .dot-collections { background: linear-gradient(135deg, var(--secondary), var(--accent)); }
+
+  .archive-link {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    flex-grow: 1;
+    font-family: 'Lora', serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+  }
+
+  .archive-link:hover {
+    color: var(--accent);
+  }
+
+  .archive-read-time {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--secondary);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .archive-tags {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Pill-free hashtags directly over background */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.06rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.1rem 0;
+    border-radius: 0;
+    font-size: 0.76rem;
+    font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .tag .hash-mark {
+    color: var(--accent);
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .tag:hover,
+  .tag.active {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--accent);
+  }
+
+  .tag.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+</style>

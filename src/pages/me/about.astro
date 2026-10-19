@@ -1,0 +1,160 @@
+---
+import PersonalLayout from '../../layouts/PersonalLayout.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<PersonalLayout title="About — Abdul Rehman">
+  <!-- 6A: Editorial Split Header with Portrait Card & Personal Introduction -->
+  <section class="me-about-hero">
+    <div class="me-about-intro">
+      <span class="me-eyebrow">Digital Window • <span class="urdu-inline">تعارف</span></span>
+      <h1>About</h1>
+
+      <p class="me-salutation"><em>Assalamu alaikum,</em></p>
+
+      <p>
+        I am <strong>Abdul Rehman</strong>, known in the digital space as <em>a.rehman</em>.
+      </p>
+
+      <p>
+        A student of knowledge pursuing a career in Information Technology. I occasionally write here, share visuals from my lens, and reflect on ideas and art that resonate with me.
+      </p>
+
+      <p>
+        Life, to me, is a continuous transition—spanning from college days to systems engineering, from photography to contemplative prose, and from contemporary sciences to the timeless depth of the Islamic intellectual tradition.
+      </p>
+    </div>
+
+    <div class="me-about-portrait-card">
+      <div class="portrait-frame portrait-placeholder">
+        <!-- Drop your new image here later: <img src={`${base}about/images/your-photo.jpeg`} alt="Abdul Rehman" loading="lazy" /> -->
+        <div class="portrait-placeholder-inner">
+          <span class="placeholder-monogram">a.r</span>
+          <i data-lucide="image" class="placeholder-icon"></i>
+          <span class="placeholder-note">Portrait Placeholder</span>
+        </div>
+      </div>
+      <div class="portrait-caption">
+        <span>Abdul Rehman (<em>a.rehman</em>)</span>
+        <span class="portrait-sub">Islamabad • Systems &amp; Contemplation</span>
+      </div>
+    </div>
+  </section>
+
+  <h2>The Orbit — What Grounds My Days</h2>
+  <p><em>The anchors around which my daily life, study, and craft revolve:</em></p>
+
+  <!-- Open-Canvas Architectural Ledger (Card-Free) -->
+  <div class="orbit-open-ledger">
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mosque" aria-hidden="true">
+          <path d="M20 21V10a2 2 0 0 0-2-2h-1" />
+          <path d="M19 8V5l-1-2-1 2v3" />
+          <path d="M4 21v-7a6 6 0 0 1 12 0v7" />
+          <path d="M10 8V5" />
+          <path d="M8 21v-4a2 2 0 0 1 4 0v4" />
+          <path d="M2 21h20" />
+        </svg>
+      </span>
+      <div class="orbit-open-body">
+        <strong>ʿUbūdiyyah (Servitude)</strong>
+        <span>Anchoring intention and daily rhythm around purposeful servitude to the Creator.</span>
+      </div>
+    </div>
+
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon"><i data-lucide="heart"></i></span>
+      <div class="orbit-open-body">
+        <strong>Family &amp; Kinship</strong>
+        <span>Rooted in traditional family values, gratitude, and quiet presence.</span>
+      </div>
+    </div>
+
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon"><i data-lucide="book-open"></i></span>
+      <div class="orbit-open-body">
+        <strong>Pursuit of ʿIlm</strong>
+        <span>Bridging classical scholarship, Arabic/Urdu literature, and foundational sciences.</span>
+      </div>
+    </div>
+
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon"><i data-lucide="terminal"></i></span>
+      <div class="orbit-open-body">
+        <strong>Code &amp; Linux Systems</strong>
+        <span>Crafting clean automation, C++/Python pipelines, and resilient infrastructure.</span>
+      </div>
+    </div>
+
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon"><i data-lucide="coffee"></i></span>
+      <div class="orbit-open-body">
+        <strong>Strong Coffee &amp; Solitude</strong>
+        <span>Unhurried morning and late-night hours for deep reading and reflection.</span>
+      </div>
+    </div>
+
+    <div class="orbit-open-item">
+      <span class="orbit-open-icon"><i data-lucide="dumbbell"></i></span>
+      <div class="orbit-open-body">
+        <strong>Bikes &amp; Strength Training</strong>
+        <span>Physical discipline, open roads, and cultivating endurance of body and mind.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Three Guiding Pillars</h2>
+
+  <!-- Open-Canvas Numbered Editorial Columns (Card-Free) -->
+  <div class="pillars-open-columns">
+    <div class="pillar-open-col">
+      <span class="pillar-open-num">01</span>
+      <h3>Objective Morality</h3>
+      <p>Standing by truth and ethical principles independent of shifting trends or convenience.</p>
+    </div>
+
+    <div class="pillar-open-col">
+      <span class="pillar-open-num">02</span>
+      <h3>Ḥayāʾ (Modesty)</h3>
+      <p>Practicing restraint in speech, humility in knowledge, and dignity in private and public life.</p>
+    </div>
+
+    <div class="pillar-open-col">
+      <span class="pillar-open-num">03</span>
+      <h3>Iḥsān (Excellence)</h3>
+      <p>Attending to the unseen details of every craft with sincerity and thoroughness.</p>
+    </div>
+  </div>
+
+  <h2>Get in Touch</h2>
+  <p>I welcome thoughtful conversations and correspondence:</p>
+
+  <!-- Open-Canvas Correspondence Links (Card-Free) -->
+  <div class="me-contact-open-list">
+    <a href="https://twitter.com/arehman_dev" target="_blank" rel="noopener noreferrer" class="me-contact-open-link">
+      <i data-lucide="at-sign"></i>
+      <span class="contact-link-text"><strong>X (Twitter)</strong> <span class="contact-sep">·</span> @arehman_dev</span>
+      <span class="contact-arrow">↗</span>
+    </a>
+    <a href="https://wa.me/923396690006" target="_blank" rel="noopener noreferrer" class="me-contact-open-link">
+      <i data-lucide="message-circle"></i>
+      <span class="contact-link-text"><strong>WhatsApp</strong> <span class="contact-sep">·</span> Direct Message</span>
+      <span class="contact-arrow">↗</span>
+    </a>
+    <a href={base} class="me-contact-open-link">
+      <i data-lucide="terminal"></i>
+      <span class="contact-link-text"><strong>Technical Portfolio</strong> <span class="contact-sep">·</span> Projects &amp; Work</span>
+      <span class="contact-arrow">→</span>
+    </a>
+  </div>
+
+  <hr class="dinkus" />
+
+  <blockquote class="about-open-epigraph">
+    <p>
+      <em>"The heart's need for knowledge is like the body's need for food; rather, it is even greater, for a man needs food once or twice a day, but he needs knowledge with every breath he takes."</em>
+    </p>
+    <p class="epigraph-author"><em>— Imām Ibn al-Qayyim (r.a.)</em></p>
+  </blockquote>
+</PersonalLayout>

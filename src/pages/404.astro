@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout 
+  title="404: Page Not Found | Abdul Rehman Portfolio"
+  description="The requested page could not be found on this systems server."
+>
+  <div class="error-container">
+    <div class="error-card card">
+      <div class="error-header-visual">
+        <span class="error-code">404</span>
+        <div class="glow-effect"></div>
+      </div>
+      
+      <div class="error-content">
+        <h1>Segment Fault: Path Not Found</h1>
+        <p class="error-tagline">The requested URL was not found or is currently undergoing maintenance.</p>
+        
+        <div class="terminal-box">
+          <div class="terminal-header">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+            <span class="terminal-title">systems-monitor</span>
+          </div>
+          <div class="terminal-body">
+            <p class="line-output error-text"><span class="output-red">[ERR]</span> Page segment not resolved in active workspace.</p>
+            <p class="line-output"><span class="output-gray">Target:</span> {Astro.url.pathname}</p>
+            <p class="line-output"><span class="output-gray">Status:</span> 404_PAGE_MISSING</p>
+            <p class="line-cmd"><span class="prompt">$</span> navigate --target=home <span class="cursor">▒</span></p>
+          </div>
+        </div>
+        
+        <div class="error-actions mt-lg">
+          <a href={base} class="btn btn-primary">
+            <i class="fas fa-home"></i> Return to Homepage
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    padding: 2rem 1.5rem;
+  }
+
+  .error-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-header-visual {
+    position: relative;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-code {
+    font-size: 7.5rem;
+    font-weight: 800;
+    font-family: var(--font-sans);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--green-500) 0%, var(--blue-500) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 8px rgba(1, 172, 106, 0.15));
+    letter-spacing: -0.05em;
+  }
+
+  .glow-effect {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(1, 172, 106, 0.15) 0%, rgba(57, 123, 201, 0) 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .error-content h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .error-tagline {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Terminal Styling */
+  .terminal-box {
+    background-color: var(--bg-terminal);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+  }
+
+  .terminal-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot-red { background-color: #ff5f56; }
+  .dot-yellow { background-color: #ffbd2e; }
+  .dot-green { background-color: #27c93f; }
+
+  .terminal-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .terminal-body {
+    padding: 1.2rem;
+    font-size: 0.88rem;
+  }
+
+  .line-output {
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+
+  .line-cmd {
+    margin-top: 0.8rem;
+    color: var(--text-main);
+  }
+
+  .prompt {
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  .output-red {
+    color: #ff5f56;
+    font-weight: 600;
+  }
+
+  .output-gray {
+    color: var(--text-muted);
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background-color: var(--primary);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    from, to { background-color: transparent }
+    50% { background-color: var(--primary) }
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 599px) {
+    .error-code {
+      font-size: 5.5rem;
+    }
+    .error-card {
+      padding: 2rem 1.2rem;
+    }
+    .error-content h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

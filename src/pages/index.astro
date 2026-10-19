@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TechStack from '../components/TechStack.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout title="Abdul Rehman - Python & C++ Developer | Linux Automation">
+  <div class="hero-container-main">
+    <section class="hero-section">
+      <!-- Left Column: Rich Bios, Focus Details, Competencies, CTAs -->
+      <div class="hero-content">
+        <span class="hero-eyebrow">Welcome to my space</span>
+        <h1 class="hero-title">Abdul Rehman</h1>
+        <h2 class="hero-subtitle">Python & C++ Developer | Linux Automation</h2>
+        
+        <p class="hero-text">
+          I am a passionate software developer specializing in C++, Python, and Linux automation. With a solid foundation in Linux system administration, software testing, and clean script architectures, I design secure, optimized solutions that bridge compile-time performance with automated operational pipelines.
+        </p>
+        
+        <p class="hero-text">
+          My development philosophy is centered around precise execution, clean script logic, and principled implementation. I believe that writing code is not just about solving immediate requirements, but about leaving a clean, maintainable trail for future scale.
+        </p>
+
+        <!-- Core Competencies section to add more detailed sample content -->
+        <div class="competencies-block mt-lg">
+          <h3 class="section-sub-title">Core Competencies</h3>
+          <div class="competencies-grid">
+            <div class="comp-item">
+              <span class="comp-icon"><i class="fas fa-cubes"></i></span>
+              <div class="comp-text">
+                <strong>Systems Programming &amp; Data Pipelines</strong>
+                <p>Building multithreaded Python automation, OCR/data pipelines, local-first applications, and modular programs in C++.</p>
+              </div>
+            </div>
+
+            <div class="comp-item">
+              <span class="comp-icon"><i class="fas fa-terminal"></i></span>
+              <div class="comp-text">
+                <strong>Linux SysAdmin & Automation</strong>
+                <p>Managing server configurations, shell workflows, and end-to-end task automation in Linux (Debian, Ubuntu) environments.</p>
+              </div>
+            </div>
+
+            <div class="comp-item">
+              <span class="comp-icon"><i class="fas fa-vial"></i></span>
+              <div class="comp-text">
+                <strong>Testing & Quality Assurance</strong>
+                <p>Integrating structured unit testing, functional verification, and automation checks to guarantee stability and security.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-focus-block card mt-lg">
+          <h3><i class="fab fa-python tech-focus-icon"></i> Current Specialization &amp; Learning Track</h3>
+          <p class="focus-desc">
+            Currently focused on deepening specializations in <strong>C++</strong> and <strong>Python</strong>, while completing the <strong>Google IT Automation with Python</strong> Professional Certificate and freeCodeCamp's <strong>Scientific Computing with Python</strong> program. My primary competencies lie in Linux administration, software testing, and workflow automation.
+          </p>
+        </div>
+        
+        <div class="hero-ctas flex gap-md mt-lg">
+          <a href={`${base}projects`} class="btn btn-primary" id="hero-view-projects">
+            <i class="fas fa-terminal"></i> View Projects
+          </a>
+          <a href={`${base}hire-me`} class="btn btn-secondary" id="hero-connect">
+            <i class="fas fa-handshake"></i> Let's Connect
+          </a>
+        </div>
+      </div>
+      
+      <!-- Right Column: Terminal + Enhanced Compact Values Card -->
+      <div class="hero-sidebar">
+        <!-- Terminal Mockup -->
+        <div class="terminal-mockup">
+          <div class="terminal-header">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+            <span class="terminal-title">arehman@linux-server:~</span>
+          </div>
+          <div class="terminal-body">
+            <p class="line-cmd"><span class="prompt">$</span> neofetch</p>
+            <p class="line-output logo-line"><span class="logo-python">&gt;&gt;&gt; </span><span class="output-bold">arehman</span>@<span class="output-green">portfolio</span></p>
+            <p class="line-output"><span class="output-gray">OS: </span>Linux (Debian/Ubuntu)</p>
+            <p class="line-output"><span class="output-gray">Kernel: </span>Linux 6.6.0-stable</p>
+            <p class="line-output"><span class="output-gray">Shell: </span>bash 5.2.15</p>
+            <p class="line-output"><span class="output-gray">Uptime: </span>24-48 hours (responsive)</p>
+            <p class="line-output"><span class="output-gray">Status: </span><span class="badge badge-status">Actively Seeking Opportunities</span></p>
+            <p class="line-output"><span class="output-gray">Focus: </span>Python | C++ | Linux | Testing | Automation</p>
+            <p class="line-cmd"><span class="prompt">$</span> <span class="cursor">▒</span></p>
+          </div>
+        </div>
+
+        <!-- Enhanced Compact Core Values Card (copied and customized from about.astro) -->
+        <div class="card values-card-sidebar">
+          <h3 class="sidebar-card-title">Core Values</h3>
+          <div class="value-item-row">
+            <h4><i class="fa-regular fa-circle-dot value-icon-accent"></i> Purpose</h4>
+            <p>I aim to develop software configurations that solve real user problems, avoiding technological fluff.</p>
+          </div>
+          <div class="value-item-row">
+            <h4><i class="fa-regular fa-gem value-icon-accent"></i> Integrity</h4>
+            <p>Ethical code standards are paramount. I enforce clean access boundaries and codebase transparency.</p>
+          </div>
+          <div class="value-item-row">
+            <h4><i class="fa-regular fa-star value-icon-accent"></i> Excellence</h4>
+            <p>Every line of code I write is optimized for standard conventions, styling, and future scalability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width Complete Tech Stack & Toolbelt (Style A: Flat Pill Wall) -->
+    <TechStack />
+  </div>
+</BaseLayout>
+
+<style>
+  .hero-container-main {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+    padding: 0.5rem 0 2rem;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-section {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.75rem;
+    color: var(--secondary);
+    border: none;
+    padding-bottom: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .hero-text {
+    font-size: 1.05rem;
+    max-width: 620px;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .highlight {
+    color: var(--text-main);
+    font-weight: 600;
+    border-bottom: 1px dashed var(--primary);
+  }
+
+  /* Technical Focus Card */
+  .tech-focus-block {
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid var(--primary);
+    background-color: var(--bg-card);
+  }
+
+  .tech-focus-icon {
+    color: var(--primary);
+    margin-right: 0.5rem;
+  }
+
+  .focus-desc {
+    font-size: 0.92rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  /* Competencies section */
+  .section-sub-title {
+    font-size: 1.35rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .competencies-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .comp-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .comp-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  :global([data-theme="dark"]) .comp-icon {
+    background-color: rgba(1, 172, 106, 0.1);
+  }
+
+  .comp-text strong {
+    font-size: 0.98rem;
+    display: block;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+  }
+
+  .comp-text p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  /* Sidebar styling */
+  .hero-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem; /* Spacious padding separating terminal and value cards */
+  }
+
+  /* Terminal Mockup Design */
+  .terminal-mockup {
+    width: 100%;
+    background-color: #0d0d0d;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid #222;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  :global([data-theme="light"]) .terminal-mockup {
+    background-color: #141414;
+  }
+
+  .terminal-header {
+    background-color: #1a1a1a;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid #2b2b2b;
+    position: relative;
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background-color: #ff5f56; }
+  .dot-yellow { background-color: #ffbd2e; }
+  .dot-green { background-color: #27c93f; }
+
+  .terminal-title {
+    color: #888;
+    font-size: 0.75rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .terminal-body {
+    padding: 1.25rem;
+    color: #e0e0e0;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .line-cmd {
+    color: #fff;
+  }
+
+  .prompt {
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  .logo-python {
+    color: var(--secondary);
+    font-weight: bold;
+  }
+
+  .output-bold {
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .output-green {
+    color: var(--primary);
+  }
+
+  .output-gray {
+    color: #888;
+  }
+
+  .cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--primary);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* Enhanced Compact Single Card Values block */
+  .values-card-sidebar {
+    padding: 1.5rem;
+    border-top: 4px solid var(--primary);
+  }
+
+  .sidebar-card-title {
+    font-size: 1.15rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.4rem;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .value-item-row {
+    margin-bottom: 1.25rem;
+  }
+
+  .value-item-row:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .value-item-row h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-main);
+  }
+
+  .value-icon-accent {
+    color: var(--primary);
+    font-size: 0.9rem;
+  }
+
+  .value-item-row p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-bottom: 0;
+    padding-left: 1.4rem; /* Aligns neatly under the text, not under bullet icon */
+  }
+</style>
+
+

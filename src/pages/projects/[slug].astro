@@ -1,0 +1,307 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+import type { Project } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+// Get 2 other projects as related projects
+const relatedProjects = projects
+  .filter((p) => p.slug !== project.slug)
+  .slice(0, 2);
+
+const statusClass = `badge-${project.status.toLowerCase().replace(/\s+/g, '-')}`;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout 
+  title={`${project.title} | Abdul Rehman Portfolio`}
+  description={project.description}
+>
+  <div class="project-detail-container">
+    <div class="back-nav mb-lg">
+      <a href={`${base}projects/`} class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+      </a>
+    </div>
+
+    <header class="detail-header card mb-lg">
+      <div class="header-top">
+        <span class={`badge ${statusClass}`}>{project.status}</span>
+      </div>
+      <h1 class="project-title">{project.title}</h1>
+      <p class="project-short-desc">{project.description}</p>
+      
+      <div class="tech-badges flex flex-wrap gap-md mt-lg">
+        {project.tags.map((tag) => (
+          <span class="tech-badge">{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    <div class="detail-content grid">
+      <div class="main-details">
+        <section class="section card mb-lg">
+          <h2>Project Overview</h2>
+          <p class="narrative-text">{project.longDescription}</p>
+        </section>
+
+        {(project.problem || project.solution) && (
+          <div class="grid grid-2 mb-lg">
+            {project.problem && (
+              <section class="section card problem-card">
+                <h3><i class="fas fa-exclamation-triangle problem-icon"></i> The Problem</h3>
+                <p>{project.problem}</p>
+              </section>
+            )}
+            {project.solution && (
+              <section class="section card solution-card">
+                <h3><i class="fas fa-check-circle solution-icon"></i> The Solution</h3>
+                <p>{project.solution}</p>
+              </section>
+            )}
+          </div>
+        )}
+
+        {project.features && project.features.length > 0 && (
+          <section class="section card mb-lg">
+            <h2>Key Features & Scope</h2>
+            <ul class="features-list">
+              {project.features.map((feature) => (
+                <li>
+                  <i class="fas fa-chevron-right list-bullet"></i>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+
+      <div class="sidebar-details">
+        <section class="section card action-card mb-lg">
+          <h3>Project Links</h3>
+          <div class="action-buttons flex flex-wrap gap-md mt-lg">
+            {project.link && project.link !== "#" ? (
+              <a href={project.link} target="_blank" rel="noopener" class="btn btn-primary w-full justify-center">
+                <i class="fas fa-external-link-alt"></i> Visit Live Demo
+              </a>
+            ) : (
+              <span class="btn btn-outline w-full justify-center disabled-btn">
+                <i class="fas fa-ban"></i> Demo Unavailable
+              </span>
+            )}
+            
+            {project.sourceLink && (
+              <a href={project.sourceLink} target="_blank" rel="noopener" class="btn btn-secondary w-full justify-center">
+                <i class="fab fa-github"></i> Source Code
+              </a>
+            )}
+          </div>
+        </section>
+
+        <section class="section card related-card">
+          <h3>Related Projects</h3>
+          <div class="related-list">
+            {relatedProjects.map((p) => (
+              <a href={`${base}projects/${p.slug}/`} class="related-item">
+                <h4>{p.title}</h4>
+                <p>{p.description}</p>
+                <span class="related-link-text">View Project <i class="fas fa-chevron-right"></i></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .project-detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  .detail-header {
+    border-left: 6px solid var(--primary);
+  }
+
+  .header-top {
+    margin-bottom: 0.75rem;
+  }
+
+  .project-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-short-desc {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .tech-badge {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background-color: var(--gray-100);
+    color: var(--text-main);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-card);
+  }
+
+  :global([data-theme="dark"]) .tech-badge {
+    background-color: #2b2b2b;
+    border-color: #3b3b3b;
+  }
+
+  /* Two Column Grid */
+  .detail-content {
+    grid-template-columns: 1.8fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .detail-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .narrative-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .problem-card {
+    border-top: 4px solid #ef4444;
+  }
+
+  .problem-icon {
+    color: #ef4444;
+  }
+
+  .solution-card {
+    border-top: 4px solid var(--primary);
+  }
+
+  .solution-icon {
+    color: var(--primary);
+  }
+
+  .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .features-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .list-bullet {
+    color: var(--primary);
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+  }
+
+  .disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+    width: 100%;
+    text-align: center;
+  }
+
+  .action-card {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+  }
+
+  :global([data-theme="dark"]) .action-card {
+    background-color: rgba(1, 172, 106, 0.05);
+    border-color: var(--green-900);
+  }
+
+  .action-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-dark);
+  }
+
+  :global([data-theme="dark"]) .action-card h3 {
+    color: var(--white);
+  }
+
+  .related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .related-item {
+    display: block;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .related-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .related-item h4 {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+    transition: color 0.2s ease;
+  }
+
+  .related-item p {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .related-link-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .related-item:hover h4 {
+    color: var(--primary);
+  }
+</style>

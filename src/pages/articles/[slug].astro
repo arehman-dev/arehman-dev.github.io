@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articles } from '../../data/articles';
+import type { Article } from '../../data/articles';
+
+export async function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout 
+  title={`${article.title} | Abdul Rehman Articles`}
+  description={article.excerpt}
+>
+  <div class="article-detail-container">
+    <div class="back-nav mb-lg">
+      <a href={`${base}articles/`} class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Articles
+      </a>
+    </div>
+
+    <article class="article-main card" id="reader-article-surface" data-reader-theme="default">
+      <header class="article-header">
+        <div class="header-top-bar">
+          <span class="badge badge-completed">{article.category}</span>
+
+          <!-- Reading Comfort Theme Switcher -->
+          <div class="reader-theme-bar" role="group" aria-label="Reading comfort theme">
+            <span class="reader-label"><i class="fas fa-eye"></i> Reading:</span>
+            <button type="button" class="reader-theme-btn active" data-set-reader="default">Default</button>
+            <button type="button" class="reader-theme-btn" data-set-reader="sepia">Sepia</button>
+            <button type="button" class="reader-theme-btn" data-set-reader="sepia-contrast">Sepia Dark</button>
+            <button type="button" class="reader-theme-btn" data-set-reader="soft-contrast">Soft Contrast</button>
+          </div>
+        </div>
+
+        <h1 class="article-title">{article.title}</h1>
+        
+        <div class="meta-row">
+          <span class="meta-item"><i class="far fa-calendar"></i> {article.date}</span>
+          <span class="meta-item"><i class="far fa-clock"></i> {article.readTime}</span>
+        </div>
+      </header>
+
+      <!-- Render the hosted article body -->
+      <div class="article-body-content" set:html={article.content} />
+    </article>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const surface = document.getElementById('reader-article-surface');
+    const buttons = document.querySelectorAll('.reader-theme-btn[data-set-reader]');
+    if (!surface || !buttons.length) return;
+
+    const applyReaderTheme = (mode) => {
+      surface.setAttribute('data-reader-theme', mode);
+      buttons.forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-set-reader') === mode);
+      });
+    };
+
+    const savedMode = typeof localStorage !== 'undefined' ? localStorage.getItem('reader-theme') : null;
+    if (savedMode && ['default', 'sepia', 'sepia-contrast', 'soft-contrast'].includes(savedMode)) {
+      applyReaderTheme(savedMode);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-set-reader') || 'default';
+        applyReaderTheme(mode);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('reader-theme', mode);
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .article-detail-container {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  /* Default Eye-Comfort Calibrated Tokens */
+  .article-main {
+    --reader-text: #2c333a;
+    --reader-heading: #161b22;
+    --reader-muted: #57606a;
+    --reader-border: var(--border-color);
+    --reader-code-bg: var(--gray-50);
+    --reader-code-text: var(--primary-dark);
+    padding: 3rem 2.75rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  :global([data-theme="dark"]) .article-main {
+    /* Softened warm silver-parchment on Pitch Black to prevent halation & eye strain */
+    --reader-text: #c8d0d8;
+    --reader-heading: #e6edf3;
+    --reader-muted: #8b949e;
+    --reader-border: rgba(255, 255, 255, 0.09);
+    --reader-code-bg: #121417;
+    --reader-code-text: #a5d6ff;
+  }
+
+  /* Reading Theme 1: Sepia (Warm Book Paper) */
+  .article-main[data-reader-theme="sepia"],
+  :global([data-theme="dark"]) .article-main[data-reader-theme="sepia"] {
+    background: #f4ecd8 !important;
+    border-color: #dfcca8 !important;
+    --reader-text: #3b2f2f;
+    --reader-heading: #231915;
+    --reader-muted: #6e5a47;
+    --reader-border: rgba(92, 75, 55, 0.2);
+    --reader-code-bg: #ebe0c5;
+    --reader-code-text: #5a381e;
+  }
+
+  /* Reading Theme 2: Sepia Contrast / Sepia Dark (Warm Espresso OLED-Safe) */
+  .article-main[data-reader-theme="sepia-contrast"],
+  :global([data-theme="dark"]) .article-main[data-reader-theme="sepia-contrast"] {
+    background: #17120e !important;
+    border-color: rgba(212, 163, 89, 0.24) !important;
+    --reader-text: #dfd3c3;
+    --reader-heading: #f5ebe0;
+    --reader-muted: #a69580;
+    --reader-border: rgba(212, 163, 89, 0.18);
+    --reader-code-bg: #221b15;
+    --reader-code-text: #eab676;
+  }
+
+  /* Reading Theme 3: Soft Contrast (Calibrated Low-Glare E-Ink Slate) */
+  .article-main[data-reader-theme="soft-contrast"],
+  :global([data-theme="dark"]) .article-main[data-reader-theme="soft-contrast"] {
+    background: #181d23 !important;
+    border-color: rgba(57, 123, 201, 0.28) !important;
+    --reader-text: #cdd6df;
+    --reader-heading: #e8eef4;
+    --reader-muted: #8e9baa;
+    --reader-border: rgba(255, 255, 255, 0.1);
+    --reader-code-bg: #11151a;
+    --reader-code-text: #79c0ff;
+  }
+
+  @media (max-width: 639px) {
+    .article-main {
+      padding: 1.5rem;
+    }
+  }
+
+  .header-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .reader-theme-bar {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0.28rem 0.45rem;
+    border-radius: 8px;
+    background: rgba(128, 128, 128, 0.08);
+    border: 1px solid var(--reader-border);
+  }
+
+  .reader-label {
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    color: var(--reader-muted);
+    padding: 0 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .reader-theme-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--reader-muted);
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    font-weight: 500;
+    padding: 0.22rem 0.55rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .reader-theme-btn:hover {
+    color: var(--primary);
+    background: rgba(1, 172, 106, 0.08);
+  }
+
+  .reader-theme-btn.active {
+    color: var(--primary);
+    background: rgba(1, 172, 106, 0.14);
+    border-color: rgba(1, 172, 106, 0.35);
+    font-weight: 600;
+  }
+
+  .article-header {
+    border-bottom: 1px solid var(--reader-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .article-title {
+    font-size: 2.4rem;
+    line-height: 1.25;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--reader-heading);
+    -webkit-text-fill-color: var(--reader-heading);
+    background: none;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--reader-muted);
+    font-family: var(--font-mono);
+  }
+
+  .meta-item i {
+    margin-right: 0.35rem;
+    color: var(--secondary);
+  }
+
+  /* Styling for the rendered HTML body of the article */
+  .article-body-content :global(p) {
+    font-size: 1.06rem;
+    line-height: 1.82;
+    margin-bottom: 1.5rem;
+    color: var(--reader-text);
+  }
+
+  .article-body-content :global(h2),
+  .article-body-content :global(h3) {
+    font-size: 1.45rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--reader-heading);
+  }
+
+  .article-body-content :global(pre) {
+    background-color: var(--reader-code-bg);
+    border: 1px solid var(--reader-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    color: var(--reader-code-text);
+  }
+
+  .article-body-content :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background-color: var(--reader-code-bg);
+    color: var(--reader-code-text);
+    border-color: var(--reader-border);
+  }
+
+  .article-body-content :global(ul), .article-body-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--reader-text);
+  }
+
+  .article-body-content :global(li) {
+    margin-bottom: 0.55rem;
+    line-height: 1.72;
+    color: var(--reader-text);
+  }
+
+  .article-body-content :global(strong) {
+    color: var(--reader-heading);
+  }
+
+  .article-body-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.75rem;
+    font-size: 0.92rem;
+    border: 1px solid var(--reader-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .article-body-content :global(th),
+  .article-body-content :global(td) {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--reader-border);
+    color: var(--reader-text);
+  }
+
+  .article-body-content :global(th) {
+    background-color: var(--reader-code-bg);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--primary);
+  }
+
+  .article-body-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+</style>

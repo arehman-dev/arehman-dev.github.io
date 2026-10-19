@@ -1,0 +1,642 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { certificates } from '../../data/certificates';
+import type { Certificate } from '../../data/certificates';
+
+export async function getStaticPaths() {
+  return certificates.map((certificate) => ({
+    params: { slug: certificate.slug },
+    props: { certificate }
+  }));
+}
+
+interface Props {
+  certificate: Certificate;
+}
+
+const { certificate } = Astro.props;
+const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-')}`;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout 
+  title={`${certificate.title} | Abdul Rehman Credentials`}
+  description={certificate.description}
+>
+  <div class="cert-detail-container">
+    <div class="back-nav mb-lg">
+      <a href={`${base}certificates/`} class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Certificates
+      </a>
+    </div>
+
+    <header class="detail-header card mb-lg">
+      <div class="header-top">
+        <div class="flex items-center gap-md">
+          <span class={`badge ${statusClass}`}>{certificate.status}</span>
+          {certificate.duration && (
+            <span class="badge badge-duration"><i class="far fa-clock"></i> {certificate.duration}</span>
+          )}
+        </div>
+        <span class="cert-date">{certificate.date}</span>
+      </div>
+      <h1 class="cert-title">{certificate.title}</h1>
+      <p class="cert-issuer"><i class="far fa-building"></i> {certificate.issuer}</p>
+      
+      {certificate.credentialId && (
+        <p class="cert-id"><i class="fas fa-id-card"></i> Credential ID: <code>{certificate.credentialId}</code></p>
+      )}
+    </header>
+
+    <div class="detail-content grid">
+      <div class="main-details">
+        <section class="section card mb-lg">
+          <h2>Overview &amp; Purpose</h2>
+          <p class="narrative-text">{certificate.overview}</p>
+        </section>
+
+        {certificate.skillsAcquired && certificate.skillsAcquired.length > 0 && (
+          <section class="section card mb-lg">
+            <h2>Topics &amp; Capabilities Covered</h2>
+            <ul class="skills-acquired-list">
+              {certificate.skillsAcquired.map((skill) => (
+                <li>
+                  <i class="fas fa-check-circle list-bullet-icon"></i>
+                  <span>{skill}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+
+      <div class="sidebar-details">
+        <section class="section card action-card mb-lg">
+          <h3>Verification</h3>
+          <p class="verification-desc">This certification can be verified directly via the issuer's credential portal.</p>
+          <div class="action-buttons flex flex-wrap gap-md mt-lg">
+            {certificate.link ? (
+              <a href={certificate.link} target="_blank" rel="noopener" class="btn btn-primary w-full justify-center">
+                <i class="fas fa-external-link-alt"></i> Verify Credential
+              </a>
+            ) : (
+              <span class="btn btn-outline w-full justify-center disabled-btn">
+                <i class="fas fa-lock"></i> Verification Pending
+              </span>
+            )}
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- CERTIFICATE PREVIEW SECTION -->
+    <section class="preview-section card mt-lg">
+      <div class="preview-header mb-md">
+        <h2><i class="fas fa-certificate"></i> Certificate Preview</h2>
+      </div>
+      
+      <!-- Preview Metrics Section -->
+      <div class="preview-metrics mb-lg">
+        {certificate.duration && (
+          <div class="metric-row">
+            <span class="metric-label"><i class="far fa-clock"></i> Course Duration:</span>
+            <span class="metric-value">{certificate.duration}</span>
+          </div>
+        )}
+        {certificate.technologies && certificate.technologies.length > 0 && (
+          <div class="metric-row">
+            <span class="metric-label"><i class="fas fa-tools"></i> Core Technologies:</span>
+            <span class="metric-value">{certificate.technologies.join(', ')}</span>
+          </div>
+        )}
+        {certificate.difficulty && (
+          <div class="metric-row">
+            <span class="metric-label"><i class="fas fa-chart-line"></i> Difficulty Level:</span>
+            <span class="metric-value"><span class="status-difficulty">{certificate.difficulty}</span></span>
+          </div>
+        )}
+      </div>
+      
+      <div class="mock-cert-frame">
+        <div class="mock-cert-border-outer">
+          <div class="mock-cert-border-inner">
+            <!-- Decorative Corner Accents -->
+            <div class="corner-accent top-left"></div>
+            <div class="corner-accent top-right"></div>
+            <div class="corner-accent bottom-left"></div>
+            <div class="corner-accent bottom-right"></div>
+
+            <div class="mock-cert-content">
+              <div class="mock-cert-header">
+                <span class="mock-cert-badge-icon">🎖️</span>
+                <h3>Certificate of Accomplishment</h3>
+                <p class="mock-cert-subtitle">PREVIEW TEMPLATE &mdash; WORK IN PROGRESS</p>
+              </div>
+              
+              <div class="mock-cert-recipient">
+                <span class="recipient-label">THIS IS PROUDLY PRESENTED TO</span>
+                <h4 class="recipient-name">Abdul Rehman</h4>
+                <span class="recipient-line"></span>
+              </div>
+              
+              <div class="mock-cert-body">
+                <p>for actively pursuing and demonstrating academic and engineering excellence in</p>
+                <h5 class="course-title">{certificate.title}</h5>
+                <p class="issuer-text">authorized and delivered online by <strong>{certificate.issuer}</strong></p>
+              </div>
+              
+              <div class="mock-cert-footer">
+                <div class="footer-sign-column">
+                  <span class="sign-label">Status</span>
+                  <span class="sign-value text-amber">{certificate.status}</span>
+                  <span class="sign-line"></span>
+                </div>
+                
+                <div class="footer-seal-column">
+                  <div class="seal-graphic">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>VERIFIED</span>
+                  </div>
+                </div>
+                
+                <div class="footer-sign-column">
+                  <span class="sign-label">Estimated Effort</span>
+                  <span class="sign-value">{certificate.duration || 'Flexible'}</span>
+                  <span class="sign-line"></span>
+                </div>
+              </div>
+              
+              <div class="mock-cert-meta">
+                <span>Target Date: {certificate.date}</span>
+                <span class="meta-separator">|</span>
+                <span>Document ID: MOCK-{certificate.slug.toUpperCase()}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .cert-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  .detail-header {
+    border-left: 6px solid var(--secondary);
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .badge-duration {
+    background-color: var(--secondary-light);
+    color: var(--secondary);
+    border: 1px solid rgba(57, 123, 201, 0.15);
+  }
+
+  :global([data-theme="dark"]) .badge-duration {
+    background-color: rgba(57, 123, 201, 0.1);
+    color: var(--secondary-dark);
+    border-color: rgba(57, 123, 201, 0.2);
+  }
+
+  .badge-duration i {
+    margin-right: 0.25rem;
+  }
+
+  .cert-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .cert-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-issuer {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-id {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Layout */
+  .detail-content {
+    grid-template-columns: 1.8fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .detail-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .narrative-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .skills-acquired-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skills-acquired-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .list-bullet-icon {
+    color: var(--primary);
+    font-size: 1.05rem;
+    margin-top: 0.25rem;
+  }
+
+  .verification-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .disabled-btn {
+    opacity: 0.6;
+    cursor: not-allowed;
+    width: 100%;
+    text-align: center;
+  }
+
+  .action-card {
+    background-color: var(--secondary-light);
+    border-color: var(--secondary);
+  }
+
+  :global([data-theme="dark"]) .action-card {
+    background-color: rgba(57, 123, 201, 0.05);
+    border-color: var(--secondary-dark);
+  }
+
+  .action-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-dark);
+  }
+
+  :global([data-theme="dark"]) .action-card h3 {
+    color: var(--white);
+  }
+
+  /* Preview Section */
+  .preview-section {
+    border-top: 4px solid var(--primary);
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .preview-header h2 {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Premium HTML Mock Certificate Styling */
+  .mock-cert-frame {
+    background-color: #fffaf0; /* Classic ivory paper look */
+    color: #2c251d; /* Elegant deep brownish-charcoal text */
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md), inset 0 0 40px rgba(0, 0, 0, 0.02);
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+  }
+
+  :global([data-theme="dark"]) .mock-cert-frame {
+    background-color: #161310; /* Dark parchment tone for dark theme */
+    color: #e5d5c5;
+    border: 1px solid rgba(197, 160, 89, 0.15);
+  }
+
+  .mock-cert-border-outer {
+    border: 2px solid #c5a059; /* Elegant Gold border */
+    padding: 4px;
+    border-radius: 8px;
+  }
+
+  .mock-cert-border-inner {
+    border: 1px dashed rgba(197, 160, 89, 0.4);
+    padding: 2rem 1.5rem;
+    border-radius: 6px;
+    position: relative;
+  }
+
+  /* Decorative Corner Accents */
+  .corner-accent {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #c5a059;
+  }
+  .top-left { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .top-right { top: 8px; right: 8px; border-left: none; border-bottom: none; }
+  .bottom-left { bottom: 8px; left: 8px; border-right: none; border-top: none; }
+  .bottom-right { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+  .mock-cert-content {
+    text-align: center;
+  }
+
+  .mock-cert-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .mock-cert-badge-icon {
+    font-size: 2.75rem;
+    display: inline-block;
+    margin-bottom: 0.25rem;
+  }
+
+  .mock-cert-header h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #c5a059; /* Gold */
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+
+  .mock-cert-subtitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .mock-cert-recipient {
+    margin-bottom: 1.75rem;
+  }
+
+  .recipient-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8b7d6b;
+  }
+
+  .recipient-name {
+    font-family: 'Georgia', serif;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 600;
+    margin: 0.4rem 0;
+    color: #1e293b;
+  }
+
+  :global([data-theme="dark"]) .recipient-name {
+    color: #f1f5f9;
+  }
+
+  .recipient-line {
+    display: block;
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c5a059, transparent);
+    margin: 0.5rem auto 0 auto;
+  }
+
+  .mock-cert-body {
+    margin-bottom: 2rem;
+  }
+
+  .mock-cert-body p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0.4rem 0;
+    color: #57534e;
+  }
+
+  :global([data-theme="dark"]) .mock-cert-body p {
+    color: #a8a29e;
+  }
+
+  .course-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0d9488; /* Teal */
+    margin: 0.4rem 0;
+    line-height: 1.4;
+  }
+
+  :global([data-theme="dark"]) .course-title {
+    color: #2dd4bf;
+  }
+
+  .issuer-text {
+    font-size: 0.88rem;
+  }
+
+  /* Certificate Footer Signatures and Seals */
+  .mock-cert-footer {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 550px) {
+    .mock-cert-footer {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .footer-seal-column {
+      order: -1;
+    }
+  }
+
+  .footer-sign-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sign-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8b7d6b;
+  }
+
+  .sign-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0.25rem 0;
+  }
+
+  .sign-value.text-amber {
+    color: #d97706;
+  }
+
+  .sign-line {
+    width: 130px;
+    height: 1px;
+    background-color: rgba(197, 160, 89, 0.3);
+  }
+
+  .footer-seal-column {
+    display: flex;
+    justify-content: center;
+  }
+
+  .seal-graphic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px double #c5a059;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 160, 89, 0.03);
+    color: #c5a059;
+    font-family: var(--font-mono);
+  }
+
+  .seal-graphic i {
+    font-size: 1.1rem;
+    margin-bottom: 1px;
+  }
+
+  .seal-graphic span {
+    font-size: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .mock-cert-meta {
+    font-size: 0.72rem;
+    color: #8b7d6b;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(197, 160, 89, 0.15);
+    padding-top: 0.75rem;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .meta-separator {
+    color: rgba(197, 160, 89, 0.3);
+  }
+
+  /* Preview Metrics Styling */
+  .preview-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.25rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  :global([data-theme="dark"]) .preview-metrics {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .metric-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .metric-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .metric-label i {
+    color: var(--primary);
+    width: 16px;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .metric-value {
+    color: var(--text-main);
+    font-weight: 500;
+  }
+
+  .status-difficulty {
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    background-color: rgba(57, 123, 201, 0.1);
+    color: var(--secondary);
+    border: 1px solid rgba(57, 123, 201, 0.15);
+    letter-spacing: 0.02em;
+    display: inline-block;
+  }
+
+  :global([data-theme="dark"]) .status-difficulty {
+    color: var(--secondary-dark);
+    border-color: rgba(57, 123, 201, 0.25);
+  }
+</style>

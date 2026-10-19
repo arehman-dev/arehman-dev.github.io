@@ -1,0 +1,41 @@
+---
+import PersonalLayout from '../../layouts/PersonalLayout.astro';
+import { personalPosts } from '../../data/personal';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const meBase = `${base}me/`;
+
+const poetryPosts = personalPosts
+  .filter((p) => p.category === 'poetry')
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<PersonalLayout title="Poetry — Ashaar">
+  <span class="me-eyebrow">Ashaar • <span class="urdu-inline">اشعار و شاعری</span></span>
+  <h1>Poetry — Ashaar</h1>
+
+  <p>A collection of poems and verses exploring the self (<em>Khudi</em>), discipline, resilience, and the eternal struggle between comfort and excellence.</p>
+  <p><em>For me, poetry is where the soul finds voice in silence—an art of speaking volumes through minimal words that echo.</em></p>
+
+  <h2>Curated Works &amp; Reflections ({poetryPosts.length})</h2>
+
+  <div class="card-grid">
+    {poetryPosts.map((post) => (
+      <a
+        href={`${meBase}poetry/${post.slug}/`}
+        class={`content-card ${post.dir === 'rtl' ? 'urdu-text' : ''}`}
+        data-category="poetry"
+      >
+        <span class="card-meta" style={post.dir === 'rtl' ? "text-align: right; font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;" : undefined}>
+          {post.categoryLabel} • {post.displayDate} • {post.readTime}
+        </span>
+        <h3>{post.title}</h3>
+        <p>{post.excerpt}</p>
+        <div class="card-read-footer" style="font-family: 'Inter', sans-serif;">
+          <span class={post.dir === 'rtl' ? 'urdu-inline' : ''}>{post.dir === 'rtl' ? 'اشعار پڑھیں ←' : 'Read verses →'}</span>
+          <span class="card-date-chip">{post.shortDate}</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</PersonalLayout>

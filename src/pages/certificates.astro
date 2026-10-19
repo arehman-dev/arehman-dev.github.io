@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CertificateCard from '../components/CertificateCard.astro';
+import { certificates } from '../data/certificates';
+---
+
+<BaseLayout 
+  title="Certificates & Credentials | Abdul Rehman"
+  description="View the professional certifications, courses, and credentials earned by Abdul Rehman, including Red Hat, LPIC, and Python certifications."
+>
+  <div class="certificates-container">
+    <header class="page-header">
+      <span class="eyebrow">Validating Technical Skills</span>
+      <h1>Certificates &amp; Credentials</h1>
+      <p class="tagline">A catalog of my professional credentials and ongoing technical examination tracks.</p>
+    </header>
+
+    <div class="grid grid-1">
+      {certificates.map((cert) => (
+        <CertificateCard certificate={cert} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .certificates-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* Specific vertical listing styling */
+  .grid-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+</style>

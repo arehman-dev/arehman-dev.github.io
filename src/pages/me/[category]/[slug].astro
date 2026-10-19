@@ -1,0 +1,39 @@
+---
+import PersonalLayout from '../../../layouts/PersonalLayout.astro';
+import { personalPosts } from '../../../data/personal';
+import type { PersonalPost } from '../../../data/personal';
+
+export async function getStaticPaths() {
+  const sorted = [...personalPosts].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  return sorted.map((post, idx) => ({
+    params: {
+      category: post.category,
+      slug: post.slug
+    },
+    props: {
+      post,
+      prevPost: idx > 0 ? sorted[idx - 1] : undefined,
+      nextPost: idx < sorted.length - 1 ? sorted[idx + 1] : undefined
+    }
+  }));
+}
+
+interface Props {
+  post: PersonalPost;
+  prevPost?: PersonalPost;
+  nextPost?: PersonalPost;
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+---
+
+<PersonalLayout
+  title={post.title}
+  description={post.excerpt}
+  post={post}
+  prevPost={prevPost}
+  nextPost={nextPost}
+/>

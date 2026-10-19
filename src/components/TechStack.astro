@@ -1,0 +1,209 @@
+---
+import { techStackData } from '../data/skills';
+
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<section class={`tech-stack-section card ${className}`.trim()} aria-labelledby="tech-stack-heading">
+  <div class="tech-stack-header">
+    <div class="tech-stack-title-wrap">
+      <h3 id="tech-stack-heading" class="tech-stack-title">
+        <i class="fa-solid fa-layer-group tech-stack-heading-icon"></i> Complete Tech Stack &amp; Toolbelt
+      </h3>
+      <p class="tech-stack-subtitle">
+        Languages, frameworks, Linux utilities, infrastructure tools, and platforms I have built and worked with.
+      </p>
+    </div>
+    <div class="tech-stack-legend" aria-label="Tech stack proficiency legend">
+      <span class="legend-item">
+        <span class="legend-dot legend-dot-core"></span> Core / Daily Driver
+      </span>
+      <span class="legend-item">
+        <span class="legend-dot legend-dot-worked"></span> Worked With
+      </span>
+    </div>
+  </div>
+
+  <div class="tech-pill-wall">
+    {techStackData.map((tech) => (
+      <span class={`tech-pill ${tech.isCore ? 'tech-pill-core' : ''}`}>
+        {tech.isCore && <span class="pill-core-dot" aria-hidden="true"></span>}
+        <i class={`${tech.icon} pill-icon`} aria-hidden="true"></i>
+        <span class="pill-label">{tech.name}</span>
+      </span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .tech-stack-section {
+    padding: 1.75rem 2rem;
+    border-top: 3px solid var(--primary);
+  }
+
+  .tech-stack-section:hover {
+    transform: none;
+  }
+
+  .tech-stack-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1.15rem;
+    margin-bottom: 1.35rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .tech-stack-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .tech-stack-heading-icon {
+    color: var(--primary);
+    font-size: 1.15rem;
+  }
+
+  .tech-stack-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .tech-stack-legend {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-dot-core {
+    background-color: var(--primary);
+    box-shadow: 0 0 6px rgba(1, 172, 106, 0.65);
+  }
+
+  .legend-dot-worked {
+    border: 1.5px solid var(--text-muted);
+    background-color: transparent;
+  }
+
+  .tech-pill-wall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.48rem;
+    padding: 0.42rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--text-main);
+    background-color: var(--secondary-light);
+    border: 1px solid rgba(57, 123, 201, 0.2);
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    user-select: none;
+  }
+
+  :global([data-theme="dark"]) .tech-pill {
+    background-color: rgba(57, 123, 201, 0.1);
+    border-color: rgba(57, 123, 201, 0.25);
+    color: var(--text-main);
+  }
+
+  .tech-pill .pill-icon {
+    font-size: 0.92rem;
+    color: var(--secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .tech-pill:hover,
+  :global([data-theme="dark"]) .tech-pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    background-color: rgba(1, 172, 106, 0.08);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tech-pill:hover .pill-icon,
+  :global([data-theme="dark"]) .tech-pill:hover .pill-icon {
+    color: var(--primary);
+    transform: scale(1.08);
+  }
+
+  /* Core / Daily Driver Pill Accent */
+  .tech-pill.tech-pill-core {
+    background-color: rgba(1, 172, 106, 0.1);
+    border-color: rgba(1, 172, 106, 0.38);
+    font-weight: 600;
+  }
+
+  :global([data-theme="dark"]) .tech-pill.tech-pill-core {
+    background-color: rgba(1, 172, 106, 0.14);
+    border-color: rgba(1, 172, 106, 0.45);
+  }
+
+  .tech-pill.tech-pill-core .pill-icon {
+    color: var(--primary);
+  }
+
+  .pill-core-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    box-shadow: 0 0 6px rgba(1, 172, 106, 0.65);
+    flex-shrink: 0;
+  }
+
+  .tech-pill.tech-pill-core:hover,
+  :global([data-theme="dark"]) .tech-pill.tech-pill-core:hover {
+    background-color: rgba(1, 172, 106, 0.2);
+    box-shadow: 0 4px 14px rgba(1, 172, 106, 0.22);
+    border-color: var(--primary);
+  }
+
+  @media (max-width: 639px) {
+    .tech-stack-section {
+      padding: 1.35rem 1.25rem;
+    }
+
+    .tech-stack-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .tech-pill {
+      font-size: 0.82rem;
+      padding: 0.38rem 0.75rem;
+    }
+  }
+</style>

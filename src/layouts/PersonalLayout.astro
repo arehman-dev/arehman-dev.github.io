@@ -1,0 +1,621 @@
+---
+import '../styles/personal.css';
+import { personalPosts } from '../data/personal';
+import type { PersonalPost } from '../data/personal';
+
+interface Props {
+  title?: string;
+  description?: string;
+  post?: PersonalPost;
+  prevPost?: PersonalPost;
+  nextPost?: PersonalPost;
+}
+
+const {
+  title = "Home",
+  description = "Digital Resilience & 'Ilm — A minimalist personal space exploring technology, ethics, philosophy, Urdu poetry, and photography.",
+  post,
+  prevPost,
+  nextPost
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const meBase = `${base}me/`;
+const pathname = new URL(Astro.request.url).pathname;
+
+const searchIndex = personalPosts.map((p) => ({
+  title: p.title,
+  slug: p.slug,
+  category: p.category,
+  categoryLabel: p.categoryLabel,
+  excerpt: p.excerpt,
+  readTime: p.readTime,
+  shortDate: p.shortDate,
+  dir: p.dir,
+  tags: p.tags,
+  url: `${meBase}${p.category}/${p.slug}/`
+}));
+---
+
+<!DOCTYPE html>
+<html lang={post?.lang || "en"}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} | Abdul Rehman</title>
+  <meta name="description" content={post?.excerpt || description} />
+  <meta name="author" content="Abdul Rehman" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:title" content={`${title} | Abdul Rehman`} />
+  <meta property="og:description" content={post?.excerpt || description} />
+
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet" />
+  <script is:inline src="https://unpkg.com/lucide@latest"></script>
+
+  <script is:inline>
+    // Unified Theme Initialization (Syncs both data-theme and .dark class)
+    (function() {
+      const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? saved === 'dark' : prefersDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+    })();
+  </script>
+</head>
+<body class={`personal-space-body ${post?.dir || 'ltr'} ${post ? 'is-article-page' : ''}`} data-reader-theme="default">
+  <!-- 1A & 1B: Utility & Quick-Jump Side Dock with Custom Frosted Slide-Out Labels -->
+  <aside class="sidebar" aria-label="Quick utilities and navigation">
+    <div class="sidebar-icons">
+      <a href={meBase} aria-label="Personal Home (h)" class={`sidebar-item ${pathname === '/me' || pathname === '/me/' ? 'active' : ''}`}>
+        <i data-lucide="home"></i>
+        <span class="sidebar-tooltip">Home <code>h</code></span>
+      </a>
+
+      <button type="button" id="sidebar-search-btn" class="nav-btn sidebar-item" aria-label="Search writings (/)">
+        <i data-lucide="search"></i>
+        <span class="sidebar-tooltip">Search <code>/</code></span>
+      </button>
+
+      <button type="button" id="sidebar-random-btn" class="nav-btn sidebar-item" aria-label="Serendipity: Random essay (r)">
+        <i data-lucide="sparkles"></i>
+        <span class="sidebar-tooltip">Serendipity <code>r</code></span>
+      </button>
+
+      <button type="button" id="sidebar-top-btn" class="nav-btn sidebar-item" aria-label="Scroll to top">
+        <i data-lucide="arrow-up"></i>
+        <span class="sidebar-tooltip">Top <code>↑</code></span>
+      </button>
+
+      <div class="sidebar-divider" role="separator"></div>
+
+      <button type="button" id="personal-theme-toggle" class="nav-btn sidebar-item" aria-label="Toggle Theme (d)">
+        <i data-lucide="moon" class="moon-icon"></i>
+        <i data-lucide="sun" class="sun-icon"></i>
+        <span class="sidebar-tooltip">Theme <code>d</code></span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-viewport">
+    <!-- 1A & 1C: Direct Editorial Top Bar + Reading Progress Hairline -->
+    <header class="top-bar-container">
+      <nav class="glass-top-bar">
+        <a href={meBase} class="brand-logo">Abdul Rehman<span class="brand-dot">.</span></a>
+        <div class="top-links">
+          <a href={`${meBase}perspective/`} class={`top-link ${pathname.includes('/me/perspective') ? 'active' : ''}`}>perspective</a>
+          <a href={`${meBase}poetry/`} class={`top-link ${pathname.includes('/me/poetry') ? 'active' : ''}`}>poetry</a>
+          <a href={`${meBase}tasweer-kahani/`} class={`top-link ${pathname.includes('/me/tasweer-kahani') ? 'active' : ''}`}>tasweer kahani</a>
+          <a href={`${meBase}archive/`} class={`top-link ${pathname.includes('/me/archive') || pathname.includes('/me/collections') ? 'active' : ''}`}>archive</a>
+          <a href={`${meBase}about/`} class={`top-link ${pathname.includes('/me/about') ? 'active' : ''}`}>about</a>
+          <a href={base} class="portfolio-bridge-pill" aria-label="Portfolio">
+            <span class="bridge-prompt">&gt;_</span> <span>portfolio</span>
+          </a>
+        </div>
+        <!-- 1C: Reading Progress Hairline -->
+        <div class="reading-progress-track" aria-hidden="true">
+          <div class="reading-progress-bar" id="me-reading-progress"></div>
+        </div>
+      </nav>
+    </header>
+
+    <main class={`wrapper ${post ? 'wrapper-article-wide' : ''}`}>
+      {post ? (
+        <!-- 3A: Dario Amodei-inspired Open-Canvas Article with Left-Most (EN) / Right-Most (UR) Title + Subheader Navigation Rail -->
+        <div class={`article-editorial-layout ${post.dir === 'rtl' || post.lang === 'ur' ? 'rtl-layout' : 'ltr-layout'}`}>
+          <aside class={`article-toc-rail ${post.dir === 'rtl' || post.lang === 'ur' ? 'urdu-text' : ''}`} aria-label="Article table of contents">
+            <div class="toc-sticky-box">
+              <div class={`toc-eyebrow ${post.dir === 'rtl' ? 'urdu-inline' : ''}`}>
+                {post.dir === 'rtl' ? 'فہرستِ مضمون' : 'Contents'}
+              </div>
+              <a href="#post-top" class="toc-article-title active" data-toc-target="post-top">
+                {post.title}
+              </a>
+              <nav class="toc-subheaders-list" id="article-toc-list"></nav>
+            </div>
+          </aside>
+
+          <article class={`post-container category-${post.category}`} id="me-reader-article">
+            <header id="post-top" class={`post-header ${post.dir === 'rtl' || post.lang === 'ur' ? 'urdu-text' : ''}`}>
+              <div class="post-category-kicker" style="font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;">
+                {post.categoryLabel}
+              </div>
+              <h1 class="post-title">{post.title}</h1>
+              <div class="post-meta">
+                <span>{post.displayDate}</span>
+                <span class="meta-sep">•</span>
+                <span class="read-time-badge">{post.readTime}</span>
+              </div>
+              {post.tags && post.tags.length > 0 && (
+                <div class="post-hashtags-row" aria-label="Article tags">
+                  {post.tags.map((tag) => (
+                    <a
+                      href={`${meBase}archive/?tag=${encodeURIComponent(tag)}`}
+                      class={`post-hashtag ${/[\u0600-\u06FF]/.test(tag) ? 'urdu-inline' : ''}`}
+                    >
+                      <span class="hash-mark">#</span>{tag}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </header>
+
+            <!-- 3C: Compact Unified Editorial Utility Strip -->
+            <div class="post-toolbar" style="direction: ltr;">
+              <div class="me-reader-theme-bar" role="group" aria-label="Reading comfort theme">
+                <span class="me-reader-label"><i data-lucide="eye" style="width: 14px; height: 14px;"></i></span>
+                <button type="button" class="me-reader-btn active" data-me-reader="default">Default</button>
+                <button type="button" class="me-reader-btn" data-me-reader="sepia">Sepia</button>
+                <button type="button" class="me-reader-btn" data-me-reader="sepia-contrast">Sepia Dark</button>
+                <button type="button" class="me-reader-btn" data-me-reader="soft-contrast">Soft Contrast</button>
+              </div>
+
+              <div class="post-actions">
+                <div class="font-size-controls" role="group" aria-label="Adjust font size">
+                  <button type="button" class="action-btn font-btn" id="font-dec-btn" aria-label="Decrease font size">A-</button>
+                  <button type="button" class="action-btn font-btn" id="font-inc-btn" aria-label="Increase font size">A+</button>
+                </div>
+                <button class="action-btn" id="copy-link-btn" type="button">
+                  <i data-lucide="link"></i> Copy
+                </button>
+                <button class="action-btn" id="print-btn" type="button">
+                  <i data-lucide="printer"></i> Print
+                </button>
+              </div>
+            </div>
+
+            <div class="post-content" id="me-post-content" set:html={post.content} />
+
+            {(prevPost || nextPost) && (
+              <nav class="post-nav" style="direction: ltr;">
+                {prevPost ? (
+                  <a href={`${meBase}${prevPost.category}/${prevPost.slug}/`} class="post-nav-link prev">
+                    <span class="nav-label">← Previous</span>
+                    <span class={`nav-title ${prevPost.dir === 'rtl' ? 'urdu-text' : ''}`}>{prevPost.title}</span>
+                  </a>
+                ) : <div />}
+
+                {nextPost ? (
+                  <a href={`${meBase}${nextPost.category}/${nextPost.slug}/`} class="post-nav-link next">
+                    <span class="nav-label">Next →</span>
+                    <span class={`nav-title ${nextPost.dir === 'rtl' ? 'urdu-text' : ''}`}>{nextPost.title}</span>
+                  </a>
+                ) : <div />}
+              </nav>
+            )}
+          </article>
+        </div>
+      ) : (
+        <slot />
+      )}
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 — a digital window to my life. handcrafted with precision.</p>
+      <p class="footer-credits">
+        inspired by
+        <a href="https://paulstamatiou.com" target="_blank" rel="noopener noreferrer">paul stamatiou</a>,
+        <a href="https://darioamodei.com" target="_blank" rel="noopener noreferrer">dario amodei</a>
+      </p>
+      <p class="footer-shortcuts">
+        shortcuts: <code>h</code> home · <code>p</code> perspective · <code>t</code> photos · <code>a</code> about · <code>/</code> search · <code>r</code> random
+      </p>
+    </footer>
+  </div>
+
+  <!-- Quick-Search / Command Palette Modal -->
+  <div id="me-search-modal" class="me-search-modal" aria-hidden="true">
+    <div class="me-search-dialog" role="dialog" aria-label="Search writings">
+      <div class="me-search-header">
+        <i data-lucide="search" class="me-search-icon"></i>
+        <input
+          type="text"
+          id="me-search-input"
+          class="me-search-input"
+          placeholder="Search essays, Urdu poetry, collections, or tags..."
+          autocomplete="off"
+        />
+        <button type="button" id="me-search-close" class="me-search-esc">ESC</button>
+      </div>
+      <div id="me-search-results" class="me-search-results"></div>
+    </div>
+  </div>
+
+  <!-- Single Deduplicated Fullscreen Photo Modal -->
+  <div id="photo-modal" class="photo-modal">
+    <div class="photo-modal-content">
+      <button id="modal-close" class="photo-modal-close" aria-label="Close modal">&times;</button>
+      <img id="modal-image" class="photo-modal-image" src="" alt="" />
+      <button id="modal-prev" class="photo-modal-nav prev" aria-label="Previous image">❮</button>
+      <button id="modal-next" class="photo-modal-nav next" aria-label="Next image">❯</button>
+      <div id="modal-caption" class="photo-modal-caption">
+        <span id="modal-caption-text"></span>
+        <span id="modal-caption-counter" style="opacity: 0.75; font-size: 0.8rem;"></span>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ meBase, searchIndex }}>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    // Unified Theme Toggle
+    const toggleTheme = () => {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark') || document.documentElement.getAttribute('data-theme') === 'dark';
+      const nextDark = !isCurrentlyDark;
+      document.documentElement.classList.toggle('dark', nextDark);
+      document.documentElement.setAttribute('data-theme', nextDark ? 'dark' : 'light');
+      localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+    };
+
+    const themeToggleBtn = document.getElementById('personal-theme-toggle');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // Sidebar Scroll-to-Top & Serendipity Random Post
+    const topBtn = document.getElementById('sidebar-top-btn');
+    if (topBtn) {
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    const randomBtn = document.getElementById('sidebar-random-btn');
+    const triggerRandomPost = () => {
+      if (!searchIndex || !searchIndex.length) return;
+      const pool = searchIndex.filter((item) => item.url !== window.location.pathname);
+      const list = pool.length > 0 ? pool : searchIndex;
+      const pick = list[Math.floor(Math.random() * list.length)];
+      if (pick) window.location.href = pick.url;
+    };
+    if (randomBtn) {
+      randomBtn.addEventListener('click', triggerRandomPost);
+    }
+
+    // Reading Progress Hairline + Compact Top Bar on Scroll
+    const progressBar = document.getElementById('me-reading-progress');
+    const topBar = document.querySelector('.glass-top-bar');
+    const updateScrollState = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 20 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+      if (topBar) {
+        topBar.classList.toggle('scrolled', scrollTop > 40);
+      }
+    };
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    updateScrollState();
+
+    // 3A: Dynamic Article Table of Contents (Title Header + Sub-headers) & Scroll-Spy
+    const postContentEl = document.getElementById('me-post-content');
+    const tocListEl = document.getElementById('article-toc-list');
+    const tocTitleLink = document.querySelector('.toc-article-title');
+    if (postContentEl && tocListEl) {
+      const headings = Array.from(postContentEl.querySelectorAll('h2, h3'));
+      if (headings.length === 0) {
+        tocListEl.innerHTML = `<span class="toc-empty-note">${document.body.classList.contains('rtl') ? 'مکمل کلام / مضمون' : 'Single-section reading'}</span>`;
+      } else {
+        headings.forEach((heading, idx) => {
+          if (!heading.id) {
+            heading.id = `section-${idx + 1}`;
+          }
+          const link = document.createElement('a');
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent;
+          link.className = `toc-sub-link toc-${heading.tagName.toLowerCase()}`;
+          link.dataset.tocTarget = heading.id;
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          tocListEl.appendChild(link);
+        });
+      }
+
+      if (tocTitleLink) {
+        tocTitleLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      const allTocLinks = document.querySelectorAll('[data-toc-target]');
+      const spyScroll = () => {
+        const scrollPos = window.scrollY + 150;
+        let activeId = 'post-top';
+        headings.forEach((h) => {
+          if (h.offsetTop <= scrollPos) {
+            activeId = h.id;
+          }
+        });
+        allTocLinks.forEach((l) => {
+          l.classList.toggle('active', l.getAttribute('data-toc-target') === activeId);
+        });
+      };
+      window.addEventListener('scroll', spyScroll, { passive: true });
+      spyScroll();
+    }
+
+    // 3C: Reading Comfort Mode Switcher & Font Size Controls
+    const readerBtns = document.querySelectorAll('.me-reader-btn[data-me-reader]');
+    if (readerBtns.length > 0) {
+      const applyMeReaderMode = (mode) => {
+        document.body.setAttribute('data-reader-theme', mode);
+        readerBtns.forEach((btn) => {
+          btn.classList.toggle('active', btn.getAttribute('data-me-reader') === mode);
+        });
+      };
+
+      const savedReader = typeof localStorage !== 'undefined' ? localStorage.getItem('reader-theme') : null;
+      if (savedReader && ['default', 'sepia', 'sepia-contrast', 'soft-contrast'].includes(savedReader)) {
+        applyMeReaderMode(savedReader);
+      }
+
+      readerBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-me-reader') || 'default';
+          applyMeReaderMode(mode);
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('reader-theme', mode);
+          }
+        });
+      });
+    }
+
+    let fontScale = 100;
+    const fontDecBtn = document.getElementById('font-dec-btn');
+    const fontIncBtn = document.getElementById('font-inc-btn');
+    const applyFontScale = (scale) => {
+      fontScale = Math.min(125, Math.max(85, scale));
+      if (postContentEl) {
+        postContentEl.style.fontSize = `${fontScale}%`;
+      }
+    };
+    if (fontDecBtn) fontDecBtn.addEventListener('click', () => applyFontScale(fontScale - 8));
+    if (fontIncBtn) fontIncBtn.addEventListener('click', () => applyFontScale(fontScale + 8));
+
+    // Copy Link & Print Buttons
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const originalText = copyLinkBtn.innerHTML;
+          copyLinkBtn.innerHTML = '<i data-lucide="check"></i> Copied!';
+          if (window.lucide) window.lucide.createIcons();
+          setTimeout(() => {
+            copyLinkBtn.innerHTML = originalText;
+            if (window.lucide) window.lucide.createIcons();
+          }, 2000);
+        });
+      });
+    }
+
+    const printBtn = document.getElementById('print-btn');
+    if (printBtn) {
+      printBtn.addEventListener('click', () => window.print());
+    }
+
+    // Quick-Search Modal Logic
+    const searchModal = document.getElementById('me-search-modal');
+    const searchInput = document.getElementById('me-search-input');
+    const searchResults = document.getElementById('me-search-results');
+    const searchClose = document.getElementById('me-search-close');
+    const searchBtn = document.getElementById('sidebar-search-btn');
+
+    const renderSearchResults = (query = '') => {
+      if (!searchResults) return;
+      const q = query.trim().toLowerCase();
+      const matches = searchIndex.filter((item) => {
+        if (!q) return true;
+        return (
+          item.title.toLowerCase().includes(q) ||
+          item.excerpt.toLowerCase().includes(q) ||
+          item.categoryLabel.toLowerCase().includes(q) ||
+          item.tags.some((t) => t.toLowerCase().includes(q))
+        );
+      });
+
+      if (matches.length === 0) {
+        searchResults.innerHTML = `<div class="me-search-empty">No matching writings found.</div>`;
+        return;
+      }
+
+      searchResults.innerHTML = matches
+        .map(
+          (item) => `
+          <a href="${item.url}" class="me-search-item ${item.dir === 'rtl' ? 'urdu-text' : ''}">
+            <div class="me-search-item-meta" style="font-family: 'Inter', sans-serif;">
+              <span>${item.categoryLabel}</span>
+              <span>${item.shortDate} • ${item.readTime}</span>
+            </div>
+            <div class="me-search-item-title">${item.title}</div>
+            <div class="me-search-item-excerpt">${item.excerpt}</div>
+          </a>
+        `
+        )
+        .join('');
+    };
+
+    const openSearchModal = () => {
+      if (!searchModal) return;
+      searchModal.classList.add('active');
+      searchModal.setAttribute('aria-hidden', 'false');
+      renderSearchResults(searchInput ? searchInput.value : '');
+      setTimeout(() => searchInput && searchInput.focus(), 40);
+    };
+
+    const closeSearchModal = () => {
+      if (!searchModal) return;
+      searchModal.classList.remove('active');
+      searchModal.setAttribute('aria-hidden', 'true');
+    };
+
+    if (searchBtn) searchBtn.addEventListener('click', openSearchModal);
+    if (searchClose) searchClose.addEventListener('click', closeSearchModal);
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => renderSearchResults(e.target.value));
+    }
+    if (searchModal) {
+      searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) closeSearchModal();
+      });
+    }
+
+    // Carousel Navigation
+    const carousels = document.querySelectorAll('.posts-carousel');
+    carousels.forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track');
+      const header = carousel.previousElementSibling;
+      const prevBtn = header ? header.querySelector('.carousel-nav.prev') : null;
+      const nextBtn = header ? header.querySelector('.carousel-nav.next') : null;
+
+      const scroll = (direction) => {
+        if (!track) return;
+        const firstCard = track.querySelector('.carousel-card');
+        const gap = parseFloat(window.getComputedStyle(track).gap) || 19.2;
+        const cardWidth = firstCard ? firstCard.offsetWidth + gap : 300;
+        track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+      };
+
+      if (prevBtn) prevBtn.addEventListener('click', () => scroll(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => scroll(1));
+    });
+
+    // Keyboard Navigation inside Personal Space
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchModal && searchModal.classList.contains('active')) {
+        closeSearchModal();
+        return;
+      }
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+      const modalEl = document.getElementById('photo-modal');
+      if (modalEl && modalEl.classList.contains('active')) return;
+      if (searchModal && searchModal.classList.contains('active')) return;
+
+      if (e.key === '/') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'h' || e.key === 'H') window.location.href = meBase;
+      if (e.key === 'p' || e.key === 'P') window.location.href = `${meBase}perspective/`;
+      if (e.key === 't' || e.key === 'T') window.location.href = `${meBase}tasweer-kahani/`;
+      if (e.key === 'a' || e.key === 'A') window.location.href = `${meBase}about/`;
+      if (e.key === 'r' || e.key === 'R') triggerRandomPost();
+      if (e.key === 'd' || e.key === 'D') toggleTheme();
+    });
+
+    // Photo Gallery Modal Logic
+    const modal = document.getElementById('photo-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaptionText = document.getElementById('modal-caption-text');
+    const modalCaptionCounter = document.getElementById('modal-caption-counter');
+    const modalClose = document.getElementById('modal-close');
+    const prevModalBtn = document.getElementById('modal-prev');
+    const nextModalBtn = document.getElementById('modal-next');
+
+    let currentGallery = [];
+    let currentIndex = 0;
+    const galleries = {};
+
+    document.querySelectorAll('.photo-card[data-gallery]').forEach((card) => {
+      const galleryKey = card.dataset.gallery;
+      const imageSrc = card.dataset.image;
+      const imageAlt = card.dataset.alt;
+      if (!galleries[galleryKey]) galleries[galleryKey] = [];
+      galleries[galleryKey].push({ src: imageSrc, alt: imageAlt, element: card });
+    });
+
+    function showImage() {
+      if (!currentGallery || currentGallery.length === 0) return;
+      const image = currentGallery[currentIndex];
+      modalImage.src = image.src;
+      modalImage.alt = image.alt;
+      if (modalCaptionText) modalCaptionText.textContent = image.alt;
+      if (modalCaptionCounter) modalCaptionCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      if (!currentGallery || currentGallery.length === 0) return;
+      currentIndex = (currentIndex + 1) % currentGallery.length;
+      showImage();
+    }
+
+    function prevImage() {
+      if (!currentGallery || currentGallery.length === 0) return;
+      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      showImage();
+    }
+
+    Object.keys(galleries).forEach((galleryKey) => {
+      galleries[galleryKey].forEach((image, imageIndex) => {
+        const openHandler = () => {
+          currentGallery = galleries[galleryKey];
+          currentIndex = imageIndex;
+          showImage();
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        };
+        image.element.addEventListener('click', openHandler);
+        image.element.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openHandler();
+          }
+        });
+      });
+    });
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (nextModalBtn) nextModalBtn.addEventListener('click', nextImage);
+    if (prevModalBtn) prevModalBtn.addEventListener('click', prevImage);
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal || !modal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+  </script>
+</body>
+</html>

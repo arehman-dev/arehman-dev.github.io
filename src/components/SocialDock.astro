@@ -1,0 +1,89 @@
+---
+---
+<div class="social-bar" id="social-bar">
+  <a href="https://github.com/arehman-dev" aria-label="GitHub" target="_blank" rel="noopener" class="social-link github">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://linkedin.com/in/arehman-dev" aria-label="LinkedIn" target="_blank" rel="noopener" class="social-link linkedin">
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <a href="https://twitter.com/arehman_dev" aria-label="X (Twitter)" target="_blank" rel="noopener" class="social-link x-twitter">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+  <a href="mailto:arehman.dev@proton.me" aria-label="Email" class="social-link email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+
+<style>
+  .social-bar {
+    position: fixed;
+    bottom: 2.5rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 100;
+  }
+
+  .social-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.15rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Hover Animations and Brand Colors exactly as requested */
+  .social-bar a:hover {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-md);
+  }
+
+  .social-bar a.github:hover {
+    background-color: #181717;
+    border-color: #181717;
+    color: var(--white) !important;
+  }
+
+  .social-bar a.linkedin:hover {
+    background-color: #0077b5;
+    border-color: #0077b5;
+    color: var(--white) !important;
+  }
+
+  .social-bar a.x-twitter:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: var(--white) !important;
+  }
+
+  .social-bar a.email:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white) !important;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 1023px) {
+    .social-bar {
+      left: 1.5rem;
+      bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    /* Hide on very small screens to prevent overlay clutter with the floating nav menu button */
+    .social-bar {
+      display: none;
+    }
+  }
+</style>

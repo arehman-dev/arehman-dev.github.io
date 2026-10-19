@@ -1,0 +1,108 @@
+---
+import PersonalLayout from '../../layouts/PersonalLayout.astro';
+import { galleryThemes } from '../../data/personal';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const totalPhotos = galleryThemes.reduce((acc, g) => acc + g.images.length, 0);
+---
+
+<PersonalLayout title="Tasweer Kahani — Stories from the Lens">
+  <span class="me-eyebrow">Visual Journal • تصویر کہانی</span>
+  <h1>Tasweer Kahani — Stories from the Lens</h1>
+
+  <p><em>Perspective and visuals through my lens.</em></p>
+
+  <p>
+    Photography, for me, is a practice of observation. It's about pausing long enough to notice what moves the eye—light filtering through spaces, the geometry of human structures, moments where nature and architecture speak to one another. Each frame is an attempt to capture not just what is visible, but what it means.
+  </p>
+
+  <!-- 5A: Theme Filter Pills + Grid / Journal View Switcher -->
+  <div class="gallery-toolbar-row">
+    <div class="gallery-filter-bar" role="tablist" aria-label="Filter photography themes" style="margin: 0;">
+      <button type="button" class="gallery-filter-pill active" data-filter="all">
+        All ({totalPhotos})
+      </button>
+      {galleryThemes.map((gallery) => (
+        <button type="button" class="gallery-filter-pill" data-filter={gallery.key}>
+          {gallery.title} ({gallery.images.length})
+        </button>
+      ))}
+    </div>
+
+    <div class="gallery-view-switcher" role="group" aria-label="Gallery layout mode">
+      <button type="button" class="gallery-filter-pill view-mode-btn active" data-view-mode="bento">
+        <i data-lucide="layout-grid" style="width: 14px; height: 14px;"></i> Grid
+      </button>
+      <button type="button" class="gallery-filter-pill view-mode-btn" data-view-mode="journal">
+        <i data-lucide="rows-3" style="width: 14px; height: 14px;"></i> Journal
+      </button>
+    </div>
+  </div>
+
+  <div id="gallery-master-wrapper" class="gallery-mode-bento">
+    {galleryThemes.map((gallery) => (
+      <section class="gallery-theme-section" data-theme-section={gallery.key}>
+        <h2>{gallery.title}</h2>
+        <p><em>{gallery.description}</em></p>
+
+        <div class="photo-grid bento-photo-grid" data-gallery={gallery.key}>
+          {gallery.images.map((image, idx) => (
+            <div
+              class={`photo-card ${idx % 5 === 0 ? 'photo-card-featured' : ''}`}
+              data-gallery={gallery.key}
+              data-image={`${base}${image.path}`}
+              data-alt={`${gallery.title} — ${image.alt}`}
+              role="button"
+              tabindex="0"
+            >
+              <img src={`${base}${image.path}`} alt={image.alt} loading="lazy" decoding="async" />
+              <div class="photo-hover-caption">
+                <span class="caption-theme-tag">{gallery.title}</span>
+                <span class="caption-story-text">{image.alt}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <hr class="dinkus" />
+
+  <p><em>Photography reminds me that the world is always offering itself—we just need to slow down enough to notice.</em></p>
+
+  <script is:inline>
+    const filterPills = document.querySelectorAll('.gallery-filter-pill[data-filter]');
+    const themeSections = document.querySelectorAll('.gallery-theme-section');
+    const viewModeBtns = document.querySelectorAll('.view-mode-btn[data-view-mode]');
+    const masterWrapper = document.getElementById('gallery-master-wrapper');
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const selected = pill.getAttribute('data-filter');
+        filterPills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        themeSections.forEach((sec) => {
+          const key = sec.getAttribute('data-theme-section');
+          if (selected === 'all' || key === selected) {
+            sec.style.display = 'block';
+          } else {
+            sec.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    viewModeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-view-mode');
+        viewModeBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (masterWrapper) {
+          masterWrapper.className = `gallery-mode-${mode}`;
+        }
+      });
+    });
+  </script>
+</PersonalLayout>

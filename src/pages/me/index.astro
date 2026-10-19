@@ -1,0 +1,148 @@
+---
+import PersonalLayout from '../../layouts/PersonalLayout.astro';
+import { personalPosts, homeGridImages } from '../../data/personal';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const meBase = `${base}me/`;
+
+const sortedPosts = [...personalPosts].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+
+const featuredPosts = sortedPosts.filter((p) => p.featuredOnHome);
+---
+
+<PersonalLayout title="Home — Digital Window to My Life">
+  <header class="me-home-hero">
+    <span class="me-eyebrow">Digital Resilience &amp; ʿIlm • A Contemplative Space</span>
+    <h1>Blend of thought &amp; craft</h1>
+
+    <p>
+      <em>Welcome to my corner of the web. An ordinary man of calculated speech and deep thoughts.</em>
+    </p>
+
+    <p>
+      <em>A student of knowledge, pursuing a career in I.T. I occasionally write here, share visuals from my lens, and reflect on art that resonates with me.</em>
+    </p>
+
+    <p>
+      <em>This space is a collection of my writings and perspectives: an effort to document my life—a window into how I observe, what I ponder.</em>
+      <button type="button" class="expand-bio-btn" id="expand-bio-toggle" aria-expanded="false">
+        <span>more</span>
+        <i data-lucide="chevron-down" class="expand-bio-icon" style="width: 14px; height: 14px;"></i>
+      </button>
+    </p>
+
+    <div class="expandable-bio-drawer" id="expandable-bio-drawer">
+      <div class="bio-drawer-grid">
+        <div class="bio-drawer-col">
+          <span class="bio-drawer-label">What I Orbit Around</span>
+          <p style="margin-bottom: 0;">
+            <em>ʿUbūdiyyah</em> (servitude), family, love, the pursuit of knowledge (<em>ʿIlm</em>), code, strong coffee, bikes, and strength training.
+          </p>
+        </div>
+        <div class="bio-drawer-col">
+          <span class="bio-drawer-label">Guiding Principles</span>
+          <p style="margin-bottom: 0;">
+            Embodying objective morality, <em>Ḥayāʾ</em> (modesty), and <em>Iḥsān</em> (excellence)—bridging contemporary sciences with traditional values.
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <h2>Featured Writings</h2>
+
+  <div class="card-grid">
+    {featuredPosts.map((post) => (
+      <a
+        href={`${meBase}${post.category}/${post.slug}/`}
+        class={`content-card ${post.dir === 'rtl' ? 'urdu-text' : ''}`}
+        data-category={post.category}
+      >
+        <span class="card-meta" style={post.dir === 'rtl' ? "text-align: right; font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;" : undefined}>
+          {post.categoryLabel} • {post.readTime}
+        </span>
+        <h3>{post.title}</h3>
+        <p style={post.dir === 'ltr' ? "font-family: 'Lora', serif;" : undefined}>{post.excerpt}</p>
+        <div class="card-read-footer" style="font-family: 'Inter', sans-serif;">
+          <span class={post.dir === 'rtl' ? 'urdu-inline' : ''}>{post.dir === 'rtl' ? 'مطالعہ کریں ←' : 'Read piece →'}</span>
+          <span class="card-date-chip">{post.shortDate}</span>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="carousel-header">
+    <h2 style="margin: 0;"><a href={`${meBase}archive/`}>Recent Writings &amp; Archive</a></h2>
+    <div class="carousel-controls">
+      <button class="carousel-nav prev" aria-label="Scroll left">
+        <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+      </button>
+      <button class="carousel-nav next" aria-label="Scroll right">
+        <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="posts-carousel">
+    <div class="carousel-track">
+      {sortedPosts.map((post) => (
+        <a
+          href={`${meBase}${post.category}/${post.slug}/`}
+          class={`carousel-card ${post.dir === 'rtl' ? 'urdu-text' : ''}`}
+          data-category={post.category}
+        >
+          <span class="card-meta" style="font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;">
+            {post.category.charAt(0).toUpperCase() + post.category.slice(1)} • {post.shortDate} • {post.readTime}
+          </span>
+          <h4>{post.title}</h4>
+          <p>{post.excerpt}</p>
+          <div class="card-read-footer" style="font-family: 'Inter', sans-serif;">
+            <span class={post.dir === 'rtl' ? 'urdu-inline' : ''}>{post.dir === 'rtl' ? 'مطالعہ کریں ←' : 'Read →'}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="section-header-row">
+    <div>
+      <h2><a href={`${meBase}tasweer-kahani/`}>Tasweer-kahani (Stories from the Lens)</a></h2>
+      <p style="margin-top: 0.25rem;"><em>Perspective &amp; visuals through my lens.</em></p>
+    </div>
+    <a href={`${meBase}tasweer-kahani/`} class="me-inline-cta">Explore full gallery →</a>
+  </div>
+
+  <div class="photo-grid" data-gallery="home-grid">
+    {homeGridImages.map((img) => (
+      <div
+        class="photo-card"
+        data-gallery="home-grid"
+        data-image={`${base}${img.path}`}
+        data-alt={img.alt}
+        role="button"
+        tabindex="0"
+      >
+        <img src={`${base}${img.path}`} alt={img.alt} loading="lazy" decoding="async" />
+        <div class="photo-hover-caption">
+          <span>{img.alt}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <script is:inline>
+    const bioBtn = document.getElementById('expand-bio-toggle');
+    const bioDrawer = document.getElementById('expandable-bio-drawer');
+    if (bioBtn && bioDrawer) {
+      bioBtn.addEventListener('click', () => {
+        const isOpen = bioDrawer.classList.toggle('open');
+        bioBtn.classList.toggle('open', isOpen);
+        bioBtn.setAttribute('aria-expanded', String(isOpen));
+        const span = bioBtn.querySelector('span');
+        if (span) span.textContent = isOpen ? 'less' : 'more';
+      });
+    }
+  </script>
+</PersonalLayout>
