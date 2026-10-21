@@ -4,304 +4,812 @@ import { projects } from '../../data/projects';
 import type { Project } from '../../data/projects';
 
 export async function getStaticPaths() {
-  return projects.map((project) => ({
+  return projects.map((project, index) => ({
     params: { slug: project.slug },
-    props: { project }
+    props: { 
+      project,
+      schematicId: `AR-SCHEM-${(index + 1).toString().padStart(2, '0')}`
+    }
   }));
 }
 
 interface Props {
   project: Project;
+  schematicId: string;
 }
 
-const { project } = Astro.props;
+const { project, schematicId } = Astro.props;
 
-// Get 2 other projects as related projects
+// Get 2 other projects as related schematics
 const relatedProjects = projects
   .filter((p) => p.slug !== project.slug)
   .slice(0, 2);
 
-const statusClass = `badge-${project.status.toLowerCase().replace(/\s+/g, '-')}`;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const isCompleted = project.status.toLowerCase() === 'completed' || project.status.toLowerCase() === 'live';
 ---
 
 <BaseLayout 
-  title={`${project.title} | Abdul Rehman Portfolio`}
+  title={`${project.title} | Engineering Schematic Dossier`}
   description={project.description}
 >
-  <div class="project-detail-container">
-    <div class="back-nav mb-lg">
+  <div class="schematic-dossier-container">
+    
+    <!-- Top Caliper & Breadcrumb Navigation -->
+    <div class="caliper-bar">
       <a href={`${base}projects/`} class="back-link">
-        <i class="fas fa-arrow-left"></i> Back to Projects
+        <i class="fas fa-arrow-left"></i>
+        <span>RETURN TO SCHEMATICS CATALOG</span>
       </a>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">[{schematicId}]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">GIT:MAIN</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: {project.status.toUpperCase()}</span>
     </div>
 
-    <header class="detail-header card mb-lg">
-      <div class="header-top">
-        <span class={`badge ${statusClass}`}>{project.status}</span>
+    <!-- Dossier Header Unit -->
+    <header class="dossier-header-unit">
+      <div class="dossier-header-top">
+        <span class="dossier-spec-tag"><i class="fas fa-microchip"></i> SUBSYSTEM SPECIFICATION</span>
+        <span class={`status-chip ${isCompleted ? 'status-completed' : 'status-in-progress'}`}>
+          <span class="status-indicator"></span>
+          {project.status.toUpperCase()}
+        </span>
       </div>
-      <h1 class="project-title">{project.title}</h1>
-      <p class="project-short-desc">{project.description}</p>
-      
-      <div class="tech-badges flex flex-wrap gap-md mt-lg">
+
+      <h1 class="dossier-title">{project.title}</h1>
+      <p class="dossier-summary">{project.description}</p>
+
+      <div class="tags-row">
         {project.tags.map((tag) => (
-          <span class="tech-badge">{tag}</span>
+          <span class="tech-chip">#{tag.toLowerCase()}</span>
         ))}
       </div>
     </header>
 
-    <div class="detail-content grid">
-      <div class="main-details">
-        <section class="section card mb-lg">
-          <h2>Project Overview</h2>
-          <p class="narrative-text">{project.longDescription}</p>
+    <!-- Main Content & Sidebar Layout -->
+    <div class="dossier-body-grid">
+      
+      <!-- Left Column: Core Architecture & Specifications -->
+      <div class="dossier-main-col">
+        
+        <!-- Architecture Narrative -->
+        <section class="dossier-section">
+          <div class="section-caliper-head">
+            <span class="sec-num">01 //</span>
+            <h2 class="sec-title">ARCHITECTURAL CONTEXT &amp; SCOPE</h2>
+          </div>
+          <div class="section-card">
+            <p class="body-narrative">{project.longDescription}</p>
+          </div>
         </section>
 
+        <!-- Bottleneck & Systems Implementation -->
         {(project.problem || project.solution) && (
-          <div class="grid grid-2 mb-lg">
-            {project.problem && (
-              <section class="section card problem-card">
-                <h3><i class="fas fa-exclamation-triangle problem-icon"></i> The Problem</h3>
-                <p>{project.problem}</p>
-              </section>
-            )}
-            {project.solution && (
-              <section class="section card solution-card">
-                <h3><i class="fas fa-check-circle solution-icon"></i> The Solution</h3>
-                <p>{project.solution}</p>
-              </section>
-            )}
-          </div>
-        )}
+          <section class="dossier-section">
+            <div class="section-caliper-head">
+              <span class="sec-num">02 //</span>
+              <h2 class="sec-title">BOTTLENECK ANALYSIS &amp; IMPLEMENTATION</h2>
+            </div>
+            
+            <div class="problem-solution-grid">
+              {project.problem && (
+                <div class="spec-block block-problem">
+                  <div class="block-head text-warning">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    <strong>Target Bottleneck &amp; Friction</strong>
+                  </div>
+                  <p>{project.problem}</p>
+                </div>
+              )}
 
-        {project.features && project.features.length > 0 && (
-          <section class="section card mb-lg">
-            <h2>Key Features & Scope</h2>
-            <ul class="features-list">
-              {project.features.map((feature) => (
-                <li>
-                  <i class="fas fa-chevron-right list-bullet"></i>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
+              {project.solution && (
+                <div class="spec-block block-solution">
+                  <div class="block-head text-primary">
+                    <i class="fas fa-shield-halved"></i>
+                    <strong>Systems Architecture Solution</strong>
+                  </div>
+                  <p>{project.solution}</p>
+                </div>
+              )}
+            </div>
           </section>
         )}
+
+        <!-- Key Features List -->
+        {project.features && project.features.length > 0 && (
+          <section class="dossier-section">
+            <div class="section-caliper-head">
+              <span class="sec-num">03 //</span>
+              <h2 class="sec-title">VERIFIED SUBSYSTEM CAPABILITIES</h2>
+            </div>
+
+            <div class="section-card">
+              <ul class="features-checklist">
+                {project.features.map((feat) => (
+                  <li>
+                    <i class="fas fa-check-circle text-primary"></i>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
+        <!-- Runbook CLI Access Snippet -->
+        <section class="dossier-section">
+          <div class="section-caliper-head">
+            <span class="sec-num">04 //</span>
+            <h2 class="sec-title">REPRODUCIBLE RUNBOOK &amp; REPO ACCESS</h2>
+          </div>
+
+          <div class="runbook-terminal">
+            <div class="runbook-top">
+              <span class="runbook-prompt">arehman@systems-node:~/{project.slug}</span>
+              <button type="button" class="runbook-copy-btn" id="runbook-copy-btn" title="Copy CLI Command">
+                <i class="far fa-copy"></i>
+                <span class="copy-lbl">copy</span>
+              </button>
+            </div>
+            <pre class="runbook-code" id="runbook-code-text"><code># Inspect source and launch local test suite
+git clone {project.sourceLink || 'https://github.com/arehman-dev/portfolio.git'}
+cd {project.slug}
+{project.tags.includes('Python') ? 'python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt\npython3 -m unittest discover -v' : (project.tags.includes('C++') ? 'mkdir -p build && cd build && cmake ..\nmake -j$(nproc) && ./run_tests' : './run.sh --verify')}</code></pre>
+          </div>
+        </section>
       </div>
 
-      <div class="sidebar-details">
-        <section class="section card action-card mb-lg">
-          <h3>Project Links</h3>
-          <div class="action-buttons flex flex-wrap gap-md mt-lg">
+      <!-- Right Column: Deployment Actions & Telemetry Meta -->
+      <aside class="dossier-sidebar-col">
+        <!-- Action Card -->
+        <div class="sidebar-card action-card">
+          <h3 class="side-card-title"><i class="fas fa-link text-primary"></i> Subsystem Endpoints</h3>
+          
+          <div class="actions-stack">
             {project.link && project.link !== "#" ? (
-              <a href={project.link} target="_blank" rel="noopener" class="btn btn-primary w-full justify-center">
-                <i class="fas fa-external-link-alt"></i> Visit Live Demo
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="endpoint-btn btn-live">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                <span>Launch Live Endpoint</span>
               </a>
             ) : (
-              <span class="btn btn-outline w-full justify-center disabled-btn">
-                <i class="fas fa-ban"></i> Demo Unavailable
+              <span class="endpoint-btn btn-disabled">
+                <i class="fas fa-lock"></i>
+                <span>Local Subsystem / Internal</span>
               </span>
             )}
-            
-            {project.sourceLink && (
-              <a href={project.sourceLink} target="_blank" rel="noopener" class="btn btn-secondary w-full justify-center">
-                <i class="fab fa-github"></i> Source Code
+
+            {project.sourceLink ? (
+              <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" class="endpoint-btn btn-source">
+                <i class="fab fa-github"></i>
+                <span>Inspect Repository Source</span>
+              </a>
+            ) : (
+              <a href="https://github.com/arehman-dev" target="_blank" rel="noopener noreferrer" class="endpoint-btn btn-source">
+                <i class="fab fa-github"></i>
+                <span>Profile Source Tree</span>
               </a>
             )}
           </div>
-        </section>
+        </div>
 
-        <section class="section card related-card">
-          <h3>Related Projects</h3>
-          <div class="related-list">
+        <!-- Telemetry Spec Sheet -->
+        <div class="sidebar-card telemetry-card">
+          <h3 class="side-card-title"><i class="fas fa-gauge-high text-primary"></i> Runtime Parameters</h3>
+          <div class="telemetry-sheet">
+            <div class="sheet-row">
+              <span class="sheet-lbl">ENVIRONMENT:</span>
+              <span class="sheet-val">Linux (Debian / POSIX)</span>
+            </div>
+            <div class="sheet-row">
+              <span class="sheet-lbl">CONCURRENCY:</span>
+              <span class="sheet-val">{project.tags.includes('Multithreading') ? 'ThreadPool / Async' : 'Deterministic Loop'}</span>
+            </div>
+            <div class="sheet-row">
+              <span class="sheet-lbl">IPC / PERSISTENCE:</span>
+              <span class="sheet-val">{project.tags.includes('SQLite') || project.tags.includes('Docker') ? 'SQLite / Sockets' : 'POSIX File IO'}</span>
+            </div>
+            <div class="sheet-row">
+              <span class="sheet-lbl">COMPILATION / RUNTIME:</span>
+              <span class="sheet-val">{project.tags[0] || 'Linux Native'}</span>
+            </div>
+            <div class="sheet-row">
+              <span class="sheet-lbl">VALIDATION:</span>
+              <span class="sheet-val text-primary">InfraLayers Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Schematics -->
+        <div class="sidebar-card related-card">
+          <h3 class="side-card-title"><i class="fas fa-network-wired text-primary"></i> Related Schematics</h3>
+          <div class="related-stack">
             {relatedProjects.map((p) => (
-              <a href={`${base}projects/${p.slug}/`} class="related-item">
-                <h4>{p.title}</h4>
-                <p>{p.description}</p>
-                <span class="related-link-text">View Project <i class="fas fa-chevron-right"></i></span>
+              <a href={`${base}projects/${p.slug}/`} class="related-schem-link">
+                <strong class="rel-title">{p.title}</strong>
+                <p class="rel-desc">{p.description.slice(0, 85)}...</p>
+                <span class="rel-inspect">inspect &rarr;</span>
               </a>
             ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </aside>
     </div>
   </div>
 </BaseLayout>
 
+<script is:inline>
+  function initRunbookCopy() {
+    const copyBtn = document.getElementById('runbook-copy-btn');
+    const codeEl = document.getElementById('runbook-code-text');
+    if (copyBtn && codeEl) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(codeEl.textContent || '').then(() => {
+          const lbl = copyBtn.querySelector('.copy-lbl');
+          if (lbl) lbl.textContent = 'copied!';
+          setTimeout(() => {
+            if (lbl) lbl.textContent = 'copy';
+          }, 1800);
+        });
+      });
+    }
+  }
+
+  initRunbookCopy();
+  document.addEventListener('astro:page-load', initRunbookCopy);
+</script>
+
 <style>
-  .project-detail-container {
-    max-width: 1000px;
+  .schematic-dossier-container {
+    max-width: 1140px;
     margin: 0 auto;
+    font-family: var(--font-sans, system-ui, sans-serif);
+  }
+
+  /* Caliper Bar */
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
   }
 
   .back-link {
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    transition: color 0.2s ease;
+    gap: 5px;
+    transition: opacity 0.15s ease;
   }
 
   .back-link:hover {
-    color: var(--primary);
+    opacity: 0.8;
   }
 
-  .detail-header {
-    border-left: 6px solid var(--primary);
+  .caliper-div {
+    color: var(--primary, #01ac6a);
   }
 
-  .header-top {
+  /* Header Unit */
+  .dossier-header-unit {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.22);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-theme="light"] .dossier-header-unit {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .dossier-header-unit::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #01ac6a, #00c47a, transparent);
+  }
+
+  .dossier-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.75rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
   }
 
-  .project-title {
-    font-size: 2.5rem;
+  .dossier-spec-tag {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .status-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .status-completed {
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+  .status-completed .status-indicator { background: var(--primary, #01ac6a); }
+
+  .status-in-progress {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  .status-in-progress .status-indicator { background: #f59e0b; }
+
+  .dossier-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  [data-theme="light"] .dossier-title {
+    color: #111827;
+  }
+
+  .dossier-summary {
+    font-size: 1.05rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 0 1.25rem 0;
+  }
+
+  [data-theme="light"] .dossier-summary {
+    color: #4b5563;
+  }
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  .tech-chip {
+    font-size: 0.72rem;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  [data-theme="light"] .tech-chip {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #374151;
+  }
+
+  /* Body Grid */
+  .dossier-body-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 1.75rem;
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  .dossier-section {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-caliper-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(1, 172, 106, 0.2);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  .sec-num {
+    color: var(--primary, #01ac6a);
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+
+  .sec-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  [data-theme="light"] .sec-title {
+    color: #111827;
+  }
+
+  .section-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.18);
+    border-radius: 6px;
+    padding: 1.35rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="light"] .section-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .body-narrative {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #d1d5db;
+    margin: 0;
+  }
+
+  [data-theme="light"] .body-narrative {
+    color: #374151;
+  }
+
+  /* Problem & Solution Grid */
+  .problem-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .spec-block {
+    background: #0d0f12;
+    border-radius: 6px;
+    padding: 1.15rem 1.35rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  [data-theme="light"] .spec-block {
+    background: #ffffff;
+  }
+
+  .block-problem {
+    border-left: 3px solid #f59e0b;
+    border-top: 1px solid rgba(245, 158, 11, 0.2);
+    border-right: 1px solid rgba(245, 158, 11, 0.15);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+  }
+
+  .block-solution {
+    border-left: 3px solid var(--primary, #01ac6a);
+    border-top: 1px solid rgba(1, 172, 106, 0.2);
+    border-right: 1px solid rgba(1, 172, 106, 0.15);
+    border-bottom: 1px solid rgba(1, 172, 106, 0.15);
+  }
+
+  .block-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.78rem;
     margin-bottom: 0.5rem;
   }
 
-  .project-short-desc {
-    font-size: 1.15rem;
-    color: var(--text-muted);
-    margin-bottom: 0;
+  .text-warning { color: #f59e0b; }
+  .text-primary { color: var(--primary, #01ac6a); }
+
+  .spec-block p {
+    margin: 0;
+    color: #d1d5db;
+  }
+  [data-theme="light"] .spec-block p {
+    color: #374151;
   }
 
-  .tech-badge {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    background-color: var(--gray-100);
-    color: var(--text-main);
-    padding: 0.25rem 0.75rem;
+  /* Features Checklist */
+  .features-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .features-checklist li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #d1d5db;
+    line-height: 1.5;
+  }
+
+  [data-theme="light"] .features-checklist li {
+    color: #374151;
+  }
+
+  /* Runbook Terminal */
+  .runbook-terminal {
+    background: #08090b;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  .runbook-top {
+    background: #121418;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.72rem;
+  }
+
+  .runbook-prompt {
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .runbook-copy-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.68rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .runbook-copy-btn:hover {
+    background: rgba(1, 172, 106, 0.2);
+    color: #ffffff;
+    border-color: var(--primary, #01ac6a);
+  }
+
+  .runbook-code {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.78rem;
+    color: #e5e7eb;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  /* Sidebar */
+  .dossier-sidebar-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sidebar-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.18);
+    border-radius: 8px;
+    padding: 1.35rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="light"] .sidebar-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .side-card-title {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  [data-theme="light"] .side-card-title {
+    color: #111827;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .actions-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  .endpoint-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border-radius: 5px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-live {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border: 1px solid var(--primary, #01ac6a);
+  }
+  .btn-live:hover {
+    background: #00c47a;
+    box-shadow: 0 0 12px rgba(1, 172, 106, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-source {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d1d5db;
+  }
+  [data-theme="light"] .btn-source {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #374151;
+  }
+  .btn-source:hover {
+    background: rgba(1, 172, 106, 0.12);
+    border-color: var(--primary, #01ac6a);
+    color: var(--primary, #01ac6a);
+  }
+
+  .btn-disabled {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #6b7280;
+    cursor: not-allowed;
+  }
+
+  /* Telemetry Sheet */
+  .telemetry-sheet {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+  }
+
+  .sheet-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  [data-theme="light"] .sheet-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .sheet-lbl {
+    color: #6b7280;
+  }
+
+  .sheet-val {
+    color: #f3f4f6;
+    font-weight: 600;
+  }
+  [data-theme="light"] .sheet-val {
+    color: #111827;
+  }
+
+  /* Related Schematics */
+  .related-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .related-schem-link {
+    display: block;
+    padding: 0.6rem 0.8rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 4px;
-    border: 1px solid var(--border-card);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  [data-theme="light"] .related-schem-link {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  :global([data-theme="dark"]) .tech-badge {
-    background-color: #2b2b2b;
-    border-color: #3b3b3b;
+  .related-schem-link:hover {
+    background: rgba(1, 172, 106, 0.08);
+    border-color: var(--primary, #01ac6a);
+    transform: translateX(3px);
   }
 
-  /* Two Column Grid */
-  .detail-content {
-    grid-template-columns: 1.8fr 1fr;
-    align-items: start;
-    gap: 2rem;
+  .rel-title {
+    display: block;
+    color: #f3f4f6;
+    font-size: 0.82rem;
+    margin-bottom: 2px;
+  }
+  [data-theme="light"] .rel-title {
+    color: #111827;
   }
 
-  @media (max-width: 768px) {
-    .detail-content {
+  .rel-desc {
+    font-size: 0.74rem;
+    color: #9ca3af;
+    line-height: 1.4;
+    margin: 0 0 4px 0;
+  }
+  [data-theme="light"] .rel-desc {
+    color: #4b5563;
+  }
+
+  .rel-inspect {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .dossier-body-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .narrative-text {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 0;
-  }
-
-  .problem-card {
-    border-top: 4px solid #ef4444;
-  }
-
-  .problem-icon {
-    color: #ef4444;
-  }
-
-  .solution-card {
-    border-top: 4px solid var(--primary);
-  }
-
-  .solution-icon {
-    color: var(--primary);
-  }
-
-  .features-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .features-list li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-
-  .list-bullet {
-    color: var(--primary);
-    font-size: 0.8rem;
-    margin-top: 0.35rem;
-  }
-
-  .disabled-btn {
-    opacity: 0.5;
-    cursor: not-allowed;
-    width: 100%;
-    text-align: center;
-  }
-
-  .action-card {
-    background-color: var(--primary-light);
-    border-color: var(--primary);
-  }
-
-  :global([data-theme="dark"]) .action-card {
-    background-color: rgba(1, 172, 106, 0.05);
-    border-color: var(--green-900);
-  }
-
-  .action-card h3 {
-    margin-bottom: 0.5rem;
-    color: var(--primary-dark);
-  }
-
-  :global([data-theme="dark"]) .action-card h3 {
-    color: var(--white);
-  }
-
-  .related-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .related-item {
-    display: block;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .related-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .related-item h4 {
-    color: var(--text-main);
-    font-size: 1.05rem;
-    margin-bottom: 0.25rem;
-    transition: color 0.2s ease;
-  }
-
-  .related-item p {
-    font-size: 0.82rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-  }
-
-  .related-link-text {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .related-item:hover h4 {
-    color: var(--primary);
+  @media (max-width: 600px) {
+    .dossier-title {
+      font-size: 1.75rem;
+    }
   }
 </style>

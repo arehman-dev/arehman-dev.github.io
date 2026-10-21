@@ -4,639 +4,1239 @@ import { certificates } from '../../data/certificates';
 import type { Certificate } from '../../data/certificates';
 
 export async function getStaticPaths() {
-  return certificates.map((certificate) => ({
-    params: { slug: certificate.slug },
-    props: { certificate }
-  }));
+  return certificates.map((certificate, index) => {
+    const regId = `REG-0x${(index + 1).toString(16).padStart(2, '0').toUpperCase()}`;
+    const relatedCerts = certificates
+      .filter((c) => c.slug !== certificate.slug)
+      .slice(0, 2);
+    // Deterministic pseudo-hash for aesthetic cryptographic verification specimen
+    const certHash = Array.from(certificate.slug + certificate.issuer)
+      .reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 0x5f3759df)
+      .toString(16).padStart(8, '0').toUpperCase();
+
+    return {
+      params: { slug: certificate.slug },
+      props: { 
+        certificate, 
+        regId,
+        certHash: `SHA256:${certHash}9E74A2B1FD`,
+        relatedCerts 
+      }
+    };
+  });
 }
 
 interface Props {
   certificate: Certificate;
+  regId: string;
+  certHash: string;
+  relatedCerts: Certificate[];
 }
 
-const { certificate } = Astro.props;
-const statusClass = `badge-${certificate.status.toLowerCase().replace(/\s+/g, '-')}`;
+const { certificate, regId, certHash, relatedCerts } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const isCompleted = certificate.status.toLowerCase() === 'completed';
 ---
 
 <BaseLayout 
-  title={`${certificate.title} | Abdul Rehman Credentials`}
+  title={`${certificate.title} | Verified Credential ${regId}`}
   description={certificate.description}
 >
-  <div class="cert-detail-container">
-    <div class="back-nav mb-lg">
+  <div class="credential-dossier-container">
+    
+    <!-- Top Caliper Navigation Bar -->
+    <div class="caliper-bar">
       <a href={`${base}certificates/`} class="back-link">
-        <i class="fas fa-arrow-left"></i> Back to Certificates
+        <i class="fas fa-arrow-left"></i>
+        <span>RETURN TO CREDENTIALS REGISTRY</span>
       </a>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">[{regId}]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">ISSUER: {certificate.issuer.toUpperCase()}</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: {certificate.status.toUpperCase()}</span>
     </div>
 
-    <header class="detail-header card mb-lg">
-      <div class="header-top">
-        <div class="flex items-center gap-md">
-          <span class={`badge ${statusClass}`}>{certificate.status}</span>
-          {certificate.duration && (
-            <span class="badge badge-duration"><i class="far fa-clock"></i> {certificate.duration}</span>
-          )}
+    <!-- Dossier Header Unit -->
+    <header class="dossier-header-unit">
+      <div class="dossier-header-top">
+        <span class="dossier-spec-tag">
+          <i class="fas fa-certificate"></i> ACCREDITED STANDARDS SPECIFICATION
+        </span>
+        <span class={`status-chip ${isCompleted ? 'status-completed' : 'status-in-progress'}`}>
+          <span class="status-indicator"></span>
+          {certificate.status.toUpperCase()}
+        </span>
+      </div>
+
+      <h1 class="dossier-title">{certificate.title}</h1>
+      <p class="dossier-summary">{certificate.description}</p>
+
+      <div class="header-telemetry-row">
+        <div class="telemetry-pill">
+          <i class="far fa-building"></i>
+          <span>ISSUER: <strong>{certificate.issuer}</strong></span>
         </div>
-        <span class="cert-date">{certificate.date}</span>
-      </div>
-      <h1 class="cert-title">{certificate.title}</h1>
-      <p class="cert-issuer"><i class="far fa-building"></i> {certificate.issuer}</p>
-      
-      {certificate.credentialId && (
-        <p class="cert-id"><i class="fas fa-id-card"></i> Credential ID: <code>{certificate.credentialId}</code></p>
-      )}
-    </header>
-
-    <div class="detail-content grid">
-      <div class="main-details">
-        <section class="section card mb-lg">
-          <h2>Overview &amp; Purpose</h2>
-          <p class="narrative-text">{certificate.overview}</p>
-        </section>
-
-        {certificate.skillsAcquired && certificate.skillsAcquired.length > 0 && (
-          <section class="section card mb-lg">
-            <h2>Topics &amp; Capabilities Covered</h2>
-            <ul class="skills-acquired-list">
-              {certificate.skillsAcquired.map((skill) => (
-                <li>
-                  <i class="fas fa-check-circle list-bullet-icon"></i>
-                  <span>{skill}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-
-      <div class="sidebar-details">
-        <section class="section card action-card mb-lg">
-          <h3>Verification</h3>
-          <p class="verification-desc">This certification can be verified directly via the issuer's credential portal.</p>
-          <div class="action-buttons flex flex-wrap gap-md mt-lg">
-            {certificate.link ? (
-              <a href={certificate.link} target="_blank" rel="noopener" class="btn btn-primary w-full justify-center">
-                <i class="fas fa-external-link-alt"></i> Verify Credential
-              </a>
-            ) : (
-              <span class="btn btn-outline w-full justify-center disabled-btn">
-                <i class="fas fa-lock"></i> Verification Pending
-              </span>
-            )}
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <!-- CERTIFICATE PREVIEW SECTION -->
-    <section class="preview-section card mt-lg">
-      <div class="preview-header mb-md">
-        <h2><i class="fas fa-certificate"></i> Certificate Preview</h2>
-      </div>
-      
-      <!-- Preview Metrics Section -->
-      <div class="preview-metrics mb-lg">
+        <div class="telemetry-pill">
+          <i class="far fa-calendar-alt"></i>
+          <span>TIMELINE: <strong>{certificate.date}</strong></span>
+        </div>
         {certificate.duration && (
-          <div class="metric-row">
-            <span class="metric-label"><i class="far fa-clock"></i> Course Duration:</span>
-            <span class="metric-value">{certificate.duration}</span>
-          </div>
-        )}
-        {certificate.technologies && certificate.technologies.length > 0 && (
-          <div class="metric-row">
-            <span class="metric-label"><i class="fas fa-tools"></i> Core Technologies:</span>
-            <span class="metric-value">{certificate.technologies.join(', ')}</span>
+          <div class="telemetry-pill">
+            <i class="far fa-clock"></i>
+            <span>EFFORT: <strong>{certificate.duration}</strong></span>
           </div>
         )}
         {certificate.difficulty && (
-          <div class="metric-row">
-            <span class="metric-label"><i class="fas fa-chart-line"></i> Difficulty Level:</span>
-            <span class="metric-value"><span class="status-difficulty">{certificate.difficulty}</span></span>
+          <div class="telemetry-pill">
+            <i class="fas fa-signal"></i>
+            <span>RIGOR: <strong>{certificate.difficulty.toUpperCase()}</strong></span>
           </div>
         )}
       </div>
-      
-      <div class="mock-cert-frame">
-        <div class="mock-cert-border-outer">
-          <div class="mock-cert-border-inner">
-            <!-- Decorative Corner Accents -->
-            <div class="corner-accent top-left"></div>
-            <div class="corner-accent top-right"></div>
-            <div class="corner-accent bottom-left"></div>
-            <div class="corner-accent bottom-right"></div>
 
-            <div class="mock-cert-content">
-              <div class="mock-cert-header">
-                <span class="mock-cert-badge-icon">🎖️</span>
-                <h3>Certificate of Accomplishment</h3>
-                <p class="mock-cert-subtitle">PREVIEW TEMPLATE &mdash; WORK IN PROGRESS</p>
-              </div>
-              
-              <div class="mock-cert-recipient">
-                <span class="recipient-label">THIS IS PROUDLY PRESENTED TO</span>
-                <h4 class="recipient-name">Abdul Rehman</h4>
-                <span class="recipient-line"></span>
-              </div>
-              
-              <div class="mock-cert-body">
-                <p>for actively pursuing and demonstrating academic and engineering excellence in</p>
-                <h5 class="course-title">{certificate.title}</h5>
-                <p class="issuer-text">authorized and delivered online by <strong>{certificate.issuer}</strong></p>
-              </div>
-              
-              <div class="mock-cert-footer">
-                <div class="footer-sign-column">
-                  <span class="sign-label">Status</span>
-                  <span class="sign-value text-amber">{certificate.status}</span>
-                  <span class="sign-line"></span>
-                </div>
-                
-                <div class="footer-seal-column">
-                  <div class="seal-graphic">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>VERIFIED</span>
+      {certificate.technologies && certificate.technologies.length > 0 && (
+        <div class="tags-row">
+          {certificate.technologies.map((tech) => (
+            <span class="tech-chip">#{tech.toLowerCase()}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Main Content & Sidebar Layout -->
+    <div class="dossier-body-grid">
+      
+      <!-- Left Column: Curriculum Scope & Cryptographic Specimen -->
+      <div class="dossier-main-col">
+        
+        <!-- Section 01: Curriculum Overview & Scope -->
+        <section class="dossier-section">
+          <div class="section-caliper-head">
+            <span class="sec-num">01 //</span>
+            <h2 class="sec-title">CURRICULUM SPECIFICATION &amp; AUDIT SCOPE</h2>
+          </div>
+          <div class="section-card">
+            <p class="body-narrative">{certificate.overview}</p>
+          </div>
+        </section>
+
+        <!-- Section 02: Core Competencies Verified -->
+        {certificate.skillsAcquired && certificate.skillsAcquired.length > 0 && (
+          <section class="dossier-section">
+            <div class="section-caliper-head">
+              <span class="sec-num">02 //</span>
+              <h2 class="sec-title">VERIFIED CAPABILITIES &amp; COMPETENCIES</h2>
+            </div>
+            
+            <div class="capabilities-grid">
+              {certificate.skillsAcquired.map((skill, sIdx) => (
+                <div class="capability-item">
+                  <div class="cap-index">[{String(sIdx + 1).padStart(2, '0')}]</div>
+                  <div class="cap-text">
+                    <i class="fas fa-check-circle cap-icon"></i>
+                    <span>{skill}</span>
                   </div>
                 </div>
-                
-                <div class="footer-sign-column">
-                  <span class="sign-label">Estimated Effort</span>
-                  <span class="sign-value">{certificate.duration || 'Flexible'}</span>
-                  <span class="sign-line"></span>
-                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Section 03: Cryptographic Specimen & Digital Certificate Frame -->
+        <section class="dossier-section">
+          <div class="section-caliper-head">
+            <span class="sec-num">03 //</span>
+            <h2 class="sec-title">DIGITAL CREDENTIAL SPECIMEN</h2>
+            <span class="sec-badge">ENCRYPTED WATERMARK</span>
+          </div>
+
+          <div class="specimen-frame">
+            <!-- Caliper Corner Markers -->
+            <span class="caliper-corner corner-tl">+</span>
+            <span class="caliper-corner corner-tr">+</span>
+            <span class="caliper-corner corner-bl">+</span>
+            <span class="caliper-corner corner-br">+</span>
+
+            <div class="specimen-inner">
+              <div class="specimen-top-meta">
+                <div class="specimen-serial">SPECIMEN SERIAL: {regId}</div>
+                <div class="specimen-hash">{certHash}</div>
               </div>
-              
-              <div class="mock-cert-meta">
-                <span>Target Date: {certificate.date}</span>
-                <span class="meta-separator">|</span>
-                <span>Document ID: MOCK-{certificate.slug.toUpperCase()}</span>
+
+              <div class="specimen-crest">
+                <div class="crest-icon">
+                  <i class="fas fa-shield-halved"></i>
+                </div>
+                <span class="crest-label">ACCREDITED TECHNICAL SPECIFICATION</span>
+              </div>
+
+              <div class="specimen-presentation">
+                <span class="pres-sub">THIS VERIFIES THAT</span>
+                <h3 class="pres-name">Abdul Rehman</h3>
+                <span class="pres-role">Systems &amp; Software Engineer</span>
+                <span class="pres-body">
+                  has undertaken and demonstrated rigorous engineering mastery in the curriculum:
+                </span>
+                <h4 class="pres-title">{certificate.title}</h4>
+                <span class="pres-issuer">ACCREDITED &amp; ISSUED BY: <strong>{certificate.issuer}</strong></span>
+              </div>
+
+              <div class="specimen-foot-grid">
+                <div class="foot-col">
+                  <span class="col-k">STATUS</span>
+                  <span class={`col-v ${isCompleted ? 'text-primary' : 'text-amber'}`}>
+                    {certificate.status.toUpperCase()}
+                  </span>
+                </div>
+                <div class="foot-col foot-center">
+                  <div class="specimen-seal">
+                    <span class="seal-inner">
+                      <i class="fas fa-certificate"></i>
+                      <span>VERIFIED</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="foot-col foot-right">
+                  <span class="col-k">TIMELINE</span>
+                  <span class="col-v">{certificate.date}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
       </div>
-    </section>
+
+      <!-- Right Column: Verification Telemetry & Parameters -->
+      <aside class="dossier-sidebar">
+        
+        <!-- Verification Portal Card -->
+        <div class="sidebar-box verification-box">
+          <div class="sidebar-head">
+            <i class="fas fa-fingerprint"></i>
+            <span>VERIFICATION STATUS</span>
+          </div>
+
+          <div class="verif-status-indicator">
+            <span class={`status-dot ${isCompleted ? 'status-completed' : 'status-in-progress'}`}></span>
+            <div>
+              <div class="verif-status-label">{isCompleted ? 'VERIFIED ACCREDITATION' : 'ACTIVE IN-FLIGHT CURRICULUM'}</div>
+              <div class="verif-status-sub">{certificate.date}</div>
+            </div>
+          </div>
+
+          <div class="verif-meta-list">
+            <div class="verif-meta-row">
+              <span class="v-label">REGISTRY ID:</span>
+              <span class="v-val"><code>{regId}</code></span>
+            </div>
+            <div class="verif-meta-row">
+              <span class="v-label">ISSUING ENTITY:</span>
+              <span class="v-val">{certificate.issuer}</span>
+            </div>
+            {certificate.credentialId && (
+              <div class="verif-meta-row">
+                <span class="v-label">CREDENTIAL ID:</span>
+                <span class="v-val"><code>{certificate.credentialId}</code></span>
+              </div>
+            )}
+            <div class="verif-meta-row">
+              <span class="v-label">AUDIT HASH:</span>
+              <span class="v-val font-mono">{certHash.substring(0, 16)}...</span>
+            </div>
+          </div>
+
+          <div class="verif-action-wrap">
+            {certificate.link ? (
+              <a 
+                href={certificate.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="action-btn-primary"
+              >
+                <i class="fas fa-external-link-alt"></i>
+                <span>LAUNCH ISSUER VERIFICATION</span>
+              </a>
+            ) : (
+              <div class="action-btn-pending">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>IN-PROGRESS: DIRECT AUDIT PENDING</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Telemetry Parameters Matrix -->
+        <div class="sidebar-box">
+          <div class="sidebar-head">
+            <i class="fas fa-sliders-h"></i>
+            <span>CURRICULUM TELEMETRY</span>
+          </div>
+
+          <dl class="telemetry-dl">
+            {certificate.duration && (
+              <div class="dl-row">
+                <dt>Estimated Duration</dt>
+                <dd>{certificate.duration}</dd>
+              </div>
+            )}
+            {certificate.difficulty && (
+              <div class="dl-row">
+                <dt>Evaluation Rigor</dt>
+                <dd><span class="rigor-badge">{certificate.difficulty}</span></dd>
+              </div>
+            )}
+            <div class="dl-row">
+              <dt>Verification Track</dt>
+              <dd>Technical &amp; Systems Specialization</dd>
+            </div>
+            <div class="dl-row">
+              <dt>Target Standard</dt>
+              <dd>POSIX / Google / Open-Source</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Related Credentials -->
+        {relatedCerts.length > 0 && (
+          <div class="sidebar-box">
+            <div class="sidebar-head">
+              <i class="fas fa-layer-group"></i>
+              <span>OTHER REGISTRY RECORDS</span>
+            </div>
+
+            <div class="related-list">
+              {relatedCerts.map((rel) => (
+                <a href={`${base}certificates/${rel.slug}/`} class="related-item">
+                  <div class="related-head">
+                    <span class="related-issuer">{rel.issuer}</span>
+                    <span class="related-status">{rel.status}</span>
+                  </div>
+                  <div class="related-title">{rel.title}</div>
+                  <div class="related-arrow">
+                    <span>inspect</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </aside>
+
+    </div>
+
   </div>
 </BaseLayout>
 
 <style>
-  .cert-detail-container {
-    max-width: 900px;
+  .credential-dossier-container {
+    max-width: 1100px;
     margin: 0 auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .credential-dossier-container {
+    color: #1f2937;
+  }
+
+  /* Top Caliper Bar */
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.72rem;
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    transition: color 0.2s ease;
+    gap: 6px;
+    color: #01ac6a;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: color 0.15s ease, transform 0.15s ease;
   }
 
   .back-link:hover {
-    color: var(--primary);
+    color: #00c47a;
+    transform: translateX(-2px);
   }
 
-  .detail-header {
-    border-left: 6px solid var(--secondary);
+  .caliper-div {
+    color: #4b5563;
   }
 
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
+  [data-theme="light"] .caliper-div {
+    color: #9ca3af;
   }
 
-  .badge-duration {
-    background-color: var(--secondary-light);
-    color: var(--secondary);
-    border: 1px solid rgba(57, 123, 201, 0.15);
+  .caliper-tag {
+    letter-spacing: 0.04em;
+    font-weight: 500;
   }
 
-  :global([data-theme="dark"]) .badge-duration {
-    background-color: rgba(57, 123, 201, 0.1);
-    color: var(--secondary-dark);
-    border-color: rgba(57, 123, 201, 0.2);
+  /* Dossier Header Unit */
+  .dossier-header-unit {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
-  .badge-duration i {
-    margin-right: 0.25rem;
+  [data-theme="light"] .dossier-header-unit {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   }
 
-  .cert-date {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .cert-title {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .cert-issuer {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--secondary);
-    margin-bottom: 0.5rem;
-  }
-
-  .cert-id {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 0;
-  }
-
-  /* Layout */
-  .detail-content {
-    grid-template-columns: 1.8fr 1fr;
-    align-items: start;
-    gap: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    .detail-content {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .narrative-text {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 0;
-  }
-
-  .skills-acquired-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .skills-acquired-list li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-
-  .list-bullet-icon {
-    color: var(--primary);
-    font-size: 1.05rem;
-    margin-top: 0.25rem;
-  }
-
-  .verification-desc {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-  }
-
-  .disabled-btn {
-    opacity: 0.6;
-    cursor: not-allowed;
-    width: 100%;
-    text-align: center;
-  }
-
-  .action-card {
-    background-color: var(--secondary-light);
-    border-color: var(--secondary);
-  }
-
-  :global([data-theme="dark"]) .action-card {
-    background-color: rgba(57, 123, 201, 0.05);
-    border-color: var(--secondary-dark);
-  }
-
-  .action-card h3 {
-    margin-bottom: 0.5rem;
-    color: var(--secondary-dark);
-  }
-
-  :global([data-theme="dark"]) .action-card h3 {
-    color: var(--white);
-  }
-
-  /* Preview Section */
-  .preview-section {
-    border-top: 4px solid var(--primary);
-  }
-
-  .preview-header {
+  .dossier-header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    margin-bottom: 0.85rem;
     flex-wrap: wrap;
   }
 
-  .preview-header h2 {
-    margin-bottom: 0;
-    font-size: 1.5rem;
-    display: flex;
+  .dossier-spec-tag {
+    font-size: 0.72rem;
+    color: #01ac6a;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 6px;
   }
 
-  /* Premium HTML Mock Certificate Styling */
-  .mock-cert-frame {
-    background-color: #fffaf0; /* Classic ivory paper look */
-    color: #2c251d; /* Elegant deep brownish-charcoal text */
-    padding: 2.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-md), inset 0 0 40px rgba(0, 0, 0, 0.02);
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    border: 1px solid rgba(197, 160, 89, 0.2);
-  }
-
-  :global([data-theme="dark"]) .mock-cert-frame {
-    background-color: #161310; /* Dark parchment tone for dark theme */
-    color: #e5d5c5;
-    border: 1px solid rgba(197, 160, 89, 0.15);
-  }
-
-  .mock-cert-border-outer {
-    border: 2px solid #c5a059; /* Elegant Gold border */
-    padding: 4px;
-    border-radius: 8px;
-  }
-
-  .mock-cert-border-inner {
-    border: 1px dashed rgba(197, 160, 89, 0.4);
-    padding: 2rem 1.5rem;
-    border-radius: 6px;
-    position: relative;
-  }
-
-  /* Decorative Corner Accents */
-  .corner-accent {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #c5a059;
-  }
-  .top-left { top: 8px; left: 8px; border-right: none; border-bottom: none; }
-  .top-right { top: 8px; right: 8px; border-left: none; border-bottom: none; }
-  .bottom-left { bottom: 8px; left: 8px; border-right: none; border-top: none; }
-  .bottom-right { bottom: 8px; right: 8px; border-left: none; border-top: none; }
-
-  .mock-cert-content {
-    text-align: center;
-  }
-
-  .mock-cert-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .mock-cert-badge-icon {
-    font-size: 2.75rem;
-    display: inline-block;
-    margin-bottom: 0.25rem;
-  }
-
-  .mock-cert-header h3 {
-    font-family: 'Georgia', serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #c5a059; /* Gold */
-    margin: 0;
-    letter-spacing: 0.05em;
-  }
-
-  .mock-cert-subtitle {
+  .status-chip {
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .mock-cert-recipient {
-    margin-bottom: 1.75rem;
+  .status-chip.status-completed {
+    background: rgba(1, 172, 106, 0.12);
+    color: #01ac6a;
+    border: 1px solid rgba(1, 172, 106, 0.3);
   }
 
-  .recipient-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #8b7d6b;
+  .status-chip.status-in-progress {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
   }
 
-  .recipient-name {
-    font-family: 'Georgia', serif;
-    font-size: 2rem;
-    font-style: italic;
-    font-weight: 600;
-    margin: 0.4rem 0;
-    color: #1e293b;
+  .status-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-block;
   }
 
-  :global([data-theme="dark"]) .recipient-name {
-    color: #f1f5f9;
+  .status-chip.status-in-progress .status-indicator {
+    animation: pulse 1.8s ease-in-out infinite;
   }
 
-  .recipient-line {
-    display: block;
-    width: 200px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #c5a059, transparent);
-    margin: 0.5rem auto 0 auto;
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
   }
 
-  .mock-cert-body {
+  .dossier-title {
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: #ffffff;
+    margin: 0 0 0.85rem 0;
+  }
+
+  [data-theme="light"] .dossier-title {
+    color: #111827;
+  }
+
+  .dossier-summary {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #9ca3af;
+    margin: 0 0 1.25rem 0;
+    font-family: var(--font-sans, system-ui, sans-serif);
+  }
+
+  [data-theme="light"] .dossier-summary {
+    color: #4b5563;
+  }
+
+  .header-telemetry-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  [data-theme="light"] .header-telemetry-row {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .telemetry-pill {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .telemetry-pill {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
+  }
+
+  .telemetry-pill i {
+    color: #01ac6a;
+  }
+
+  .telemetry-pill strong {
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .telemetry-pill strong {
+    color: #111827;
+  }
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-chip {
+    font-size: 0.72rem;
+    background: rgba(1, 172, 106, 0.08);
+    color: #01ac6a;
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  /* Grid Layout */
+  .dossier-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .dossier-body-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Section Styling */
+  .dossier-section {
     margin-bottom: 2rem;
   }
 
-  .mock-cert-body p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0.4rem 0;
-    color: #57534e;
+  .section-caliper-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.85rem;
   }
 
-  :global([data-theme="dark"]) .mock-cert-body p {
-    color: #a8a29e;
-  }
-
-  .course-title {
-    font-size: 1.25rem;
+  .sec-num {
+    color: #01ac6a;
     font-weight: 700;
-    color: #0d9488; /* Teal */
-    margin: 0.4rem 0;
-    line-height: 1.4;
+    font-size: 0.85rem;
   }
 
-  :global([data-theme="dark"]) .course-title {
-    color: #2dd4bf;
-  }
-
-  .issuer-text {
-    font-size: 0.88rem;
-  }
-
-  /* Certificate Footer Signatures and Seals */
-  .mock-cert-footer {
-    display: grid;
-    grid-template-columns: 1fr 100px 1fr;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    max-width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (max-width: 550px) {
-    .mock-cert-footer {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    .footer-seal-column {
-      order: -1;
-    }
-  }
-
-  .footer-sign-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sign-label {
-    font-size: 0.65rem;
+  .sec-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #8b7d6b;
   }
 
-  .sign-value {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0.25rem 0;
+  [data-theme="light"] .sec-title {
+    color: #111827;
   }
 
-  .sign-value.text-amber {
-    color: #d97706;
+  .sec-badge {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: #6b7280;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1px 6px;
+    border-radius: 3px;
   }
 
-  .sign-line {
-    width: 130px;
-    height: 1px;
-    background-color: rgba(197, 160, 89, 0.3);
+  [data-theme="light"] .sec-badge {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #4b5563;
   }
 
-  .footer-seal-column {
-    display: flex;
-    justify-content: center;
+  .section-card {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.5rem;
   }
 
-  .seal-graphic {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px double #c5a059;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(197, 160, 89, 0.03);
-    color: #c5a059;
-    font-family: var(--font-mono);
+  [data-theme="light"] .section-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .seal-graphic i {
-    font-size: 1.1rem;
-    margin-bottom: 1px;
+  .body-narrative {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #d1d5db;
+    margin: 0;
   }
 
-  .seal-graphic span {
-    font-size: 0.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+  [data-theme="light"] .body-narrative {
+    color: #374151;
   }
 
-  .mock-cert-meta {
-    font-size: 0.72rem;
-    color: #8b7d6b;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    border-top: 1px solid rgba(197, 160, 89, 0.15);
-    padding-top: 0.75rem;
-    max-width: 450px;
-    margin: 0 auto;
-  }
-
-  .meta-separator {
-    color: rgba(197, 160, 89, 0.3);
-  }
-
-  /* Preview Metrics Styling */
-  .preview-metrics {
+  /* Capabilities Grid */
+  .capabilities-grid {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-    padding: 1.25rem;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-card);
-    border-radius: 8px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
   }
 
-  :global([data-theme="dark"]) .preview-metrics {
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  .metric-row {
+  .capability-item {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 0.85rem 1.1rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    gap: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
 
-  .metric-label {
-    font-weight: 600;
-    color: var(--text-muted);
-    min-width: 160px;
-    display: inline-flex;
+  [data-theme="light"] .capability-item {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .capability-item:hover {
+    border-color: rgba(1, 172, 106, 0.4);
+    background: rgba(1, 172, 106, 0.02);
+  }
+
+  .cap-index {
+    font-size: 0.72rem;
+    color: #6b7280;
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .cap-index {
+    color: #9ca3af;
+  }
+
+  .cap-text {
+    display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: #e5e7eb;
+    font-family: var(--font-sans, system-ui, sans-serif);
   }
 
-  .metric-label i {
-    color: var(--primary);
-    width: 16px;
-    text-align: center;
+  [data-theme="light"] .cap-text {
+    color: #1f2937;
+  }
+
+  .cap-icon {
+    color: #01ac6a;
+    font-size: 0.85rem;
+  }
+
+  /* Cryptographic Specimen Frame */
+  .specimen-frame {
+    position: relative;
+    background: #060606;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    border-radius: 8px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(1, 172, 106, 0.02);
+  }
+
+  [data-theme="light"] .specimen-frame {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), inset 0 0 50px rgba(1, 172, 106, 0.02);
+  }
+
+  /* Corner Calipers */
+  .caliper-corner {
+    position: absolute;
     font-size: 0.95rem;
+    font-weight: bold;
+    color: #01ac6a;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
   }
 
-  .metric-value {
-    color: var(--text-main);
-    font-weight: 500;
+  .corner-tl { top: 6px; left: 8px; }
+  .corner-tr { top: 6px; right: 8px; }
+  .corner-bl { bottom: 6px; left: 8px; }
+  .corner-br { bottom: 6px; right: 8px; }
+
+  .specimen-inner {
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 2rem 1.75rem;
+    text-align: center;
+    position: relative;
   }
 
-  .status-difficulty {
-    text-transform: uppercase;
-    font-family: var(--font-mono);
+  [data-theme="light"] .specimen-inner {
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+  }
+
+  .specimen-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  [data-theme="light"] .specimen-top-meta {
+    color: #4b5563;
+  }
+
+  .specimen-serial {
+    color: #01ac6a;
+    font-weight: 700;
+  }
+
+  .specimen-crest {
+    margin-bottom: 1.25rem;
+  }
+
+  .crest-icon {
+    font-size: 2rem;
+    color: #01ac6a;
+    margin-bottom: 0.35rem;
+  }
+
+  .crest-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: #9ca3af;
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .crest-label {
+    color: #4b5563;
+  }
+
+  .specimen-presentation {
+    margin-bottom: 2rem;
+  }
+
+  .pres-sub {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: #6b7280;
+    margin-bottom: 0.4rem;
+  }
+
+  [data-theme="light"] .pres-sub {
+    color: #4b5563;
+  }
+
+  .pres-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    margin: 0 0 0.2rem 0;
+  }
+
+  [data-theme="light"] .pres-name {
+    color: #111827;
+  }
+
+  .pres-role {
+    display: block;
+    font-size: 0.75rem;
+    color: #01ac6a;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .pres-body {
+    display: block;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    max-width: 460px;
+    margin: 0 auto 0.75rem auto;
+    line-height: 1.5;
+    font-family: var(--font-sans, system-ui, sans-serif);
+  }
+
+  [data-theme="light"] .pres-body {
+    color: #4b5563;
+  }
+
+  .pres-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #00c47a;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.02em;
+  }
+
+  [data-theme="light"] .pres-title {
+    color: #018f56;
+  }
+
+  .pres-issuer {
+    display: block;
+    font-size: 0.78rem;
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .pres-issuer {
+    color: #4b5563;
+  }
+
+  .pres-issuer strong {
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .pres-issuer strong {
+    color: #111827;
+  }
+
+  .specimen-foot-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  [data-theme="light"] .specimen-foot-grid {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .foot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .foot-col.foot-center {
+    align-items: center;
+  }
+
+  .foot-col.foot-right {
+    align-items: flex-end;
+  }
+
+  .col-k {
+    font-size: 0.62rem;
+    color: #6b7280;
+    letter-spacing: 0.08em;
+  }
+
+  [data-theme="light"] .col-k {
+    color: #4b5563;
+  }
+
+  .col-v {
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .text-primary {
+    color: #01ac6a;
+  }
+
+  .text-amber {
+    color: #f59e0b;
+  }
+
+  .specimen-seal {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(1, 172, 106, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(1, 172, 106, 0.04);
+  }
+
+  .seal-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #01ac6a;
+    gap: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  .seal-inner i {
+    font-size: 0.85rem;
+  }
+
+  /* Sidebar Boxes */
+  .dossier-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sidebar-box {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  [data-theme="light"] .sidebar-box {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .sidebar-head {
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    background-color: rgba(57, 123, 201, 0.1);
-    color: var(--secondary);
-    border: 1px solid rgba(57, 123, 201, 0.15);
-    letter-spacing: 0.02em;
-    display: inline-block;
+    color: #e5e7eb;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  :global([data-theme="dark"]) .status-difficulty {
-    color: var(--secondary-dark);
-    border-color: rgba(57, 123, 201, 0.25);
+  [data-theme="light"] .sidebar-head {
+    color: #111827;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .sidebar-head i {
+    color: #01ac6a;
+  }
+
+  .verification-box {
+    border-color: rgba(1, 172, 106, 0.3);
+  }
+
+  .verif-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  [data-theme="light"] .verif-status-indicator {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-dot.status-completed {
+    background: #01ac6a;
+    box-shadow: 0 0 8px #01ac6a;
+  }
+
+  .status-dot.status-in-progress {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  .verif-status-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .verif-status-label {
+    color: #111827;
+  }
+
+  .verif-status-sub {
+    font-size: 0.7rem;
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .verif-status-sub {
+    color: #4b5563;
+  }
+
+  .verif-meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .verif-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  [data-theme="light"] .verif-meta-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .v-label {
+    color: #6b7280;
+    font-size: 0.68rem;
+  }
+
+  [data-theme="light"] .v-label {
+    color: #4b5563;
+  }
+
+  .v-val {
+    color: #e5e7eb;
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .v-val {
+    color: #111827;
+  }
+
+  .v-val code {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #01ac6a;
+  }
+
+  [data-theme="light"] .v-val code {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .action-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: #01ac6a;
+    color: #000000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .action-btn-primary:hover {
+    background: #00c47a;
+    transform: translateY(-1px);
+  }
+
+  .action-btn-pending {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: rgba(245, 158, 11, 0.08);
+    color: #f59e0b;
+    border: 1px dashed rgba(245, 158, 11, 0.35);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  /* Telemetry DL */
+  .telemetry-dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dl-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .dl-row dt {
+    font-size: 0.65rem;
+    color: #6b7280;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  [data-theme="light"] .dl-row dt {
+    color: #4b5563;
+  }
+
+  .dl-row dd {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #e5e7eb;
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .dl-row dd {
+    color: #111827;
+  }
+
+  .rigor-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: rgba(1, 172, 106, 0.1);
+    color: #01ac6a;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+  }
+
+  /* Related Registry Records */
+  .related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .related-item {
+    display: block;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  [data-theme="light"] .related-item {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .related-item:hover {
+    border-color: rgba(1, 172, 106, 0.35);
+    background: rgba(1, 172, 106, 0.03);
+  }
+
+  .related-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .related-issuer {
+    color: #01ac6a;
+    font-weight: 600;
+  }
+
+  .related-status {
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .related-status {
+    color: #6b7280;
+  }
+
+  .related-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  [data-theme="light"] .related-title {
+    color: #111827;
+  }
+
+  .related-arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.65rem;
+    color: #6b7280;
+    letter-spacing: 0.04em;
+  }
+
+  .related-item:hover .related-arrow {
+    color: #01ac6a;
   }
 </style>

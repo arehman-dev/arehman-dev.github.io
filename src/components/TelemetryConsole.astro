@@ -197,9 +197,18 @@
         if (cmdEl) {
           navigator.clipboard.writeText(cmdEl.textContent || '').then(() => {
             const copyText = copyBtn.querySelector('.copy-text');
+            const copyIcon = copyBtn.querySelector('i');
             if (copyText) copyText.textContent = 'copied!';
+            if (copyIcon) {
+              copyIcon.className = 'fas fa-check';
+              copyIcon.style.color = '#01ac6a';
+            }
             setTimeout(() => {
               if (copyText) copyText.textContent = 'copy';
+              if (copyIcon) {
+                copyIcon.className = 'far fa-copy';
+                copyIcon.style.color = '';
+              }
             }, 1800);
           });
         }

@@ -342,6 +342,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #9ca3af;
     font-size: 0.7rem;
   }
+  [data-theme="light"] .status-banner-text span {
+    color: #374151;
+  }
 
   .protocol-heading {
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
@@ -395,6 +398,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 0.65rem;
     letter-spacing: 0.04em;
   }
+  [data-theme="light"] .channel-label {
+    color: #4b5563;
+    font-weight: 600;
+  }
 
   .channel-val {
     color: #f3f4f6;
@@ -431,6 +438,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     transform: translateY(-1px);
   }
 
+  .send-handshake-btn:active {
+    transform: scale(0.98);
+  }
+
   .networks-box {
     margin-top: 1.5rem;
     padding-top: 1.25rem;
@@ -448,6 +459,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #6b7280;
     margin-bottom: 0.6rem;
     letter-spacing: 0.05em;
+  }
+  [data-theme="light"] .networks-label {
+    color: #4b5563;
+    font-weight: 600;
   }
 
   .networks-grid {
@@ -472,15 +487,22 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   }
 
   [data-theme="light"] .net-btn {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #374151;
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1f2937;
+    font-weight: 600;
   }
 
   .net-btn:hover {
     background: rgba(1, 172, 106, 0.12);
     border-color: var(--primary, #01ac6a);
     color: var(--primary, #01ac6a);
+  }
+
+  [data-theme="light"] .net-btn:hover {
+    background: rgba(1, 172, 106, 0.12);
+    color: #017a4b;
+    border-color: #01ac6a;
   }
 
   @media (max-width: 900px) {

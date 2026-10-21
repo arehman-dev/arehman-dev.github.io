@@ -500,10 +500,25 @@ const recentArticles = articles.slice(0, 3);
     transition: all 0.2s ease;
   }
 
+  [data-theme="light"] .catalog-btn {
+    background: rgba(1, 172, 106, 0.1);
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+    font-weight: 700;
+  }
+
+  .catalog-btn i {
+    transition: transform 0.15s ease;
+  }
+
   .catalog-btn:hover {
     background: rgba(1, 172, 106, 0.16);
     border-color: var(--primary, #01ac6a);
     transform: translateY(-1px);
+  }
+
+  .catalog-btn:hover i {
+    transform: translateX(3px);
   }
 
   /* Incident Logs List */
@@ -529,12 +544,14 @@ const recentArticles = articles.slice(0, 3);
   [data-theme="light"] .incident-log-row {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.25);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   }
 
   .incident-log-row:hover {
     border-color: var(--primary, #01ac6a);
     background: rgba(1, 172, 106, 0.03);
-    transform: translateX(3px);
+    transform: translateX(4px);
+    box-shadow: 0 4px 18px rgba(1, 172, 106, 0.12);
   }
 
   .log-left-col {
@@ -553,10 +570,17 @@ const recentArticles = articles.slice(0, 3);
     color: #6b7280;
     font-size: 0.72rem;
   }
+  [data-theme="light"] .log-date {
+    color: #4b5563;
+  }
 
   .log-category-pill {
     color: #9ca3af;
     font-size: 0.68rem;
+  }
+  [data-theme="light"] .log-category-pill {
+    color: #374151;
+    font-weight: 600;
   }
 
   .log-mid-col {
@@ -606,6 +630,9 @@ const recentArticles = articles.slice(0, 3);
     color: #6b7280;
     font-size: 0.72rem;
   }
+  [data-theme="light"] .log-read-time {
+    color: #4b5563;
+  }
 
   .log-inspect-link {
     display: inline-flex;
@@ -622,9 +649,24 @@ const recentArticles = articles.slice(0, 3);
     transition: all 0.15s ease;
   }
 
+  [data-theme="light"] .log-inspect-link {
+    background: rgba(1, 172, 106, 0.1);
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+    font-weight: 700;
+  }
+
+  .log-inspect-link i {
+    transition: transform 0.15s ease;
+  }
+
   .log-inspect-link:hover {
     background: var(--primary, #01ac6a);
     color: #ffffff;
+  }
+
+  .log-inspect-link:hover i {
+    transform: translateX(2px);
   }
 
   /* Responsive Rules */

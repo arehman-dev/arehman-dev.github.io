@@ -49,8 +49,8 @@
   --bg-main: var(--gray-50);
   --bg-sidebar: var(--white);
   --bg-card: rgba(255, 255, 255, 0.7);
-  --text-main: var(--gray-800);
-  --text-muted: #5a626a;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
   --border-color: rgba(0, 0, 0, 0.08);
   --border-card: rgba(0, 0, 0, 0.04);
   

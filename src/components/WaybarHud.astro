@@ -105,9 +105,9 @@ else if (pathname.includes('/about')) currentModule = 'about';
   }
 
   [data-theme="light"] .waybar-hud {
-    background: rgba(245, 247, 249, 0.92);
-    border-bottom: 1px solid rgba(1, 172, 106, 0.25);
-    color: #4b5563;
+    background: rgba(248, 250, 252, 0.94);
+    border-bottom: 1px solid rgba(1, 172, 106, 0.28);
+    color: #374151;
   }
 
   .waybar-inner {
@@ -136,11 +136,23 @@ else if (pathname.includes('/about')) currentModule = 'about';
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
     line-height: 1.2;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .waybar-pill:hover {
+    transform: translateY(-1px);
+    border-color: rgba(1, 172, 106, 0.35);
   }
 
   [data-theme="light"] .waybar-pill {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.035);
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    color: #1f2937;
+  }
+
+  [data-theme="light"] .waybar-pill:hover {
+    background: rgba(1, 172, 106, 0.08);
+    border-color: rgba(1, 172, 106, 0.4);
   }
 
   .waybar-prompt {
@@ -160,7 +172,8 @@ else if (pathname.includes('/about')) currentModule = 'about';
     color: #d1d5db;
   }
   [data-theme="light"] .waybar-git {
-    color: #374151;
+    color: #1f2937;
+    font-weight: 600;
   }
 
   .waybar-led {
@@ -186,21 +199,33 @@ else if (pathname.includes('/about')) currentModule = 'about';
     color: #6b7280;
     margin-right: 3px;
   }
+  [data-theme="light"] .waybar-label {
+    color: #4b5563;
+    font-weight: 600;
+  }
 
   .waybar-val {
     color: #e5e7eb;
     font-weight: 500;
   }
   [data-theme="light"] .waybar-val {
-    color: #1f2937;
+    color: #111827;
+    font-weight: 600;
   }
 
   .waybar-sep {
     color: rgba(1, 172, 106, 0.4);
   }
+  [data-theme="light"] .waybar-sep {
+    color: rgba(1, 172, 106, 0.6);
+  }
 
   .waybar-clock {
     color: #9ca3af;
+  }
+  [data-theme="light"] .waybar-clock {
+    color: #1f2937;
+    font-weight: 600;
   }
 
   .waybar-status {
@@ -210,6 +235,12 @@ else if (pathname.includes('/about')) currentModule = 'about';
     font-weight: 600;
     font-size: 0.65rem;
     letter-spacing: 0.04em;
+  }
+  [data-theme="light"] .waybar-status {
+    color: #017a4b;
+    background: rgba(1, 172, 106, 0.12);
+    border-color: rgba(1, 172, 106, 0.4);
+    font-weight: 700;
   }
 
   .status-dot {
@@ -229,11 +260,24 @@ else if (pathname.includes('/about')) currentModule = 'about';
     transition: all 0.2s ease;
   }
 
+  [data-theme="light"] .waybar-personal {
+    color: #92400e;
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.35);
+    font-weight: 700;
+  }
+
   .waybar-personal:hover {
     background: rgba(251, 191, 36, 0.16);
     border-color: rgba(251, 191, 36, 0.45);
     color: #f59e0b;
     transform: translateY(-1px);
+  }
+
+  [data-theme="light"] .waybar-personal:hover {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.55);
+    color: #78350f;
   }
 
   @media (max-width: 900px) {

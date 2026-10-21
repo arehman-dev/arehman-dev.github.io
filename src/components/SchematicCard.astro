@@ -195,6 +195,10 @@ const cardId = `schem-card-${project.slug}`;
   .schematic-branch {
     color: #6b7280;
   }
+  [data-theme="light"] .schematic-branch {
+    color: #4b5563;
+    font-weight: 500;
+  }
 
   .status-pill {
     display: inline-flex;
@@ -218,6 +222,11 @@ const cardId = `schem-card-${project.slug}`;
     color: var(--primary, #01ac6a);
     border: 1px solid rgba(1, 172, 106, 0.3);
   }
+  [data-theme="light"] .status-completed, [data-theme="light"] .status-live {
+    background: rgba(1, 172, 106, 0.1);
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+  }
   .status-completed .status-indicator, .status-live .status-indicator {
     background: var(--primary, #01ac6a);
   }
@@ -227,6 +236,11 @@ const cardId = `schem-card-${project.slug}`;
     color: #f59e0b;
     border: 1px solid rgba(245, 158, 11, 0.3);
   }
+  [data-theme="light"] .status-in-progress {
+    color: #b45309;
+    border-color: rgba(217, 119, 6, 0.35);
+    background: rgba(245, 158, 11, 0.1);
+  }
   .status-in-progress .status-indicator {
     background: #f59e0b;
   }
@@ -235,6 +249,11 @@ const cardId = `schem-card-${project.slug}`;
     background: rgba(156, 163, 175, 0.12);
     color: #9ca3af;
     border: 1px solid rgba(156, 163, 175, 0.3);
+  }
+  [data-theme="light"] .status-concept, [data-theme="light"] .status-upcoming {
+    background: rgba(0, 0, 0, 0.05);
+    color: #374151;
+    border-color: rgba(0, 0, 0, 0.12);
   }
   .status-concept .status-indicator, .status-upcoming .status-indicator {
     background: #9ca3af;
@@ -326,10 +345,30 @@ const cardId = `schem-card-${project.slug}`;
     color: #d1d5db;
   }
 
+  [data-theme="light"] .s-tab-btn {
+    color: #4b5563;
+  }
+
+  [data-theme="light"] .s-tab-btn:hover {
+    color: #111827;
+    background: rgba(0, 0, 0, 0.04);
+  }
+
   .s-tab-btn.active {
     background: rgba(1, 172, 106, 0.12);
     color: var(--primary, #01ac6a);
     font-weight: 600;
+  }
+
+  [data-theme="light"] .s-tab-btn.active {
+    background: rgba(1, 172, 106, 0.12);
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+    font-weight: 700;
+  }
+
+  .s-tab-btn:active {
+    transform: scale(0.96);
   }
 
   .s-tab-pane {
@@ -350,6 +389,11 @@ const cardId = `schem-card-${project.slug}`;
     margin-bottom: 3px;
   }
 
+  [data-theme="light"] .pane-label {
+    color: #374151;
+    font-weight: 700;
+  }
+
   .pane-text {
     margin: 0;
     color: #d1d5db;
@@ -357,7 +401,7 @@ const cardId = `schem-card-${project.slug}`;
   }
 
   [data-theme="light"] .pane-text {
-    color: #374151;
+    color: #1f2937;
   }
 
   .specs-feature-list {
@@ -378,7 +422,7 @@ const cardId = `schem-card-${project.slug}`;
   }
 
   [data-theme="light"] .specs-feature-list li {
-    color: #374151;
+    color: #1f2937;
   }
 
   .text-primary {
@@ -410,6 +454,15 @@ const cardId = `schem-card-${project.slug}`;
   .tech-tag {
     font-size: 0.68rem;
     color: #6b7280;
+    transition: color 0.15s ease;
+  }
+
+  [data-theme="light"] .tech-tag {
+    color: #4b5563;
+  }
+
+  .tech-tag:hover {
+    color: var(--primary, #01ac6a);
   }
 
   .schematic-actions {
@@ -440,6 +493,19 @@ const cardId = `schem-card-${project.slug}`;
     color: #ffffff;
   }
 
+  [data-theme="light"] .source-btn {
+    background: #f3f4f6;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #1f2937;
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .source-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
   .inspect-btn {
     background: rgba(1, 172, 106, 0.12);
     border: 1px solid rgba(1, 172, 106, 0.3);
@@ -447,9 +513,24 @@ const cardId = `schem-card-${project.slug}`;
     font-weight: 600;
   }
 
+  [data-theme="light"] .inspect-btn {
+    background: rgba(1, 172, 106, 0.1);
+    border-color: rgba(1, 172, 106, 0.35);
+    color: #017a4b;
+    font-weight: 700;
+  }
+
+  .inspect-btn i {
+    transition: transform 0.15s ease;
+  }
+
   .inspect-btn:hover {
     background: var(--primary, #01ac6a);
     color: #ffffff;
     border-color: var(--primary, #01ac6a);
+  }
+
+  .inspect-btn:hover i {
+    transform: translateX(3px);
   }
 </style>
