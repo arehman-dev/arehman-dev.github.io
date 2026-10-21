@@ -1,51 +1,237 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import SchematicCard from '../components/SchematicCard.astro';
 import { projects } from '../data/projects';
 ---
 
 <BaseLayout 
-  title="Projects | Abdul Rehman Portfolio"
-  description="Explore the portfolio projects crafted by Abdul Rehman, showcasing Linux infrastructure, scripting automation, extension concepts, and frontend design."
+  title="Systems Schematics & Builds | Abdul Rehman"
+  description="Explore the engineering schematics, multithreaded systems, and Linux automation pipelines crafted by Abdul Rehman."
 >
-  <div class="projects-container">
-    <header class="page-header">
-      <span class="eyebrow">My Portfolio</span>
-      <h1>Featured Projects</h1>
-      <p class="tagline">A selection of my recent works covering system administration, scripting utilities, and conceptual designs.</p>
+  <div class="schematics-catalog-container">
+    <!-- Caliper Header -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[CATALOG: AR-SCHEMATICS]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">COUNT: {projects.length} VERIFIED BUILDS</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">REVISION: v4.0</span>
+    </div>
+
+    <header class="catalog-page-header">
+      <span class="catalog-eyebrow">01 // PRODUCTION BUILDS &amp; ARCHITECTURAL SCHEMATICS</span>
+      <h1 class="catalog-title">Engineering Schematics</h1>
+      <p class="catalog-tagline">
+        Hardware testbeds, multithreaded OCR pipelines, Linux kernel namespace sandboxes, and offline-first utility engines built with compile-time discipline.
+      </p>
     </header>
 
-    <div class="grid grid-3">
-      {projects.map((project) => (
-        <ProjectCard project={project} />
-      ))}
+    <!-- Interactive Filter Tabs -->
+    <div class="filter-controls" id="schematics-filter-bar">
+      <button type="button" class="filter-btn active" data-filter="all">
+        <i class="fas fa-layer-group"></i> All Schematics ({projects.length})
+      </button>
+      <button type="button" class="filter-btn" data-filter="linux">
+        <i class="fab fa-linux"></i> Linux &amp; SysAdmin
+      </button>
+      <button type="button" class="filter-btn" data-filter="python">
+        <i class="fab fa-python"></i> Python Automation
+      </button>
+      <button type="button" class="filter-btn" data-filter="systems">
+        <i class="fas fa-cubes"></i> Systems &amp; Offline Core
+      </button>
+    </div>
+
+    <!-- Schematics Grid -->
+    <div class="schematics-catalog-grid" id="schematics-grid">
+      {projects.map((project, index) => {
+        const tagsString = project.tags.join(' ').toLowerCase();
+        let categoryGroup = 'systems';
+        if (tagsString.includes('linux') || tagsString.includes('debian') || tagsString.includes('networking')) {
+          categoryGroup = 'linux';
+        } else if (tagsString.includes('python')) {
+          categoryGroup = 'python';
+        }
+
+        return (
+          <div class="schematic-item" data-category={categoryGroup} data-tags={tagsString}>
+            <SchematicCard project={project} index={index} />
+          </div>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>
 
+<script is:inline>
+  function initSchematicsFilter() {
+    const filterBtns = document.querySelectorAll('#schematics-filter-bar .filter-btn');
+    const items = document.querySelectorAll('#schematics-grid .schematic-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter') || 'all';
+
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        items.forEach(item => {
+          const category = item.getAttribute('data-category') || '';
+          const tags = item.getAttribute('data-tags') || '';
+
+          if (filter === 'all') {
+            item.style.display = 'block';
+          } else if (filter === 'linux' && (category === 'linux' || tags.includes('linux') || tags.includes('debian'))) {
+            item.style.display = 'block';
+          } else if (filter === 'python' && (category === 'python' || tags.includes('python'))) {
+            item.style.display = 'block';
+          } else if (filter === 'systems' && (category === 'systems' || tags.includes('c++') || tags.includes('offline-first') || tags.includes('sqlite'))) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initSchematicsFilter();
+  document.addEventListener('astro:page-load', initSchematicsFilter);
+</script>
+
 <style>
-  .projects-container {
-    max-width: 1100px;
+  .schematics-catalog-container {
+    max-width: 1140px;
     margin: 0 auto;
   }
 
-  .page-header {
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
+  }
+
+  .caliper-tag {
+    letter-spacing: 0.04em;
+  }
+
+  .caliper-div {
+    color: var(--primary, #01ac6a);
+  }
+
+  .catalog-page-header {
+    margin-bottom: 2rem;
+  }
+
+  .catalog-eyebrow {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: var(--primary, #01ac6a);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .catalog-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  [data-theme="light"] .catalog-title {
+    color: #111827;
+  }
+
+  .catalog-tagline {
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 760px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .catalog-tagline {
+    color: #4b5563;
+  }
+
+  /* Filter Controls */
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+    padding: 8px 12px;
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.18);
+    border-radius: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  [data-theme="light"] .filter-controls {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #9ca3af;
+    font-family: inherit;
+    font-size: 0.76rem;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover {
+    color: #f3f4f6;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  [data-theme="light"] .filter-btn:hover {
+    color: #111827;
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .filter-btn.active {
+    background: rgba(1, 172, 106, 0.14);
+    border-color: rgba(1, 172, 106, 0.35);
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  /* Grid Layout */
+  .schematics-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 1.75rem;
     margin-bottom: 3rem;
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 700px;
-    margin-top: 0.25rem;
+  @media (max-width: 768px) {
+    .schematics-catalog-grid {
+      grid-template-columns: 1fr;
+    }
+    .catalog-title {
+      font-size: 1.75rem;
+    }
   }
 </style>

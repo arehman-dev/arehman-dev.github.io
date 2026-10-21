@@ -1,0 +1,455 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const schematicId = `AR-SCHEM-${(index + 1).toString().padStart(2, '0')}`;
+const cardId = `schem-card-${project.slug}`;
+---
+
+<article class="schematic-card" id={cardId} data-project-slug={project.slug}>
+  <!-- Card Header Bar -->
+  <div class="schematic-header">
+    <div class="schematic-id-group">
+      <span class="schematic-id">[{schematicId}]</span>
+      <span class="schematic-branch"><i class="fas fa-code-branch"></i> git:main</span>
+    </div>
+    <div class="schematic-status-group">
+      <span class={`status-pill status-${project.status.toLowerCase().replace(/\s+/g, '-')}`}>
+        <span class="status-indicator"></span>
+        {project.status.toUpperCase()}
+      </span>
+    </div>
+  </div>
+
+  <!-- Title & Description -->
+  <div class="schematic-body">
+    <h3 class="schematic-title">
+      <a href={`${base}projects/${project.slug}/`}>{project.title}</a>
+    </h3>
+    <p class="schematic-desc">{project.description}</p>
+  </div>
+
+  <!-- Interactive 3-Way Tabs -->
+  <div class="schematic-interactive-box">
+    <div class="schematic-tabs" role="tablist">
+      <button 
+        type="button" 
+        class="s-tab-btn active" 
+        data-target={`${cardId}-overview`}
+        role="tab"
+        aria-selected="true"
+      >
+        <i class="fas fa-layer-group"></i> Architecture
+      </button>
+      <button 
+        type="button" 
+        class="s-tab-btn" 
+        data-target={`${cardId}-solution`}
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fas fa-shield-halved"></i> Engineering Solution
+      </button>
+      <button 
+        type="button" 
+        class="s-tab-btn" 
+        data-target={`${cardId}-specs`}
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fas fa-list-check"></i> Key Capabilities
+      </button>
+    </div>
+
+    <!-- Tab 1: Architecture / Problem -->
+    <div class="s-tab-pane active" id={`${cardId}-overview`} role="tabpanel">
+      <div class="pane-content">
+        <span class="pane-label"><i class="fas fa-triangle-exclamation"></i> Problem Statement:</span>
+        <p class="pane-text">{project.problem || "Architected for high reliability, strict isolation, and automated execution in production Linux environments."}</p>
+      </div>
+    </div>
+
+    <!-- Tab 2: Solution -->
+    <div class="s-tab-pane" id={`${cardId}-solution`} role="tabpanel">
+      <div class="pane-content">
+        <span class="pane-label"><i class="fas fa-wrench"></i> Systems Implementation:</span>
+        <p class="pane-text">{project.solution || project.longDescription}</p>
+      </div>
+    </div>
+
+    <!-- Tab 3: Key Specs & Features -->
+    <div class="s-tab-pane" id={`${cardId}-specs`} role="tabpanel">
+      <ul class="specs-feature-list">
+        {(project.features || []).slice(0, 3).map((feat) => (
+          <li><i class="fas fa-check-circle text-primary"></i> <span>{feat}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Card Footer: Tags & Action Links -->
+  <div class="schematic-footer">
+    <div class="schematic-tags">
+      {project.tags.slice(0, 4).map((tag) => (
+        <span class="tech-tag">#{tag.toLowerCase()}</span>
+      ))}
+    </div>
+    <div class="schematic-actions">
+      {project.sourceLink && (
+        <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" class="action-btn source-btn" title="View Source Code on GitHub">
+          <i class="fab fa-github"></i> <span>source</span>
+        </a>
+      )}
+      <a href={`${base}projects/${project.slug}/`} class="action-btn inspect-btn" title="Inspect Full Technical Dossier">
+        <span>inspect spec</span> <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</article>
+
+<script is:inline>
+  function initSchematicTabs() {
+    const cards = document.querySelectorAll('.schematic-card');
+    cards.forEach(card => {
+      const tabs = card.querySelectorAll('.s-tab-btn');
+      const panes = card.querySelectorAll('.s-tab-pane');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.getAttribute('data-target');
+          if (!targetId) return;
+
+          tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          panes.forEach(p => p.classList.remove('active'));
+
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          const targetPane = document.getElementById(targetId);
+          if (targetPane) targetPane.classList.add('active');
+        });
+      });
+    });
+  }
+
+  initSchematicTabs();
+  document.addEventListener('astro:page-load', initSchematicTabs);
+</script>
+
+<style>
+  .schematic-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-theme="light"] .schematic-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  }
+
+  .schematic-card:hover {
+    border-color: var(--primary, #01ac6a);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(1, 172, 106, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Header Bar */
+  .schematic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.72rem;
+  }
+
+  [data-theme="light"] .schematic-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .schematic-id {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .schematic-branch {
+    color: #6b7280;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .status-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .status-completed, .status-live {
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+  .status-completed .status-indicator, .status-live .status-indicator {
+    background: var(--primary, #01ac6a);
+  }
+
+  .status-in-progress {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  .status-in-progress .status-indicator {
+    background: #f59e0b;
+  }
+
+  .status-concept, .status-upcoming {
+    background: rgba(156, 163, 175, 0.12);
+    color: #9ca3af;
+    border: 1px solid rgba(156, 163, 175, 0.3);
+  }
+  .status-concept .status-indicator, .status-upcoming .status-indicator {
+    background: #9ca3af;
+  }
+
+  /* Body Content */
+  .schematic-body {
+    margin-bottom: 1rem;
+  }
+
+  .schematic-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.35;
+  }
+
+  .schematic-title a {
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  [data-theme="light"] .schematic-title a {
+    color: #111827;
+  }
+
+  .schematic-title a:hover {
+    color: var(--primary, #01ac6a);
+  }
+
+  .schematic-desc {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  [data-theme="light"] .schematic-desc {
+    color: #4b5563;
+  }
+
+  /* Interactive Tabbed Box */
+  .schematic-interactive-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+  }
+
+  [data-theme="light"] .schematic-interactive-box {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .schematic-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.4rem;
+    overflow-x: auto;
+  }
+
+  [data-theme="light"] .schematic-tabs {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .s-tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #6b7280;
+    font-size: 0.68rem;
+    font-family: inherit;
+    padding: 2px 7px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .s-tab-btn:hover {
+    color: #d1d5db;
+  }
+
+  .s-tab-btn.active {
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .s-tab-pane {
+    display: none;
+    line-height: 1.5;
+  }
+
+  .s-tab-pane.active {
+    display: block;
+    animation: fadeIn 0.15s ease-in-out;
+  }
+
+  .pane-label {
+    display: block;
+    font-size: 0.68rem;
+    color: #9ca3af;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .pane-text {
+    margin: 0;
+    color: #d1d5db;
+    font-size: 0.74rem;
+  }
+
+  [data-theme="light"] .pane-text {
+    color: #374151;
+  }
+
+  .specs-feature-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .specs-feature-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: #d1d5db;
+  }
+
+  [data-theme="light"] .specs-feature-list li {
+    color: #374151;
+  }
+
+  .text-primary {
+    color: var(--primary, #01ac6a);
+    font-size: 0.7rem;
+  }
+
+  /* Footer Section */
+  .schematic-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  [data-theme="light"] .schematic-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .schematic-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tech-tag {
+    font-size: 0.68rem;
+    color: #6b7280;
+  }
+
+  .schematic-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .source-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #9ca3af;
+  }
+
+  .source-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .inspect-btn {
+    background: rgba(1, 172, 106, 0.12);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .inspect-btn:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border-color: var(--primary, #01ac6a);
+  }
+</style>

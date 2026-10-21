@@ -1,391 +1,657 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TelemetryConsole from '../components/TelemetryConsole.astro';
+import ProcessTree from '../components/ProcessTree.astro';
+import SchematicCard from '../components/SchematicCard.astro';
 import TechStack from '../components/TechStack.astro';
+import { projects } from '../data/projects';
+import { articles } from '../data/articles';
+
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+// Featured schematics for the home cockpit
+const featuredProjects = projects.slice(0, 4);
+
+// Top technical incident logs
+const recentArticles = articles.slice(0, 3);
 ---
 
-<BaseLayout title="Abdul Rehman - Python & C++ Developer | Linux Automation">
-  <div class="hero-container-main">
-    <section class="hero-section">
-      <!-- Left Column: Rich Bios, Focus Details, Competencies, CTAs -->
-      <div class="hero-content">
-        <span class="hero-eyebrow">Welcome to my space</span>
-        <h1 class="hero-title">Abdul Rehman</h1>
-        <h2 class="hero-subtitle">Python & C++ Developer | Linux Automation</h2>
-        
-        <p class="hero-text">
-          I am a passionate software developer specializing in C++, Python, and Linux automation. With a solid foundation in Linux system administration, software testing, and clean script architectures, I design secure, optimized solutions that bridge compile-time performance with automated operational pipelines.
-        </p>
-        
-        <p class="hero-text">
-          My development philosophy is centered around precise execution, clean script logic, and principled implementation. I believe that writing code is not just about solving immediate requirements, but about leaving a clean, maintainable trail for future scale.
-        </p>
+<BaseLayout title="Abdul Rehman - Systems & Automation Engineer | C++ · Python · Linux">
+  <div class="cockpit-container">
+    
+    <!-- 01: Top Coordinates & Spec Header -->
+    <div class="spec-caliper-bar">
+      <div class="caliper-item">
+        <span class="caliper-bracket">[</span>
+        <span class="caliper-code">SPEC-ID: AR-SYS-2026</span>
+        <span class="caliper-bracket">]</span>
+      </div>
+      <div class="caliper-divider"></div>
+      <div class="caliper-item">
+        <span class="caliper-bracket">[</span>
+        <span class="caliper-code">NODE: ISLAMABAD, PK (33.6844° N, 73.0479° E)</span>
+        <span class="caliper-bracket">]</span>
+      </div>
+      <div class="caliper-divider"></div>
+      <div class="caliper-item">
+        <span class="caliper-bracket">[</span>
+        <span class="caliper-code">REVISION: v4.0-STABLE</span>
+        <span class="caliper-bracket">]</span>
+      </div>
+    </div>
 
-        <!-- Core Competencies section to add more detailed sample content -->
-        <div class="competencies-block mt-lg">
-          <h3 class="section-sub-title">Core Competencies</h3>
-          <div class="competencies-grid">
-            <div class="comp-item">
-              <span class="comp-icon"><i class="fas fa-cubes"></i></span>
-              <div class="comp-text">
-                <strong>Systems Programming &amp; Data Pipelines</strong>
-                <p>Building multithreaded Python automation, OCR/data pipelines, local-first applications, and modular programs in C++.</p>
-              </div>
-            </div>
-
-            <div class="comp-item">
-              <span class="comp-icon"><i class="fas fa-terminal"></i></span>
-              <div class="comp-text">
-                <strong>Linux SysAdmin & Automation</strong>
-                <p>Managing server configurations, shell workflows, and end-to-end task automation in Linux (Debian, Ubuntu) environments.</p>
-              </div>
-            </div>
-
-            <div class="comp-item">
-              <span class="comp-icon"><i class="fas fa-vial"></i></span>
-              <div class="comp-text">
-                <strong>Testing & Quality Assurance</strong>
-                <p>Integrating structured unit testing, functional verification, and automation checks to guarantee stability and security.</p>
-              </div>
-            </div>
-          </div>
+    <!-- 02: HERO BENTO GRID (Linear/Railway Systems Telemetry) -->
+    <section class="cockpit-hero-grid">
+      <!-- Left Bento Tile: Identity & Engineering Mission -->
+      <div class="bento-tile bento-hero-main">
+        <div class="hero-status-beacon">
+          <span class="beacon-pulse"></span>
+          <span class="beacon-text">SYSTEMS &amp; AUTOMATION ENGINEER</span>
         </div>
 
-        <div class="tech-focus-block card mt-lg">
-          <h3><i class="fab fa-python tech-focus-icon"></i> Current Specialization &amp; Learning Track</h3>
-          <p class="focus-desc">
-            Currently focused on deepening specializations in <strong>C++</strong> and <strong>Python</strong>, while completing the <strong>Google IT Automation with Python</strong> Professional Certificate and freeCodeCamp's <strong>Scientific Computing with Python</strong> program. My primary competencies lie in Linux administration, software testing, and workflow automation.
-          </p>
+        <h1 class="hero-name">Abdul Rehman</h1>
+        <h2 class="hero-tagline">Compile-Time Precision &bull; Linux Pipelines</h2>
+
+        <p class="hero-manifesto">
+          I engineer reliable software at the intersection of compile-time performance in <strong>C++</strong> and automated operational pipelines in <strong>Python</strong>. Grounded in hands-on Linux system administration at <strong>InfraLayers</strong>, I build secure, zero-fluff solutions that eliminate manual toil and scale deterministically.
+        </p>
+
+        <!-- Quick CTAs -->
+        <div class="cockpit-actions">
+          <a href="#schematics-section" class="cockpit-btn btn-emerald">
+            <i class="fas fa-terminal"></i>
+            <span>Inspect Schematics</span>
+          </a>
+          <a href="#process-monitor" class="cockpit-btn btn-ghost">
+            <i class="fas fa-microchip"></i>
+            <span>Process Tree</span>
+          </a>
+          <a href={`${base}hire-me/`} class="cockpit-btn btn-outline">
+            <i class="fas fa-handshake"></i>
+            <span>Handshake Protocol</span>
+          </a>
         </div>
-        
-        <div class="hero-ctas flex gap-md mt-lg">
-          <a href={`${base}projects`} class="btn btn-primary" id="hero-view-projects">
-            <i class="fas fa-terminal"></i> View Projects
-          </a>
-          <a href={`${base}hire-me`} class="btn btn-secondary" id="hero-connect">
-            <i class="fas fa-handshake"></i> Let's Connect
-          </a>
+
+        <!-- Telemetry Chips -->
+        <div class="telemetry-chips-row">
+          <span class="telemetry-chip"><i class="fab fa-linux"></i> 100% Linux Native</span>
+          <span class="telemetry-chip"><i class="fas fa-server"></i> InfraLayers Tested</span>
+          <span class="telemetry-chip"><i class="fas fa-shield-halved"></i> POSIX &amp; PEP 8</span>
+          <span class="telemetry-chip"><i class="fas fa-bolt"></i> Zero Fluff</span>
         </div>
       </div>
-      
-      <!-- Right Column: Terminal + Enhanced Compact Values Card -->
-      <div class="hero-sidebar">
-        <!-- Terminal Mockup -->
-        <div class="terminal-mockup">
-          <div class="terminal-header">
-            <span class="terminal-dot dot-red"></span>
-            <span class="terminal-dot dot-yellow"></span>
-            <span class="terminal-dot dot-green"></span>
-            <span class="terminal-title">arehman@linux-server:~</span>
-          </div>
-          <div class="terminal-body">
-            <p class="line-cmd"><span class="prompt">$</span> neofetch</p>
-            <p class="line-output logo-line"><span class="logo-python">&gt;&gt;&gt; </span><span class="output-bold">arehman</span>@<span class="output-green">portfolio</span></p>
-            <p class="line-output"><span class="output-gray">OS: </span>Linux (Debian/Ubuntu)</p>
-            <p class="line-output"><span class="output-gray">Kernel: </span>Linux 6.6.0-stable</p>
-            <p class="line-output"><span class="output-gray">Shell: </span>bash 5.2.15</p>
-            <p class="line-output"><span class="output-gray">Uptime: </span>24-48 hours (responsive)</p>
-            <p class="line-output"><span class="output-gray">Status: </span><span class="badge badge-status">Actively Seeking Opportunities</span></p>
-            <p class="line-output"><span class="output-gray">Focus: </span>Python | C++ | Linux | Testing | Automation</p>
-            <p class="line-cmd"><span class="prompt">$</span> <span class="cursor">▒</span></p>
-          </div>
-        </div>
 
-        <!-- Enhanced Compact Core Values Card (copied and customized from about.astro) -->
-        <div class="card values-card-sidebar">
-          <h3 class="sidebar-card-title">Core Values</h3>
-          <div class="value-item-row">
-            <h4><i class="fa-regular fa-circle-dot value-icon-accent"></i> Purpose</h4>
-            <p>I aim to develop software configurations that solve real user problems, avoiding technological fluff.</p>
-          </div>
-          <div class="value-item-row">
-            <h4><i class="fa-regular fa-gem value-icon-accent"></i> Integrity</h4>
-            <p>Ethical code standards are paramount. I enforce clean access boundaries and codebase transparency.</p>
-          </div>
-          <div class="value-item-row">
-            <h4><i class="fa-regular fa-star value-icon-accent"></i> Excellence</h4>
-            <p>Every line of code I write is optimized for standard conventions, styling, and future scalability.</p>
-          </div>
-        </div>
+      <!-- Right Bento Tile: Live Interactive Telemetry Runner -->
+      <div class="bento-tile bento-telemetry-panel">
+        <TelemetryConsole />
       </div>
     </section>
 
-    <!-- Full-Width Complete Tech Stack & Toolbelt (Style A: Flat Pill Wall) -->
-    <TechStack />
+    <!-- 03: LIVE PROCESS TREE (btop style skills) -->
+    <section class="cockpit-section" id="process-monitor">
+      <div class="section-caliper-head">
+        <span class="section-num">01 //</span>
+        <h2 class="section-title">ACTIVE SUBSYSTEMS &amp; PROCESS MONITOR</h2>
+        <span class="section-tag">[STATUS: ALL DAEMONS OPERATIONAL]</span>
+      </div>
+
+      <ProcessTree />
+    </section>
+
+    <!-- 04: FEATURED SCHEMATICS (Projects) -->
+    <section class="cockpit-section" id="schematics-section">
+      <div class="section-caliper-head">
+        <span class="section-num">02 //</span>
+        <h2 class="section-title">VERIFIED SYSTEMS SCHEMATICS &amp; BUILDS</h2>
+        <span class="section-tag">[SELECTED RUNBOOKS]</span>
+      </div>
+
+      <div class="schematics-grid">
+        {featuredProjects.map((proj, idx) => (
+          <SchematicCard project={proj} index={idx} />
+        ))}
+      </div>
+
+      <div class="section-footer-action">
+        <a href={`${base}projects/`} class="catalog-btn">
+          <span>View Complete Schematics Catalog ({projects.length} Total Builds)</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 05: INCIDENT LOGS & PAPERS (Recent Articles) -->
+    <section class="cockpit-section" id="logs-section">
+      <div class="section-caliper-head">
+        <span class="section-num">03 //</span>
+        <h2 class="section-title">SYSTEM INCIDENT LOGS &amp; TECHNICAL PAPERS</h2>
+        <span class="section-tag">[KERNEL &amp; AUTOMATION ARCHIVE]</span>
+      </div>
+
+      <div class="incident-logs-list">
+        {recentArticles.map((art, idx) => (
+          <article class="incident-log-row">
+            <div class="log-left-col">
+              <span class="log-hex-id">LOG-0x{((idx + 1) * 73).toString(16).toUpperCase()}</span>
+              <span class="log-date">{art.date}</span>
+              <span class="log-category-pill">#{art.category.toLowerCase()}</span>
+            </div>
+            <div class="log-mid-col">
+              <h3 class="log-title">
+                <a href={`${base}articles/${art.slug}/`}>{art.title}</a>
+              </h3>
+              <p class="log-excerpt">{art.excerpt}</p>
+            </div>
+            <div class="log-right-col">
+              <span class="log-read-time">{art.readTime}</span>
+              <a href={`${base}articles/${art.slug}/`} class="log-inspect-link" title="Open Log Paper">
+                <span>inspect log</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="section-footer-action">
+        <a href={`${base}articles/`} class="catalog-btn">
+          <span>View All System Incident Logs ({articles.length} Published)</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 06: OPERATIONAL TOOLBELT -->
+    <section class="cockpit-section" id="toolbelt-section">
+      <div class="section-caliper-head">
+        <span class="section-num">04 //</span>
+        <h2 class="section-title">TOOLBELT &amp; RUNTIME COMPILER SPECS</h2>
+        <span class="section-tag">[USERSPACE &amp; KERNEL TOOLING]</span>
+      </div>
+
+      <TechStack />
+    </section>
+
   </div>
 </BaseLayout>
 
 <style>
-  .hero-container-main {
-    max-width: 1100px;
+  .cockpit-container {
+    max-width: 1140px;
     margin: 0 auto;
+    font-family: var(--font-sans, system-ui, sans-serif);
   }
 
-  .hero-section {
+  /* 01: Caliper Coordinate Bar */
+  .spec-caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  [data-theme="light"] .spec-caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
+  }
+
+  .caliper-bracket {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .caliper-code {
+    letter-spacing: 0.04em;
+  }
+
+  .caliper-divider {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(1, 172, 106, 0.4);
+  }
+
+  /* 02: Hero Bento Grid */
+  .cockpit-hero-grid {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    gap: 3.5rem;
-    align-items: start;
-    padding: 0.5rem 0 2rem;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+    margin-bottom: 2.5rem;
   }
 
-  @media (max-width: 1023px) {
-    .hero-section {
+  .bento-tile {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.22);
+    border-radius: 8px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-theme="light"] .bento-tile {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .bento-hero-main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #01ac6a, #00c47a, transparent);
+  }
+
+  .hero-status-beacon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .beacon-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 8px var(--primary, #01ac6a);
+    animation: beaconPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes beaconPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.85); }
+  }
+
+  .hero-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.3rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  [data-theme="light"] .hero-name {
+    color: #111827;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #9ca3af;
+    margin: 0 0 1.25rem 0;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  [data-theme="light"] .hero-tagline {
+    color: #4b5563;
+  }
+
+  .hero-manifesto {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #d1d5db;
+    margin-bottom: 1.75rem;
+  }
+
+  [data-theme="light"] .hero-manifesto {
+    color: #374151;
+  }
+
+  .hero-manifesto strong {
+    color: #ffffff;
+  }
+  [data-theme="light"] .hero-manifesto strong {
+    color: #111827;
+  }
+
+  /* Actions */
+  .cockpit-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .cockpit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-emerald {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border: 1px solid var(--primary, #01ac6a);
+  }
+  .btn-emerald:hover {
+    background: #00c47a;
+    border-color: #00c47a;
+    box-shadow: 0 0 14px rgba(1, 172, 106, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: #d1d5db;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  [data-theme="light"] .btn-ghost {
+    background: rgba(0, 0, 0, 0.04);
+    color: #374151;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.4);
+  }
+  .btn-outline:hover {
+    background: rgba(1, 172, 106, 0.1);
+    border-color: var(--primary, #01ac6a);
+  }
+
+  /* Telemetry Chips */
+  .telemetry-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  [data-theme="light"] .telemetry-chips-row {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .telemetry-chip {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  [data-theme="light"] .telemetry-chip {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
+  }
+
+  .telemetry-chip i {
+    color: var(--primary, #01ac6a);
+  }
+
+  .bento-telemetry-panel {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Section caliper headers */
+  .cockpit-section {
+    margin: 3.5rem 0;
+  }
+
+  .section-caliper-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(1, 172, 106, 0.2);
+    flex-wrap: wrap;
+  }
+
+  .section-num {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary, #01ac6a);
+  }
+
+  .section-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  [data-theme="light"] .section-title {
+    color: #111827;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-left: auto;
+  }
+
+  /* Schematics Grid */
+  .schematics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-footer-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .catalog-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    padding: 8px 16px;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    border-radius: 5px;
+    transition: all 0.2s ease;
+  }
+
+  .catalog-btn:hover {
+    background: rgba(1, 172, 106, 0.16);
+    border-color: var(--primary, #01ac6a);
+    transform: translateY(-1px);
+  }
+
+  /* Incident Logs List */
+  .incident-logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .incident-log-row {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.18);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: 200px 1fr 140px;
+    align-items: center;
+    gap: 1.25rem;
+    transition: all 0.2s ease;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  [data-theme="light"] .incident-log-row {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+  }
+
+  .incident-log-row:hover {
+    border-color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.03);
+    transform: translateX(3px);
+  }
+
+  .log-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .log-hex-id {
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    font-size: 0.75rem;
+  }
+
+  .log-date {
+    color: #6b7280;
+    font-size: 0.72rem;
+  }
+
+  .log-category-pill {
+    color: #9ca3af;
+    font-size: 0.68rem;
+  }
+
+  .log-mid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .log-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .log-title a {
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  [data-theme="light"] .log-title a {
+    color: #111827;
+  }
+  .log-title a:hover {
+    color: var(--primary, #01ac6a);
+  }
+
+  .log-excerpt {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+  [data-theme="light"] .log-excerpt {
+    color: #4b5563;
+  }
+
+  .log-right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .log-read-time {
+    color: #6b7280;
+    font-size: 0.72rem;
+  }
+
+  .log-inspect-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    transition: all 0.15s ease;
+  }
+
+  .log-inspect-link:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 960px) {
+    .cockpit-hero-grid {
       grid-template-columns: 1fr;
-      gap: 3rem;
+    }
+    .schematics-grid {
+      grid-template-columns: 1fr;
+    }
+    .incident-log-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .log-right-col {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
-  .hero-eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-title {
-    font-size: 3.5rem;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.25rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.75rem;
-    color: var(--secondary);
-    border: none;
-    padding-bottom: 0;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-  }
-
-  .hero-text {
-    font-size: 1.05rem;
-    max-width: 620px;
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-  }
-
-  .highlight {
-    color: var(--text-main);
-    font-weight: 600;
-    border-bottom: 1px dashed var(--primary);
-  }
-
-  /* Technical Focus Card */
-  .tech-focus-block {
-    padding: 1.25rem 1.5rem;
-    border-left: 4px solid var(--primary);
-    background-color: var(--bg-card);
-  }
-
-  .tech-focus-icon {
-    color: var(--primary);
-    margin-right: 0.5rem;
-  }
-
-  .focus-desc {
-    font-size: 0.92rem;
-    margin-bottom: 0;
-    line-height: 1.6;
-  }
-
-  /* Competencies section */
-  .section-sub-title {
-    font-size: 1.35rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .competencies-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .comp-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .comp-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background-color: var(--primary-light);
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.95rem;
-    flex-shrink: 0;
-    margin-top: 0.15rem;
-  }
-
-  :global([data-theme="dark"]) .comp-icon {
-    background-color: rgba(1, 172, 106, 0.1);
-  }
-
-  .comp-text strong {
-    font-size: 0.98rem;
-    display: block;
-    color: var(--text-main);
-    margin-bottom: 0.2rem;
-  }
-
-  .comp-text p {
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin-bottom: 0;
-  }
-
-  /* Sidebar styling */
-  .hero-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2.25rem; /* Spacious padding separating terminal and value cards */
-  }
-
-  /* Terminal Mockup Design */
-  .terminal-mockup {
-    width: 100%;
-    background-color: #0d0d0d;
-    border-radius: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border: 1px solid #222;
-    overflow: hidden;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-  }
-
-  :global([data-theme="light"]) .terminal-mockup {
-    background-color: #141414;
-  }
-
-  .terminal-header {
-    background-color: #1a1a1a;
-    padding: 0.75rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-bottom: 1px solid #2b2b2b;
-    position: relative;
-  }
-
-  .terminal-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .dot-red { background-color: #ff5f56; }
-  .dot-yellow { background-color: #ffbd2e; }
-  .dot-green { background-color: #27c93f; }
-
-  .terminal-title {
-    color: #888;
-    font-size: 0.75rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-
-  .terminal-body {
-    padding: 1.25rem;
-    color: #e0e0e0;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .line-cmd {
-    color: #fff;
-  }
-
-  .prompt {
-    color: var(--primary);
-    font-weight: bold;
-  }
-
-  .logo-python {
-    color: var(--secondary);
-    font-weight: bold;
-  }
-
-  .output-bold {
-    font-weight: bold;
-    color: #fff;
-  }
-
-  .output-green {
-    color: var(--primary);
-  }
-
-  .output-gray {
-    color: #888;
-  }
-
-  .cursor {
-    animation: blink 1s step-end infinite;
-    color: var(--primary);
-  }
-
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-
-  /* Enhanced Compact Single Card Values block */
-  .values-card-sidebar {
-    padding: 1.5rem;
-    border-top: 4px solid var(--primary);
-  }
-
-  .sidebar-card-title {
-    font-size: 1.15rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.4rem;
-    text-transform: uppercase;
-    font-family: var(--font-mono);
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-  }
-
-  .value-item-row {
-    margin-bottom: 1.25rem;
-  }
-
-  .value-item-row:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .value-item-row h4 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.98rem;
-    margin-bottom: 0.25rem;
-    color: var(--text-main);
-  }
-
-  .value-icon-accent {
-    color: var(--primary);
-    font-size: 0.9rem;
-  }
-
-  .value-item-row p {
-    font-size: 0.82rem;
-    line-height: 1.45;
-    margin-bottom: 0;
-    padding-left: 1.4rem; /* Aligns neatly under the text, not under bullet icon */
+  @media (max-width: 600px) {
+    .hero-name {
+      font-size: 1.85rem;
+    }
+    .spec-caliper-bar {
+      font-size: 0.65rem;
+    }
   }
 </style>
-
-

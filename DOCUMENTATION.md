@@ -44,15 +44,17 @@ Both `/` and `/me/` share two synchronized client-side persistence keys so switc
 ### 2.1 Technical Portfolio Layout (`src/layouts/BaseLayout.astro`)
 Used by all routes under `/`.
 - **Anti-FOUC Theme Script**: Reads `localStorage.getItem('theme')` (or `prefers-color-scheme`) in `<head>` before body render.
-- **Navigation ([`src/components/Navbar.astro`](file:///home/arehman/00-code/portfolio/src/components/Navbar.astro))**:
+- **Linux Waybar Global HUD ([`src/components/WaybarHud.astro`](file:///home/arehman/00-code/arehman-dev.github.io/src/components/WaybarHud.astro))**:
+  - Persistent, tiling-window-manager-inspired telemetry bar fixed below the navbar displaying active shell path (`arehman@dev:~/home`), Git status (`v4.0-main ●`), kernel/runtime indicators (`Linux 6.6 · C++20 · Python 3.12 · POSIX`), dynamic Islamabad timezone clock (`PKT`), and instant jump pill to `/me/`.
+- **Interactive Telemetry Console ([`src/components/TelemetryConsole.astro`](file:///home/arehman/00-code/arehman-dev.github.io/src/components/TelemetryConsole.astro))**:
+  - Tabbed terminal console on the homepage featuring `neofetch`, live multi-threaded `benchmarks` matrix, and `test-run` execution simulator with one-click CLI command copying.
+- **Live Process Tree Monitor ([`src/components/ProcessTree.astro`](file:///home/arehman/00-code/arehman-dev.github.io/src/components/ProcessTree.astro))**:
+  - `btop`/`htop`-style Linux process table mapping core engineering competencies as active system daemons (Python Automation PID 101, C++ Systems Core PID 102, Linux SysAdmin PID 103, QA Verification PID 104) with visual utilization bars and runtime capabilities.
+- **Blueprint Schematics Card ([`src/components/SchematicCard.astro`](file:///home/arehman/00-code/arehman-dev.github.io/src/components/SchematicCard.astro))**:
+  - Hardware/systems blueprint card featuring caliper IDs (`[AR-SCHEM-01]`), Git branch status, and interactive 3-way in-card tabs (`Architecture`, `Engineering Solution`, `Key Capabilities`).
+- **Navigation ([`src/components/Navbar.astro`](file:///home/arehman/00-code/arehman-dev.github.io/src/components/Navbar.astro))**:
   - Sticky frosted-glass top navigation bar with active link highlighting and mobile hamburger drawer.
-  - Includes the **Site Switcher Button (`personal`)** featuring a rounded-corner rectangle (`border-radius: 8px`) and pen icon (`fa-pen-nib`) that bridges directly to `/me/` with a green-to-blue gradient fill on hover.
-- **Reusable Cards**:
-  - **[`ProjectCard.astro`](file:///home/arehman/00-code/portfolio/src/components/ProjectCard.astro)**: Styled as a **Developer Architecture Card** featuring a top terminal window bar (`.project-window-bar` with traffic-light dots, monospace `~/projects/{slug}` path, and status badge), dynamic tech-stack icon box, problem/solution preview, tech chips, and action links.
-  - **[`ArticleCard.astro`](file:///home/arehman/00-code/portfolio/src/components/ArticleCard.astro)**: Editorial technical card with clickable `<a class="article-title-link">` title, metadata header, excerpt, and read-more CTA.
-  - **[`CertificateCard.astro`](file:///home/arehman/00-code/portfolio/src/components/CertificateCard.astro)**: Credential card with status badges (`Completed`, `In Progress`) and skill tags.
-- **Collapsible Social Dock ([`src/components/SocialDock.astro`](file:///home/arehman/00-code/portfolio/src/components/SocialDock.astro))**:
-  - Anchored at bottom-left on desktop, providing quick links to GitHub, LinkedIn, X/Twitter, and ProtonMail (`arehman.dev@proton.me`).
+  - Includes the **Site Switcher Button (`personal`)** featuring a rounded-corner rectangle (`border-radius: 8px`) and pen icon (`fa-pen-nib`) that bridges directly to `/me/`.
 
 ### 2.2 Personal Space Layout (`src/layouts/PersonalLayout.astro`)
 Used by all routes under `/me/`, serving both **index/page views** (via `<slot />`) and **opened article/poetry views** (when the `post` prop is passed).

@@ -1,0 +1,253 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+let currentModule = 'home';
+if (pathname.includes('/projects')) currentModule = 'projects';
+else if (pathname.includes('/articles')) currentModule = 'articles';
+else if (pathname.includes('/certificates')) currentModule = 'certificates';
+else if (pathname.includes('/skills-experience')) currentModule = 'skills';
+else if (pathname.includes('/hire-me')) currentModule = 'connect';
+else if (pathname.includes('/about')) currentModule = 'about';
+---
+
+<div class="waybar-hud" id="waybar-hud" aria-label="System Status Telemetry">
+  <div class="waybar-inner">
+    <!-- Left Section: Shell Path & Git Branch -->
+    <div class="waybar-group waybar-left">
+      <span class="waybar-pill waybar-prompt">
+        <span class="waybar-term-icon">&gt;_</span>
+        <span class="waybar-path">arehman@dev:~/{currentModule}</span>
+      </span>
+      <span class="waybar-pill waybar-git">
+        <i class="fas fa-code-branch"></i>
+        <span>v4.0-main</span>
+        <span class="waybar-led" title="System Daemon Active"></span>
+      </span>
+    </div>
+
+    <!-- Center Section: Kernel & Runtime Specs (Desktop only) -->
+    <div class="waybar-group waybar-center">
+      <span class="waybar-item">
+        <span class="waybar-label">KERNEL:</span>
+        <span class="waybar-val">Linux 6.6</span>
+      </span>
+      <span class="waybar-sep">·</span>
+      <span class="waybar-item">
+        <span class="waybar-label">RUNTIMES:</span>
+        <span class="waybar-val">C++20 · Python 3.12</span>
+      </span>
+      <span class="waybar-sep">·</span>
+      <span class="waybar-item">
+        <span class="waybar-label">IPC:</span>
+        <span class="waybar-val">POSIX / Socket</span>
+      </span>
+    </div>
+
+    <!-- Right Section: Live Telemetry Clock & Personal Space Jump -->
+    <div class="waybar-group waybar-right">
+      <span class="waybar-pill waybar-clock" id="waybar-clock" title="Islamabad / Pakistan Standard Time">
+        <i class="far fa-clock"></i>
+        <span id="waybar-clock-val">PKT --:--</span>
+      </span>
+      <span class="waybar-pill waybar-status">
+        <span class="status-dot"></span>
+        <span class="status-text">READY FOR OPS</span>
+      </span>
+      <a href={`${base}me/`} class="waybar-pill waybar-personal" title="Switch to Personal & Creative Space">
+        <i class="fas fa-pen-nib"></i>
+        <span>/me ↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function updateWaybarClock() {
+    const clockEl = document.getElementById('waybar-clock-val');
+    if (!clockEl) return;
+    try {
+      const options = {
+        timeZone: 'Asia/Karachi',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const formatter = new Intl.DateTimeFormat('en-GB', options);
+      clockEl.textContent = `PKT ${formatter.format(new Date())}`;
+    } catch {
+      const now = new Date();
+      clockEl.textContent = `PKT ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    }
+  }
+  updateWaybarClock();
+  setInterval(updateWaybarClock, 1000);
+</script>
+
+<style>
+  .waybar-hud {
+    width: 100%;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(1, 172, 106, 0.18);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    color: #9ca3af;
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    height: 32px;
+    z-index: 999;
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="light"] .waybar-hud {
+    background: rgba(245, 247, 249, 0.92);
+    border-bottom: 1px solid rgba(1, 172, 106, 0.25);
+    color: #4b5563;
+  }
+
+  .waybar-inner {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .waybar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .waybar-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    line-height: 1.2;
+  }
+
+  [data-theme="light"] .waybar-pill {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .waybar-prompt {
+    color: #f3f4f6;
+    font-weight: 600;
+  }
+  [data-theme="light"] .waybar-prompt {
+    color: #111827;
+  }
+
+  .waybar-term-icon {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .waybar-git {
+    color: #d1d5db;
+  }
+  [data-theme="light"] .waybar-git {
+    color: #374151;
+  }
+
+  .waybar-led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 6px var(--primary, #01ac6a);
+    animation: ledPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes ledPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  .waybar-center {
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+  }
+
+  .waybar-label {
+    color: #6b7280;
+    margin-right: 3px;
+  }
+
+  .waybar-val {
+    color: #e5e7eb;
+    font-weight: 500;
+  }
+  [data-theme="light"] .waybar-val {
+    color: #1f2937;
+  }
+
+  .waybar-sep {
+    color: rgba(1, 172, 106, 0.4);
+  }
+
+  .waybar-clock {
+    color: #9ca3af;
+  }
+
+  .waybar-status {
+    border-color: rgba(1, 172, 106, 0.3);
+    background: rgba(1, 172, 106, 0.08);
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 6px rgba(1, 172, 106, 0.8);
+  }
+
+  .waybar-personal {
+    text-decoration: none;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.25);
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .waybar-personal:hover {
+    background: rgba(251, 191, 36, 0.16);
+    border-color: rgba(251, 191, 36, 0.45);
+    color: #f59e0b;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 900px) {
+    .waybar-center {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .waybar-clock {
+      display: none;
+    }
+    .waybar-hud {
+      top: 56px;
+    }
+  }
+</style>

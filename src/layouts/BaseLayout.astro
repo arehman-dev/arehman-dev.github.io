@@ -1,5 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import WaybarHud from '../components/WaybarHud.astro';
 import SocialDock from '../components/SocialDock.astro';
 import '../styles/global.css';
 
@@ -70,6 +71,7 @@ const {
   <body>
     <div class="app-layout">
       <Navbar />
+      <WaybarHud />
       <SocialDock />
       <main class="page-content" id="main-content">
         <slot />

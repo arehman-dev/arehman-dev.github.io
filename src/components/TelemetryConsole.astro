@@ -1,0 +1,502 @@
+---
+// TelemetryConsole.astro - Interactive Systems Terminal & Benchmark Inspector
+---
+
+<div class="telemetry-terminal" id="telemetry-console">
+  <!-- Terminal Top Bar -->
+  <div class="terminal-top">
+    <div class="terminal-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    
+    <!-- Tab Controls -->
+    <div class="terminal-tabs" role="tablist">
+      <button 
+        type="button" 
+        class="tab-btn active" 
+        data-tab="neofetch" 
+        role="tab" 
+        aria-selected="true"
+        aria-controls="panel-neofetch"
+      >
+        <i class="fas fa-microchip"></i> neofetch
+      </button>
+      <button 
+        type="button" 
+        class="tab-btn" 
+        data-tab="benchmarks" 
+        role="tab" 
+        aria-selected="false"
+        aria-controls="panel-benchmarks"
+      >
+        <i class="fas fa-gauge-high"></i> benchmarks
+      </button>
+      <button 
+        type="button" 
+        class="tab-btn" 
+        data-tab="testrun" 
+        role="tab" 
+        aria-selected="false"
+        aria-controls="panel-testrun"
+      >
+        <i class="fas fa-play"></i> test-run
+      </button>
+    </div>
+
+    <!-- Copy Action Button -->
+    <button type="button" class="terminal-copy-btn" id="terminal-copy-btn" title="Copy active CLI command">
+      <i class="far fa-copy"></i>
+      <span class="copy-text">copy</span>
+    </button>
+  </div>
+
+  <!-- Terminal Body Content -->
+  <div class="terminal-screen">
+    <!-- Panel 1: Neofetch -->
+    <div class="tab-panel active" id="panel-neofetch" role="tabpanel">
+      <div class="cmd-line">
+        <span class="prompt">arehman@systems-node:~$</span>
+        <span class="command-text" id="cmd-neofetch">neofetch --distro debian</span>
+      </div>
+      <div class="terminal-output neofetch-output">
+        <div class="ascii-art">
+          <pre class="ascii-block">
+       _,met$$$$$gg.
+    ,g$$$$$$$$$$$$$$$P.
+  ,g$$P"     """Y$$.".
+ ,$$P'              `$$$.
+',$$P       ,ggs.     `$$b:
+`d$$'     ,$P"'   .    $$$
+ $$P      d$'     ,    $$P
+ $$:      $$.   -    ,d$$'
+ $$\;      Y$b._   _,d$P'
+ Y$$.    `.`"Y$$$$P"'
+  `$$b      "-.__
+   `Y$$b
+          </pre>
+        </div>
+        <div class="specs-block">
+          <div class="spec-head"><span class="highlight">arehman</span>@<span class="host">systems-core</span></div>
+          <div class="spec-div">--------------------</div>
+          <div class="spec-row"><span class="lbl">OS:</span> Debian GNU/Linux 12 (Bookworm) x86_64</div>
+          <div class="spec-row"><span class="lbl">Role:</span> Systems Developer &amp; Automation Engineer</div>
+          <div class="spec-row"><span class="lbl">Kernel:</span> Linux 6.6.15-hardened</div>
+          <div class="spec-row"><span class="lbl">Runtimes:</span> C++20 (GCC 13), Python 3.12, Bash 5.2</div>
+          <div class="spec-row"><span class="lbl">Infrastructure:</span> InfraLayers Server Operations</div>
+          <div class="spec-row"><span class="lbl">Uptime:</span> 99.98% High Availability</div>
+          <div class="spec-row"><span class="lbl">Status:</span> <span class="badge-status">Active / Seeking Engineering Ops</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Benchmarks -->
+    <div class="tab-panel" id="panel-benchmarks" role="tabpanel">
+      <div class="cmd-line">
+        <span class="prompt">arehman@systems-node:~$</span>
+        <span class="command-text" id="cmd-benchmarks">./run_benchmarks.sh --engine=all</span>
+      </div>
+      <div class="terminal-output benchmark-output">
+        <p class="meta-line">[SYSTEM PROFILING: MULTITHREADED HIGH-THROUGHPUT TEST]</p>
+        <div class="table-container">
+          <table class="bench-table">
+            <thead>
+              <tr>
+                <th>PIPELINE SUBSYSTEM</th>
+                <th>ENGINE</th>
+                <th>THROUGHPUT</th>
+                <th>LATENCY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>C++ Memory Arena</td>
+                <td><span class="tag tag-cpp">GCC 13 -O3</span></td>
+                <td>2.84M ops/sec</td>
+                <td><span class="metric-good">0.36 µs</span></td>
+              </tr>
+              <tr>
+                <td>Python Ingestion Pipeline</td>
+                <td><span class="tag tag-py">Python 3.12</span></td>
+                <td>1,420 docs/min</td>
+                <td><span class="metric-good">8.12 ms</span></td>
+              </tr>
+              <tr>
+                <td>POSIX Sockets IPC</td>
+                <td><span class="tag tag-sys">Native UNIX</span></td>
+                <td>980 MB/sec</td>
+                <td><span class="metric-good">0.14 ms</span></td>
+              </tr>
+              <tr>
+                <td>Shadowsocks GUI Proxy</td>
+                <td><span class="tag tag-cpp">C++ / Rust</span></td>
+                <td>Line-rate TCP</td>
+                <td><span class="metric-good">1.20 ms</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="summary-line"><i class="fas fa-check-circle text-success"></i> Valgrind Diagnostic: 0 memory leaks, 100% deterministic execution.</p>
+      </div>
+    </div>
+
+    <!-- Panel 3: Test Run -->
+    <div class="tab-panel" id="panel-testrun" role="tabpanel">
+      <div class="cmd-line">
+        <span class="prompt">arehman@systems-node:~$</span>
+        <span class="command-text" id="cmd-testrun">python3 -m sys_pipeline.verify --dry-run</span>
+      </div>
+      <div class="terminal-output testrun-output">
+        <div class="log-entry"><span class="log-time">[22:25:01]</span> <span class="log-tag">[INIT]</span> Initializing systems environment and toolchains...</div>
+        <div class="log-entry"><span class="log-time">[22:25:02]</span> <span class="log-tag">[PASS]</span> C++20 toolchain (g++ 13.2.0, cmake 3.28) verified.</div>
+        <div class="log-entry"><span class="log-time">[22:25:02]</span> <span class="log-tag">[PASS]</span> Python 3.12 daemon runtime &amp; virtualenv verified.</div>
+        <div class="log-entry"><span class="log-time">[22:25:03]</span> <span class="log-tag">[PASS]</span> Linux permissions &amp; systemd service configurations verified.</div>
+        <div class="log-entry"><span class="log-time">[22:25:03]</span> <span class="log-tag">[PASS]</span> Unit test suite execution: <span class="text-success">52 of 52 tests passed (100%)</span>.</div>
+        <div class="log-entry highlight-entry"><span class="log-time">[22:25:04]</span> <span class="log-tag text-success">[READY]</span> Operational pipeline stable. Daemon process ID: PID 1337.</div>
+      </div>
+    </div>
+
+    <!-- Active Prompt Line -->
+    <div class="cursor-line">
+      <span class="prompt">arehman@systems-node:~$</span>
+      <span class="cursor-block">█</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function initTelemetryConsole() {
+    const tabs = document.querySelectorAll('#telemetry-console .tab-btn');
+    const panels = document.querySelectorAll('#telemetry-console .tab-panel');
+    const copyBtn = document.getElementById('terminal-copy-btn');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.getAttribute('data-tab');
+        
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const targetPanel = document.getElementById(`panel-${targetTab}`);
+        if (targetPanel) targetPanel.classList.add('active');
+      });
+    });
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const activeTab = document.querySelector('#telemetry-console .tab-btn.active');
+        if (!activeTab) return;
+        const tabName = activeTab.getAttribute('data-tab');
+        const cmdEl = document.getElementById(`cmd-${tabName}`);
+        if (cmdEl) {
+          navigator.clipboard.writeText(cmdEl.textContent || '').then(() => {
+            const copyText = copyBtn.querySelector('.copy-text');
+            if (copyText) copyText.textContent = 'copied!';
+            setTimeout(() => {
+              if (copyText) copyText.textContent = 'copy';
+            }, 1800);
+          });
+        }
+      });
+    }
+  }
+
+  // Run on initial load and after potential view transitions
+  initTelemetryConsole();
+  document.addEventListener('astro:page-load', initTelemetryConsole);
+</script>
+
+<style>
+  .telemetry-terminal {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.28);
+    border-radius: 8px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(1, 172, 106, 0.08);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+
+  [data-theme="light"] .telemetry-terminal {
+    background: #14171c;
+    border: 1px solid rgba(1, 172, 106, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Top Bar */
+  .terminal-top {
+    background: #16191f;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 0.5rem;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+
+  .terminal-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #9ca3af;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-family: inherit;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+
+  .tab-btn:hover {
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .tab-btn.active {
+    background: rgba(1, 172, 106, 0.14);
+    border-color: rgba(1, 172, 106, 0.4);
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .terminal-copy-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    font-family: inherit;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .terminal-copy-btn:hover {
+    background: rgba(1, 172, 106, 0.2);
+    color: #ffffff;
+    border-color: var(--primary, #01ac6a);
+  }
+
+  /* Screen Area */
+  .terminal-screen {
+    padding: 1rem 1.25rem;
+    color: #d1d5db;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .cmd-line {
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    font-weight: 500;
+  }
+
+  .prompt {
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .command-text {
+    color: #f3f4f6;
+  }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Neofetch Styling */
+  .neofetch-output {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+
+  .ascii-art pre {
+    color: #f59e0b;
+    font-size: 0.65rem;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .specs-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-head {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .spec-head .highlight { color: #f3f4f6; }
+  .spec-head .host { color: var(--primary, #01ac6a); }
+  .spec-div { color: #4b5563; margin-bottom: 4px; }
+  .spec-row .lbl { color: #9ca3af; font-weight: 500; margin-right: 4px; }
+
+  .badge-status {
+    background: rgba(1, 172, 106, 0.15);
+    color: var(--primary, #01ac6a);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+
+  /* Benchmarks Styling */
+  .meta-line {
+    color: #9ca3af;
+    font-size: 0.72rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    margin-bottom: 0.75rem;
+  }
+
+  .bench-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.74rem;
+  }
+
+  .bench-table th {
+    text-align: left;
+    color: #9ca3af;
+    padding: 4px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+  }
+
+  .bench-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .tag {
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.68rem;
+    font-weight: 500;
+  }
+  .tag-cpp { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  .tag-py { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+  .tag-sys { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+  .metric-good {
+    color: var(--primary, #01ac6a);
+    font-weight: 600;
+  }
+
+  .summary-line {
+    color: #9ca3af;
+    font-size: 0.72rem;
+    margin-top: 0.5rem;
+  }
+  .text-success { color: var(--primary, #01ac6a); }
+
+  /* Test Run Styling */
+  .testrun-output {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .log-entry {
+    font-size: 0.74rem;
+  }
+  .log-time { color: #6b7280; margin-right: 4px; }
+  .log-tag { color: #9ca3af; font-weight: 600; margin-right: 4px; }
+  .highlight-entry {
+    background: rgba(1, 172, 106, 0.08);
+    border-left: 2px solid var(--primary, #01ac6a);
+    padding: 4px 6px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Cursor Line */
+  .cursor-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .cursor-block {
+    color: var(--primary, #01ac6a);
+    animation: blinkCursor 1s infinite;
+  }
+
+  @keyframes blinkCursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .neofetch-output {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .ascii-art {
+      display: none;
+    }
+    .telemetry-terminal {
+      min-height: auto;
+    }
+  }
+</style>
