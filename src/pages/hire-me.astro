@@ -157,7 +157,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     white-space: nowrap;
   }
 
-  [data-theme="light"] .caliper-bar {
+  :global([data-theme="light"]) .caliper-bar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     color: #4b5563;
   }
@@ -188,7 +188,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     letter-spacing: -0.02em;
   }
 
-  [data-theme="light"] .catalog-title {
+  :global([data-theme="light"]) .catalog-title {
     color: #111827;
   }
 
@@ -200,7 +200,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     margin: 0;
   }
 
-  [data-theme="light"] .catalog-tagline {
+  :global([data-theme="light"]) .catalog-tagline {
     color: #4b5563;
   }
 
@@ -221,7 +221,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   }
 
-  [data-theme="light"] .cv-card, [data-theme="light"] .protocol-card {
+  :global([data-theme="light"]) .cv-card, :global([data-theme="light"]) .protocol-card {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.3);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
@@ -239,7 +239,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     gap: 0.75rem;
   }
 
-  [data-theme="light"] .cv-header {
+  :global([data-theme="light"]) .cv-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -258,7 +258,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #f3f4f6;
     margin: 0;
   }
-  [data-theme="light"] .cv-title {
+  :global([data-theme="light"]) .cv-title {
     color: #111827;
   }
 
@@ -342,7 +342,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #9ca3af;
     font-size: 0.7rem;
   }
-  [data-theme="light"] .status-banner-text span {
+  :global([data-theme="light"]) .status-banner-text span {
     color: #374151;
   }
 
@@ -355,7 +355,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
-  [data-theme="light"] .protocol-heading {
+  :global([data-theme="light"]) .protocol-heading {
     color: #111827;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
@@ -398,7 +398,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 0.65rem;
     letter-spacing: 0.04em;
   }
-  [data-theme="light"] .channel-label {
+  :global([data-theme="light"]) .channel-label {
     color: #4b5563;
     font-weight: 600;
   }
@@ -408,7 +408,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     text-decoration: none;
     font-weight: 500;
   }
-  [data-theme="light"] .channel-val {
+  :global([data-theme="light"]) .channel-val {
     color: #111827;
   }
   .channel-val:hover {
@@ -449,7 +449,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  [data-theme="light"] .networks-box {
+  :global([data-theme="light"]) .networks-box {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -460,7 +460,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     margin-bottom: 0.6rem;
     letter-spacing: 0.05em;
   }
-  [data-theme="light"] .networks-label {
+  :global([data-theme="light"]) .networks-label {
     color: #4b5563;
     font-weight: 600;
   }
@@ -486,7 +486,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     transition: all 0.15s ease;
   }
 
-  [data-theme="light"] .net-btn {
+  :global([data-theme="light"]) .net-btn {
     background: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: #1f2937;
@@ -499,7 +499,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: var(--primary, #01ac6a);
   }
 
-  [data-theme="light"] .net-btn:hover {
+  :global([data-theme="light"]) .net-btn:hover {
     background: rgba(1, 172, 106, 0.12);
     color: #017a4b;
     border-color: #01ac6a;

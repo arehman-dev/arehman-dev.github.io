@@ -197,7 +197,7 @@ const recentArticles = articles.slice(0, 3);
     white-space: nowrap;
   }
 
-  [data-theme="light"] .spec-caliper-bar {
+  :global([data-theme="light"]) .spec-caliper-bar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     color: #4b5563;
   }
@@ -240,7 +240,7 @@ const recentArticles = articles.slice(0, 3);
     overflow: hidden;
   }
 
-  [data-theme="light"] .bento-tile {
+  :global([data-theme="light"]) .bento-tile {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.35);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
@@ -291,7 +291,7 @@ const recentArticles = articles.slice(0, 3);
     line-height: 1.15;
   }
 
-  [data-theme="light"] .hero-name {
+  :global([data-theme="light"]) .hero-name {
     color: #111827;
   }
 
@@ -303,7 +303,7 @@ const recentArticles = articles.slice(0, 3);
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  [data-theme="light"] .hero-tagline {
+  :global([data-theme="light"]) .hero-tagline {
     color: #4b5563;
   }
 
@@ -314,14 +314,14 @@ const recentArticles = articles.slice(0, 3);
     margin-bottom: 1.75rem;
   }
 
-  [data-theme="light"] .hero-manifesto {
+  :global([data-theme="light"]) .hero-manifesto {
     color: #374151;
   }
 
   .hero-manifesto strong {
     color: #ffffff;
   }
-  [data-theme="light"] .hero-manifesto strong {
+  :global([data-theme="light"]) .hero-manifesto strong {
     color: #111827;
   }
 
@@ -363,7 +363,7 @@ const recentArticles = articles.slice(0, 3);
     color: #d1d5db;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  [data-theme="light"] .btn-ghost {
+  :global([data-theme="light"]) .btn-ghost {
     background: rgba(0, 0, 0, 0.04);
     color: #374151;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -394,7 +394,7 @@ const recentArticles = articles.slice(0, 3);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  [data-theme="light"] .telemetry-chips-row {
+  :global([data-theme="light"]) .telemetry-chips-row {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -411,7 +411,7 @@ const recentArticles = articles.slice(0, 3);
     gap: 5px;
   }
 
-  [data-theme="light"] .telemetry-chip {
+  :global([data-theme="light"]) .telemetry-chip {
     background: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #4b5563;
@@ -459,8 +459,12 @@ const recentArticles = articles.slice(0, 3);
     margin: 0;
   }
 
-  [data-theme="light"] .section-title {
+  :global([data-theme="light"]) .section-title {
     color: #111827;
+  }
+
+  :global([data-theme="light"]) .section-tag {
+    color: #4b5563;
   }
 
   .section-tag {
@@ -500,7 +504,7 @@ const recentArticles = articles.slice(0, 3);
     transition: all 0.2s ease;
   }
 
-  [data-theme="light"] .catalog-btn {
+  :global([data-theme="light"]) .catalog-btn {
     background: rgba(1, 172, 106, 0.1);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);
@@ -541,7 +545,7 @@ const recentArticles = articles.slice(0, 3);
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  [data-theme="light"] .incident-log-row {
+  :global([data-theme="light"]) .incident-log-row {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.25);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
@@ -570,7 +574,7 @@ const recentArticles = articles.slice(0, 3);
     color: #6b7280;
     font-size: 0.72rem;
   }
-  [data-theme="light"] .log-date {
+  :global([data-theme="light"]) .log-date {
     color: #4b5563;
   }
 
@@ -578,7 +582,7 @@ const recentArticles = articles.slice(0, 3);
     color: #9ca3af;
     font-size: 0.68rem;
   }
-  [data-theme="light"] .log-category-pill {
+  :global([data-theme="light"]) .log-category-pill {
     color: #374151;
     font-weight: 600;
   }
@@ -602,7 +606,7 @@ const recentArticles = articles.slice(0, 3);
     text-decoration: none;
     transition: color 0.15s ease;
   }
-  [data-theme="light"] .log-title a {
+  :global([data-theme="light"]) .log-title a {
     color: #111827;
   }
   .log-title a:hover {
@@ -615,7 +619,7 @@ const recentArticles = articles.slice(0, 3);
     font-size: 0.78rem;
     line-height: 1.45;
   }
-  [data-theme="light"] .log-excerpt {
+  :global([data-theme="light"]) .log-excerpt {
     color: #4b5563;
   }
 
@@ -630,7 +634,7 @@ const recentArticles = articles.slice(0, 3);
     color: #6b7280;
     font-size: 0.72rem;
   }
-  [data-theme="light"] .log-read-time {
+  :global([data-theme="light"]) .log-read-time {
     color: #4b5563;
   }
 
@@ -649,7 +653,7 @@ const recentArticles = articles.slice(0, 3);
     transition: all 0.15s ease;
   }
 
-  [data-theme="light"] .log-inspect-link {
+  :global([data-theme="light"]) .log-inspect-link {
     background: rgba(1, 172, 106, 0.1);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);

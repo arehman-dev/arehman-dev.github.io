@@ -159,7 +159,7 @@ const cardId = `schem-card-${project.slug}`;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
-  [data-theme="light"] .schematic-card {
+  :global([data-theme="light"]) .schematic-card {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.3);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
@@ -182,7 +182,7 @@ const cardId = `schem-card-${project.slug}`;
     font-size: 0.72rem;
   }
 
-  [data-theme="light"] .schematic-header {
+  :global([data-theme="light"]) .schematic-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -195,7 +195,7 @@ const cardId = `schem-card-${project.slug}`;
   .schematic-branch {
     color: #6b7280;
   }
-  [data-theme="light"] .schematic-branch {
+  :global([data-theme="light"]) .schematic-branch {
     color: #4b5563;
     font-weight: 500;
   }
@@ -222,7 +222,7 @@ const cardId = `schem-card-${project.slug}`;
     color: var(--primary, #01ac6a);
     border: 1px solid rgba(1, 172, 106, 0.3);
   }
-  [data-theme="light"] .status-completed, [data-theme="light"] .status-live {
+  :global([data-theme="light"]) .status-completed, :global([data-theme="light"]) .status-live {
     background: rgba(1, 172, 106, 0.1);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);
@@ -236,7 +236,7 @@ const cardId = `schem-card-${project.slug}`;
     color: #f59e0b;
     border: 1px solid rgba(245, 158, 11, 0.3);
   }
-  [data-theme="light"] .status-in-progress {
+  :global([data-theme="light"]) .status-in-progress {
     color: #b45309;
     border-color: rgba(217, 119, 6, 0.35);
     background: rgba(245, 158, 11, 0.1);
@@ -250,7 +250,7 @@ const cardId = `schem-card-${project.slug}`;
     color: #9ca3af;
     border: 1px solid rgba(156, 163, 175, 0.3);
   }
-  [data-theme="light"] .status-concept, [data-theme="light"] .status-upcoming {
+  :global([data-theme="light"]) .status-concept, :global([data-theme="light"]) .status-upcoming {
     background: rgba(0, 0, 0, 0.05);
     color: #374151;
     border-color: rgba(0, 0, 0, 0.12);
@@ -278,7 +278,7 @@ const cardId = `schem-card-${project.slug}`;
     transition: color 0.15s ease;
   }
 
-  [data-theme="light"] .schematic-title a {
+  :global([data-theme="light"]) .schematic-title a {
     color: #111827;
   }
 
@@ -293,7 +293,7 @@ const cardId = `schem-card-${project.slug}`;
     margin: 0;
   }
 
-  [data-theme="light"] .schematic-desc {
+  :global([data-theme="light"]) .schematic-desc {
     color: #4b5563;
   }
 
@@ -307,7 +307,7 @@ const cardId = `schem-card-${project.slug}`;
     font-size: 0.75rem;
   }
 
-  [data-theme="light"] .schematic-interactive-box {
+  :global([data-theme="light"]) .schematic-interactive-box {
     background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
@@ -321,7 +321,7 @@ const cardId = `schem-card-${project.slug}`;
     overflow-x: auto;
   }
 
-  [data-theme="light"] .schematic-tabs {
+  :global([data-theme="light"]) .schematic-tabs {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -345,11 +345,11 @@ const cardId = `schem-card-${project.slug}`;
     color: #d1d5db;
   }
 
-  [data-theme="light"] .s-tab-btn {
+  :global([data-theme="light"]) .s-tab-btn {
     color: #4b5563;
   }
 
-  [data-theme="light"] .s-tab-btn:hover {
+  :global([data-theme="light"]) .s-tab-btn:hover {
     color: #111827;
     background: rgba(0, 0, 0, 0.04);
   }
@@ -360,7 +360,7 @@ const cardId = `schem-card-${project.slug}`;
     font-weight: 600;
   }
 
-  [data-theme="light"] .s-tab-btn.active {
+  :global([data-theme="light"]) .s-tab-btn.active {
     background: rgba(1, 172, 106, 0.12);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);
@@ -389,7 +389,7 @@ const cardId = `schem-card-${project.slug}`;
     margin-bottom: 3px;
   }
 
-  [data-theme="light"] .pane-label {
+  :global([data-theme="light"]) .pane-label {
     color: #374151;
     font-weight: 700;
   }
@@ -400,7 +400,7 @@ const cardId = `schem-card-${project.slug}`;
     font-size: 0.74rem;
   }
 
-  [data-theme="light"] .pane-text {
+  :global([data-theme="light"]) .pane-text {
     color: #1f2937;
   }
 
@@ -421,7 +421,7 @@ const cardId = `schem-card-${project.slug}`;
     color: #d1d5db;
   }
 
-  [data-theme="light"] .specs-feature-list li {
+  :global([data-theme="light"]) .specs-feature-list li {
     color: #1f2937;
   }
 
@@ -441,7 +441,7 @@ const cardId = `schem-card-${project.slug}`;
     gap: 0.75rem;
   }
 
-  [data-theme="light"] .schematic-footer {
+  :global([data-theme="light"]) .schematic-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -457,7 +457,7 @@ const cardId = `schem-card-${project.slug}`;
     transition: color 0.15s ease;
   }
 
-  [data-theme="light"] .tech-tag {
+  :global([data-theme="light"]) .tech-tag {
     color: #4b5563;
   }
 
@@ -493,14 +493,14 @@ const cardId = `schem-card-${project.slug}`;
     color: #ffffff;
   }
 
-  [data-theme="light"] .source-btn {
+  :global([data-theme="light"]) .source-btn {
     background: #f3f4f6;
     border: 1px solid rgba(0, 0, 0, 0.12);
     color: #1f2937;
     font-weight: 600;
   }
 
-  [data-theme="light"] .source-btn:hover {
+  :global([data-theme="light"]) .source-btn:hover {
     background: #e5e7eb;
     color: #111827;
     border-color: rgba(0, 0, 0, 0.2);
@@ -513,7 +513,7 @@ const cardId = `schem-card-${project.slug}`;
     font-weight: 600;
   }
 
-  [data-theme="light"] .inspect-btn {
+  :global([data-theme="light"]) .inspect-btn {
     background: rgba(1, 172, 106, 0.1);
     border-color: rgba(1, 172, 106, 0.35);
     color: #017a4b;

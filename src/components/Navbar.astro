@@ -275,7 +275,7 @@ const isActive = (path: string) => {
     overflow-y: auto;
   }
 
-  [data-theme="light"] .nav-mobile-dropdown {
+  :global([data-theme="light"]) .nav-mobile-dropdown {
     background-color: rgba(255, 255, 255, 0.98);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);

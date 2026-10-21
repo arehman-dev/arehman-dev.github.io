@@ -104,7 +104,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     transition: all 0.2s ease;
   }
 
-  [data-theme="light"] .waybar-hud {
+  :global([data-theme="light"]) .waybar-hud {
     background: rgba(248, 250, 252, 0.94);
     border-bottom: 1px solid rgba(1, 172, 106, 0.28);
     color: #374151;
@@ -144,13 +144,13 @@ else if (pathname.includes('/about')) currentModule = 'about';
     border-color: rgba(1, 172, 106, 0.35);
   }
 
-  [data-theme="light"] .waybar-pill {
+  :global([data-theme="light"]) .waybar-pill {
     background: rgba(0, 0, 0, 0.035);
     border: 1px solid rgba(0, 0, 0, 0.09);
     color: #1f2937;
   }
 
-  [data-theme="light"] .waybar-pill:hover {
+  :global([data-theme="light"]) .waybar-pill:hover {
     background: rgba(1, 172, 106, 0.08);
     border-color: rgba(1, 172, 106, 0.4);
   }
@@ -159,7 +159,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     color: #f3f4f6;
     font-weight: 600;
   }
-  [data-theme="light"] .waybar-prompt {
+  :global([data-theme="light"]) .waybar-prompt {
     color: #111827;
   }
 
@@ -171,7 +171,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
   .waybar-git {
     color: #d1d5db;
   }
-  [data-theme="light"] .waybar-git {
+  :global([data-theme="light"]) .waybar-git {
     color: #1f2937;
     font-weight: 600;
   }
@@ -199,7 +199,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     color: #6b7280;
     margin-right: 3px;
   }
-  [data-theme="light"] .waybar-label {
+  :global([data-theme="light"]) .waybar-label {
     color: #4b5563;
     font-weight: 600;
   }
@@ -208,7 +208,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     color: #e5e7eb;
     font-weight: 500;
   }
-  [data-theme="light"] .waybar-val {
+  :global([data-theme="light"]) .waybar-val {
     color: #111827;
     font-weight: 600;
   }
@@ -216,14 +216,14 @@ else if (pathname.includes('/about')) currentModule = 'about';
   .waybar-sep {
     color: rgba(1, 172, 106, 0.4);
   }
-  [data-theme="light"] .waybar-sep {
+  :global([data-theme="light"]) .waybar-sep {
     color: rgba(1, 172, 106, 0.6);
   }
 
   .waybar-clock {
     color: #9ca3af;
   }
-  [data-theme="light"] .waybar-clock {
+  :global([data-theme="light"]) .waybar-clock {
     color: #1f2937;
     font-weight: 600;
   }
@@ -236,7 +236,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     font-size: 0.65rem;
     letter-spacing: 0.04em;
   }
-  [data-theme="light"] .waybar-status {
+  :global([data-theme="light"]) .waybar-status {
     color: #017a4b;
     background: rgba(1, 172, 106, 0.12);
     border-color: rgba(1, 172, 106, 0.4);
@@ -260,7 +260,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     transition: all 0.2s ease;
   }
 
-  [data-theme="light"] .waybar-personal {
+  :global([data-theme="light"]) .waybar-personal {
     color: #92400e;
     background: rgba(245, 158, 11, 0.12);
     border-color: rgba(245, 158, 11, 0.35);
@@ -274,7 +274,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
     transform: translateY(-1px);
   }
 
-  [data-theme="light"] .waybar-personal:hover {
+  :global([data-theme="light"]) .waybar-personal:hover {
     background: rgba(245, 158, 11, 0.2);
     border-color: rgba(245, 158, 11, 0.55);
     color: #78350f;

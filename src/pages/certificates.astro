@@ -92,7 +92,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     white-space: nowrap;
   }
 
-  [data-theme="light"] .caliper-bar {
+  :global([data-theme="light"]) .caliper-bar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     color: #4b5563;
   }
@@ -123,7 +123,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     letter-spacing: -0.02em;
   }
 
-  [data-theme="light"] .catalog-title {
+  :global([data-theme="light"]) .catalog-title {
     color: #111827;
   }
 
@@ -136,7 +136,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     margin: 0;
   }
 
-  [data-theme="light"] .catalog-tagline {
+  :global([data-theme="light"]) .catalog-tagline {
     color: #4b5563;
   }
 
@@ -160,7 +160,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   }
 
-  [data-theme="light"] .credential-card {
+  :global([data-theme="light"]) .credential-card {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.3);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -181,7 +181,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 0.74rem;
   }
 
-  [data-theme="light"] .cred-header {
+  :global([data-theme="light"]) .cred-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -199,7 +199,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .cred-issuer {
     color: #9ca3af;
   }
-  [data-theme="light"] .cred-issuer {
+  :global([data-theme="light"]) .cred-issuer {
     color: #4b5563;
     font-weight: 500;
   }
@@ -226,7 +226,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: var(--primary, #01ac6a);
     border: 1px solid rgba(1, 172, 106, 0.3);
   }
-  [data-theme="light"] .status-completed {
+  :global([data-theme="light"]) .status-completed {
     background: rgba(1, 172, 106, 0.1);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);
@@ -240,7 +240,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #f59e0b;
     border: 1px solid rgba(245, 158, 11, 0.3);
   }
-  [data-theme="light"] .status-in-progress {
+  :global([data-theme="light"]) .status-in-progress {
     background: rgba(245, 158, 11, 0.1);
     color: #b45309;
     border-color: rgba(217, 119, 6, 0.35);
@@ -264,7 +264,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     transition: color 0.15s ease;
   }
 
-  [data-theme="light"] .cred-title a {
+  :global([data-theme="light"]) .cred-title a {
     color: #111827;
   }
 
@@ -280,7 +280,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     margin: 0;
   }
 
-  [data-theme="light"] .cred-desc {
+  :global([data-theme="light"]) .cred-desc {
     color: #4b5563;
   }
 
@@ -296,7 +296,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     gap: 0.5rem;
   }
 
-  [data-theme="light"] .cred-footer {
+  :global([data-theme="light"]) .cred-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -306,7 +306,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     gap: 12px;
     color: #6b7280;
   }
-  [data-theme="light"] .cred-meta {
+  :global([data-theme="light"]) .cred-meta {
     color: #4b5563;
   }
 
@@ -325,7 +325,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     transition: all 0.15s ease;
   }
 
-  [data-theme="light"] .inspect-cred-btn {
+  :global([data-theme="light"]) .inspect-cred-btn {
     background: rgba(1, 172, 106, 0.1);
     color: #017a4b;
     border-color: rgba(1, 172, 106, 0.35);

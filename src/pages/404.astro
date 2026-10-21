@@ -71,7 +71,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #e5e7eb;
   }
 
-  [data-theme="light"] .fault-container {
+  :global([data-theme="light"]) .fault-container {
     color: #1f2937;
   }
 
@@ -107,7 +107,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.08);
   }
 
-  [data-theme="light"] .fault-box {
+  :global([data-theme="light"]) .fault-box {
     background: #ffffff;
     border: 1px solid rgba(239, 68, 68, 0.4);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
@@ -123,7 +123,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 0.72rem;
   }
 
-  [data-theme="light"] .fault-terminal-top {
+  :global([data-theme="light"]) .fault-terminal-top {
     background: #f9fafb;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
@@ -148,7 +148,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-weight: 600;
   }
 
-  [data-theme="light"] .terminal-title {
+  :global([data-theme="light"]) .terminal-title {
     color: #4b5563;
   }
 
@@ -190,7 +190,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-weight: 700;
   }
 
-  [data-theme="light"] .err-type {
+  :global([data-theme="light"]) .err-type {
     color: #4b5563;
   }
 
@@ -207,7 +207,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 0.76rem;
   }
 
-  [data-theme="light"] .terminal-dump {
+  :global([data-theme="light"]) .terminal-dump {
     background: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.08);
   }
@@ -226,7 +226,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #d1d5db;
   }
 
-  [data-theme="light"] .dump-line {
+  :global([data-theme="light"]) .dump-line {
     color: #374151;
   }
 
@@ -283,7 +283,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #9ca3af;
   }
 
-  [data-theme="light"] .btn-ghost {
+  :global([data-theme="light"]) .btn-ghost {
     background: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: #374151;
@@ -294,7 +294,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  [data-theme="light"] .btn-ghost:hover {
+  :global([data-theme="light"]) .btn-ghost:hover {
     color: #111827;
     border-color: rgba(0, 0, 0, 0.2);
   }

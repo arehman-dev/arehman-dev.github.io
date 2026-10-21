@@ -57,7 +57,7 @@ const { className = '' } = Astro.props;
     margin: 1.5rem 0;
   }
 
-  [data-theme="light"] .cockpit-toolbelt-box {
+  :global([data-theme="light"]) .cockpit-toolbelt-box {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.35);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -74,7 +74,7 @@ const { className = '' } = Astro.props;
     flex-wrap: wrap;
   }
 
-  [data-theme="light"] .toolbelt-head {
+  :global([data-theme="light"]) .toolbelt-head {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
@@ -98,7 +98,7 @@ const { className = '' } = Astro.props;
     gap: 8px;
   }
 
-  [data-theme="light"] .toolbelt-title {
+  :global([data-theme="light"]) .toolbelt-title {
     color: #111827;
   }
 
@@ -110,7 +110,7 @@ const { className = '' } = Astro.props;
     line-height: 1.5;
   }
 
-  [data-theme="light"] .toolbelt-subtitle {
+  :global([data-theme="light"]) .toolbelt-subtitle {
     color: #4b5563;
   }
 
@@ -136,7 +136,7 @@ const { className = '' } = Astro.props;
     color: #9ca3af;
   }
 
-  [data-theme="light"] .legend-chip {
+  :global([data-theme="light"]) .legend-chip {
     background: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #4b5563;
@@ -180,7 +180,7 @@ const { className = '' } = Astro.props;
     color: #d1d5db;
   }
 
-  [data-theme="light"] .tech-spec-chip {
+  :global([data-theme="light"]) .tech-spec-chip {
     background: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #1f2937;
@@ -193,7 +193,7 @@ const { className = '' } = Astro.props;
     color: #ffffff;
   }
 
-  [data-theme="light"] .tech-spec-chip:hover {
+  :global([data-theme="light"]) .tech-spec-chip:hover {
     color: #017a4b;
     background: rgba(1, 172, 106, 0.08);
     border-color: #01ac6a;
@@ -206,7 +206,7 @@ const { className = '' } = Astro.props;
     font-weight: 600;
   }
 
-  [data-theme="light"] .chip-core {
+  :global([data-theme="light"]) .chip-core {
     background: rgba(1, 172, 106, 0.08);
     border-color: rgba(1, 172, 106, 0.4);
     color: #017a4b;
