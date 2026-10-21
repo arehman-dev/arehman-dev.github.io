@@ -1,65 +1,70 @@
 ---
 ---
-<button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
-  <span class="sun-icon">☀️</span>
-  <span class="moon-icon">🌙</span>
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle light / dark display theme">
+  <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
+  <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
 </button>
 
 <style>
   .theme-toggle {
     background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    border-radius: 6px;
     width: 36px;
     height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
     color: var(--text-main);
   }
 
   .theme-toggle:hover {
-    background-color: var(--gray-100);
-    transform: scale(1.05);
-    border-color: var(--primary);
-  }
-
-  :global([data-theme="dark"]) .theme-toggle:hover {
-    background-color: #2b2b2b;
+    border-color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.08);
+    transform: translateY(-1px);
   }
 
   .sun-icon {
     display: none;
+    color: #fbbf24;
   }
+
   .moon-icon {
     display: block;
+    color: #4b5563;
   }
 
   :global([data-theme="dark"]) .sun-icon {
     display: block;
   }
+
   :global([data-theme="dark"]) .moon-icon {
     display: none;
   }
 </style>
 
 <script>
-  const toggleBtn = document.getElementById('theme-toggle');
-  
-  const handleToggleClick = () => {
-    const element = document.documentElement;
-    const currentTheme = element.getAttribute('data-theme');
-    const isDark = currentTheme === 'dark';
-    const newTheme = isDark ? 'light' : 'dark';
-    
-    element.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+  function setupThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
 
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', handleToggleClick);
+    const newToggle = toggleBtn.cloneNode(true) as HTMLElement;
+    toggleBtn.parentNode?.replaceChild(newToggle, toggleBtn);
+
+    newToggle.addEventListener('click', () => {
+      const element = document.documentElement;
+      const currentTheme = element.getAttribute('data-theme');
+      const isDark = currentTheme === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      
+      element.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
   }
+
+  setupThemeToggle();
+  document.addEventListener('astro:page-load', setupThemeToggle);
 </script>

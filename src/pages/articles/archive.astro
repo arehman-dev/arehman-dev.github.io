@@ -10,177 +10,339 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title="Articles Archive | Abdul Rehman"
-  description="Chronological archive of technical articles written by Python Developer Abdul Rehman."
+  title="Historical Incident Logs Archive | Abdul Rehman"
+  description="Chronological repository of systems incident logs, network topologies, and Linux technical papers written by Abdul Rehman."
 >
-  <div class="archive-container">
-    <div class="back-nav mb-lg">
+  <div class="archive-cockpit-container">
+    
+    <!-- Top Caliper & Return Navigation -->
+    <div class="caliper-bar">
       <a href={`${base}articles/`} class="back-link">
-        <i class="fas fa-arrow-left"></i> Back to Articles
+        <i class="fas fa-arrow-left"></i>
+        <span>RETURN TO SYSTEM LOGS</span>
       </a>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">[INDEX: CHRONOLOGICAL-LOG-RECORDS]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">COUNT: {sortedArticles.length} ENTRIES</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: 100% INDEXED</span>
     </div>
 
-    <header class="page-header">
-      <span class="eyebrow">Technical Repository</span>
-      <h1>Articles Archive</h1>
-      <p class="tagline">A chronological indexing of all published guides, notes, and technical writeups.</p>
+    <!-- Header Block -->
+    <header class="archive-page-header">
+      <span class="archive-eyebrow">01 // CHRONOLOGICAL AUDIT TRAIL &amp; TECHNICAL REPOSITORY</span>
+      <h1 class="archive-title">Historical Incident Logs</h1>
+      <p class="archive-tagline">
+        Complete chronological index of all published runbooks, root-cause postmortems, network isolation guides, and systems automation notes.
+      </p>
     </header>
 
-    <div class="archive-list mt-lg">
-      {sortedArticles.map((article) => (
-        <div class="archive-row">
-          <div class="archive-left">
-            <span class="archive-date-col">{article.publishDate}</span>
-            <span class="archive-divider">|</span>
-            <h2 class="archive-title-col">
-              <a href={`${base}articles/${article.slug}/`}>{article.title}</a>
-            </h2>
-          </div>
-          <div class="archive-right">
-            <span class="badge badge-completed">{article.category}</span>
-          </div>
-        </div>
-      ))}
+    <!-- Chronological Table List -->
+    <div class="archive-table-card">
+      <div class="archive-table-head">
+        <span class="th-cell th-id">LOG ID</span>
+        <span class="th-cell th-date">TIMELINE</span>
+        <span class="th-cell th-title">INCIDENT LOG SPECIFICATION</span>
+        <span class="th-cell th-cat">CATEGORY</span>
+        <span class="th-cell th-act">ACTION</span>
+      </div>
+
+      <div class="archive-rows-list">
+        {sortedArticles.map((article, idx) => {
+          const hexId = `0x${((idx + 1) * 73).toString(16).toUpperCase()}`;
+          return (
+            <article class="archive-item-row">
+              <div class="row-cell cell-id">
+                <span class="hex-badge">LOG-{hexId}</span>
+              </div>
+              <div class="row-cell cell-date">
+                <i class="far fa-calendar-alt text-primary"></i>
+                <span>{article.date}</span>
+              </div>
+              <div class="row-cell cell-title">
+                <h2 class="article-link-title">
+                  <a href={`${base}articles/${article.slug}/`}>{article.title}</a>
+                </h2>
+              </div>
+              <div class="row-cell cell-cat">
+                <span class="cat-chip">#{article.category.toLowerCase()}</span>
+              </div>
+              <div class="row-cell cell-act">
+                <a href={`${base}articles/${article.slug}/`} class="inspect-btn" title="Inspect Runbook">
+                  <span>open</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </div>
+
   </div>
 </BaseLayout>
 
 <style>
-  .archive-container {
-    max-width: 850px;
+  .archive-cockpit-container {
+    max-width: 1060px;
     margin: 0 auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .archive-cockpit-container {
+    color: #1f2937;
+  }
+
+  /* Caliper Top Bar */
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.72rem;
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    transition: color 0.2s ease;
+    gap: 6px;
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease, transform 0.15s ease;
   }
 
   .back-link:hover {
-    color: var(--primary);
+    color: #00c47a;
+    transform: translateX(-2px);
   }
 
-  .page-header {
-    margin-bottom: 3rem;
+  .caliper-div {
+    color: #4b5563;
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  [data-theme="light"] .caliper-div {
+    color: #9ca3af;
+  }
+
+  /* Header */
+  .archive-page-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .archive-eyebrow {
+    font-size: 0.8rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
     letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.35rem;
   }
 
-  .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
+  .archive-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
   }
 
-  .archive-list {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--border-color);
+  [data-theme="light"] .archive-title {
+    color: #111827;
   }
 
-  .archive-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-    transition: all 0.25s ease;
-    gap: 2rem;
-  }
-
-  .archive-row:hover {
-    background-color: rgba(1, 172, 106, 0.02);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 6px;
-  }
-
-  :global([data-theme="dark"]) .archive-row:hover {
-    background-color: rgba(192, 255, 20, 0.02);
-  }
-
-  .archive-left {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-grow: 1;
-  }
-
-  .archive-date-col {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    width: 90px; /* Exact width for standard YYYY-MM-DD monospace digits */
-    flex-shrink: 0;
-  }
-
-  .archive-divider {
-    color: var(--border-color);
-    font-weight: 300;
-    font-size: 0.9rem;
-    margin: 0 0.25rem;
-    flex-shrink: 0;
-  }
-
-  .archive-title-col {
-    font-size: 1.05rem;
-    font-weight: 600;
+  .archive-tagline {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 760px;
+    line-height: 1.6;
     margin: 0;
   }
 
-  .archive-title-col a {
-    color: var(--text-main);
-    transition: color 0.2s ease;
+  [data-theme="light"] .archive-tagline {
+    color: #4b5563;
   }
 
-  .archive-title-col a:hover {
-    color: var(--primary);
+  /* Table Card */
+  .archive-table-card {
+    background: #080808;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    margin-bottom: 3.5rem;
   }
 
-  .archive-right {
-    flex-shrink: 0;
+  [data-theme="light"] .archive-table-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
   }
 
-  @media (max-width: 768px) {
-    .archive-row {
-      gap: 1rem;
+  .archive-table-head {
+    display: grid;
+    grid-template-columns: 120px 140px 1fr 140px 100px;
+    padding: 0.85rem 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.68rem;
+    color: #6b7280;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  [data-theme="light"] .archive-table-head {
+    background: #f9fafb;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #374151;
+  }
+
+  .th-act {
+    text-align: right;
+  }
+
+  .archive-rows-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .archive-item-row {
+    display: grid;
+    grid-template-columns: 120px 140px 1fr 140px 100px;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  [data-theme="light"] .archive-item-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .archive-item-row:hover {
+    background: rgba(1, 172, 106, 0.04);
+  }
+
+  .hex-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+  }
+
+  .cell-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .cell-date {
+    color: #4b5563;
+  }
+
+  .article-link-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .article-link-title a {
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  [data-theme="light"] .article-link-title a {
+    color: #111827;
+  }
+
+  .article-link-title a:hover {
+    color: var(--primary, #01ac6a);
+  }
+
+  .cat-chip {
+    font-size: 0.68rem;
+    background: rgba(1, 172, 106, 0.08);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  [data-theme="light"] .cat-chip {
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+  }
+
+  .cell-act {
+    text-align: right;
+  }
+
+  .inspect-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(1, 172, 106, 0.1);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    transition: all 0.15s ease;
+  }
+
+  [data-theme="light"] .inspect-btn {
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.4);
+  }
+
+  .inspect-btn i {
+    transition: transform 0.15s ease;
+  }
+
+  .inspect-btn:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+  }
+
+  .inspect-btn:hover i {
+    transform: translateX(3px);
+  }
+
+  .text-primary {
+    color: var(--primary, #01ac6a);
+  }
+
+  @media (max-width: 860px) {
+    .archive-table-head {
+      display: none;
     }
-  }
-
-  @media (max-width: 639px) {
-    .archive-row {
-      flex-direction: column;
-      align-items: flex-start;
+    .archive-item-row {
+      grid-template-columns: 1fr;
       gap: 0.5rem;
-      padding: 1.25rem 0.25rem;
+      padding: 1rem;
     }
-    
-    .archive-row:hover {
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
-      background: none;
-    }
-
-    .archive-left {
-      flex-direction: row;
-      align-items: center;
-      gap: 0.75rem;
-      width: 100%;
-    }
-
-    .archive-divider {
-      display: inline;
+    .cell-act {
+      text-align: left;
     }
   }
 </style>

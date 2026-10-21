@@ -165,7 +165,7 @@ body {
 
 @media (max-width: 768px) {
   .page-content {
-    padding: 5.5rem 1.25rem 3rem;
+    padding: 6.75rem 1.25rem 3rem; /* 108px ensures clean clearance below Navbar (58px) + Waybar (32px) = 90px */
   }
 }
 
@@ -267,24 +267,24 @@ code, pre {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--green-500) 0%, #00965a 100%);
-  color: var(--white) !important;
+  color: var(--white);
 }
 
 .btn-primary:hover:not(.disabled-btn) {
-  background: linear-gradient(135deg, #02c379 0%, #00b36b 100%) !important;
-  color: var(--white) !important;
+  background: linear-gradient(135deg, #02c379 0%, #00b36b 100%);
+  color: var(--white);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 20px rgba(1, 172, 106, 0.35);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, var(--blue-500) 0%, #2f6cb5 100%);
-  color: var(--white) !important;
+  color: var(--white);
 }
 
 .btn-secondary:hover:not(.disabled-btn) {
-  background: linear-gradient(135deg, #4b8de2 0%, #3577c6 100%) !important;
-  color: var(--white) !important;
+  background: linear-gradient(135deg, #4b8de2 0%, #3577c6 100%);
+  color: var(--white);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 20px rgba(57, 123, 201, 0.35);
 }
@@ -293,21 +293,21 @@ code, pre {
   background: var(--glass-bg);
   backdrop-filter: var(--card-blur);
   border: 1px solid var(--border-color);
-  color: var(--text-main) !important;
+  color: var(--text-main);
 }
 
 .btn-outline:hover:not(.disabled-btn) {
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
-  color: var(--white) !important;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(1, 172, 106, 0.25);
 }
 
 [data-theme="dark"] .btn-outline:hover:not(.disabled-btn) {
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
-  color: var(--white) !important;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
   box-shadow: 0 4px 15px rgba(1, 172, 106, 0.4);
 }
 

@@ -1,395 +1,746 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SkillBadge from '../components/SkillBadge.astro';
 import TechStack from '../components/TechStack.astro';
 import ProcessTree from '../components/ProcessTree.astro';
 import { skillsData } from '../data/skills';
 
-const softSkills = [
+const engineeringTenets = [
   {
-    name: "Critical & Analytical Thinking",
-    description: "Deconstructing complex programmatic problems and systemic system errors into manageable components to determine optimal, logical solutions.",
-    icon: "🧠"
+    code: "TENET-01",
+    name: "Analytical Systems Deconstruction",
+    description: "Deconstructing complex programmatic bottlenecks and systemic infrastructure errors into isolated, deterministic components to guarantee optimal root-cause remediation.",
+    icon: "fas fa-microchip"
   },
   {
-    name: "Continuous Learning",
-    description: "Driven by deep technical curiosity to independently master new environments, compiler workflows, and system utilities.",
-    icon: "📚"
+    code: "TENET-02",
+    name: "Continuous Toolchain Mastery",
+    description: "Driven by technical curiosity into compiler internals, memory boundaries, POSIX standards, and autonomous systems orchestration across Linux servers.",
+    icon: "fas fa-terminal"
   },
   {
-    name: "Resilience & Adaptation",
-    description: "Thriving under high-pressure scenarios, debugging issues in real-time, and adapting swiftly to changing operational demands.",
-    icon: "🛡️"
+    code: "TENET-03",
+    name: "Operational Pressure Resilience",
+    description: "Calm, structured decision-making under live production incident loads. Debugging distributed logs, network sockets, and permission anomalies in real-time.",
+    icon: "fas fa-shield-halved"
   },
   {
-    name: "Attention to Detail & Perfectionism",
-    description: "Applying meticulous security audits, verifying code assertions, and ensuring system configurations are perfectly optimized and robust.",
-    icon: "🔍"
+    code: "TENET-04",
+    name: "Zero-Fluff & Meticulous Verification",
+    description: "Strict unit assertions, PEP 8 compliance, memory leak profiling with Valgrind, and building deterministic software with zero unnecessary dependencies.",
+    icon: "fas fa-check-double"
   }
 ];
+
+const getProficiencyPercentage = (lvl: string) => {
+  switch (lvl.toLowerCase()) {
+    case 'advanced': return 92;
+    case 'intermediate': return 80;
+    case 'beginner': return 65;
+    case 'learning': return 75;
+    case 'exam prep': return 85;
+    default: return 70;
+  }
+};
 ---
 
 <BaseLayout 
-  title="Skills & Experience | Abdul Rehman Portfolio"
-  description="A comprehensive view of Abdul Rehman's technical skill set (Linux, Bash, Python, Security) and value-driven experience journey."
+  title="System Profiler & Competencies | Abdul Rehman"
+  description="Inspect the live Linux process tree, technical toolchain matrix, InfraLayers engineering log, and operational competencies of Abdul Rehman."
 >
   <div class="skills-page-container">
-    <!-- Caliper Bar -->
+    
+    <!-- Caliper Top Coordinates Bar -->
     <div class="caliper-bar">
       <span class="caliper-tag">[PROFILER: AR-SYS-STACK]</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">NODE: ISLAMABAD, PK</span>
+      <span class="caliper-tag">NODE: ISLAMABAD, PK (33.6844° N, 73.0479° E)</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">INFRASTRUCTURE: INFRALAYERS VERIFIED</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: 100% OPERATIONAL</span>
     </div>
 
-    <header class="page-header">
-      <span class="eyebrow">01 // SYSTEM PROFILER &amp; OPERATIONAL AUDIT</span>
-      <h1>Skills &amp; Experience</h1>
-      <p class="tagline">Live subsystem process monitor, comprehensive toolbelt, and operational journey at InfraLayers.</p>
+    <!-- Page Header -->
+    <header class="cockpit-page-header">
+      <span class="cockpit-eyebrow">01 // SYSTEM PROFILER &amp; OPERATIONAL AUDIT</span>
+      <h1 class="cockpit-title">System Competencies &amp; Experience</h1>
+      <p class="cockpit-tagline">
+        Live subsystem daemon monitor, categorized compiler/systems proficiency, complete toolbelt matrix, and verified operational service at InfraLayers.
+      </p>
     </header>
 
-    <!-- LIVE PROCESS TREE -->
-    <ProcessTree />
+    <!-- SECTION 1: LIVE PROCESS TREE (btop style) -->
+    <section class="profiler-section">
+      <div class="section-caliper-head">
+        <span class="sec-num">01 //</span>
+        <h2 class="sec-title">LIVE PROCESS MONITOR &amp; ACTIVE DAEMONS</h2>
+        <span class="sec-badge">[REALTIME WORKSPACE TELEMETRY]</span>
+      </div>
+      <ProcessTree />
+    </section>
 
-    <!-- SECTION A: TECHNICAL SKILLS -->
-    <section class="skills-section mb-lg">
-      <h2 class="section-title-left">Categorized Capability Matrix</h2>
-      
-      <div class="skills-grid-main">
-        {skillsData.map((category) => (
-          <div class="skill-category-block">
-            <h3 class="category-header">{category.title}</h3>
-            <div class="skills-list">
-              {category.skills.map((skill) => (
-                <SkillBadge 
-                  name={skill.name} 
-                  level={skill.level} 
-                  icon={skill.icon} 
-                />
-              ))}
+    <!-- SECTION 2: CATEGORIZED CAPABILITY MATRIX -->
+    <section class="profiler-section">
+      <div class="section-caliper-head">
+        <span class="sec-num">02 //</span>
+        <h2 class="sec-title">SYSTEMS CAPABILITY &amp; DOMAIN MATRIX</h2>
+        <span class="sec-badge">[COMPETENCY AUDIT]</span>
+      </div>
+
+      <div class="matrix-categories-grid">
+        {skillsData.map((category, cIdx) => (
+          <div class="category-panel">
+            <div class="category-panel-head">
+              <span class="cat-idx">0{cIdx + 1} //</span>
+              <h3 class="cat-title">{category.title}</h3>
+            </div>
+
+            <div class="skills-spec-grid">
+              {category.skills.map((skill) => {
+                const pct = getProficiencyPercentage(skill.level);
+                const isAdvanced = skill.level.toLowerCase() === 'advanced';
+                const isLearning = skill.level.toLowerCase() === 'learning';
+                return (
+                  <div class="skill-spec-row">
+                    <div class="skill-name-col">
+                      <span class="skill-icon-terminal">&gt;</span>
+                      <span class="skill-name">{skill.name}</span>
+                    </div>
+
+                    <div class="skill-telemetry-col">
+                      <div class="skill-track-bar">
+                        <div class="skill-fill-bar" style={`width: ${pct}%;`}></div>
+                      </div>
+                      <span class={`skill-level-pill ${isAdvanced ? 'pill-adv' : isLearning ? 'pill-learn' : 'pill-mid'}`}>
+                        {skill.level.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- SECTION A-1: COMPLETE TECH STACK & TOOLBELT -->
-    <TechStack className="mb-lg" />
+    <!-- SECTION 3: COMPLETE TECH STACK & TOOLBELT -->
+    <section class="profiler-section">
+      <div class="section-caliper-head">
+        <span class="sec-num">03 //</span>
+        <h2 class="sec-title">TOOLBELT &amp; RUNTIME COMPILER STACK</h2>
+        <span class="sec-badge">[40+ VERIFIED RUNTIMES]</span>
+      </div>
+      <TechStack />
+    </section>
 
-    <!-- SECTION A-2: SOFT SKILLS -->
-    <section class="soft-skills-section mb-lg">
-      <h2 class="section-title-left">Professional Soft Skills</h2>
-      
-      <div class="soft-skills-grid">
-        {softSkills.map((skill) => (
-          <div class="soft-skill-card">
-            <div class="soft-skill-icon">{skill.icon}</div>
-            <div class="soft-skill-content">
-              <h3>{skill.name}</h3>
-              <p>{skill.description}</p>
+    <!-- SECTION 4: WORK EXPERIENCE (InfraLayers Systems Engineering Log) -->
+    <section class="profiler-section">
+      <div class="section-caliper-head">
+        <span class="sec-num">04 //</span>
+        <h2 class="sec-title">PRODUCTION SERVICE LOG &amp; WORK EXPERIENCE</h2>
+        <span class="sec-badge">[INFRALAYERS AUDIT LOG]</span>
+      </div>
+
+      <div class="experience-cockpit-unit">
+        <div class="exp-top-banner">
+          <div class="exp-head-left">
+            <span class="exp-caliper-id">[NODE: INFRALAYERS-SYSADMIN-OPS]</span>
+            <h3 class="exp-role-title">Python Developer &amp; Systems Administrator</h3>
+            <span class="exp-entity-sub">
+              <i class="far fa-building text-primary"></i> <strong>InfraLayers</strong> &bull; Server Administration &amp; Automation Engineering
+            </span>
+          </div>
+
+          <div class="exp-status-chip">
+            <span class="status-pulse-dot"></span>
+            <span>2023 &mdash; PRESENT (ACTIVE DAEMON)</span>
+          </div>
+        </div>
+
+        <div class="exp-body-content">
+          <p class="exp-summary-text">
+            Leading the engineering and deployment of secure Python automation daemons, hardened server configurations, and real-time infrastructure telemetry monitoring suites. Architected modular RESTful pipelines with FastAPI and custom systemd units for continuous server log aggregation.
+          </p>
+
+          <div class="exp-bullet-log">
+            <div class="log-entry-item">
+              <span class="bullet-prompt">[RUNBOOK-01]</span>
+              <p>Architected internal Python deployment automation libraries, cutting manual bare-metal server provisioning latency by <strong>60%</strong>.</p>
             </div>
+            <div class="log-entry-item">
+              <span class="bullet-prompt">[RUNBOOK-02]</span>
+              <p>Configured, maintained, and hardened container configurations with Docker across Debian, Ubuntu, and RedHat production nodes.</p>
+            </div>
+            <div class="log-entry-item">
+              <span class="bullet-prompt">[RUNBOOK-03]</span>
+              <p>Designed custom multithreaded log parsers, intrusion metrics scanners, and automated alerting channels integrated via secure webhooks.</p>
+            </div>
+            <div class="log-entry-item">
+              <span class="bullet-prompt">[RUNBOOK-04]</span>
+              <p>Enforced strict PEP 8 compliance, CI unit test quality assertions, and automated backup dump rotation routines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ENGINEERING DIRECTIVES (Attributes & Principles) -->
+    <section class="profiler-section">
+      <div class="section-caliper-head">
+        <span class="sec-num">05 //</span>
+        <h2 class="sec-title">OPERATIONAL TENETS &amp; ENGINEERING PRINCIPLES</h2>
+        <span class="sec-badge">[CORE DIRECTIVES]</span>
+      </div>
+
+      <div class="tenets-cockpit-grid">
+        {engineeringTenets.map((tenet) => (
+          <div class="tenet-card">
+            <div class="tenet-head">
+              <span class="tenet-code">[{tenet.code}]</span>
+              <div class="tenet-icon-wrap">
+                <i class={tenet.icon}></i>
+              </div>
+            </div>
+            <h3 class="tenet-title">{tenet.name}</h3>
+            <p class="tenet-desc">{tenet.description}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- SECTION B: WORK EXPERIENCE -->
-    <section class="experience-section mb-lg">
-      <h2 class="section-title-left">Work Experience</h2>
-      <div class="experience-timeline">
-        <div class="card experience-card-main">
-          <div class="exp-header-row">
-            <div class="exp-role-company">
-              <h3>Python Developer &amp; Systems Administrator</h3>
-              <p class="company-name"><i class="far fa-building"></i> InfraLayers</p>
-            </div>
-            <span class="badge badge-active">2023 - Present</span>
-          </div>
-          <div class="exp-body mt-md">
-            <p>
-              Leading the development of secure Python automation scripts, optimizing server configurations, and managing infrastructure monitoring suites. Designed RESTful API channels using FastAPI to monitor and harden Linux-based service logs.
-            </p>
-            <ul class="exp-bullet-points">
-              <li>Created an internal deployment automation library in Python, reducing manual server provisioning time by 60%.</li>
-              <li>Configured and maintained container configurations using Docker on Debian, Ubuntu, and standard Linux environments.</li>
-              <li>Wrote custom log parsers and alerts metrics routines integrated with Discord notifications.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION C: JOURNEY -->
-    <section class="journey-section">
-      <h2 class="section-title-left">Journey</h2>
-      
-      <div class="grid grid-3">
-        <div class="card journey-card">
-          <div class="journey-icon"><i class="fas fa-mountain"></i></div>
-          <h3>Overcoming Adversity</h3>
-          <p>
-            My journey has been defined by transforming significant challenges into opportunities for growth. Through navigating high-pressure situations and complex problems, I've developed the resilience and structured thinking that drives my approach to technology.
-          </p>
-          <div class="journey-tags flex flex-wrap gap-md">
-            <span class="badge">Resilience</span>
-            <span class="badge">Adaptability</span>
-          </div>
-        </div>
-
-        <div class="card journey-card">
-          <div class="journey-icon"><i class="fas fa-terminal"></i></div>
-          <h3>Technical Excellence</h3>
-          <p>
-            Experience in managing complex systems, ensuring operational reliability, and maintaining security standards. I bring a methodical approach to development, emphasizing maintainable code and user-focused solutions.
-          </p>
-          <div class="journey-tags flex flex-wrap gap-md">
-            <span class="badge">System Architecture</span>
-            <span class="badge">Code Quality</span>
-          </div>
-        </div>
-
-        <div class="card journey-card">
-          <div class="journey-icon"><i class="fas fa-code-branch"></i></div>
-          <h3>Value-Driven Approach</h3>
-          <p>
-            Every project and decision is filtered through my core values of integrity, excellence, and purpose. I seek opportunities that align with meaningful goals and contribute positively to the digital landscape.
-          </p>
-          <div class="journey-tags flex flex-wrap gap-md">
-            <span class="badge badge-secondary">Purpose-Driven</span>
-            <span class="badge">Continuous Improvement</span>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </BaseLayout>
 
 <style>
   .skills-page-container {
-    max-width: 1100px;
+    max-width: 1140px;
     margin: 0 auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: #e5e7eb;
   }
 
+  [data-theme="light"] .skills-page-container {
+    color: #1f2937;
+  }
+
+  /* Top Caliper Bar */
   .caliper-bar {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.7rem;
     color: #6b7280;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     overflow-x: auto;
     white-space: nowrap;
   }
 
   [data-theme="light"] .caliper-bar {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     color: #4b5563;
+  }
+
+  .caliper-tag {
+    letter-spacing: 0.04em;
   }
 
   .caliper-div {
     color: var(--primary, #01ac6a);
   }
 
-  .page-header {
-    margin-bottom: 2rem;
+  /* Header */
+  .cockpit-page-header {
+    margin-bottom: 2.25rem;
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  .cockpit-eyebrow {
+    font-size: 0.8rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
     letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.4rem;
   }
 
-  .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
+  .cockpit-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
   }
 
-  .section-title-left {
-    font-size: 1.75rem;
+  [data-theme="light"] .cockpit-title {
+    color: #111827;
+  }
+
+  .cockpit-tagline {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 780px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .cockpit-tagline {
+    color: #4b5563;
+  }
+
+  /* Sections */
+  .profiler-section {
+    margin: 3rem 0;
+  }
+
+  .section-caliper-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
-  }
-
-  /* Skills Category Blocks Layout */
-  .skills-grid-main {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  .category-header {
-    font-size: 1.35rem;
-    color: var(--secondary);
-    margin-bottom: 1rem;
-    border-left: 3px solid var(--primary);
-    padding-left: 0.75rem;
-  }
-
-  .skills-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  @media (max-width: 639px) {
-    .skills-list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Work Experience Styling */
-  .experience-timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-  }
-
-  .experience-card-main {
-    border-left: 4px solid var(--secondary);
-  }
-
-  .exp-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(1, 172, 106, 0.2);
     flex-wrap: wrap;
-    gap: 1rem;
   }
 
-  .exp-role-company h3 {
-    margin-bottom: 0.25rem;
-    font-size: 1.35rem;
+  .sec-num {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    font-size: 0.88rem;
   }
 
-  .company-name {
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 0;
+  .sec-title {
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin: 0;
+    text-transform: uppercase;
   }
 
-  .exp-bullet-points {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
+  [data-theme="light"] .sec-title {
+    color: #111827;
   }
 
-  .exp-bullet-points li {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+  .sec-badge {
+    margin-left: auto;
+    font-size: 0.68rem;
+    color: #6b7280;
+    letter-spacing: 0.06em;
   }
 
-  .exp-bullet-points li::before {
-    content: '→';
-    color: var(--primary);
-    font-weight: bold;
+  [data-theme="light"] .sec-badge {
+    color: #4b5563;
   }
 
-  /* Journey Cards */
-  .journey-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .journey-icon {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
-  }
-
-  .journey-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .journey-card p {
-    font-size: 0.9rem;
-    flex-grow: 1;
-  }
-
-  .journey-tags {
-    margin-top: auto;
-    padding-top: 1rem;
-  }
-
-  /* Soft Skills Grid & Card Styles */
-  .soft-skills-grid {
+  /* Capability Matrix */
+  .matrix-categories-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1.5rem;
   }
 
-  @media (max-width: 768px) {
-    .soft-skills-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .soft-skill-card {
-    display: flex;
-    gap: 1.25rem;
+  .category-panel {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
     padding: 1.5rem;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-card);
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
-  .soft-skill-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  [data-theme="light"] .category-panel {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
 
-  :global([data-theme="dark"]) .soft-skill-card:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .soft-skill-icon {
-    font-size: 1.75rem;
-    line-height: 1;
+  .category-panel-head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 10px;
-    background-color: var(--secondary-light);
-    color: var(--secondary);
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  [data-theme="light"] .category-panel-head {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .cat-idx {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  .cat-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .cat-title {
+    color: #111827;
+  }
+
+  .skills-spec-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skill-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0.65rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+
+  [data-theme="light"] .skill-spec-row {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .skill-spec-row:hover {
+    border-color: rgba(1, 172, 106, 0.35);
+    background: rgba(1, 172, 106, 0.04);
+  }
+
+  .skill-name-col {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .skill-icon-terminal {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .skill-telemetry-col {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     flex-shrink: 0;
   }
 
-  :global([data-theme="dark"]) .soft-skill-icon {
-    background-color: rgba(57, 123, 201, 0.1);
-    color: var(--secondary-dark);
+  .skill-track-bar {
+    width: 65px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
   }
 
-  .soft-skill-content h3 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.15rem;
-    color: var(--text-main);
+  [data-theme="light"] .skill-track-bar {
+    background: rgba(0, 0, 0, 0.08);
   }
 
-  .soft-skill-content p {
+  .skill-fill-bar {
+    height: 100%;
+    background: var(--primary, #01ac6a);
+    border-radius: 3px;
+  }
+
+  .skill-level-pill {
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .pill-adv {
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+  [data-theme="light"] .pill-adv {
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+  }
+
+  .pill-mid {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+  [data-theme="light"] .pill-mid {
+    color: #1d4ed8;
+    border-color: rgba(37, 99, 235, 0.35);
+  }
+
+  .pill-learn {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  [data-theme="light"] .pill-learn {
+    color: #b45309;
+    border-color: rgba(217, 119, 6, 0.35);
+  }
+
+  /* Work Experience Unit */
+  .experience-cockpit-unit {
+    background: #080808;
+    border: 1px solid rgba(1, 172, 106, 0.28);
+    border-radius: 8px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-theme="light"] .experience-cockpit-unit {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  }
+
+  .exp-top-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+  }
+
+  [data-theme="light"] .exp-top-banner {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .exp-caliper-id {
+    font-size: 0.72rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .exp-role-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 0.4rem 0;
+  }
+
+  [data-theme="light"] .exp-role-title {
+    color: #111827;
+  }
+
+  .exp-entity-sub {
+    font-size: 0.88rem;
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .exp-entity-sub {
+    color: #4b5563;
+  }
+
+  .exp-entity-sub strong {
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .exp-entity-sub strong {
+    color: #111827;
+  }
+
+  .exp-status-chip {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(1, 172, 106, 0.1);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+
+  [data-theme="light"] .exp-status-chip {
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+  }
+
+  .status-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 6px var(--primary, #01ac6a);
+    animation: ledPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes ledPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  .exp-summary-text {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+  }
+
+  [data-theme="light"] .exp-summary-text {
+    color: #374151;
+  }
+
+  .exp-bullet-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .log-entry-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+
+  [data-theme="light"] .log-entry-item {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .bullet-prompt {
+    font-size: 0.72rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .log-entry-item p {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #d1d5db;
     margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--text-muted);
+  }
+
+  [data-theme="light"] .log-entry-item p {
+    color: #374151;
+  }
+
+  .log-entry-item strong {
+    color: #ffffff;
+  }
+
+  [data-theme="light"] .log-entry-item strong {
+    color: #111827;
+  }
+
+  /* Engineering Tenets Grid */
+  .tenets-cockpit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .tenet-card {
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="light"] .tenet-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  }
+
+  .tenet-card:hover {
+    border-color: rgba(1, 172, 106, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .tenet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+  }
+
+  .tenet-code {
+    font-size: 0.68rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .tenet-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(1, 172, 106, 0.1);
+    color: var(--primary, #01ac6a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .tenet-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+  }
+
+  [data-theme="light"] .tenet-title {
+    color: #111827;
+  }
+
+  .tenet-desc {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #9ca3af;
+    margin: 0;
+  }
+
+  [data-theme="light"] .tenet-desc {
+    color: #4b5563;
+  }
+
+  .text-primary {
+    color: var(--primary, #01ac6a);
+  }
+
+  @media (max-width: 768px) {
+    .cockpit-title {
+      font-size: 1.85rem;
+    }
+    .matrix-categories-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
-
-

@@ -4,210 +4,298 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title="404: Page Not Found | Abdul Rehman Portfolio"
-  description="The requested page could not be found on this systems server."
+  title="404: Segmentation Fault | Abdul Rehman"
+  description="The requested route does not resolve in the current system kernel workspace."
 >
-  <div class="error-container">
-    <div class="error-card card">
-      <div class="error-header-visual">
-        <span class="error-code">404</span>
-        <div class="glow-effect"></div>
-      </div>
-      
-      <div class="error-content">
-        <h1>Segment Fault: Path Not Found</h1>
-        <p class="error-tagline">The requested URL was not found or is currently undergoing maintenance.</p>
-        
-        <div class="terminal-box">
-          <div class="terminal-header">
-            <span class="terminal-dot dot-red"></span>
-            <span class="terminal-dot dot-yellow"></span>
-            <span class="terminal-dot dot-green"></span>
-            <span class="terminal-title">systems-monitor</span>
-          </div>
-          <div class="terminal-body">
-            <p class="line-output error-text"><span class="output-red">[ERR]</span> Page segment not resolved in active workspace.</p>
-            <p class="line-output"><span class="output-gray">Target:</span> {Astro.url.pathname}</p>
-            <p class="line-output"><span class="output-gray">Status:</span> 404_PAGE_MISSING</p>
-            <p class="line-cmd"><span class="prompt">$</span> navigate --target=home <span class="cursor">▒</span></p>
-          </div>
+  <div class="fault-container">
+    
+    <!-- Caliper Bar -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[STATUS: SEGMENTATION FAULT 0x00000194]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">INTERRUPT: POSIX_SIGSEGV</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">RECOVERY: READY</span>
+    </div>
+
+    <!-- Fault Cockpit Box -->
+    <div class="fault-box">
+      <div class="fault-terminal-top">
+        <div class="terminal-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
         </div>
-        
-        <div class="error-actions mt-lg">
-          <a href={base} class="btn btn-primary">
-            <i class="fas fa-home"></i> Return to Homepage
+        <span class="terminal-title">arehman@kernel-ops:~/fault-diagnostic</span>
+        <span class="terminal-err-tag">ERR: 404_PAGE_MISSING</span>
+      </div>
+
+      <div class="fault-body">
+        <div class="fault-code-display">
+          <span class="err-num">404</span>
+          <span class="err-type">SEGMENTATION_FAULT: UNMAPPED_VIRTUAL_ADDRESS</span>
+        </div>
+
+        <div class="terminal-dump">
+          <div class="dump-line"><span class="dump-prompt">kernel:</span> [PANIC] Memory access violation at requested URI.</div>
+          <div class="dump-line"><span class="dump-prompt">virtual_memory:</span> 0xDEADBEEF &rarr; 0x00000000 [NULL_POINTER]</div>
+          <div class="dump-line"><span class="dump-prompt">process_state:</span> Thread PID 404 dumped core. No permanent damage.</div>
+          <div class="dump-line dump-solution"><span class="dump-prompt text-success">&gt;_ recovery:</span> Automated fallbacks online. Choose a valid recovery route below.</div>
+        </div>
+
+        <div class="fault-actions">
+          <a href={base} class="action-btn btn-home">
+            <i class="fas fa-terminal"></i>
+            <span>Return to Systems Cockpit</span>
+          </a>
+          <a href={`${base}projects/`} class="action-btn btn-schem">
+            <i class="fas fa-microchip"></i>
+            <span>Inspect Schematics</span>
+          </a>
+          <a href={`${base}articles/`} class="action-btn btn-ghost">
+            <i class="fas fa-book"></i>
+            <span>System Incident Logs</span>
           </a>
         </div>
       </div>
     </div>
+
   </div>
 </BaseLayout>
 
 <style>
-  .error-container {
+  .fault-container {
+    max-width: 760px;
+    margin: 1.5rem auto 3rem auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: #e5e7eb;
+  }
+
+  [data-theme="light"] .fault-container {
+    color: #1f2937;
+  }
+
+  /* Caliper Bar */
+  .caliper-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 120px);
-    padding: 2rem 1.5rem;
-  }
-
-  .error-card {
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    padding: 3rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .error-header-visual {
-    position: relative;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: #ef4444;
     margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .error-code {
-    font-size: 7.5rem;
-    font-weight: 800;
-    font-family: var(--font-sans);
-    line-height: 1;
-    background: linear-gradient(135deg, var(--green-500) 0%, var(--blue-500) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 8px rgba(1, 172, 106, 0.15));
-    letter-spacing: -0.05em;
-  }
-
-  .glow-effect {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, rgba(1, 172, 106, 0.15) 0%, rgba(57, 123, 201, 0) 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .error-content h1 {
-    font-size: 1.8rem;
+  .caliper-tag {
+    letter-spacing: 0.04em;
     font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
   }
 
-  .error-tagline {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
+  .caliper-div {
+    color: #6b7280;
   }
 
-  /* Terminal Styling */
-  .terminal-box {
-    background-color: var(--bg-terminal);
-    border: 1px solid var(--border-color);
+  /* Fault Box */
+  .fault-box {
+    background: #080808;
+    border: 1px solid rgba(239, 68, 68, 0.35);
     border-radius: 8px;
-    text-align: left;
-    box-shadow: var(--shadow-md);
-    margin-bottom: 2rem;
-    font-family: var(--font-mono);
+    overflow: hidden;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.08);
   }
 
-  .terminal-header {
-    background-color: var(--bg-card);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
+  [data-theme="light"] .fault-box {
+    background: #ffffff;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .fault-terminal-top {
+    background: #141414;
+    padding: 8px 14px;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.72rem;
   }
 
-  .terminal-dot {
+  [data-theme="light"] .fault-terminal-top {
+    background: #f9fafb;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    display: inline-block;
   }
-
-  .dot-red { background-color: #ff5f56; }
-  .dot-yellow { background-color: #ffbd2e; }
-  .dot-green { background-color: #27c93f; }
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #10b981; }
 
   .terminal-title {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-left: auto;
-  }
-
-  .terminal-body {
-    padding: 1.2rem;
-    font-size: 0.88rem;
-  }
-
-  .line-output {
-    margin-bottom: 0.5rem;
-    color: var(--text-main);
-    line-height: 1.4;
-  }
-
-  .line-cmd {
-    margin-top: 0.8rem;
-    color: var(--text-main);
-  }
-
-  .prompt {
-    color: var(--primary);
-    font-weight: bold;
-  }
-
-  .output-red {
-    color: #ff5f56;
+    color: #9ca3af;
     font-weight: 600;
   }
 
-  .output-gray {
-    color: var(--text-muted);
+  [data-theme="light"] .terminal-title {
+    color: #4b5563;
   }
 
-  .cursor {
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background-color: var(--primary);
-    animation: blink 1s step-end infinite;
-    vertical-align: middle;
-    margin-left: 2px;
+  .terminal-err-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
   }
 
-  @keyframes blink {
-    from, to { background-color: transparent }
-    50% { background-color: var(--primary) }
+  .fault-body {
+    padding: 2rem;
+    text-align: center;
   }
 
-  .error-actions {
+  .fault-code-display {
+    margin-bottom: 1.5rem;
+  }
+
+  .err-num {
+    display: block;
+    font-size: 5.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #ef4444;
+    text-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
+    letter-spacing: -0.04em;
+  }
+
+  .err-type {
+    display: block;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    letter-spacing: 0.08em;
+    margin-top: 0.5rem;
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .err-type {
+    color: #4b5563;
+  }
+
+  .terminal-dump {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.76rem;
+  }
+
+  [data-theme="light"] .terminal-dump {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .dump-prompt {
+    color: #ef4444;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  .dump-solution .dump-prompt {
+    color: #01ac6a;
+  }
+
+  .dump-line {
+    color: #d1d5db;
+  }
+
+  [data-theme="light"] .dump-line {
+    color: #374151;
+  }
+
+  .text-success {
+    color: #01ac6a;
+  }
+
+  .fault-actions {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
-  @media (max-width: 599px) {
-    .error-code {
-      font-size: 5.5rem;
-    }
-    .error-card {
-      padding: 2rem 1.2rem;
-    }
-    .error-content h1 {
-      font-size: 1.5rem;
-    }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .btn-home {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border: 1px solid var(--primary, #01ac6a);
+  }
+
+  .btn-home:hover {
+    background: #00c47a;
+    box-shadow: 0 0 14px rgba(1, 172, 106, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-schem {
+    background: rgba(1, 172, 106, 0.1);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+
+  .btn-schem:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .btn-ghost {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #374151;
+  }
+
+  .btn-ghost:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  [data-theme="light"] .btn-ghost:hover {
+    color: #111827;
+    border-color: rgba(0, 0, 0, 0.2);
   }
 </style>

@@ -8,202 +8,234 @@ interface Props {
 const { className = '' } = Astro.props;
 ---
 
-<section class={`tech-stack-section card ${className}`.trim()} aria-labelledby="tech-stack-heading">
-  <div class="tech-stack-header">
-    <div class="tech-stack-title-wrap">
-      <h3 id="tech-stack-heading" class="tech-stack-title">
-        <i class="fa-solid fa-layer-group tech-stack-heading-icon"></i> Complete Tech Stack &amp; Toolbelt
+<div class={`cockpit-toolbelt-box ${className}`.trim()} aria-labelledby="tech-stack-heading">
+  <!-- Toolbelt Caliper Header -->
+  <div class="toolbelt-head">
+    <div class="toolbelt-title-block">
+      <span class="toolbelt-caliper-tag">[SPEC-MATRIX: TOOLBELT &amp; RUNTIME COMPILERS]</span>
+      <h3 id="tech-stack-heading" class="toolbelt-title">
+        <i class="fas fa-layer-group text-primary"></i> Complete Tech Stack &amp; Toolbelt
       </h3>
-      <p class="tech-stack-subtitle">
-        Languages, frameworks, Linux utilities, infrastructure tools, and platforms I have built and worked with.
+      <p class="toolbelt-subtitle">
+        Hardened runtimes, compiler toolchains, Linux utilities, network protocols, and infrastructure frameworks.
       </p>
     </div>
-    <div class="tech-stack-legend" aria-label="Tech stack proficiency legend">
-      <span class="legend-item">
-        <span class="legend-dot legend-dot-core"></span> Core / Daily Driver
+
+    <!-- Telemetry Legend -->
+    <div class="toolbelt-legend" aria-label="Toolbelt proficiency legend">
+      <span class="legend-chip legend-core">
+        <span class="legend-indicator dot-core"></span>
+        <span>CORE / DAILY DRIVER</span>
       </span>
-      <span class="legend-item">
-        <span class="legend-dot legend-dot-worked"></span> Worked With
+      <span class="legend-chip legend-worked">
+        <span class="legend-indicator dot-worked"></span>
+        <span>DEPLOYED / WORKED WITH</span>
       </span>
     </div>
   </div>
 
-  <div class="tech-pill-wall">
+  <!-- Chip Wall -->
+  <div class="tech-chip-grid">
     {techStackData.map((tech) => (
-      <span class={`tech-pill ${tech.isCore ? 'tech-pill-core' : ''}`}>
-        {tech.isCore && <span class="pill-core-dot" aria-hidden="true"></span>}
-        <i class={`${tech.icon} pill-icon`} aria-hidden="true"></i>
-        <span class="pill-label">{tech.name}</span>
-      </span>
+      <div class={`tech-spec-chip ${tech.isCore ? 'chip-core' : 'chip-regular'}`}>
+        <span class={`spec-dot ${tech.isCore ? 'dot-active' : 'dot-passive'}`}></span>
+        <i class={`${tech.icon} chip-icon`} aria-hidden="true"></i>
+        <span class="chip-name">{tech.name}</span>
+      </div>
     ))}
   </div>
-</section>
+</div>
 
 <style>
-  .tech-stack-section {
-    padding: 1.75rem 2rem;
-    border-top: 3px solid var(--primary);
-  }
-
-  .tech-stack-section:hover {
-    transform: none;
-  }
-
-  .tech-stack-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-bottom: 1.15rem;
-    margin-bottom: 1.35rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .tech-stack-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.3rem;
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-  }
-
-  .tech-stack-heading-icon {
-    color: var(--primary);
-    font-size: 1.15rem;
-  }
-
-  .tech-stack-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 0;
-  }
-
-  .tech-stack-legend {
-    display: flex;
-    align-items: center;
-    gap: 1.15rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    flex-shrink: 0;
-  }
-
-  .legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .legend-dot-core {
-    background-color: var(--primary);
-    box-shadow: 0 0 6px rgba(1, 172, 106, 0.65);
-  }
-
-  .legend-dot-worked {
-    border: 1.5px solid var(--text-muted);
-    background-color: transparent;
-  }
-
-  .tech-pill-wall {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-  }
-
-  .tech-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.48rem;
-    padding: 0.42rem 0.85rem;
+  .cockpit-toolbelt-box {
+    background: #080808;
+    border: 1px solid rgba(1, 172, 106, 0.25);
     border-radius: 8px;
-    font-size: 0.86rem;
-    font-weight: 500;
-    color: var(--text-main);
-    background-color: var(--secondary-light);
-    border: 1px solid rgba(57, 123, 201, 0.2);
-    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-    user-select: none;
+    padding: 1.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    margin: 1.5rem 0;
   }
 
-  :global([data-theme="dark"]) .tech-pill {
-    background-color: rgba(57, 123, 201, 0.1);
-    border-color: rgba(57, 123, 201, 0.25);
-    color: var(--text-main);
+  [data-theme="light"] .cockpit-toolbelt-box {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
 
-  .tech-pill .pill-icon {
-    font-size: 0.92rem;
-    color: var(--secondary);
-    transition: color 0.2s ease, transform 0.2s ease;
+  .toolbelt-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
   }
 
-  .tech-pill:hover,
-  :global([data-theme="dark"]) .tech-pill:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-    background-color: rgba(1, 172, 106, 0.08);
-    box-shadow: var(--shadow-sm);
+  [data-theme="light"] .toolbelt-head {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .tech-pill:hover .pill-icon,
-  :global([data-theme="dark"]) .tech-pill:hover .pill-icon {
-    color: var(--primary);
-    transform: scale(1.08);
+  .toolbelt-caliper-tag {
+    font-size: 0.68rem;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.35rem;
   }
 
-  /* Core / Daily Driver Pill Accent */
-  .tech-pill.tech-pill-core {
-    background-color: rgba(1, 172, 106, 0.1);
-    border-color: rgba(1, 172, 106, 0.38);
-    font-weight: 600;
+  .toolbelt-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  :global([data-theme="dark"]) .tech-pill.tech-pill-core {
-    background-color: rgba(1, 172, 106, 0.14);
-    border-color: rgba(1, 172, 106, 0.45);
+  [data-theme="light"] .toolbelt-title {
+    color: #111827;
   }
 
-  .tech-pill.tech-pill-core .pill-icon {
-    color: var(--primary);
+  .toolbelt-subtitle {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.88rem;
+    color: #9ca3af;
+    margin: 0;
+    line-height: 1.5;
   }
 
-  .pill-core-dot {
+  [data-theme="light"] .toolbelt-subtitle {
+    color: #4b5563;
+  }
+
+  /* Legend */
+  .toolbelt-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-chip {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #9ca3af;
+  }
+
+  [data-theme="light"] .legend-chip {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
+  }
+
+  .legend-indicator {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: var(--primary);
-    box-shadow: 0 0 6px rgba(1, 172, 106, 0.65);
+  }
+
+  .dot-core {
+    background: #01ac6a;
+    box-shadow: 0 0 6px #01ac6a;
+  }
+
+  .dot-worked {
+    border: 1.5px solid #9ca3af;
+    background: transparent;
+  }
+
+  /* Grid of Chips */
+  .tech-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tech-spec-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.38rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    user-select: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    color: #d1d5db;
+  }
+
+  [data-theme="light"] .tech-spec-chip {
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #1f2937;
+  }
+
+  .tech-spec-chip:hover {
+    border-color: rgba(1, 172, 106, 0.5);
+    background: rgba(1, 172, 106, 0.05);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+
+  [data-theme="light"] .tech-spec-chip:hover {
+    color: #017a4b;
+    background: rgba(1, 172, 106, 0.08);
+    border-color: #01ac6a;
+  }
+
+  .chip-core {
+    border-color: rgba(1, 172, 106, 0.35);
+    background: rgba(1, 172, 106, 0.08);
+    color: #e5e7eb;
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .chip-core {
+    background: rgba(1, 172, 106, 0.08);
+    border-color: rgba(1, 172, 106, 0.4);
+    color: #017a4b;
+    font-weight: 700;
+  }
+
+  .spec-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
     flex-shrink: 0;
   }
 
-  .tech-pill.tech-pill-core:hover,
-  :global([data-theme="dark"]) .tech-pill.tech-pill-core:hover {
-    background-color: rgba(1, 172, 106, 0.2);
-    box-shadow: 0 4px 14px rgba(1, 172, 106, 0.22);
-    border-color: var(--primary);
+  .dot-active {
+    background: #01ac6a;
+    box-shadow: 0 0 6px rgba(1, 172, 106, 0.8);
   }
 
-  @media (max-width: 639px) {
-    .tech-stack-section {
-      padding: 1.35rem 1.25rem;
-    }
+  .dot-passive {
+    background: #6b7280;
+    opacity: 0.5;
+  }
 
-    .tech-stack-header {
-      align-items: flex-start;
-      flex-direction: column;
-    }
+  .chip-icon {
+    font-size: 0.85rem;
+    color: var(--primary, #01ac6a);
+  }
 
-    .tech-pill {
-      font-size: 0.82rem;
-      padding: 0.38rem 0.75rem;
-    }
+  .text-primary {
+    color: var(--primary, #01ac6a);
   }
 </style>
