@@ -4,111 +4,129 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title="Hire Me & Resume | Abdul Rehman Portfolio"
-  description="Contact Abdul Rehman for system administration and Python development opportunities. Download my resume and view contact details."
+  title="Engineering Handshake & Resume | Abdul Rehman"
+  description="Establish an engineering connection with Abdul Rehman. Inspect curriculum vitae, review availability, and discuss systems opportunities."
 >
-  <div class="hire-container">
-    <header class="page-header">
-      <span class="eyebrow">Ready for Collaboration</span>
-      <h1>Hire Me / Let's Connect</h1>
-      <p class="tagline">Review my resume and get in touch to discuss positions, collaborations, or opportunities.</p>
+  <div class="handshake-container">
+    <!-- Caliper Bar -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[PROTOCOL: TCP/IP SYN-ACK]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: READY FOR ENG OPS</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">NODE: ISLAMABAD, PK (UTC+5)</span>
+    </div>
+
+    <header class="catalog-page-header">
+      <span class="catalog-eyebrow">01 // ESTABLISH CONNECTION &amp; INSPECT CREDENTIALS</span>
+      <h1 class="catalog-title">Engineering Handshake</h1>
+      <p class="catalog-tagline">
+        Open for systems development, multithreaded automation pipelines, and Linux infrastructure engineering opportunities.
+      </p>
     </header>
 
-    <div class="hire-layout">
-      <!-- LEFT COLUMN: RESUME VIEWER -->
-      <div class="resume-column">
-        <div class="card resume-card-container">
-          <div class="resume-header">
-            <h3>Curriculum Vitae</h3>
+    <div class="handshake-layout">
+      <!-- Left Column: Resume Document Reader -->
+      <div class="cv-column">
+        <div class="cv-card">
+          <div class="cv-header">
+            <div class="cv-title-group">
+              <span class="cv-tag"><i class="fas fa-file-pdf text-primary"></i> SPECIFICATION: CV</span>
+              <h2 class="cv-title">Curriculum Vitae</h2>
+            </div>
             <a 
               href={`${base}assets/documents/resume-abdulrehman.pdf`} 
               download 
-              class="btn btn-primary btn-sm"
+              class="download-cv-btn"
               id="download-resume-btn"
             >
-              <i class="fas fa-download"></i> Download Resume
+              <i class="fas fa-download"></i>
+              <span>Download PDF</span>
             </a>
           </div>
-          
-          <div class="pdf-viewer-container">
+
+          <div class="pdf-viewer-box">
             <iframe 
               src={`${base}assets/documents/resume-abdulrehman.pdf`} 
-              title="Abdul Rehman's Resume" 
+              title="Abdul Rehman's Curriculum Vitae" 
               width="100%" 
-              height="600px"
+              height="620px"
               class="pdf-iframe"
             >
-              <p>It appears you don't have a PDF plugin for this browser. No problem! You can 
-                <a href={`${base}assets/documents/resume-abdulrehman.pdf`}>click here to download the PDF file.</a>
+              <p>Your browser does not embed PDFs inline. 
+                <a href={`${base}assets/documents/resume-abdulrehman.pdf`}>Download the PDF directly</a>.
               </p>
             </iframe>
           </div>
-          <div class="mobile-pdf-notice">
-            <div class="notice-icon"><i class="fas fa-file-pdf"></i></div>
-            <p>Resume is available to download. Access on desktop to view the interactive PDF reader.</p>
-            <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="btn btn-primary w-full justify-center">
-              <i class="fas fa-download"></i> Get PDF Copy
+
+          <div class="mobile-cv-action">
+            <p>Access on desktop for the interactive PDF viewport.</p>
+            <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="download-cv-btn w-full">
+              <i class="fas fa-download"></i> Get Official PDF Copy
             </a>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: CONTACT DETAILS & CARD -->
-      <div class="contact-column">
-        <div class="card contact-details-card">
-          <h2>Let's Work Together</h2>
-          <p class="intro-contact-text">
-            I am currently open to opportunities in system administration, Linux management, junior infrastructure roles, and scripting/automation projects.
-          </p>
+      <!-- Right Column: Protocol Handshake & Direct Channels -->
+      <div class="protocol-column">
+        <div class="protocol-card">
+          <div class="status-banner">
+            <span class="status-indicator-pulse"></span>
+            <div class="status-banner-text">
+              <strong>OPERATIONAL STATUS: READY</strong>
+              <span>Available for Full-time Roles &amp; Engineering Contracts</span>
+            </div>
+          </div>
 
-          <div class="info-block-list">
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-envelope"></i></div>
-              <div class="info-details">
-                <span class="info-label">Email</span>
-                <span class="info-value"><a href="mailto:arehman.dev@proton.me">arehman.dev@proton.me</a></span>
+          <h3 class="protocol-heading">Direct Channels</h3>
+          
+          <div class="channel-list">
+            <div class="channel-item">
+              <div class="channel-icon"><i class="fas fa-envelope"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">ENCRYPTED EMAIL</span>
+                <a href="mailto:arehman.dev@proton.me" class="channel-val">arehman.dev@proton.me</a>
               </div>
             </div>
-            
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div class="info-details">
-                <span class="info-label">Location</span>
-                <span class="info-value">Islamabad, Pakistan / Remote</span>
+
+            <div class="channel-item">
+              <div class="channel-icon"><i class="fas fa-location-dot"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">STATION NODE</span>
+                <span class="channel-val">Islamabad, Pakistan / Remote</span>
+              </div>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon"><i class="far fa-clock"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">RESPONSE SLA</span>
+                <span class="channel-val">&lt; 24-48 Hours</span>
               </div>
             </div>
           </div>
 
-          <div class="status-grid mt-lg">
-            <div class="status-card">
-              <span class="status-icon"><i class="far fa-clock"></i></span>
-              <strong>Response Time</strong>
-              <span>Within 24-48 hours</span>
-            </div>
-            <div class="status-card">
-              <span class="status-icon"><i class="fas fa-check-circle"></i></span>
-              <strong>Availability</strong>
-              <span>Open to opportunities</span>
-            </div>
-          </div>
-
-          <div class="contact-action mt-lg">
-            <a href="mailto:arehman.dev@proton.me" class="btn btn-secondary w-full justify-center email-btn" id="email-me-btn">
-              <i class="fas fa-paper-plane"></i> Email Me Directly
+          <!-- Direct Email Action -->
+          <div class="direct-email-box">
+            <a href="mailto:arehman.dev@proton.me" class="send-handshake-btn">
+              <i class="fas fa-paper-plane"></i>
+              <span>Initiate Handshake via Email</span>
             </a>
           </div>
 
-          <div class="socials-container mt-lg">
-            <p class="socials-header">Connect across networks</p>
-            <div class="socials-links-grid">
-              <a href="https://github.com/arehman-dev" target="_blank" rel="noopener" class="social-link-btn flex align-center gap-md">
-                <i class="fab fa-github"></i> GitHub
+          <!-- Networks Matrix -->
+          <div class="networks-box">
+            <span class="networks-label">DEVELOPER NETWORKS</span>
+            <div class="networks-grid">
+              <a href="https://github.com/arehman-dev" target="_blank" rel="noopener noreferrer" class="net-btn">
+                <i class="fab fa-github"></i> <span>GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/arehman-dev" target="_blank" rel="noopener" class="social-link-btn flex align-center gap-md">
-                <i class="fab fa-linkedin"></i> LinkedIn
+              <a href="https://linkedin.com/in/arehman-dev" target="_blank" rel="noopener noreferrer" class="net-btn">
+                <i class="fab fa-linkedin"></i> <span>LinkedIn</span>
               </a>
-              <a href="https://twitter.com/arehman_dev" target="_blank" rel="noopener" class="social-link-btn flex align-center gap-md">
-                <i class="fab fa-x-twitter"></i> X (Twitter)
+              <a href="https://twitter.com/arehman_dev" target="_blank" rel="noopener noreferrer" class="net-btn">
+                <i class="fab fa-x-twitter"></i> <span>X (Twitter)</span>
               </a>
             </div>
           </div>
@@ -119,256 +137,361 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 </BaseLayout>
 
 <style>
-  .hire-container {
-    max-width: 1100px;
+  .handshake-container {
+    max-width: 1140px;
     margin: 0 auto;
+    font-family: var(--font-sans, system-ui, sans-serif);
   }
 
-  .page-header {
-    margin-bottom: 3rem;
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
+  }
+
+  .caliper-div {
+    color: var(--primary, #01ac6a);
+  }
+
+  .catalog-page-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .catalog-eyebrow {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: var(--primary, #01ac6a);
+    font-size: 0.8rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.35rem;
   }
 
-  .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
+  .catalog-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
   }
 
-  /* Two Column Layout */
-  .hire-layout {
+  [data-theme="light"] .catalog-title {
+    color: #111827;
+  }
+
+  .catalog-tagline {
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 760px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .catalog-tagline {
+    color: #4b5563;
+  }
+
+  /* Layout */
+  .handshake-layout {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 2.5rem;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 1.75rem;
+    margin-bottom: 3.5rem;
     align-items: start;
   }
 
-  @media (max-width: 1023px) {
-    .hire-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Resume Column */
-  .resume-card-container {
+  .cv-card, .protocol-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    border-radius: 8px;
     padding: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   }
 
-  .resume-header {
+  [data-theme="light"] .cv-card, [data-theme="light"] .protocol-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  /* CV Header */
+  .cv-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .resume-header h3 {
-    margin-bottom: 0;
-  }
-
-  .pdf-viewer-container {
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    background-color: var(--gray-50);
-  }
-
-  .pdf-iframe {
-    display: block;
-    border: none;
-  }
-
-  .mobile-pdf-notice {
-    display: none;
-    text-align: center;
-    padding: 2rem 1rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .notice-icon {
-    font-size: 3rem;
-    color: var(--primary);
-  }
-
-  @media (max-width: 768px) {
-    .pdf-viewer-container {
-      display: none;
-    }
-
-    .mobile-pdf-notice {
-      display: flex;
-    }
-  }
-
-  /* Contact Details Column */
-  .contact-details-card {
-    border-top: 4px solid var(--primary);
-  }
-
-  .intro-contact-text {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .info-block-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .info-item {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .info-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    background-color: var(--primary-light);
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-
-  :global([data-theme="dark"]) .info-icon {
-    background-color: rgba(1, 172, 106, 0.1);
-  }
-
-  .info-details {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .info-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-family: var(--font-mono);
-  }
-
-  .info-value {
-    font-weight: 600;
-    color: var(--text-main);
-  }
-
-  .info-value a {
-    color: inherit;
-    transition: color var(--transition-speed);
-  }
-
-  .info-value a:hover {
-    color: var(--primary);
-  }
-
-  /* Status Mini Cards */
-  .status-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .status-card {
-    background-color: var(--gray-50);
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-card);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  :global([data-theme="dark"]) .status-card {
-    background-color: #222;
-  }
-
-  .status-icon {
-    font-size: 1.25rem;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .status-card strong {
-    font-size: 0.85rem;
-    margin-bottom: 0.2rem;
-    color: var(--text-main);
-  }
-
-  .status-card span {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  /* Email CTA Button */
-  .email-btn {
-    padding: 1rem;
-    font-size: 1.05rem;
-  }
-
-  /* Social Links Bottom List */
-  .socials-container {
-    border-top: 1px solid var(--border-color);
-    padding-top: 1.5rem;
-  }
-
-  .socials-header {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
     margin-bottom: 1rem;
-  }
-
-  .socials-links-grid {
-    display: flex;
-    flex-direction: column;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-wrap: wrap;
     gap: 0.75rem;
   }
 
-  .social-link-btn {
+  [data-theme="light"] .cv-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .cv-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .cv-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0;
+  }
+  [data-theme="light"] .cv-title {
+    color: #111827;
+  }
+
+  .download-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.76rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .download-cv-btn:hover {
+    background: #00c47a;
+    box-shadow: 0 0 12px rgba(1, 172, 106, 0.4);
+  }
+
+  .pdf-viewer-box {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #111;
+  }
+
+  .pdf-iframe {
+    border: none;
+    display: block;
+  }
+
+  .mobile-cv-action {
+    display: none;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+  }
+
+  /* Protocol Column */
+  .status-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.3);
     padding: 0.75rem 1rem;
-    border-radius: 8px;
-    background-color: var(--gray-50);
-    border: 1px solid var(--border-card);
-    color: var(--text-main);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .status-indicator-pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 10px var(--primary, #01ac6a);
+    animation: statusPulse 2s infinite ease-in-out;
+    flex-shrink: 0;
+  }
+
+  @keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.85); }
+  }
+
+  .status-banner-text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.74rem;
+  }
+  .status-banner-text strong {
+    color: var(--primary, #01ac6a);
+  }
+  .status-banner-text span {
+    color: #9ca3af;
+    font-size: 0.7rem;
+  }
+
+  .protocol-heading {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  [data-theme="light"] .protocol-heading {
+    color: #111827;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .channel-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .channel-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(1, 172, 106, 0.1);
+    color: var(--primary, #01ac6a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .channel-info {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.74rem;
+  }
+
+  .channel-label {
+    color: #6b7280;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
+
+  .channel-val {
+    color: #f3f4f6;
+    text-decoration: none;
     font-weight: 500;
-    transition: all var(--transition-speed);
+  }
+  [data-theme="light"] .channel-val {
+    color: #111827;
+  }
+  .channel-val:hover {
+    color: var(--primary, #01ac6a);
   }
 
-  :global([data-theme="dark"]) .social-link-btn {
-    background-color: #222;
+  .send-handshake-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.82rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
   }
 
-  .social-link-btn:hover {
-    background-color: var(--primary-light);
-    border-color: var(--primary);
-    color: var(--primary);
+  .send-handshake-btn:hover {
+    background: #00c47a;
+    box-shadow: 0 0 14px rgba(1, 172, 106, 0.4);
+    transform: translateY(-1px);
   }
 
-  :global([data-theme="dark"]) .social-link-btn:hover {
-    background-color: rgba(1, 172, 106, 0.1);
+  .networks-box {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  .social-link-btn i {
-    font-size: 1.2rem;
+  [data-theme="light"] .networks-box {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .networks-label {
+    display: block;
+    font-size: 0.68rem;
+    color: #6b7280;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .networks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .net-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    color: #d1d5db;
+    font-size: 0.72rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  [data-theme="light"] .net-btn {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #374151;
+  }
+
+  .net-btn:hover {
+    background: rgba(1, 172, 106, 0.12);
+    border-color: var(--primary, #01ac6a);
+    color: var(--primary, #01ac6a);
+  }
+
+  @media (max-width: 900px) {
+    .handshake-layout {
+      grid-template-columns: 1fr;
+    }
+    .pdf-viewer-box {
+      display: none;
+    }
+    .mobile-cv-action {
+      display: block;
+    }
   }
 </style>

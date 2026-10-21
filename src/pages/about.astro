@@ -3,225 +3,445 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<BaseLayout title="About Abdul Rehman | Python Developer">
-  <div class="about-container">
-    <header class="about-header">
-      <span class="eyebrow">A brief look into my background</span>
-      <h1>About Me</h1>
-      <p class="tagline">Python Developer &amp; Systems Enthusiast</p>
+<BaseLayout 
+  title="Engineering Dossier & Philosophy | Abdul Rehman"
+  description="Learn about Abdul Rehman's systems engineering background, Linux administration methodology, and software development creed."
+>
+  <div class="dossier-container">
+    <!-- Caliper Bar -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[DOSSIER: AR-DEV-PROFILE]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">NODE: ISLAMABAD, PK (33.6844° N, 73.0479° E)</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">CLEARANCE: VERIFIED SYSTEMS</span>
+    </div>
+
+    <header class="dossier-page-header">
+      <span class="dossier-eyebrow">01 // ENGINEERING DOSSIER &amp; OPERATIONAL PHILOSOPHY</span>
+      <h1 class="dossier-title">About the Engineer</h1>
+      <p class="dossier-tagline">
+        Specializing in C++ systems programming, automated Python data engines, and hardened Linux infrastructure with zero tolerance for technical fluff.
+      </p>
     </header>
 
-    <section class="about-content grid grid-2">
-      <div class="narrative">
-        <h2>My Journey &amp; Philosophy</h2>
-        <p>
-          Hello, I'm Abdul Rehman. I am a Python developer and systems enthusiast dedicated to building clean, secure, and highly automated applications. My journey into technology is driven by a deep curiosity of software execution flows, combined with a commitment to write script logic that scales and integrates smoothly.
-        </p>
-        <p>
-          My development philosophy is simple: <strong>code should be an elegant solution, not a complex puzzle</strong>. I focus on readability, PEP 8 standards, unit testing, and leveraging scripting to automate administrative tasks across Linux platforms.
-        </p>
-        <p>
-          I approach complex problems with a patient, root-cause analysis mindset. I view technical challenges as opportunities to expand my skill set, shaping a disciplined work ethic centered around continuous learning and technical rigor.
-        </p>
-        <div class="cta-box card mt-lg">
-          <h3><i class="fas fa-laptop-code cta-focus-icon"></i> Interested in how I work?</h3>
-          <p class="cta-desc">
-            Explore my technical proficiency dashboard, operational experience at <strong>InfraLayers</strong>, or reach out directly for engineering and automation opportunities.
+    <div class="dossier-content-grid">
+      <!-- Left Column: Narrative & Operational History -->
+      <div class="dossier-narrative">
+        <div class="dossier-card narrative-card">
+          <h2 class="card-head-title"><i class="fas fa-terminal text-primary"></i> The Engineering Creed</h2>
+          
+          <p>
+            Hello, I am <strong>Abdul Rehman</strong>. I am a systems developer and Linux automation engineer dedicated to building deterministic, secure, and maintainable software architectures. My technical journey is driven by deep curiosity into memory layouts, POSIX execution boundaries, and constructing operational pipelines that eliminate human error.
           </p>
-          <div class="flex gap-md flex-wrap">
-            <a href={`${base}skills-experience/`} class="btn btn-primary">
-              <i class="fas fa-arrow-right"></i> Skills &amp; Experience
-            </a>
-            <a href={`${base}hire-me/`} class="btn btn-outline">
-              Get in Touch
-            </a>
+
+          <p>
+            My engineering philosophy centers around a core principle: <strong>Code is a liability; execution is leverage</strong>. Every line written must justify its existence in latency, maintainability, and clarity. I enforce clean script modularity, strict PEP 8 standards, robust unit verification, and POSIX compliance across all Linux server deployments.
+          </p>
+
+          <p>
+            Operating with <strong>InfraLayers</strong>, I configure, harden, and monitor Linux environments (Debian, Ubuntu), designing automated cron/systemd daemons, local-first applications, and multithreaded data engines. I treat complex technical failures with patient root-cause analysis rather than superficial hotfixes.
+          </p>
+
+          <!-- Interactive Action Box -->
+          <div class="action-box">
+            <div class="action-box-head">
+              <span class="action-icon"><i class="fas fa-network-wired text-primary"></i></span>
+              <strong>Interested in how I engineer systems?</strong>
+            </div>
+            <p class="action-desc">
+              Inspect my live capability matrix, review operational runbooks at InfraLayers, or establish an engineering handshake.
+            </p>
+            <div class="action-btn-group">
+              <a href={`${base}skills-experience/`} class="btn-dossier btn-primary">
+                <i class="fas fa-microchip"></i>
+                <span>Skills &amp; Experience</span>
+              </a>
+              <a href={`${base}hire-me/`} class="btn-dossier btn-outline">
+                <i class="fas fa-handshake"></i>
+                <span>Handshake Protocol</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="sidebar-cards">
-        <div class="card highlight-card">
-          <h3>Key Highlights</h3>
+      <!-- Right Column: Operating Highlights & Core Standards -->
+      <div class="dossier-sidebar">
+        <!-- Highlights Card -->
+        <div class="dossier-card highlights-card">
+          <h3 class="sidebar-card-title"><i class="fas fa-shield-halved text-primary"></i> Operational Focus</h3>
           <ul class="highlights-list">
             <li>
-              <div class="highlight-icon"><i class="fas fa-check"></i></div>
-              <div class="highlight-info">
-                <strong>Linux Environments</strong>
-                <p>Configuring, administering, and hardening Debian, Ubuntu, and general Linux distributions.</p>
+              <div class="hl-badge">01</div>
+              <div class="hl-text">
+                <strong>Hardened Linux Environments</strong>
+                <p>Provisioning, administering, and locking down Debian and Ubuntu server environments with systemd sandboxing.</p>
               </div>
             </li>
             <li>
-              <div class="highlight-icon"><i class="fas fa-check"></i></div>
-              <div class="highlight-info">
-                <strong>Automation First</strong>
-                <p>Developing custom Bash and Python workflows to handle backups, monitoring, and provisioning.</p>
+              <div class="hl-badge">02</div>
+              <div class="hl-text">
+                <strong>Automation Over Manual Toil</strong>
+                <p>Writing idempotent Bash and Python workflows for backup automation, log aggregation, and daemon management.</p>
               </div>
             </li>
             <li>
-              <div class="highlight-icon"><i class="fas fa-check"></i></div>
-              <div class="highlight-info">
-                <strong>Continuous Growth</strong>
-                <p>Currently specializing in Python scripts automation, software testing, and scientific computing tracks.</p>
+              <div class="hl-badge">03</div>
+              <div class="hl-text">
+                <strong>Continuous Verification &amp; Testing</strong>
+                <p>Integrating structured unit test suites, mock verification, and CI quality gates to guarantee zero regressions.</p>
               </div>
             </li>
           </ul>
         </div>
-        
-        <div class="card values-card-expanded mt-lg">
-          <h3>Core Values</h3>
-          <div class="value-item">
-            <h4><i class="fa-regular fa-circle-dot"></i> Purpose</h4>
-            <p>I aim to implement configurations that solve actual business and user problems, avoiding technological fluff for the sake of it.</p>
+
+        <!-- Values Card -->
+        <div class="dossier-card values-card">
+          <h3 class="sidebar-card-title"><i class="fas fa-gem text-primary"></i> Operating Standards</h3>
+          
+          <div class="value-row">
+            <span class="val-num">[V1]</span>
+            <div class="val-body">
+              <h4>Purpose</h4>
+              <p>Designing configurations that solve real user and operational bottlenecks, ruthlessly cutting technological fluff.</p>
+            </div>
           </div>
-          <div class="value-item">
-            <h4><i class="fa-regular fa-gem"></i> Integrity</h4>
-            <p>Ethical engineering and configuration is paramount. I enforce clean access layers, respect user data privacy, and maintain codebase transparency.</p>
+
+          <div class="value-row">
+            <span class="val-num">[V2]</span>
+            <div class="val-body">
+              <h4>Integrity</h4>
+              <p>Ethical engineering is paramount. I enforce clean access boundaries, respect privacy, and ensure codebase transparency.</p>
+            </div>
           </div>
-          <div class="value-item">
-            <h4><i class="fa-regular fa-star"></i> Excellence</h4>
-            <p>Every script I write, library I configure, and deployment I setup is crafted to the highest quality, following standards.</p>
+
+          <div class="value-row">
+            <span class="val-num">[V3]</span>
+            <div class="val-body">
+              <h4>Excellence (Iḥsān)</h4>
+              <p>Every script, library configuration, and deployment is crafted to standard conventions with zero compiler warnings.</p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .about-container {
-    max-width: 1000px;
+  .dossier-container {
+    max-width: 1140px;
     margin: 0 auto;
+    font-family: var(--font-sans, system-ui, sans-serif);
   }
 
-  .about-header {
-    margin-bottom: 3rem;
-  }
-
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .tagline {
-    font-size: 1.25rem;
-    color: var(--secondary);
-    font-weight: 500;
-    margin-top: 0.25rem;
-  }
-
-  .about-content {
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-  }
-
-  @media (max-width: 1023px) {
-    .about-content {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-  }
-
-  .narrative p {
-    font-size: 1.05rem;
-    line-height: 1.7;
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
     margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .cta-box {
-    padding: 1.35rem 1.6rem;
-    border-left: 4px solid var(--primary);
-    background-color: var(--bg-card);
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
   }
 
-  .cta-box h3 {
+  .caliper-div {
+    color: var(--primary, #01ac6a);
+  }
+
+  .dossier-page-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .dossier-eyebrow {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: var(--primary, #01ac6a);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .dossier-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  [data-theme="light"] .dossier-title {
+    color: #111827;
+  }
+
+  .dossier-tagline {
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 760px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .dossier-tagline {
+    color: #4b5563;
+  }
+
+  /* Grid Layout */
+  .dossier-content-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 1.75rem;
+    margin-bottom: 3.5rem;
+    align-items: start;
+  }
+
+  .dossier-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    border-radius: 8px;
+    padding: 1.75rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+  }
+
+  [data-theme="light"] .dossier-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-head-title {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 1.25rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  [data-theme="light"] .card-head-title {
+    color: #111827;
+  }
+
+  .narrative-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #d1d5db;
+    margin-bottom: 1.25rem;
+  }
+
+  [data-theme="light"] .narrative-card p {
+    color: #374151;
+  }
+
+  .narrative-card strong {
+    color: #ffffff;
+  }
+  [data-theme="light"] .narrative-card strong {
+    color: #111827;
+  }
+
+  /* Action Box */
+  .action-box {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background: rgba(1, 172, 106, 0.06);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    border-radius: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  }
+
+  .action-box-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f3f4f6;
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
-    color: var(--text-main);
+  }
+  [data-theme="light"] .action-box-head {
+    color: #111827;
   }
 
-  .cta-focus-icon {
-    color: var(--primary);
-    margin-right: 0.5rem;
+  .action-desc {
+    font-size: 0.78rem !important;
+    color: #9ca3af !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1rem !important;
   }
 
-  .cta-desc {
-    font-size: 0.92rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 1.15rem !important;
-    color: var(--text-muted);
+  .action-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
 
-  .highlight-card {
-    background-color: var(--bg-card);
+  .btn-dossier {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
-  .highlights-list {
-    list-style: none;
+  .btn-primary {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+    border: 1px solid var(--primary, #01ac6a);
+  }
+  .btn-primary:hover {
+    background: #00c47a;
+    border-color: #00c47a;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.4);
+  }
+  .btn-outline:hover {
+    background: rgba(1, 172, 106, 0.12);
+  }
+
+  /* Sidebar */
+  .dossier-sidebar {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    margin-top: 1.5rem;
+  }
+
+  .sidebar-card-title {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  [data-theme="light"] .sidebar-card-title {
+    color: #111827;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  /* Highlights */
+  .highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .highlights-list li {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: flex-start;
   }
 
-  .highlight-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: var(--primary-light);
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hl-badge {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.12);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    padding: 2px 6px;
+    border-radius: 3px;
     flex-shrink: 0;
-    font-size: 0.8rem;
   }
 
-  :global([data-theme="dark"]) .highlight-icon {
-    background-color: rgba(1, 172, 106, 0.15);
-  }
-
-  .highlight-info strong {
+  .hl-text strong {
     display: block;
-    font-size: 1rem;
-    color: var(--text-main);
-    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+    color: #f3f4f6;
+    margin-bottom: 2px;
+  }
+  [data-theme="light"] .hl-text strong {
+    color: #111827;
   }
 
-  .highlight-info p {
-    font-size: 0.88rem;
-    margin-bottom: 0;
+  .hl-text p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    line-height: 1.45;
+  }
+  [data-theme="light"] .hl-text p {
+    color: #4b5563;
   }
 
-  .values-card-expanded {
+  /* Values */
+  .values-card {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
-  .value-item h4 {
+  .value-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-main);
-    margin-bottom: 0.25rem;
+    gap: 0.75rem;
+    align-items: flex-start;
   }
 
-  .value-item h4 i {
-    color: var(--primary);
+  .val-num {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
-  .value-item p {
-    font-size: 0.85rem;
-    margin-bottom: 0;
+  .val-body h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 2px 0;
+  }
+  [data-theme="light"] .val-body h4 {
+    color: #111827;
+  }
+
+  .val-body p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    line-height: 1.45;
+  }
+  [data-theme="light"] .val-body p {
+    color: #4b5563;
+  }
+
+  .text-primary {
+    color: var(--primary, #01ac6a);
+  }
+
+  @media (max-width: 900px) {
+    .dossier-content-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

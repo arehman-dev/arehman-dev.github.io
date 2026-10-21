@@ -1,57 +1,319 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CertificateCard from '../components/CertificateCard.astro';
 import { certificates } from '../data/certificates';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout 
-  title="Certificates & Credentials | Abdul Rehman"
-  description="View the professional certifications, courses, and credentials earned by Abdul Rehman, including Red Hat, LPIC, and Python certifications."
+  title="Verified Credentials & Standards | Abdul Rehman"
+  description="View the professional engineering certifications and accredited credentials earned by Abdul Rehman."
 >
-  <div class="certificates-container">
-    <header class="page-header">
-      <span class="eyebrow">Validating Technical Skills</span>
-      <h1>Certificates &amp; Credentials</h1>
-      <p class="tagline">A catalog of my professional credentials and ongoing technical examination tracks.</p>
+  <div class="credentials-catalog-container">
+    <!-- Caliper Bar -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[REGISTRY: AR-CERT-VERIFIED]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STANDARDS: GOOGLE / PYTHON / LINUX</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">COUNT: {certificates.length} ACCREDITED STANDARDS</span>
+    </div>
+
+    <header class="catalog-page-header">
+      <span class="catalog-eyebrow">01 // VERIFIED CRYPTOGRAPHIC &amp; TECHNICAL CREDENTIALS</span>
+      <h1 class="catalog-title">Credentials Registry</h1>
+      <p class="catalog-tagline">
+        Accredited specializations covering Google IT Automation with Python, Scientific Computing, systems administration, and software verification standards.
+      </p>
     </header>
 
-    <div class="grid grid-1">
-      {certificates.map((cert) => (
-        <CertificateCard certificate={cert} />
-      ))}
+    <!-- Credentials Grid -->
+    <div class="credentials-grid">
+      {certificates.map((cert, idx) => {
+        const regId = `REG-0x${(idx + 1).toString(16).padStart(2, '0').toUpperCase()}`;
+        const isCompleted = cert.status.toLowerCase() === 'completed';
+
+        return (
+          <article class="credential-card">
+            <div class="cred-header">
+              <div class="cred-reg-info">
+                <span class="cred-reg-id">[{regId}]</span>
+                <span class="cred-issuer"><i class="far fa-building text-primary"></i> {cert.issuer}</span>
+              </div>
+              <span class={`status-badge ${isCompleted ? 'status-completed' : 'status-in-progress'}`}>
+                <span class="status-indicator"></span>
+                {cert.status.toUpperCase()}
+              </span>
+            </div>
+
+            <div class="cred-body">
+              <h2 class="cred-title">
+                <a href={`${base}certificates/${cert.slug}/`}>{cert.title}</a>
+              </h2>
+              <p class="cred-desc">{cert.description}</p>
+            </div>
+
+            <div class="cred-footer">
+              <div class="cred-meta">
+                <span class="cred-date"><i class="far fa-calendar-alt"></i> {cert.date}</span>
+                {cert.duration && (
+                  <span class="cred-duration"><i class="far fa-clock"></i> {cert.duration}</span>
+                )}
+              </div>
+              <a href={`${base}certificates/${cert.slug}/`} class="inspect-cred-btn" title="Inspect Credential Verification">
+                <span>inspect credential</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .certificates-container {
-    max-width: 900px;
+  .credentials-catalog-container {
+    max-width: 1000px;
     margin: 0 auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  .page-header {
-    margin-bottom: 3rem;
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
+  }
+
+  .caliper-div {
+    color: var(--primary, #01ac6a);
+  }
+
+  .catalog-page-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .catalog-eyebrow {
+    color: var(--primary, #01ac6a);
+    font-size: 0.8rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.35rem;
   }
 
-  .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
+  .catalog-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
   }
 
-  /* Specific vertical listing styling */
-  .grid-1 {
+  [data-theme="light"] .catalog-title {
+    color: #111827;
+  }
+
+  .catalog-tagline {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1rem;
+    color: #9ca3af;
+    max-width: 760px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  [data-theme="light"] .catalog-tagline {
+    color: #4b5563;
+  }
+
+  /* Grid Layout */
+  .credentials-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .credential-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="light"] .credential-card {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .credential-card:hover {
+    border-color: var(--primary, #01ac6a);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(1, 172, 106, 0.1);
+  }
+
+  .cred-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.5rem;
+    font-size: 0.74rem;
+  }
+
+  [data-theme="light"] .cred-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .cred-reg-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cred-reg-id {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .cred-issuer {
+    color: #9ca3af;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .status-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .status-completed {
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
+    border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+  .status-completed .status-indicator {
+    background: var(--primary, #01ac6a);
+  }
+
+  .status-in-progress {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  .status-in-progress .status-indicator {
+    background: #f59e0b;
+  }
+
+  /* Body */
+  .cred-title {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.35;
+  }
+
+  .cred-title a {
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  [data-theme="light"] .cred-title a {
+    color: #111827;
+  }
+
+  .cred-title a:hover {
+    color: var(--primary, #01ac6a);
+  }
+
+  .cred-desc {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    color: #9ca3af;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  [data-theme="light"] .cred-desc {
+    color: #4b5563;
+  }
+
+  /* Footer */
+  .cred-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 0.6rem;
+    font-size: 0.72rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  [data-theme="light"] .cred-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .cred-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #6b7280;
+  }
+
+  .inspect-cred-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary, #01ac6a);
+    text-decoration: none;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    transition: all 0.15s ease;
+  }
+
+  .inspect-cred-btn:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+  }
+
+  .text-primary {
+    color: var(--primary, #01ac6a);
   }
 </style>

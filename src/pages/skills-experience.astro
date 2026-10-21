@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillBadge from '../components/SkillBadge.astro';
 import TechStack from '../components/TechStack.astro';
+import ProcessTree from '../components/ProcessTree.astro';
 import { skillsData } from '../data/skills';
 
 const softSkills = [
@@ -33,15 +34,27 @@ const softSkills = [
   description="A comprehensive view of Abdul Rehman's technical skill set (Linux, Bash, Python, Security) and value-driven experience journey."
 >
   <div class="skills-page-container">
+    <!-- Caliper Bar -->
+    <div class="caliper-bar">
+      <span class="caliper-tag">[PROFILER: AR-SYS-STACK]</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">NODE: ISLAMABAD, PK</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">INFRASTRUCTURE: INFRALAYERS VERIFIED</span>
+    </div>
+
     <header class="page-header">
-      <span class="eyebrow">Technical Capability &amp; History</span>
+      <span class="eyebrow">01 // SYSTEM PROFILER &amp; OPERATIONAL AUDIT</span>
       <h1>Skills &amp; Experience</h1>
-      <p class="tagline">A detailed breakdown of my technical proficiencies and the values shaping my professional journey.</p>
+      <p class="tagline">Live subsystem process monitor, comprehensive toolbelt, and operational journey at InfraLayers.</p>
     </header>
+
+    <!-- LIVE PROCESS TREE -->
+    <ProcessTree />
 
     <!-- SECTION A: TECHNICAL SKILLS -->
     <section class="skills-section mb-lg">
-      <h2 class="section-title-left">Technical Skill Set</h2>
+      <h2 class="section-title-left">Categorized Capability Matrix</h2>
       
       <div class="skills-grid-main">
         {skillsData.map((category) => (
@@ -154,12 +167,35 @@ const softSkills = [
 
 <style>
   .skills-page-container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
+  .caliper-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  [data-theme="light"] .caliper-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #4b5563;
+  }
+
+  .caliper-div {
+    color: var(--primary, #01ac6a);
+  }
+
   .page-header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .eyebrow {
