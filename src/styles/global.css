@@ -114,24 +114,30 @@ body {
   transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* Light Theme Background Pattern */
+/* Light Theme Drafting Blueprint Background */
 body {
+  background-color: #f8fafc;
   background-image: 
-    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
-    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.05) 0%, transparent 50%),
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(1, 172, 106, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 172, 106, 0.028) 1px, transparent 1px);
+  background-size: 100% 100%, 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  background-attachment: fixed;
 }
 
-/* Pitch Black OLED Theme Background Pattern + Subtle Ambient Glow */
+/* Pitch Black OLED Stealth CAD Blueprint Grid + Cathode Glow */
 [data-theme="dark"] body {
+  background-color: #000000;
   background-image: 
-    radial-gradient(circle at 80% 18%, rgba(57, 123, 201, 0.06) 0%, transparent 55%),
-    radial-gradient(circle at 18% 82%, rgba(1, 172, 106, 0.06) 0%, transparent 55%),
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    radial-gradient(circle at 18% -10%, rgba(1, 172, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 82% -10%, rgba(57, 123, 201, 0.07) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(1, 172, 106, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 172, 106, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
   background-attachment: fixed;
 }
 
@@ -248,12 +254,18 @@ code:not(pre code) {
 pre {
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  background-color: #0d0f12 !important;
-  color: #e5e7eb;
+  background-color: #f8fafc !important;
+  color: #0f172a;
   border-radius: 8px;
   padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   overflow-x: auto;
+}
+
+[data-theme="dark"] pre {
+  background-color: #0d0f12 !important;
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 pre code {
@@ -517,35 +529,156 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--black) !important;
 }
 
-/* Footer styling */
-.footer {
+/* Engineering Cockpit Footer */
+.cockpit-footer {
   width: 100%;
-  background-color: var(--glass-bg);
-  backdrop-filter: var(--card-blur);
-  -webkit-backdrop-filter: var(--card-blur);
-  border-top: 1px solid var(--glass-border);
+  background: rgba(8, 9, 11, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(1, 172, 106, 0.22);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
   padding: 0.9rem 0;
   margin-top: auto;
+  color: #9ca3af;
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
-.footer-container {
+
+:global([data-theme="light"]) .cockpit-footer {
+  background: rgba(248, 250, 252, 0.95);
+  border-top: 1px solid rgba(1, 172, 106, 0.28);
+  color: #4b5563;
+}
+
+.footer-cockpit-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
-.footer-container p {
-  font-size: 0.85rem;
-  margin-bottom: 0;
-  color: var(--text-muted);
+
+.footer-col-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.footer-personal-link {
-  color: var(--primary);
-  font-weight: 600;
-  transition: color 0.2s ease;
+
+.footer-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary, #01ac6a);
+  box-shadow: 0 0 6px var(--primary, #01ac6a);
+  flex-shrink: 0;
 }
-.footer-personal-link:hover {
-  color: var(--secondary);
-  text-decoration: underline;
+
+.footer-node-tag {
+  color: #6b7280;
+  letter-spacing: 0.04em;
+}
+
+:global([data-theme="light"]) .footer-node-tag {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.footer-status-tag {
+  color: var(--primary, #01ac6a);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.footer-col-copy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+
+:global([data-theme="light"]) .footer-col-copy {
+  color: #374151;
+}
+
+.copy-text {
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+:global([data-theme="light"]) .copy-text {
+  color: #111827;
+}
+
+.copy-sep {
+  color: #4b5563;
+}
+
+.copy-role {
+  color: #6b7280;
+  letter-spacing: 0.04em;
+}
+
+:global([data-theme="light"]) .copy-role {
+  color: #4b5563;
+}
+
+.footer-col-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-quick-link {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+:global([data-theme="light"]) .footer-quick-link {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.footer-quick-link:hover {
+  color: var(--primary, #01ac6a);
+}
+
+.link-sep {
+  color: #4b5563;
+  opacity: 0.6;
+}
+
+.footer-personal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(1, 172, 106, 0.1);
+  border: 1px solid rgba(1, 172, 106, 0.25);
+  color: var(--primary, #01ac6a);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.footer-personal-pill:hover {
+  background: var(--primary, #01ac6a);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(1, 172, 106, 0.35);
+}
+
+@media (max-width: 860px) {
+  .footer-cockpit-inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem;
+  }
 }
 
 /* Neon cautious pops */

@@ -286,9 +286,27 @@ else if (pathname.includes('/about')) currentModule = 'about';
     }
   }
 
+  @media (max-width: 640px) {
+    .waybar-personal {
+      display: none; /* Navbar header already features /me directly above */
+    }
+  }
+
   @media (max-width: 600px) {
     .waybar-clock {
       display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .waybar-git {
+      display: none;
+    }
+    .status-text {
+      display: none; /* Display only the active telemetry LED dot on compact mobile */
+    }
+    .waybar-status {
+      padding: 4px;
     }
   }
 </style>

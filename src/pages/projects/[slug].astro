@@ -272,20 +272,25 @@ cd {project.slug}
   .caliper-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding: 0.5rem 0.85rem;
+    background: rgba(13, 15, 18, 0.75);
+    border: 1px solid rgba(1, 172, 106, 0.22);
+    border-radius: 6px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.7rem;
-    color: #6b7280;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    overflow-x: auto;
-    white-space: nowrap;
+    font-size: 0.72rem;
+    color: #9ca3af;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   }
 
   :global([data-theme="light"]) .caliper-bar {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
     color: #4b5563;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
   .back-link {
@@ -578,6 +583,12 @@ cd {project.slug}
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
+  :global([data-theme="light"]) .runbook-terminal {
+    background: #f8fafc;
+    border-color: rgba(1, 172, 106, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
   .runbook-top {
     background: #121418;
     padding: 6px 12px;
@@ -588,9 +599,19 @@ cd {project.slug}
     font-size: 0.72rem;
   }
 
+  :global([data-theme="light"]) .runbook-top {
+    background: #eef2f6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
   .runbook-prompt {
     color: var(--primary, #01ac6a);
     font-weight: 600;
+  }
+
+  :global([data-theme="light"]) .runbook-prompt {
+    color: #017a4b;
+    font-weight: 700;
   }
 
   .runbook-copy-btn {
@@ -608,10 +629,22 @@ cd {project.slug}
     transition: all 0.15s ease;
   }
 
+  :global([data-theme="light"]) .runbook-copy-btn {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+  }
+
   .runbook-copy-btn:hover {
     background: rgba(1, 172, 106, 0.2);
     color: #ffffff;
     border-color: var(--primary, #01ac6a);
+  }
+
+  :global([data-theme="light"]) .runbook-copy-btn:hover {
+    background: rgba(1, 172, 106, 0.12);
+    color: #017a4b;
+    border-color: #01ac6a;
   }
 
   .runbook-code {
@@ -621,6 +654,11 @@ cd {project.slug}
     color: #e5e7eb;
     overflow-x: auto;
     line-height: 1.6;
+  }
+
+  :global([data-theme="light"]) .runbook-code {
+    background: #f8fafc;
+    color: #0f172a;
   }
 
   /* Sidebar */

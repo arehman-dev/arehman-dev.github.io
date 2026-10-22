@@ -78,9 +78,32 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <main class="page-content" id="main-content">
         <slot />
       </main>
-      <footer class="footer">
-        <div class="footer-container">
-          <p>© 2026 Abdul Rehman • Portfolio &amp; Credentials • Islamabad / Remote • <a href={`${base}me/`} class="footer-personal-link">Personal Space</a></p>
+      <footer class="cockpit-footer" id="cockpit-footer">
+        <div class="footer-cockpit-inner">
+          <div class="footer-col-telemetry">
+            <span class="footer-led" title="Node Online"></span>
+            <span class="footer-node-tag">[NODE: ISB-PK • 33.68° N, 73.04° E]</span>
+            <span class="footer-status-tag">SYSTEMS: 100% OPERATIONAL</span>
+          </div>
+
+          <div class="footer-col-copy">
+            <span class="copy-text">© 2026 ABDUL REHMAN</span>
+            <span class="copy-sep">•</span>
+            <span class="copy-role">SYSTEMS &amp; AUTOMATION ENGINEER</span>
+          </div>
+
+          <div class="footer-col-links">
+            <a href={`${base}projects/`} class="footer-quick-link">~/projects</a>
+            <span class="link-sep">/</span>
+            <a href={`${base}articles/`} class="footer-quick-link">~/articles</a>
+            <span class="link-sep">/</span>
+            <a href={`${base}certificates/`} class="footer-quick-link">~/certificates</a>
+            <span class="link-sep">/</span>
+            <a href={`${base}me/`} class="footer-personal-pill">
+              <i class="fas fa-pen-nib" aria-hidden="true"></i>
+              <span>/me ↗</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>

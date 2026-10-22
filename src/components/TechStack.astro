@@ -21,34 +21,108 @@ const { className = '' } = Astro.props;
       </p>
     </div>
 
-    <!-- Telemetry Legend -->
-    <div class="toolbelt-legend" aria-label="Toolbelt proficiency legend">
-      <span class="legend-chip legend-core">
-        <span class="legend-indicator dot-core"></span>
-        <span>CORE / DAILY DRIVER</span>
+    <!-- Domain Telemetry Legend -->
+    <div class="toolbelt-legend" aria-label="Toolbelt domain legend">
+      <span class="legend-chip legend-kernel">
+        <span class="legend-indicator dot-kernel"></span>
+        <span>KERNEL / SYSTEMS</span>
       </span>
-      <span class="legend-chip legend-worked">
-        <span class="legend-indicator dot-worked"></span>
-        <span>DEPLOYED / WORKED WITH</span>
+      <span class="legend-chip legend-network">
+        <span class="legend-indicator dot-network"></span>
+        <span>NETWORK / SEC</span>
+      </span>
+      <span class="legend-chip legend-ai">
+        <span class="legend-indicator dot-ai"></span>
+        <span>AI / DATA</span>
+      </span>
+      <span class="legend-chip legend-devops">
+        <span class="legend-indicator dot-devops"></span>
+        <span>DEVOPS / IAC</span>
+      </span>
+      <span class="legend-chip legend-interface">
+        <span class="legend-indicator dot-interface"></span>
+        <span>INTERFACES</span>
       </span>
     </div>
   </div>
 
+  <!-- Interactive Domain Filter Bar -->
+  <div class="toolbelt-filter-row" role="tablist" aria-label="Filter toolbelt by domain">
+    <button class="domain-tab-btn active" data-domain-filter="all" role="tab" aria-selected="true">
+      <span class="tab-indicator">●</span> [ALL ({techStackData.length})]
+    </button>
+    <button class="domain-tab-btn" data-domain-filter="kernel" role="tab" aria-selected="false">
+      <span class="tab-indicator dot-kernel">●</span> [KERNEL &amp; SYSTEMS]
+    </button>
+    <button class="domain-tab-btn" data-domain-filter="network" role="tab" aria-selected="false">
+      <span class="tab-indicator dot-network">●</span> [NETWORKING &amp; SEC]
+    </button>
+    <button class="domain-tab-btn" data-domain-filter="ai" role="tab" aria-selected="false">
+      <span class="tab-indicator dot-ai">●</span> [AI &amp; PYTHON]
+    </button>
+    <button class="domain-tab-btn" data-domain-filter="devops" role="tab" aria-selected="false">
+      <span class="tab-indicator dot-devops">●</span> [DEVOPS &amp; IAC]
+    </button>
+    <button class="domain-tab-btn" data-domain-filter="interface" role="tab" aria-selected="false">
+      <span class="tab-indicator dot-interface">●</span> [INTERFACES &amp; DB]
+    </button>
+  </div>
+
   <!-- Chip Wall -->
-  <div class="tech-chip-grid">
+  <div class="tech-chip-grid" id="tech-chip-wall">
     {techStackData.map((tech) => (
-      <div class={`tech-spec-chip ${tech.isCore ? 'chip-core' : 'chip-regular'}`}>
-        <span class={`spec-dot ${tech.isCore ? 'dot-active' : 'dot-passive'}`}></span>
-        <i class={`${tech.icon} chip-icon`} aria-hidden="true"></i>
+      <div 
+        class={`tech-spec-chip chip-domain-${tech.domain} ${tech.isCore ? 'chip-core' : 'chip-regular'}`}
+        data-domain={tech.domain}
+        title={`${tech.name} • ${tech.domain.toUpperCase()} domain${tech.isCore ? ' (Core daily driver)' : ''}`}
+      >
+        <span class={`spec-dot dot-${tech.domain} ${tech.isCore ? 'dot-core-ring' : ''}`}></span>
+        <i class={`${tech.icon} chip-icon icon-${tech.domain}`} aria-hidden="true"></i>
         <span class="chip-name">{tech.name}</span>
+        {tech.isCore && <span class="core-mini-tag">CORE</span>}
       </div>
     ))}
   </div>
 </div>
 
+<script>
+  function initToolbeltFilters() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-domain-filter]');
+    const chips = document.querySelectorAll<HTMLElement>('#tech-chip-wall .tech-spec-chip');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-domain-filter');
+        if (!filter) return;
+
+        filterButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        chips.forEach((chip) => {
+          const chipDomain = chip.getAttribute('data-domain');
+          if (filter === 'all' || chipDomain === filter) {
+            chip.style.display = 'inline-flex';
+            chip.style.opacity = '1';
+            chip.style.transform = 'scale(1)';
+          } else {
+            chip.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initToolbeltFilters();
+  document.addEventListener('astro:page-load', initToolbeltFilters);
+</script>
+
 <style>
   .cockpit-toolbelt-box {
-    background: #080808;
+    background: #08090b;
     border: 1px solid rgba(1, 172, 106, 0.25);
     border-radius: 8px;
     padding: 1.75rem;
@@ -60,7 +134,7 @@ const { className = '' } = Astro.props;
   :global([data-theme="light"]) .cockpit-toolbelt-box {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.35);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   }
 
   .toolbelt-head {
@@ -69,7 +143,7 @@ const { className = '' } = Astro.props;
     align-items: flex-end;
     gap: 1.5rem;
     padding-bottom: 1.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     flex-wrap: wrap;
   }
@@ -118,26 +192,26 @@ const { className = '' } = Astro.props;
   .toolbelt-legend {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
   .legend-chip {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    padding: 3px 8px;
+    padding: 2px 7px;
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #9ca3af;
   }
 
   :global([data-theme="light"]) .legend-chip {
-    background: #f9fafb;
+    background: #f8fafc;
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #4b5563;
   }
@@ -148,14 +222,69 @@ const { className = '' } = Astro.props;
     border-radius: 50%;
   }
 
-  .dot-core {
-    background: #01ac6a;
-    box-shadow: 0 0 6px #01ac6a;
+  .dot-kernel { background: #01ac6a; }
+  .dot-network { background: #38bdf8; }
+  .dot-ai { background: #f59e0b; }
+  .dot-devops { background: #a855f7; }
+  .dot-interface { background: #14b8a6; }
+
+  /* Domain Filter Bar */
+  .toolbelt-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
   }
 
-  .dot-worked {
-    border: 1.5px solid #9ca3af;
-    background: transparent;
+  :global([data-theme="light"]) .toolbelt-filter-row {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  }
+
+  .domain-tab-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    color: #9ca3af;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+
+  :global([data-theme="light"]) .domain-tab-btn {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.09);
+    color: #4b5563;
+  }
+
+  .domain-tab-btn:hover {
+    color: #f3f4f6;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  :global([data-theme="light"]) .domain-tab-btn:hover {
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .domain-tab-btn.active {
+    background: rgba(1, 172, 106, 0.14);
+    border-color: var(--primary, #01ac6a);
+    color: var(--primary, #01ac6a);
+  }
+
+  :global([data-theme="light"]) .domain-tab-btn.active {
+    background: rgba(1, 172, 106, 0.12);
+    border-color: #01ac6a;
+    color: #017a4b;
+    font-weight: 700;
   }
 
   /* Grid of Chips */
@@ -181,36 +310,118 @@ const { className = '' } = Astro.props;
   }
 
   :global([data-theme="light"]) .tech-spec-chip {
-    background: #f9fafb;
+    background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #1f2937;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   }
 
-  .tech-spec-chip:hover {
-    border-color: rgba(1, 172, 106, 0.5);
-    background: rgba(1, 172, 106, 0.05);
+  /* Domain Color Borders & Icons */
+  .chip-domain-kernel {
+    border-left: 2.5px solid #01ac6a;
+  }
+  .icon-kernel { color: #01ac6a; }
+  .dot-kernel { background: #01ac6a; }
+
+  .chip-domain-network {
+    border-left: 2.5px solid #38bdf8;
+  }
+  .icon-network { color: #38bdf8; }
+  .dot-network { background: #38bdf8; }
+
+  .chip-domain-ai {
+    border-left: 2.5px solid #f59e0b;
+  }
+  .icon-ai { color: #f59e0b; }
+  .dot-ai { background: #f59e0b; }
+
+  .chip-domain-devops {
+    border-left: 2.5px solid #a855f7;
+  }
+  .icon-devops { color: #a855f7; }
+  .dot-devops { background: #a855f7; }
+
+  .chip-domain-interface {
+    border-left: 2.5px solid #14b8a6;
+  }
+  .icon-interface { color: #14b8a6; }
+  .dot-interface { background: #14b8a6; }
+
+  /* Hover States with domain color glow */
+  .chip-domain-kernel:hover {
+    border-color: #01ac6a;
+    box-shadow: 0 0 10px rgba(1, 172, 106, 0.25);
     transform: translateY(-1px);
     color: #ffffff;
   }
-
-  :global([data-theme="light"]) .tech-spec-chip:hover {
+  :global([data-theme="light"]) .chip-domain-kernel:hover {
     color: #017a4b;
-    background: rgba(1, 172, 106, 0.08);
     border-color: #01ac6a;
   }
 
+  .chip-domain-network:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+  :global([data-theme="light"]) .chip-domain-network:hover {
+    color: #0284c7;
+    border-color: #0284c7;
+  }
+
+  .chip-domain-ai:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+  :global([data-theme="light"]) .chip-domain-ai:hover {
+    color: #b45309;
+    border-color: #b45309;
+  }
+
+  .chip-domain-devops:hover {
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+  :global([data-theme="light"]) .chip-domain-devops:hover {
+    color: #7e22ce;
+    border-color: #7e22ce;
+  }
+
+  .chip-domain-interface:hover {
+    border-color: #14b8a6;
+    box-shadow: 0 0 10px rgba(20, 184, 166, 0.25);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+  :global([data-theme="light"]) .chip-domain-interface:hover {
+    color: #0f766e;
+    border-color: #0f766e;
+  }
+
   .chip-core {
-    border-color: rgba(1, 172, 106, 0.35);
     background: rgba(1, 172, 106, 0.08);
-    color: #e5e7eb;
     font-weight: 600;
   }
 
   :global([data-theme="light"]) .chip-core {
-    background: rgba(1, 172, 106, 0.08);
-    border-color: rgba(1, 172, 106, 0.4);
-    color: #017a4b;
+    background: rgba(1, 172, 106, 0.05);
     font-weight: 700;
+  }
+
+  .core-mini-tag {
+    font-size: 0.58rem;
+    font-weight: 800;
+    color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.15);
+    padding: 1px 4px;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    margin-left: 2px;
   }
 
   .spec-dot {
@@ -220,19 +431,12 @@ const { className = '' } = Astro.props;
     flex-shrink: 0;
   }
 
-  .dot-active {
-    background: #01ac6a;
-    box-shadow: 0 0 6px rgba(1, 172, 106, 0.8);
-  }
-
-  .dot-passive {
-    background: #6b7280;
-    opacity: 0.5;
+  .dot-core-ring {
+    box-shadow: 0 0 0 1.5px rgba(1, 172, 106, 0.4);
   }
 
   .chip-icon {
     font-size: 0.85rem;
-    color: var(--primary, #01ac6a);
   }
 
   .text-primary {

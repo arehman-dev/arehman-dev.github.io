@@ -1,54 +1,136 @@
 ---
-// ProcessTree.astro - Linux `btop`/`htop` Process Table for Skills & Competencies
+// ProcessTree.astro - High-Precision Linux `btop` Process Monitor for Systems Competencies
 ---
 
-<div class="proc-monitor-container" id="process-monitor">
+<div class="proc-monitor-container" id="process-monitor" aria-labelledby="proc-monitor-heading">
+  <!-- Top Cockpit Header -->
   <div class="proc-header">
     <div class="proc-title-group">
-      <span class="proc-badge"><i class="fas fa-microchip"></i> LIVE PROCESS TREE</span>
-      <h3 class="proc-title">System Competencies &amp; Active Daemons</h3>
+      <span class="proc-badge">
+        <span class="proc-led-pulse"></span>
+        <span>BTOP KERNEL PROFILER // PID TELEMETRY</span>
+      </span>
+      <h3 id="proc-monitor-heading" class="proc-title">
+        System Competencies &amp; Active Daemons
+      </h3>
     </div>
-    <div class="proc-meta">
-      <span class="proc-stat">Tasks: <strong class="text-success">5 active</strong></span>
-      <span class="proc-stat">Threads: <strong>32</strong></span>
-      <span class="proc-stat">Load avg: <strong>0.12, 0.08, 0.04</strong></span>
+    
+    <div class="proc-telemetry-stats">
+      <div class="stat-pill">
+        <span class="stat-lbl">TASKS:</span>
+        <strong class="stat-val text-success">5 ACTIVE</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-lbl">THREADS:</span>
+        <strong class="stat-val">32</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-lbl">LOAD:</span>
+        <strong class="stat-val">0.12, 0.08, 0.04</strong>
+      </div>
+      <div class="stat-pill stat-uptime">
+        <span class="stat-lbl">UPTIME:</span>
+        <strong class="stat-val text-accent">99.98%</strong>
+      </div>
     </div>
   </div>
 
+  <!-- Hardware Gauges Ribbon (btop style) -->
+  <div class="proc-gauges-ribbon" aria-label="System resource meters">
+    <div class="gauge-box">
+      <div class="gauge-label-row">
+        <span class="g-lbl"><i class="fas fa-microchip"></i> CPU CORES [8x]</span>
+        <span class="g-val text-success">42%</span>
+      </div>
+      <div class="gauge-track">
+        <div class="gauge-bar gauge-cpu" style="width: 42%;"></div>
+      </div>
+    </div>
+
+    <div class="gauge-box">
+      <div class="gauge-label-row">
+        <span class="g-lbl"><i class="fas fa-memory"></i> MEMORY [RSS]</span>
+        <span class="g-val text-cyan">2.4G / 16.0G</span>
+      </div>
+      <div class="gauge-track">
+        <div class="gauge-bar gauge-mem" style="width: 28%;"></div>
+      </div>
+    </div>
+
+    <div class="gauge-box gauge-io-box">
+      <div class="gauge-label-row">
+        <span class="g-lbl"><i class="fas fa-network-wired"></i> IPC / SOCKET I/O</span>
+        <span class="g-val text-amber">12.4 MB/s</span>
+      </div>
+      <div class="gauge-track">
+        <div class="gauge-bar gauge-io" style="width: 35%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subsystem Filter Pills -->
+  <div class="proc-filter-row" role="tablist" aria-label="Filter processes">
+    <button class="proc-tab-btn active" data-proc-filter="all" role="tab" aria-selected="true">
+      [ALL DAEMONS (5)]
+    </button>
+    <button class="proc-tab-btn" data-proc-filter="automation" role="tab" aria-selected="false">
+      [AUTOMATION]
+    </button>
+    <button class="proc-tab-btn" data-proc-filter="cpp" role="tab" aria-selected="false">
+      [SYSTEMS &amp; C++]
+    </button>
+    <button class="proc-tab-btn" data-proc-filter="sysadmin" role="tab" aria-selected="false">
+      [LINUX SYSADMIN]
+    </button>
+    <button class="proc-tab-btn" data-proc-filter="qa" role="tab" aria-selected="false">
+      [QA &amp; TESTING]
+    </button>
+    <button class="proc-tab-btn" data-proc-filter="db" role="tab" aria-selected="false">
+      [DATA &amp; SQL]
+    </button>
+  </div>
+
+  <!-- Process Table Wrapper -->
   <div class="proc-table-wrapper">
     <table class="proc-table">
       <thead>
         <tr>
           <th class="col-pid">PID</th>
-          <th class="col-cmd">SUBSYSTEM COMMAND</th>
-          <th class="col-load">MASTERY / LOAD</th>
+          <th class="col-cmd">TREE // DAEMON COMMAND</th>
+          <th class="col-load">CPU / LOAD</th>
+          <th class="col-mem">MEM (RSS)</th>
           <th class="col-details">CAPABILITIES &amp; RUNTIME LIBRARIES</th>
           <th class="col-status">STATE</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="proc-table-body">
         <!-- Process 1: Python Automation -->
         <tr class="proc-row" data-subsystem="automation">
           <td class="col-pid"><span class="pid-tag">101</span></td>
           <td class="col-cmd">
-            <span class="cmd-icon python-icon"><i class="fab fa-python"></i></span>
+            <span class="tree-branch">├─</span>
+            <span class="cmd-icon python-icon"><i class="fab fa-python" aria-hidden="true"></i></span>
             <span class="cmd-name">python-automation.daemon</span>
+            <span class="cmd-cli-sub">--mode=asyncio --workers=4</span>
           </td>
           <td class="col-load">
             <div class="bar-container">
-              <div class="bar-fill" style="width: 92%;"></div>
+              <div class="bar-fill bar-fill-green" style="width: 92%;"></div>
             </div>
             <span class="bar-val">92%</span>
           </td>
+          <td class="col-mem">
+            <span class="mem-tag">64.2 MB</span>
+          </td>
           <td class="col-details">
-            <span class="chip">AsyncIO</span>
+            <span class="chip chip-accent">AsyncIO</span>
             <span class="chip">ETL Pipelines</span>
             <span class="chip">Cron Scheduling</span>
             <span class="chip">OCR &amp; PDF Ingestion</span>
-            <span class="chip">API Integration</span>
+            <span class="chip">REST APIs</span>
           </td>
           <td class="col-status">
-            <span class="status-chip status-running">RUNNING</span>
+            <span class="status-chip status-running"><span class="status-dot-mini"></span>RUNNING</span>
           </td>
         </tr>
 
@@ -56,24 +138,29 @@
         <tr class="proc-row" data-subsystem="cpp">
           <td class="col-pid"><span class="pid-tag">102</span></td>
           <td class="col-cmd">
-            <span class="cmd-icon cpp-icon"><i class="fas fa-cubes"></i></span>
+            <span class="tree-branch">├─</span>
+            <span class="cmd-icon cpp-icon"><i class="fas fa-cubes" aria-hidden="true"></i></span>
             <span class="cmd-name">cpp20-systems.worker</span>
+            <span class="cmd-cli-sub">--ipc=/run/node.sock --gdb</span>
           </td>
           <td class="col-load">
             <div class="bar-container">
-              <div class="bar-fill" style="width: 80%;"></div>
+              <div class="bar-fill bar-fill-blue" style="width: 80%;"></div>
             </div>
             <span class="bar-val">80%</span>
           </td>
+          <td class="col-mem">
+            <span class="mem-tag">18.4 MB</span>
+          </td>
           <td class="col-details">
-            <span class="chip">POSIX Sockets</span>
+            <span class="chip chip-accent">POSIX Sockets</span>
             <span class="chip">Memory Arenas</span>
             <span class="chip">Multithreading</span>
             <span class="chip">GCC 13 / Clang</span>
-            <span class="chip">GTK GUI Core</span>
+            <span class="chip">GTK GUI</span>
           </td>
           <td class="col-status">
-            <span class="status-chip status-running">ACTIVE</span>
+            <span class="status-chip status-running"><span class="status-dot-mini"></span>ACTIVE</span>
           </td>
         </tr>
 
@@ -81,24 +168,29 @@
         <tr class="proc-row" data-subsystem="sysadmin">
           <td class="col-pid"><span class="pid-tag">103</span></td>
           <td class="col-cmd">
-            <span class="cmd-icon linux-icon"><i class="fab fa-linux"></i></span>
+            <span class="tree-branch">├─</span>
+            <span class="cmd-icon linux-icon"><i class="fab fa-linux" aria-hidden="true"></i></span>
             <span class="cmd-name">linux-sysadmin.service</span>
+            <span class="cmd-cli-sub">--target=InfraLayers --hardened</span>
           </td>
           <td class="col-load">
             <div class="bar-container">
-              <div class="bar-fill" style="width: 96%;"></div>
+              <div class="bar-fill bar-fill-green" style="width: 96%;"></div>
             </div>
             <span class="bar-val">96%</span>
           </td>
+          <td class="col-mem">
+            <span class="mem-tag">42.8 MB</span>
+          </td>
           <td class="col-details">
-            <span class="chip">Debian / Ubuntu</span>
+            <span class="chip chip-accent">Debian / Ubuntu</span>
             <span class="chip">Systemd Units</span>
             <span class="chip">Bash Automations</span>
-            <span class="chip">UFW Hardening</span>
-            <span class="chip">SSH / Key Infrastructure</span>
+            <span class="chip">UFW / Firewalld</span>
+            <span class="chip">SSH Keys</span>
           </td>
           <td class="col-status">
-            <span class="status-chip status-resident">RESIDENT</span>
+            <span class="status-chip status-resident"><span class="status-dot-mini"></span>RESIDENT</span>
           </td>
         </tr>
 
@@ -106,48 +198,58 @@
         <tr class="proc-row" data-subsystem="qa">
           <td class="col-pid"><span class="pid-tag">104</span></td>
           <td class="col-cmd">
-            <span class="cmd-icon test-icon"><i class="fas fa-vial"></i></span>
+            <span class="tree-branch">├─</span>
+            <span class="cmd-icon test-icon"><i class="fas fa-vial" aria-hidden="true"></i></span>
             <span class="cmd-name">qa-verification.runner</span>
+            <span class="cmd-cli-sub">--suite=pytest --strict-pep8</span>
           </td>
           <td class="col-load">
             <div class="bar-container">
-              <div class="bar-fill" style="width: 85%;"></div>
+              <div class="bar-fill bar-fill-pink" style="width: 85%;"></div>
             </div>
             <span class="bar-val">85%</span>
           </td>
+          <td class="col-mem">
+            <span class="mem-tag">36.1 MB</span>
+          </td>
           <td class="col-details">
-            <span class="chip">Pytest Suite</span>
+            <span class="chip chip-accent">Pytest Suite</span>
             <span class="chip">Mock Verification</span>
             <span class="chip">PEP 8 Strictness</span>
             <span class="chip">Regression Guards</span>
-            <span class="chip">CI Quality Gates</span>
+            <span class="chip">CI Gates</span>
           </td>
           <td class="col-status">
-            <span class="status-chip status-running">WATCHING</span>
+            <span class="status-chip status-watching"><span class="status-dot-mini"></span>WATCHING</span>
           </td>
         </tr>
 
-        <!-- Process 5: Relational Data & Schema Management -->
-        <tr class="proc-row" data-subsystem="database">
+        <!-- Process 5: SQL & Structured Data -->
+        <tr class="proc-row" data-subsystem="db">
           <td class="col-pid"><span class="pid-tag">105</span></td>
           <td class="col-cmd">
-            <span class="cmd-icon db-icon"><i class="fas fa-database"></i></span>
+            <span class="tree-branch">└─</span>
+            <span class="cmd-icon db-icon"><i class="fas fa-database" aria-hidden="true"></i></span>
             <span class="cmd-name">relational-sql.storage</span>
+            <span class="cmd-cli-sub">--wal-mode --acid-verify</span>
           </td>
           <td class="col-load">
             <div class="bar-container">
-              <div class="bar-fill" style="width: 82%;"></div>
+              <div class="bar-fill bar-fill-purple" style="width: 82%;"></div>
             </div>
             <span class="bar-val">82%</span>
           </td>
+          <td class="col-mem">
+            <span class="mem-tag">54.0 MB</span>
+          </td>
           <td class="col-details">
-            <span class="chip">SQLite / PostgreSQL</span>
+            <span class="chip chip-accent">SQLite / PostgreSQL</span>
             <span class="chip">Normalized Schemas</span>
             <span class="chip">Data Integrity</span>
-            <span class="chip">Automated Backup Dumps</span>
+            <span class="chip">Automated Backups</span>
           </td>
           <td class="col-status">
-            <span class="status-chip status-idle">STANDBY</span>
+            <span class="status-chip status-standby"><span class="status-dot-mini"></span>STANDBY</span>
           </td>
         </tr>
       </tbody>
@@ -155,14 +257,47 @@
   </div>
 </div>
 
+<script>
+  function initProcessFilter() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-proc-filter]');
+    const rows = document.querySelectorAll<HTMLElement>('#proc-table-body .proc-row');
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-proc-filter');
+        if (!filter) return;
+
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        rows.forEach((row) => {
+          const sub = row.getAttribute('data-subsystem');
+          if (filter === 'all' || sub === filter) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initProcessFilter();
+  document.addEventListener('astro:page-load', initProcessFilter);
+</script>
+
 <style>
   .proc-monitor-container {
-    background: #0d0f12;
-    border: 1px solid rgba(1, 172, 106, 0.22);
+    background: #08090b;
+    border: 1px solid rgba(1, 172, 106, 0.25);
     border-radius: 8px;
-    padding: 1.25rem;
+    padding: 1.5rem;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
     margin: 2.5rem 0;
   }
 
@@ -177,7 +312,7 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.85rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     flex-wrap: wrap;
     gap: 1rem;
@@ -190,7 +325,7 @@
   .proc-badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-size: 0.68rem;
     color: var(--primary, #01ac6a);
     font-weight: 700;
@@ -198,8 +333,22 @@
     margin-bottom: 4px;
   }
 
+  .proc-led-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 6px var(--primary, #01ac6a);
+    animation: ledPulse 1.8s infinite ease-in-out;
+  }
+
+  @keyframes ledPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.8); }
+  }
+
   .proc-title {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #f3f4f6;
     margin: 0;
@@ -210,28 +359,163 @@
     color: #111827;
   }
 
-  .proc-meta {
+  .proc-telemetry-stats {
     display: flex;
-    gap: 1rem;
-    font-size: 0.75rem;
-    color: #9ca3af;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  :global([data-theme="light"]) .proc-meta {
-    color: #374151;
+  .stat-pill {
+    font-size: 0.72rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
 
-  .proc-stat strong {
+  :global([data-theme="light"]) .stat-pill {
+    background: #f8fafc;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-lbl {
+    color: #6b7280;
+    font-size: 0.65rem;
+  }
+  :global([data-theme="light"]) .stat-lbl {
+    color: #4b5563;
+  }
+
+  .stat-val {
     color: #e5e7eb;
+    font-weight: 700;
   }
-  :global([data-theme="light"]) .proc-stat strong {
+  :global([data-theme="light"]) .stat-val {
     color: #111827;
   }
-  .text-success {
-    color: var(--primary, #01ac6a) !important;
+
+  .text-success { color: var(--primary, #01ac6a) !important; }
+  :global([data-theme="light"]) .text-success { color: #017a4b !important; }
+  .text-cyan { color: #38bdf8 !important; }
+  .text-amber { color: #f59e0b !important; }
+
+  /* Gauges Ribbon */
+  .proc-gauges-ribbon {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
   }
-  :global([data-theme="light"]) .text-success {
-    color: #017a4b !important;
+
+  :global([data-theme="light"]) .proc-gauges-ribbon {
+    background: #f8fafc;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .gauge-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .gauge-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .g-lbl {
+    color: #9ca3af;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  :global([data-theme="light"]) .g-lbl {
+    color: #4b5563;
+  }
+
+  .gauge-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  :global([data-theme="light"]) .gauge-track {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .gauge-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  .gauge-cpu { background: linear-gradient(90deg, #01ac6a, #00c47a); }
+  .gauge-mem { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+  .gauge-io { background: linear-gradient(90deg, #d97706, #f59e0b); }
+
+  /* Filter Row */
+  .proc-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+  }
+
+  :global([data-theme="light"]) .proc-filter-row {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  }
+
+  .proc-tab-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    color: #9ca3af;
+    font-family: inherit;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  :global([data-theme="light"]) .proc-tab-btn {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #4b5563;
+  }
+
+  .proc-tab-btn:hover {
+    color: #f3f4f6;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  :global([data-theme="light"]) .proc-tab-btn:hover {
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .proc-tab-btn.active {
+    background: rgba(1, 172, 106, 0.14);
+    border-color: var(--primary, #01ac6a);
+    color: var(--primary, #01ac6a);
+  }
+
+  :global([data-theme="light"]) .proc-tab-btn.active {
+    background: rgba(1, 172, 106, 0.12);
+    border-color: #01ac6a;
+    color: #017a4b;
+    font-weight: 700;
   }
 
   /* Table Layout */
@@ -304,11 +588,29 @@
     font-weight: 600;
     white-space: nowrap;
   }
+
+  .tree-branch {
+    color: #4b5563;
+    margin-right: 6px;
+    font-weight: 400;
+  }
+
   .cmd-name {
     color: #f3f4f6;
   }
   :global([data-theme="light"]) .cmd-name {
     color: #111827;
+  }
+
+  .cmd-cli-sub {
+    display: block;
+    font-size: 0.65rem;
+    color: #6b7280;
+    font-weight: 400;
+    margin-left: 24px;
+  }
+  :global([data-theme="light"]) .cmd-cli-sub {
+    color: #4b5563;
   }
 
   .cmd-icon {
@@ -325,17 +627,17 @@
 
   /* Load Bar */
   .col-load {
-    width: 160px;
+    width: 130px;
   }
   .bar-container {
-    width: 100px;
-    height: 7px;
+    width: 75px;
+    height: 6px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 3px;
     overflow: hidden;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 8px;
+    margin-right: 6px;
   }
   :global([data-theme="light"]) .bar-container {
     background: rgba(0, 0, 0, 0.1);
@@ -343,9 +645,12 @@
 
   .bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #01ac6a, #00c47a);
     border-radius: 3px;
   }
+  .bar-fill-green { background: linear-gradient(90deg, #01ac6a, #00c47a); }
+  .bar-fill-blue { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+  .bar-fill-pink { background: linear-gradient(90deg, #db2777, #f472b6); }
+  .bar-fill-purple { background: linear-gradient(90deg, #7c3aed, #a855f7); }
 
   .bar-val {
     font-size: 0.72rem;
@@ -355,6 +660,25 @@
   :global([data-theme="light"]) .bar-val {
     color: #017a4b;
     font-weight: 700;
+  }
+
+  /* Memory Col */
+  .col-mem {
+    width: 90px;
+  }
+  .mem-tag {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  :global([data-theme="light"]) .mem-tag {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #374151;
+    font-weight: 600;
   }
 
   /* Details & Chips */
@@ -382,7 +706,7 @@
 
   :global([data-theme="light"]) .chip {
     background: #f3f4f6;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.09);
     color: #1f2937;
   }
 
@@ -391,18 +715,38 @@
     background: rgba(1, 172, 106, 0.06);
   }
 
+  .chip-accent {
+    border-color: rgba(1, 172, 106, 0.3);
+    color: #a7f3d0;
+  }
+  :global([data-theme="light"]) .chip-accent {
+    border-color: rgba(1, 172, 106, 0.35);
+    color: #017a4b;
+    font-weight: 600;
+  }
+
   /* Status Chips */
   .col-status {
-    width: 90px;
+    width: 100px;
     text-align: right;
   }
 
   .status-chip {
     font-size: 0.65rem;
     font-weight: 700;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 3px;
     letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-dot-mini {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
   }
 
   .status-running {
@@ -427,26 +771,43 @@
     border-color: rgba(37, 99, 235, 0.35);
   }
 
-  .status-idle {
+  .status-watching {
+    background: rgba(236, 72, 153, 0.15);
+    color: #f472b6;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+  }
+  :global([data-theme="light"]) .status-watching {
+    background: rgba(219, 39, 119, 0.1);
+    color: #be185d;
+    border-color: rgba(219, 39, 119, 0.35);
+  }
+
+  .status-standby {
     background: rgba(156, 163, 175, 0.15);
     color: #9ca3af;
     border: 1px solid rgba(156, 163, 175, 0.3);
   }
-  :global([data-theme="light"]) .status-idle {
+  :global([data-theme="light"]) .status-standby {
     background: rgba(107, 114, 128, 0.1);
     color: #374151;
     border-color: rgba(107, 114, 128, 0.3);
   }
 
+  @media (max-width: 900px) {
+    .proc-gauges-ribbon {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
-    .col-status {
+    .col-status, .col-mem {
       display: none;
     }
     .col-load {
-      width: 110px;
+      width: 100px;
     }
     .bar-container {
-      width: 60px;
+      width: 50px;
     }
   }
 </style>

@@ -79,13 +79,13 @@
         </div>
         <div class="specs-block">
           <div class="spec-head"><span class="highlight">arehman</span>@<span class="host">systems-core</span></div>
-          <div class="spec-div">--------------------</div>
-          <div class="spec-row"><span class="lbl">OS:</span> Debian GNU/Linux 12 (Bookworm) x86_64</div>
-          <div class="spec-row"><span class="lbl">Role:</span> Systems Developer &amp; Automation Engineer</div>
-          <div class="spec-row"><span class="lbl">Kernel:</span> Linux 6.6.15-hardened</div>
-          <div class="spec-row"><span class="lbl">Runtimes:</span> C++20 (GCC 13), Python 3.12, Bash 5.2</div>
-          <div class="spec-row"><span class="lbl">Infrastructure:</span> InfraLayers Server Operations</div>
-          <div class="spec-row"><span class="lbl">Uptime:</span> 99.98% High Availability</div>
+          <div class="spec-div">--------------------------</div>
+          <div class="spec-row"><span class="lbl">OS:</span> <span class="val">Debian 12 (Bookworm) x86_64</span></div>
+          <div class="spec-row"><span class="lbl">Role:</span> <span class="val">Systems &amp; Automation Dev</span></div>
+          <div class="spec-row"><span class="lbl">Kernel:</span> <span class="val">Linux 6.6.15-hardened</span></div>
+          <div class="spec-row"><span class="lbl">Runtimes:</span> <span class="val">C++20, Python 3.12, Bash 5.2</span></div>
+          <div class="spec-row"><span class="lbl">Infrastructure:</span> <span class="val">InfraLayers Server Ops</span></div>
+          <div class="spec-row"><span class="lbl">Uptime:</span> <span class="val">99.98% High Availability</span></div>
           <div class="spec-row"><span class="lbl">Status:</span> <span class="badge-status">Active / Seeking Engineering Ops</span></div>
         </div>
       </div>
@@ -127,12 +127,6 @@
                 <td><span class="tag tag-sys">Native UNIX</span></td>
                 <td>980 MB/sec</td>
                 <td><span class="metric-good">0.14 ms</span></td>
-              </tr>
-              <tr>
-                <td>Shadowsocks GUI Proxy</td>
-                <td><span class="tag tag-cpp">C++ / Rust</span></td>
-                <td>Line-rate TCP</td>
-                <td><span class="metric-good">1.20 ms</span></td>
               </tr>
             </tbody>
           </table>
@@ -209,7 +203,7 @@
                 copyIcon.className = 'far fa-copy';
                 copyIcon.style.color = '';
               }
-            }, 1800);
+            }, 2000);
           });
         }
       });
@@ -223,7 +217,7 @@
 
 <style>
   .telemetry-terminal {
-    background: #0d0f12;
+    background: #08090b;
     border: 1px solid rgba(1, 172, 106, 0.28);
     border-radius: 8px;
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(1, 172, 106, 0.08);
@@ -232,23 +226,29 @@
     display: flex;
     flex-direction: column;
     min-height: 380px;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
 
   :global([data-theme="light"]) .telemetry-terminal {
-    background: #14171c;
-    border: 1px solid rgba(1, 172, 106, 0.4);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    background: #f8fafc;
+    border: 1px solid rgba(1, 172, 106, 0.35);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
   }
 
   /* Top Bar */
   .terminal-top {
-    background: #16191f;
+    background: #121418;
     padding: 8px 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     gap: 0.5rem;
+  }
+
+  :global([data-theme="light"]) .terminal-top {
+    background: #eef2f6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .terminal-dots {
@@ -262,10 +262,12 @@
     height: 10px;
     border-radius: 50%;
   }
+
   .dot-red { background: #ff5f56; }
   .dot-yellow { background: #ffbd2e; }
   .dot-green { background: #27c93f; }
 
+  /* Tabs */
   .terminal-tabs {
     display: flex;
     gap: 4px;
@@ -287,9 +289,18 @@
     transition: all 0.15s ease;
   }
 
+  :global([data-theme="light"]) .tab-btn {
+    color: #4b5563;
+  }
+
   .tab-btn:hover {
     color: #e5e7eb;
     background: rgba(255, 255, 255, 0.04);
+  }
+
+  :global([data-theme="light"]) .tab-btn:hover {
+    color: #0f172a;
+    background: rgba(0, 0, 0, 0.04);
   }
 
   .tab-btn.active {
@@ -297,6 +308,13 @@
     border-color: rgba(1, 172, 106, 0.4);
     color: var(--primary, #01ac6a);
     font-weight: 600;
+  }
+
+  :global([data-theme="light"]) .tab-btn.active {
+    background: rgba(1, 172, 106, 0.12);
+    border-color: #01ac6a;
+    color: #017a4b;
+    font-weight: 700;
   }
 
   .terminal-copy-btn {
@@ -314,10 +332,22 @@
     transition: all 0.2s ease;
   }
 
+  :global([data-theme="light"]) .terminal-copy-btn {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+  }
+
   .terminal-copy-btn:hover {
     background: rgba(1, 172, 106, 0.2);
     color: #ffffff;
     border-color: var(--primary, #01ac6a);
+  }
+
+  :global([data-theme="light"]) .terminal-copy-btn:hover {
+    background: rgba(1, 172, 106, 0.12);
+    color: #017a4b;
+    border-color: #01ac6a;
   }
 
   /* Screen Area */
@@ -330,6 +360,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  :global([data-theme="light"]) .terminal-screen {
+    color: #1e293b;
   }
 
   .cmd-line {
@@ -345,8 +379,18 @@
     font-weight: 600;
   }
 
+  :global([data-theme="light"]) .prompt {
+    color: #017a4b;
+    font-weight: 700;
+  }
+
   .command-text {
     color: #f3f4f6;
+  }
+
+  :global([data-theme="light"]) .command-text {
+    color: #0f172a;
+    font-weight: 600;
   }
 
   .tab-panel {
@@ -366,41 +410,81 @@
   .neofetch-output {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: start;
     margin-bottom: 1rem;
   }
 
   .ascii-art pre {
     color: #f59e0b;
-    font-size: 0.65rem;
-    line-height: 1.15;
+    font-size: 0.58rem;
+    line-height: 1.1;
     margin: 0;
+  }
+
+  :global([data-theme="light"]) .ascii-art pre {
+    color: #d97706;
   }
 
   .specs-block {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    font-size: 0.72rem;
   }
 
   .spec-head {
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
   .spec-head .highlight { color: #f3f4f6; }
+  :global([data-theme="light"]) .spec-head .highlight { color: #0f172a; }
   .spec-head .host { color: var(--primary, #01ac6a); }
+  :global([data-theme="light"]) .spec-head .host { color: #017a4b; }
+  
   .spec-div { color: #4b5563; margin-bottom: 4px; }
-  .spec-row .lbl { color: #9ca3af; font-weight: 500; margin-right: 4px; }
+  :global([data-theme="light"]) .spec-div { color: #cbd5e1; }
+
+  .spec-row {
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .spec-row .lbl { 
+    color: #9ca3af; 
+    font-weight: 500; 
+    margin-right: 2px; 
+  }
+  :global([data-theme="light"]) .spec-row .lbl { 
+    color: #475569; 
+    font-weight: 600; 
+  }
+
+  .spec-row .val {
+    color: #e5e7eb;
+  }
+  :global([data-theme="light"]) .spec-row .val {
+    color: #0f172a;
+    font-weight: 500;
+  }
 
   .badge-status {
     background: rgba(1, 172, 106, 0.15);
     color: var(--primary, #01ac6a);
     padding: 1px 6px;
     border-radius: 3px;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
     border: 1px solid rgba(1, 172, 106, 0.3);
+  }
+
+  :global([data-theme="light"]) .badge-status {
+    background: rgba(1, 172, 106, 0.12);
+    color: #017a4b;
+    border-color: rgba(1, 172, 106, 0.35);
+    font-weight: 700;
   }
 
   /* Benchmarks Styling */
@@ -408,6 +492,9 @@
     color: #9ca3af;
     font-size: 0.72rem;
     margin-bottom: 0.5rem;
+  }
+  :global([data-theme="light"]) .meta-line {
+    color: #475569;
   }
 
   .table-container {
@@ -428,10 +515,19 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-weight: 600;
   }
+  :global([data-theme="light"]) .bench-table th {
+    color: #475569;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+    font-weight: 700;
+  }
 
   .bench-table td {
     padding: 6px 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  :global([data-theme="light"]) .bench-table td {
+    border-bottom-color: rgba(0, 0, 0, 0.04);
+    color: #0f172a;
   }
 
   .tag {
@@ -444,9 +540,17 @@
   .tag-py { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
   .tag-sys { background: rgba(16, 185, 129, 0.2); color: #34d399; }
 
+  :global([data-theme="light"]) .tag-cpp { background: rgba(37, 99, 235, 0.1); color: #1d4ed8; font-weight: 600; }
+  :global([data-theme="light"]) .tag-py { background: rgba(217, 119, 6, 0.1); color: #b45309; font-weight: 600; }
+  :global([data-theme="light"]) .tag-sys { background: rgba(5, 150, 105, 0.1); color: #047857; font-weight: 600; }
+
   .metric-good {
     color: var(--primary, #01ac6a);
     font-weight: 600;
+  }
+  :global([data-theme="light"]) .metric-good {
+    color: #017a4b;
+    font-weight: 700;
   }
 
   .summary-line {
@@ -454,7 +558,12 @@
     font-size: 0.72rem;
     margin-top: 0.5rem;
   }
+  :global([data-theme="light"]) .summary-line {
+    color: #475569;
+  }
+
   .text-success { color: var(--primary, #01ac6a); }
+  :global([data-theme="light"]) .text-success { color: #017a4b; }
 
   /* Test Run Styling */
   .testrun-output {
@@ -468,12 +577,20 @@
     font-size: 0.74rem;
   }
   .log-time { color: #6b7280; margin-right: 4px; }
+  :global([data-theme="light"]) .log-time { color: #64748b; }
+  
   .log-tag { color: #9ca3af; font-weight: 600; margin-right: 4px; }
+  :global([data-theme="light"]) .log-tag { color: #475569; }
+
   .highlight-entry {
     background: rgba(1, 172, 106, 0.08);
     border-left: 2px solid var(--primary, #01ac6a);
     padding: 4px 6px;
     border-radius: 0 4px 4px 0;
+  }
+  :global([data-theme="light"]) .highlight-entry {
+    background: rgba(1, 172, 106, 0.08);
+    border-left-color: #01ac6a;
   }
 
   /* Cursor Line */
@@ -485,10 +602,16 @@
     padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
+  :global([data-theme="light"]) .cursor-line {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
 
   .cursor-block {
     color: var(--primary, #01ac6a);
     animation: blinkCursor 1s infinite;
+  }
+  :global([data-theme="light"]) .cursor-block {
+    color: #017a4b;
   }
 
   @keyframes blinkCursor {
