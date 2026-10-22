@@ -50,6 +50,12 @@ const isActive = (path: string) => {
     </nav>
 
     <div class="nav-actions">
+      <!-- Command Palette Trigger Button -->
+      <button class="nav-cmd-trigger" id="nav-cmd-trigger" title="Command Telemetry Palette (Ctrl+K or /)" aria-label="Open Command Palette">
+        <i class="fas fa-terminal"></i>
+        <span class="cmd-kbd">Ctrl K</span>
+      </button>
+
       <a href={`${base}me/`} class="cockpit-personal-pill" aria-label="Switch to Creative & Personal Space">
         <i class="fas fa-pen-nib"></i>
         <span>/me ↗</span>
@@ -268,6 +274,65 @@ const isActive = (path: string) => {
     display: flex;
     align-items: center;
     gap: 0.65rem;
+  }
+
+  .nav-cmd-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(1, 172, 106, 0.28);
+    border-radius: 4px;
+    padding: 0.32rem 0.6rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  :global([data-theme="light"]) .nav-cmd-trigger {
+    background: #f8fafc;
+    border-color: rgba(1, 172, 106, 0.35);
+    color: #4b5563;
+  }
+
+  .nav-cmd-trigger:hover {
+    color: var(--primary, #01ac6a);
+    border-color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 0 10px rgba(1, 172, 106, 0.2);
+  }
+
+  :global([data-theme="light"]) .nav-cmd-trigger:hover {
+    color: #017a4b;
+    background: rgba(1, 172, 106, 0.08);
+  }
+
+  .cmd-kbd {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 3px;
+    color: #d1d5db;
+  }
+
+  :global([data-theme="light"]) .cmd-kbd {
+    background: #e2e8f0;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #334155;
+  }
+
+  @media (max-width: 600px) {
+    .cmd-kbd {
+      display: none;
+    }
+    .nav-cmd-trigger {
+      padding: 0.35rem 0.45rem;
+    }
   }
 
   .cockpit-personal-pill {

@@ -1,6 +1,6 @@
 ---
 ---
-<div class="social-bar" id="social-bar">
+<div class="social-bar" id="social-bar" aria-label="Social & Direct Channels">
   <a href="https://github.com/arehman-dev" aria-label="GitHub" target="_blank" rel="noopener" class="social-link github">
     <i class="fab fa-github"></i>
   </a>
@@ -24,6 +24,13 @@
     flex-direction: column;
     gap: 1rem;
     z-index: 100;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .social-bar.docked-hidden {
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
   }
 
   .social-bar a {
@@ -72,3 +79,29 @@
     }
   }
 </style>
+
+<script>
+  function setupSocialDock() {
+    const socialBar = document.getElementById('social-bar');
+    const footer = document.getElementById('cockpit-footer');
+    if (!socialBar || !footer) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            socialBar.classList.add('docked-hidden');
+          } else {
+            socialBar.classList.remove('docked-hidden');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+  }
+
+  setupSocialDock();
+  document.addEventListener('astro:page-load', setupSocialDock);
+</script>

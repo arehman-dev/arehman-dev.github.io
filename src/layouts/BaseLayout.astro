@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.astro';
 import WaybarHud from '../components/WaybarHud.astro';
 import SocialDock from '../components/SocialDock.astro';
+import CommandPalette from '../components/CommandPalette.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -75,6 +76,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <Navbar />
       <WaybarHud />
       <SocialDock />
+      <CommandPalette />
       <main class="page-content" id="main-content">
         <slot />
       </main>

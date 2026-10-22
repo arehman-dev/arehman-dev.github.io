@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 let currentModule = 'home';
 if (pathname.includes('/projects')) currentModule = 'projects';
 else if (pathname.includes('/articles')) currentModule = 'articles';
-else if (pathname.includes('/certificates')) currentModule = 'certificates';
+else if (pathname.includes('/certificates')) currentModule = 'certs';
 else if (pathname.includes('/skills-experience')) currentModule = 'skills';
 else if (pathname.includes('/hire-me')) currentModule = 'connect';
 else if (pathname.includes('/about')) currentModule = 'about';
@@ -268,6 +268,18 @@ else if (pathname.includes('/about')) currentModule = 'about';
     }
     .waybar-status {
       padding: 4px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .waybar-path {
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .waybar-inner {
+      padding: 0 0.75rem;
     }
   }
 </style>
