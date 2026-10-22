@@ -15,56 +15,243 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <span class="caliper-tag">STATUS: READY FOR ENG OPS</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">NODE: ISLAMABAD, PK (UTC+5)</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">RESUME: v4.0 VERIFIED</span>
     </div>
 
     <header class="catalog-page-header">
       <span class="catalog-eyebrow">01 // ESTABLISH CONNECTION &amp; INSPECT CREDENTIALS</span>
       <h1 class="catalog-title">Engineering Handshake</h1>
       <p class="catalog-tagline">
-        Open for systems development, multithreaded automation pipelines, and Linux infrastructure engineering opportunities.
+        Open for systems programming, multithreaded automation pipelines, and hardened Linux infrastructure engineering roles.
       </p>
     </header>
 
     <div class="handshake-layout">
-      <!-- Left Column: Resume Document Reader -->
+      <!-- Left Column: Dual-Mode Resume Viewport (Terminal Spec + PDF Document) -->
       <div class="cv-column">
         <div class="cv-card">
+          <!-- CV Header with View Mode Switcher -->
           <div class="cv-header">
             <div class="cv-title-group">
-              <span class="cv-tag"><i class="fas fa-file-pdf text-primary"></i> SPECIFICATION: CV</span>
+              <span class="cv-tag"><i class="fas fa-file-code text-primary"></i> SPECIFICATION: CV</span>
               <h2 class="cv-title">Curriculum Vitae</h2>
             </div>
-            <a 
-              href={`${base}assets/documents/resume-abdulrehman.pdf`} 
-              download 
-              class="download-cv-btn"
-              id="download-resume-btn"
-            >
-              <i class="fas fa-download"></i>
-              <span>Download PDF</span>
-            </a>
+
+            <div class="cv-header-actions">
+              <!-- View Mode Tabs -->
+              <div class="cv-mode-tabs" role="tablist" aria-label="Resume View Modes">
+                <button 
+                  type="button" 
+                  class="cv-mode-btn active" 
+                  id="tab-terminal-btn"
+                  data-view="terminal" 
+                  role="tab" 
+                  aria-selected="true"
+                  title="Interactive Terminal Resume Spec"
+                >
+                  <i class="fas fa-terminal"></i>
+                  <span>Terminal Spec</span>
+                </button>
+                <button 
+                  type="button" 
+                  class="cv-mode-btn" 
+                  id="tab-pdf-btn"
+                  data-view="pdf" 
+                  role="tab" 
+                  aria-selected="false"
+                  title="PDF Document Viewport"
+                >
+                  <i class="fas fa-file-pdf"></i>
+                  <span>PDF Viewport</span>
+                </button>
+              </div>
+
+              <!-- Direct PDF Download Button -->
+              <a 
+                href={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                download="resume-abdulrehman.pdf" 
+                class="download-cv-btn"
+                id="download-resume-btn"
+                title="Download Official PDF Resume"
+              >
+                <i class="fas fa-download"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
           </div>
 
-          <div class="pdf-viewer-box">
-            <iframe 
-              src={`${base}assets/documents/resume-abdulrehman.pdf`} 
-              title="Abdul Rehman's Curriculum Vitae" 
-              width="100%" 
-              height="620px"
-              class="pdf-iframe"
-            >
-              <p>Your browser does not embed PDFs inline. 
-                <a href={`${base}assets/documents/resume-abdulrehman.pdf`}>Download the PDF directly</a>.
-              </p>
-            </iframe>
+          <!-- VIEW A: LIVE TERMINAL RESUME SPEC -->
+          <div class="cv-view-pane active" id="view-terminal" role="tabpanel" aria-labelledby="tab-terminal-btn">
+            <div class="terminal-cv-wrapper">
+              <div class="terminal-cv-bar">
+                <div class="terminal-cv-dots">
+                  <span class="term-dot dot-red"></span>
+                  <span class="term-dot dot-yellow"></span>
+                  <span class="term-dot dot-green"></span>
+                </div>
+                <div class="terminal-cv-title">
+                  <i class="fas fa-folder-open"></i>
+                  <span>arehman@dev:~/curriculum-vitae.sh</span>
+                </div>
+                <button type="button" class="term-copy-btn" id="copy-terminal-cv-btn" title="Copy Resume Plain Text">
+                  <i class="fas fa-copy"></i>
+                  <span id="copy-btn-label">Copy Raw</span>
+                </button>
+              </div>
+
+              <div class="terminal-cv-body" id="raw-cv-content">
+                <div class="term-cmd-line">
+                  <span class="term-prompt">arehman@dev:~$</span>
+                  <span class="term-command">cat ~/profile/curriculum-vitae.md</span>
+                </div>
+
+                <div class="cv-raw-output">
+                  <div class="cv-section-block cv-identity">
+================================================================================
+# ABDUL REHMAN
+Systems Developer &amp; Linux Infrastructure Automation Engineer
+Islamabad, Pakistan (UTC+5) | arehman.dev@proton.me | https://arehman-dev.github.io
+GitHub: @arehman-dev | LinkedIn: /in/arehman-dev
+================================================================================
+                  </div>
+
+                  <div class="cv-section-block">
+                    <span class="term-section-tag">[01 // EXECUTIVE SUMMARY]</span>
+<p class="term-text">
+Deterministic, hands-on Systems Developer and Linux Administrator with 2+ years of production experience at InfraLayers. Specializing in high-performance C++ systems programming, automated Python data engines, and hardened Linux environments. Relentless focus on compile-time verification, POSIX compliance, PEP 8 standards, and eliminating manual infrastructure toil.
+</p>
+                  </div>
+
+                  <div class="cv-section-block">
+                    <span class="term-section-tag">[02 // CORE SYSTEMS COMPETENCIES]</span>
+                    <div class="term-spec-table">
+                      <div class="term-row"><span class="t-key">Kernel &amp; Systems :</span> <span class="t-val">C++ (C++20, STL, RAII, Valgrind, Memory Profiling), POSIX APIs, GDB, Make/CMake, Linux Namespaces (ip-netns), Sockets</span></div>
+                      <div class="term-row"><span class="t-key">Automation &amp; API:</span> <span class="t-val">Python 3.12 (FastAPI, Multiprocessing, OpenCV, BeautifulSoup), Bash Scripting, Cron, Systemd daemons</span></div>
+                      <div class="term-row"><span class="t-key">Infrastructure  :</span> <span class="t-val">Debian, Ubuntu, RHEL Administration, Docker containerization, Outline VPN, UFW/IPTables, NTFS file recovery</span></div>
+                      <div class="term-row"><span class="t-key">Database &amp; Storage:</span> <span class="t-val">PostgreSQL, SQLite, Redis caching, Local-first Room / Jetpack Compose architectures</span></div>
+                      <div class="term-row"><span class="t-key">Directives      :</span> <span class="t-val">Idempotent workflows, zero-fluff engineering, continuous test assertions, strict error handling</span></div>
+                    </div>
+                  </div>
+
+                  <div class="cv-section-block">
+                    <span class="term-section-tag">[03 // PRODUCTION EXPERIENCE]</span>
+                    <div class="exp-entry">
+                      <div class="exp-entry-head">
+                        <span class="exp-role">Python Developer &amp; Systems Administrator</span>
+                        <span class="exp-period">2023 &mdash; PRESENT (ACTIVE DAEMON)</span>
+                      </div>
+                      <div class="exp-company"><i class="far fa-building"></i> InfraLayers &bull; Systems Operations &amp; Server Administration</div>
+                      <ul class="term-bullet-list">
+                        <li>Architected custom Python automation daemons and deployment scripts, reducing bare-metal server provisioning latency by <strong>60%</strong>.</li>
+                        <li>Hardened and maintained multi-node production Linux instances (Debian, Ubuntu) with strict systemd unit sandboxing and firewall rules.</li>
+                        <li>Designed automated multithreaded log parsers and real-time security telemetry monitors with instant alert webhooks.</li>
+                        <li>Standardized CI unit test coverage, strict PEP 8 linters, and scheduled automated backup rotations across operational nodes.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-section-block">
+                    <span class="term-section-tag">[04 // KEY VERIFIED SCHEMATICS &amp; BUILDS]</span>
+                    <div class="project-entry">
+                      <span class="p-bullet">&gt;</span> <strong>Linux Home Server:</strong> 24/7 dedicated self-hosted server running Nextcloud, Jellyfin, and automated Borg/Restic backup routines with zero external reliance.
+                    </div>
+                    <div class="project-entry">
+                      <span class="p-bullet">&gt;</span> <strong>Multimodal Arabic &amp; Urdu OCR Pipeline:</strong> High-throughput Python image processing engine with adaptive thresholding and multi-core OCR batching.
+                    </div>
+                    <div class="project-entry">
+                      <span class="p-bullet">&gt;</span> <strong>Virtual Network Testing Sandbox:</strong> Isolated Linux network topology simulator utilizing <code>ip-netns</code>, virtual ethernet pairs (veth), and iptables routing.
+                    </div>
+                    <div class="project-entry">
+                      <span class="p-bullet">&gt;</span> <strong>The Blue Orbit:</strong> High-efficiency Shadowsocks GUI client built for secure, low-latency encrypted network tunneling.
+                    </div>
+                  </div>
+
+                  <div class="cv-section-block">
+                    <span class="term-section-tag">[05 // ACCREDITED CREDENTIALS &amp; CERTIFICATIONS]</span>
+                    <ul class="term-bullet-list">
+                      <li><strong>Google IT Automation with Python Specialization</strong> &mdash; Google / Coursera (6-Course Professional Program)</li>
+                      <li><strong>Scientific Computing with Python</strong> &mdash; freeCodeCamp (Accredited Certification)</li>
+                      <li><strong>Google Cybersecurity Specialization</strong> &mdash; Google / Coursera (Security &amp; Network Defense)</li>
+                      <li><strong>Microsoft C++ Foundations Specialization</strong> &mdash; Microsoft / Coursera</li>
+                      <li><strong>Python for Everybody (PY4E)</strong> &mdash; University of Michigan</li>
+                    </ul>
+                  </div>
+
+                  <div class="term-cmd-line term-end-line">
+                    <span class="term-prompt">arehman@dev:~$</span>
+                    <span class="term-command">echo $STATUS</span>
+                    <span class="term-response">&gt;&gt; [READY FOR OPERATIONAL HANDSHAKE]</span>
+                    <span class="cursor-block">_</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="mobile-cv-action">
-            <p>Access on desktop for the interactive PDF viewport.</p>
-            <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="download-cv-btn w-full">
-              <i class="fas fa-download"></i> Get Official PDF Copy
-            </a>
+          <!-- VIEW B: PDF DOCUMENT VIEWPORT & DROPDOWN -->
+          <div class="cv-view-pane" id="view-pdf" role="tabpanel" aria-labelledby="tab-pdf-btn">
+            <div class="pdf-viewer-container">
+              <!-- Notice Banner for PDF Status -->
+              <div class="pdf-status-banner">
+                <div class="pdf-status-left">
+                  <i class="fas fa-file-pdf pdf-status-icon"></i>
+                  <div>
+                    <span class="pdf-status-title">Official Document Viewport</span>
+                    <span class="pdf-status-desc">Target: <code>/assets/documents/resume-abdulrehman.pdf</code></span>
+                  </div>
+                </div>
+                <div class="pdf-status-actions">
+                  <a 
+                    href={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="pdf-action-link"
+                  >
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                    <span>Open in New Tab</span>
+                  </a>
+                  <a 
+                    href={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                    download="resume-abdulrehman.pdf" 
+                    class="pdf-action-link"
+                  >
+                    <i class="fas fa-download"></i>
+                    <span>Download</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- PDF Iframe Box with Fallback Prompt -->
+              <div class="pdf-frame-wrapper">
+                <iframe 
+                  src={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                  title="Abdul Rehman's Curriculum Vitae" 
+                  width="100%" 
+                  height="640px"
+                  class="pdf-iframe"
+                >
+                  <div class="pdf-fallback-box">
+                    <p>Your browser does not embed PDFs inline.</p>
+                    <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="download-cv-btn">
+                      <i class="fas fa-download"></i> Download PDF directly
+                    </a>
+                  </div>
+                </iframe>
+
+                <!-- Standby Queue Notice if physical PDF is not yet replaced -->
+                <div class="pdf-standby-note">
+                  <i class="fas fa-info-circle text-primary"></i>
+                  <span>
+                    <strong>Note:</strong> The verified live specification is always current in the 
+                    <button type="button" class="inline-switch-btn" id="inline-switch-to-term">Terminal Spec view</button>. 
+                    Official PDF uploads sync directly to this viewport.
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -144,14 +331,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   }
 
   .caliper-bar {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 0.5rem 0.85rem;
+    padding: 0.35rem 0.85rem;
     background: rgba(13, 15, 18, 0.75);
     border: 1px solid rgba(1, 172, 106, 0.22);
-    border-radius: 6px;
+    border-radius: 9999px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.7rem;
     color: #9ca3af;
@@ -211,7 +398,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   /* Layout */
   .handshake-layout {
     display: grid;
-    grid-template-columns: 1.35fr 1fr;
+    grid-template-columns: 1.45fr 1fr;
     gap: 1.75rem;
     margin-bottom: 3.5rem;
     align-items: start;
@@ -219,7 +406,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
   .cv-card, .protocol-card {
     background: #0d0f12;
-    border: 1px solid rgba(1, 172, 106, 0.2);
+    border: 1px solid rgba(1, 172, 106, 0.22);
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
@@ -231,20 +418,20 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   }
 
-  /* CV Header */
+  /* CV Header & Switcher */
   .cv-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 
   :global([data-theme="light"]) .cv-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .cv-tag {
@@ -266,17 +453,80 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     color: #111827;
   }
 
+  .cv-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  /* Mode Tabs */
+  .cv-mode-tabs {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  :global([data-theme="light"]) .cv-mode-tabs {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .cv-mode-btn {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+
+  :global([data-theme="light"]) .cv-mode-btn {
+    color: #4b5563;
+  }
+
+  .cv-mode-btn:hover {
+    color: #f3f4f6;
+  }
+
+  :global([data-theme="light"]) .cv-mode-btn:hover {
+    color: #0f172a;
+  }
+
+  .cv-mode-btn.active {
+    background: rgba(1, 172, 106, 0.16);
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  :global([data-theme="light"]) .cv-mode-btn.active {
+    background: #ffffff;
+    color: #017a4b;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
   .download-cv-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 4px;
     background: var(--primary, #01ac6a);
     color: #ffffff;
     text-decoration: none;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 600;
     transition: all 0.2s ease;
   }
@@ -284,26 +534,426 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .download-cv-btn:hover {
     background: #00c47a;
     box-shadow: 0 0 12px rgba(1, 172, 106, 0.4);
+    transform: translateY(-1px);
   }
 
-  .pdf-viewer-box {
+  /* View Pane Visibility */
+  .cv-view-pane {
+    display: none;
+  }
+
+  .cv-view-pane.active {
+    display: block;
+    animation: fadeInPane 0.2s ease-out;
+  }
+
+  @keyframes fadeInPane {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TERMINAL CV SPEC VIEWPORT */
+  .terminal-cv-wrapper {
+    background: #08090b;
+    border: 1px solid rgba(1, 172, 106, 0.28);
     border-radius: 6px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: #111;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  :global([data-theme="light"]) .terminal-cv-wrapper {
+    background: #f8fafc;
+    border-color: rgba(1, 172, 106, 0.35);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .terminal-cv-bar {
+    background: #111418;
+    padding: 7px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme="light"]) .terminal-cv-bar {
+    background: #eef2f6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .terminal-cv-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .term-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #10b981; }
+
+  .terminal-cv-title {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  :global([data-theme="light"]) .terminal-cv-title {
+    color: #475569;
+  }
+
+  .term-copy-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+
+  :global([data-theme="light"]) .term-copy-btn {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+  }
+
+  .term-copy-btn:hover {
+    color: var(--primary, #01ac6a);
+    border-color: var(--primary, #01ac6a);
+  }
+
+  .terminal-cv-body {
+    padding: 1.25rem 1.4rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: #d1d5db;
+    max-height: 640px;
+    overflow-y: auto;
+  }
+
+  :global([data-theme="light"]) .terminal-cv-body {
+    color: #0f172a;
+  }
+
+  .term-cmd-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    color: #9ca3af;
+    font-weight: 600;
+  }
+
+  .term-prompt {
+    color: var(--primary, #01ac6a);
+  }
+
+  .term-command {
+    color: #f3f4f6;
+  }
+
+  :global([data-theme="light"]) .term-command {
+    color: #0f172a;
+  }
+
+  .cv-identity {
+    white-space: pre-line;
+    font-weight: 600;
+    color: #a7f3d0;
+    margin-bottom: 1.25rem;
+  }
+
+  :global([data-theme="light"]) .cv-identity {
+    color: #017a4b;
+  }
+
+  .cv-section-block {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme="light"]) .cv-section-block {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  }
+
+  .term-section-tag {
+    display: block;
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 0.74rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .term-text {
+    color: #d1d5db;
+    margin: 0;
+  }
+
+  :global([data-theme="light"]) .term-text {
+    color: #334155;
+  }
+
+  .term-spec-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .term-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .t-key {
+    color: #9ca3af;
+    font-weight: 700;
+    min-width: 150px;
+  }
+
+  :global([data-theme="light"]) .t-key {
+    color: #475569;
+  }
+
+  .t-val {
+    color: #e5e7eb;
+    flex: 1;
+  }
+
+  :global([data-theme="light"]) .t-val {
+    color: #0f172a;
+  }
+
+  .exp-entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-role {
+    font-weight: 700;
+    color: #f3f4f6;
+  }
+
+  :global([data-theme="light"]) .exp-role {
+    color: #0f172a;
+  }
+
+  .exp-period {
+    color: var(--primary, #01ac6a);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .exp-company {
+    color: #9ca3af;
+    font-size: 0.72rem;
+    margin-bottom: 0.6rem;
+  }
+
+  :global([data-theme="light"]) .exp-company {
+    color: #64748b;
+  }
+
+  .term-bullet-list {
+    margin: 0 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .term-bullet-list li {
+    color: #cbd5e1;
+  }
+
+  :global([data-theme="light"]) .term-bullet-list li {
+    color: #334155;
+  }
+
+  .project-entry {
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+  }
+
+  :global([data-theme="light"]) .project-entry {
+    color: #334155;
+  }
+
+  .p-bullet {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+  }
+
+  .term-end-line {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .term-response {
+    color: #10b981;
+    font-weight: 700;
+  }
+
+  .cursor-block {
+    display: inline-block;
+    color: var(--primary, #01ac6a);
+    font-weight: 800;
+    animation: blinkCursor 1s infinite step-start;
+  }
+
+  @keyframes blinkCursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* PDF VIEWPORT PANE */
+  .pdf-viewer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .pdf-status-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    border-radius: 6px;
+    padding: 0.65rem 0.9rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  :global([data-theme="light"]) .pdf-status-banner {
+    background: rgba(1, 172, 106, 0.08);
+    border-color: rgba(1, 172, 106, 0.3);
+  }
+
+  .pdf-status-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pdf-status-icon {
+    font-size: 1.1rem;
+    color: var(--primary, #01ac6a);
+  }
+
+  .pdf-status-title {
+    display: block;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #f3f4f6;
+  }
+
+  :global([data-theme="light"]) .pdf-status-title {
+    color: #0f172a;
+  }
+
+  .pdf-status-desc {
+    display: block;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    color: #9ca3af;
+  }
+
+  :global([data-theme="light"]) .pdf-status-desc {
+    color: #64748b;
+  }
+
+  .pdf-status-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pdf-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.1);
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .pdf-action-link:hover {
+    background: var(--primary, #01ac6a);
+    color: #ffffff;
+  }
+
+  .pdf-frame-wrapper {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #090a0c;
+  }
+
+  :global([data-theme="light"]) .pdf-frame-wrapper {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.1);
   }
 
   .pdf-iframe {
     border: none;
     display: block;
+    width: 100%;
+    min-height: 580px;
   }
 
-  .mobile-cv-action {
-    display: none;
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.85rem;
+  .pdf-standby-note {
+    padding: 0.6rem 0.9rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
     color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  :global([data-theme="light"]) .pdf-standby-note {
+    background: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    color: #475569;
+  }
+
+  .inline-switch-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary, #01ac6a);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
   }
 
   /* Protocol Column */
@@ -442,10 +1092,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     transform: translateY(-1px);
   }
 
-  .send-handshake-btn:active {
-    transform: scale(0.98);
-  }
-
   .networks-box {
     margin-top: 1.5rem;
     padding-top: 1.25rem;
@@ -513,11 +1159,68 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     .handshake-layout {
       grid-template-columns: 1fr;
     }
-    .pdf-viewer-box {
-      display: none;
-    }
-    .mobile-cv-action {
-      display: block;
-    }
   }
 </style>
+
+<script>
+  function setupResumeViewer() {
+    const modeBtns = document.querySelectorAll('.cv-mode-btn');
+    const viewPanes = document.querySelectorAll('.cv-view-pane');
+    const inlineSwitch = document.getElementById('inline-switch-to-term');
+
+    function switchView(targetView: string) {
+      modeBtns.forEach(btn => {
+        const isTarget = btn.getAttribute('data-view') === targetView;
+        btn.classList.toggle('active', isTarget);
+        btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      });
+
+      viewPanes.forEach(pane => {
+        pane.classList.toggle('active', pane.id === `view-${targetView}`);
+      });
+    }
+
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetView = btn.getAttribute('data-view') || 'terminal';
+        switchView(targetView);
+      });
+    });
+
+    if (inlineSwitch) {
+      inlineSwitch.addEventListener('click', () => {
+        switchView('terminal');
+      });
+    }
+
+    // Copy Raw Plain Text Handler
+    const copyBtn = document.getElementById('copy-terminal-cv-btn');
+    const copyLabel = document.getElementById('copy-btn-label');
+    const cvBody = document.getElementById('raw-cv-content');
+
+    if (copyBtn && cvBody && copyLabel) {
+      copyBtn.addEventListener('click', async () => {
+        const textToCopy = cvBody.innerText.replace(/arehman@dev:~\$/g, '$');
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          const original = copyLabel.textContent;
+          copyLabel.textContent = 'Copied!';
+          copyBtn.style.color = '#10b981';
+          setTimeout(() => {
+            copyLabel.textContent = original;
+            copyBtn.style.color = '';
+          }, 2000);
+        } catch {
+          // Fallback if clipboard API is restricted
+          copyLabel.textContent = 'Press Ctrl+C';
+          setTimeout(() => {
+            copyLabel.textContent = 'Copy Raw';
+          }, 2000);
+        }
+      });
+    }
+  }
+
+  setupResumeViewer();
+  document.addEventListener('astro:page-load', setupResumeViewer);
+</script>

@@ -44,7 +44,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
       </span>
     </div>
 
-    <!-- Right Section: Live Telemetry Clock & Personal Space Jump -->
+    <!-- Right Section: Live Telemetry Clock & Operational Status -->
     <div class="waybar-group waybar-right">
       <span class="waybar-pill waybar-clock" id="waybar-clock" title="Islamabad / Pakistan Standard Time">
         <i class="far fa-clock"></i>
@@ -54,10 +54,6 @@ else if (pathname.includes('/about')) currentModule = 'about';
         <span class="status-dot"></span>
         <span class="status-text">READY FOR OPS</span>
       </span>
-      <a href={`${base}me/`} class="waybar-pill waybar-personal" title="Switch to Personal & Creative Space">
-        <i class="fas fa-pen-nib"></i>
-        <span>/me ↗</span>
-      </a>
     </div>
   </div>
 </div>
@@ -251,44 +247,9 @@ else if (pathname.includes('/about')) currentModule = 'about';
     box-shadow: 0 0 6px rgba(1, 172, 106, 0.8);
   }
 
-  .waybar-personal {
-    text-decoration: none;
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.08);
-    border-color: rgba(251, 191, 36, 0.25);
-    font-weight: 600;
-    transition: all 0.2s ease;
-  }
-
-  :global([data-theme="light"]) .waybar-personal {
-    color: #92400e;
-    background: rgba(245, 158, 11, 0.12);
-    border-color: rgba(245, 158, 11, 0.35);
-    font-weight: 700;
-  }
-
-  .waybar-personal:hover {
-    background: rgba(251, 191, 36, 0.16);
-    border-color: rgba(251, 191, 36, 0.45);
-    color: #f59e0b;
-    transform: translateY(-1px);
-  }
-
-  :global([data-theme="light"]) .waybar-personal:hover {
-    background: rgba(245, 158, 11, 0.2);
-    border-color: rgba(245, 158, 11, 0.55);
-    color: #78350f;
-  }
-
   @media (max-width: 900px) {
     .waybar-center {
       display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .waybar-personal {
-      display: none; /* Navbar header already features /me directly above */
     }
   }
 
