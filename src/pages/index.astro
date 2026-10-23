@@ -362,6 +362,16 @@ const recentArticles = articles.slice(0, 3);
     box-shadow: 0 0 14px rgba(1, 172, 106, 0.4);
     transform: translateY(-1px);
   }
+  :global([data-theme="light"]) .btn-emerald {
+    background: #027a48;
+    border-color: #027a48;
+    color: #ffffff;
+  }
+  :global([data-theme="light"]) .btn-emerald:hover {
+    background: #016538;
+    border-color: #016538;
+    box-shadow: 0 0 14px rgba(2, 122, 72, 0.35);
+  }
 
   .btn-ghost {
     background: rgba(255, 255, 255, 0.04);
@@ -390,8 +400,21 @@ const recentArticles = articles.slice(0, 3);
     border: 1px solid rgba(1, 172, 106, 0.4);
   }
   .btn-outline:hover {
-    background: rgba(1, 172, 106, 0.1);
+    background: var(--primary, #01ac6a);
+    color: #ffffff !important;
     border-color: var(--primary, #01ac6a);
+    box-shadow: 0 4px 14px rgba(1, 172, 106, 0.3);
+    transform: translateY(-1px);
+  }
+  :global([data-theme="light"]) .btn-outline {
+    color: #027a48;
+    border: 1px solid rgba(2, 122, 72, 0.4);
+  }
+  :global([data-theme="light"]) .btn-outline:hover {
+    background: #027a48;
+    color: #ffffff !important;
+    border-color: #027a48;
+    box-shadow: 0 4px 14px rgba(2, 122, 72, 0.25);
   }
 
   /* Telemetry Chips */

@@ -275,10 +275,22 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border: 1px solid var(--primary, #01ac6a);
   }
 
+  :global([data-theme="light"]) .btn-home {
+    background: #027a48;
+    border-color: #027a48;
+    color: #ffffff;
+  }
+
   .btn-home:hover {
     background: #00c47a;
     box-shadow: 0 0 14px rgba(1, 172, 106, 0.4);
     transform: translateY(-1px);
+  }
+
+  :global([data-theme="light"]) .btn-home:hover {
+    background: #016538;
+    border-color: #016538;
+    box-shadow: 0 0 14px rgba(2, 122, 72, 0.3);
   }
 
   .btn-schem {
@@ -287,10 +299,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border: 1px solid rgba(1, 172, 106, 0.3);
   }
 
+  :global([data-theme="light"]) .btn-schem {
+    color: #027a48;
+    border-color: rgba(2, 122, 72, 0.4);
+  }
+
   .btn-schem:hover {
     background: var(--primary, #01ac6a);
     color: #ffffff;
     transform: translateY(-1px);
+  }
+
+  :global([data-theme="light"]) .btn-schem:hover {
+    background: #027a48;
+    color: #ffffff;
+    border-color: #027a48;
   }
 
   .btn-ghost {
