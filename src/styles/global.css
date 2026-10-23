@@ -123,7 +123,55 @@ body {
   transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* Concept 2: Enhanced Linux Binary Memory Stream */
+/* ==========================================================================
+   PRESERVED BACKGROUND CONCEPTS (REFERENCE & EASY REVERSION)
+   ========================================================================== */
+
+/* --- BASE BACKGROUND (Original Stealth Dot Matrix / Radar Coordinates) ---
+body {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(1, 172, 106, 0.08) 0%, transparent 60%),
+    radial-gradient(rgba(1, 172, 106, 0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  background-attachment: fixed;
+}
+[data-theme="dark"] body {
+  background-color: #06080a;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(1, 172, 106, 0.14) 0%, transparent 60%),
+    radial-gradient(rgba(1, 172, 106, 0.10) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  background-attachment: fixed;
+}
+*/
+
+/* --- CONCEPT: Blueprint CAD Dual-Grid (Major + Minor Subdivisions) ---
+body {
+  background-color: #f6f8fb;
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.06) 0%, transparent 60%),
+    linear-gradient(rgba(1, 172, 106, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 172, 106, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-attachment: fixed;
+}
+[data-theme="dark"] body {
+  background-color: #06090e;
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.10) 0%, transparent 60%),
+    linear-gradient(rgba(1, 172, 106, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 172, 106, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-attachment: fixed;
+}
+*/
+
+/* Concept 2: Enhanced Linux Binary Memory Stream (Static, Expanded Variety & Text) */
 body::before {
   content: "";
   position: fixed;
@@ -135,29 +183,12 @@ body::before {
   background-image: 
     var(--binary-radial-tint),
     var(--binary-stream-bg);
-  background-size: 100% 100%, 680px 736px;
+  background-size: 100% 100%, 690px 1104px;
   background-repeat: no-repeat, repeat;
   background-attachment: fixed, fixed;
   /* Reading corridor: center softens for maximum text contrast, margins & gutters show full stream */
   mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.60) 65%, rgba(0, 0, 0, 1) 100%);
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.60) 65%, rgba(0, 0, 0, 1) 100%);
-  animation: binaryStreamDrift 110s linear infinite;
-  will-change: background-position;
-}
-
-@keyframes binaryStreamDrift {
-  0% {
-    background-position: 0 0, 0 0;
-  }
-  100% {
-    background-position: 0 0, 0 736px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none !important;
-  }
 }
 
 /* App Layout Wrapper */
