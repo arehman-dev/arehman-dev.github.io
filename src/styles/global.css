@@ -114,29 +114,25 @@ body {
   transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* Concept 3: Blueprint Drafting Vellum Dual-Grid (Light) */
+/* Concept 4: Micro-Ruled Paper Notebook / Caliper Lines (Light) */
 body {
-  background-color: #f6f8fb;
+  background-color: #f8fafc;
   background-image: 
-    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.06) 0%, transparent 60%),
-    linear-gradient(rgba(1, 172, 106, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1, 172, 106, 0.09) 1px, transparent 1px),
-    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
-  background-size: 100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    radial-gradient(ellipse at 50% 0%, rgba(1, 172, 106, 0.05) 0%, transparent 60%),
+    linear-gradient(rgba(1, 172, 106, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 24px, 100% 6px;
   background-attachment: fixed;
 }
 
-/* Concept 3: Blueprint CAD Dual-Grid (Dark) */
+/* Concept 4: CRT Scanline / Terminal Phosphor Mesh (Dark) */
 [data-theme="dark"] body {
-  background-color: #06090e;
+  background-color: #07090b;
   background-image: 
-    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.10) 0%, transparent 60%),
-    linear-gradient(rgba(1, 172, 106, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1, 172, 106, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    radial-gradient(ellipse at 50% 0%, rgba(1, 172, 106, 0.12) 0%, transparent 65%),
+    linear-gradient(rgba(1, 172, 106, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+  background-size: 100% 100%, 100% 24px, 100% 4px;
   background-attachment: fixed;
 }
 
