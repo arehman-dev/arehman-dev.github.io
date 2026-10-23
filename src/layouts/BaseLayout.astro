@@ -111,39 +111,25 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <!-- Cockpit Keyboard Shortcuts Strip -->
         <div class="footer-shortcuts-strip">
           <div class="footer-shortcuts-inner">
-            <span class="shortcuts-lead"><i class="fas fa-terminal"></i> <span>SYS_SHORTCUTS:</span></span>
+            <span class="shortcuts-lead"><i class="fas fa-keyboard"></i> <span>SHORTCUTS:</span></span>
             
-            <button type="button" class="footer-shortcut-btn" id="foot-cmd-trigger" title="Open Command Telemetry Palette (Ctrl+K or /)">
-              <kbd class="f-kbd">Ctrl</kbd><span class="f-plus">+</span><kbd class="f-kbd">K</kbd>
-              <span class="f-action">Command Palette</span>
-            </button>
-
-            <span class="f-sep">&bull;</span>
-
-            <button type="button" class="footer-shortcut-btn" id="foot-find-trigger" title="Instant Search Runbook (/)">
+            <button type="button" class="footer-shortcut-btn" id="foot-cmd-trigger" title="Open Search & Command Palette (Press / or Ctrl+K)">
               <kbd class="f-kbd">/</kbd>
-              <span class="f-action">Quick Search</span>
+              <span class="f-action">Search &amp; Commands</span>
             </button>
 
             <span class="f-sep">&bull;</span>
 
-            <button type="button" class="footer-shortcut-btn" id="foot-theme-trigger" title="Toggle Display Theme (T)">
+            <button type="button" class="footer-shortcut-btn" id="foot-theme-trigger" title="Toggle Display Theme (Press T)">
               <kbd class="f-kbd">T</kbd>
               <span class="f-action">Toggle Theme</span>
             </button>
 
             <span class="f-sep">&bull;</span>
 
-            <a href="https://github.com/arehman-dev/arehman-dev.github.io" target="_blank" rel="noopener noreferrer" class="footer-shortcut-btn" title="Inspect Astro Source Repository (G)">
-              <kbd class="f-kbd">G</kbd>
-              <span class="f-action">GitHub Source ↗</span>
-            </a>
-
-            <span class="f-sep">&bull;</span>
-
             <span class="footer-shortcut-btn hint-only" title="Press ESC to close open modals">
               <kbd class="f-kbd">ESC</kbd>
-              <span class="f-action">Close Modal</span>
+              <span class="f-action">Close</span>
             </span>
           </div>
         </div>
@@ -153,7 +139,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <script is:inline>
         function setupFooterShortcuts() {
           const footCmdBtn = document.getElementById('foot-cmd-trigger');
-          const footFindBtn = document.getElementById('foot-find-trigger');
           const footThemeBtn = document.getElementById('foot-theme-trigger');
 
           const openPaletteModal = () => {
@@ -168,7 +153,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           };
 
           if (footCmdBtn) footCmdBtn.addEventListener('click', openPaletteModal);
-          if (footFindBtn) footFindBtn.addEventListener('click', openPaletteModal);
 
           if (footThemeBtn) {
             footThemeBtn.addEventListener('click', () => {
@@ -180,7 +164,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             });
           }
 
-          // Global single-key shortcuts: 't' to toggle theme, 'g' to open github (when not in an input/textarea)
+          // Global single-key shortcut: 't' to toggle theme (when not in an input/textarea)
           window.addEventListener('keydown', (e) => {
             const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
             const isEditable = document.activeElement ? document.activeElement.isContentEditable : false;
@@ -194,9 +178,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
               const next = current === 'dark' ? 'light' : 'dark';
               root.setAttribute('data-theme', next);
               localStorage.setItem('theme', next);
-            } else if (e.key.toLowerCase() === 'g') {
-              e.preventDefault();
-              window.open('https://github.com/arehman-dev/arehman-dev.github.io', '_blank', 'noopener,noreferrer');
             }
           });
         }

@@ -58,29 +58,28 @@
     <div class="tab-panel active" id="panel-neofetch" role="tabpanel">
       <div class="cmd-line">
         <span class="prompt">arehman@systems-node:~$</span>
-        <span class="command-text" id="cmd-neofetch">neofetch --distro debian</span>
+        <span class="command-text" id="cmd-neofetch">neofetch --distro redhat</span>
       </div>
       <div class="terminal-output neofetch-output">
         <div class="ascii-art">
           <pre class="ascii-block">
-       _,met$$$$$gg.
-    ,g$$$$$$$$$$$$$$$P.
-  ,g$$P"     """Y$$.".
- ,$$P'              `$$$.
-',$$P       ,ggs.     `$$b:
-`d$$'     ,$P"'   .    $$$
- $$P      d$'     ,    $$P
- $$:      $$.   -    ,d$$'
- $$\;      Y$b._   _,d$P'
- Y$$.    `.`"Y$$$$P"'
-  `$$b      "-.__
-   `Y$$b
+           .MMM..
+          MMMMMMMM~
+          MMMM__M+~
+         .MMMMMMMMN
+          ~MMMMMMM=
+      ..   .MMMM2
+   .MMMMMMMMMMMMMMMMMMM.
+  MMMMMMMMMMMMMMMMMMMMMM.
+ .MMMMMMMMMMMMMMMMMMMMMM
+  .MMMMMMMMMMMMMMMMMMMM.
+    ..MMMMMMMMMMMMMMM..
           </pre>
         </div>
         <div class="specs-block">
           <div class="spec-head"><span class="highlight">arehman</span>@<span class="host">systems-core</span></div>
           <div class="spec-div">--------------------------</div>
-          <div class="spec-row"><span class="lbl">OS:</span> <span class="val">Debian 12 (Bookworm) x86_64</span></div>
+          <div class="spec-row"><span class="lbl">OS:</span> <span class="val">Red Hat Enterprise Linux 9.4 (Plow) x86_64</span></div>
           <div class="spec-row"><span class="lbl">Role:</span> <span class="val">Systems &amp; Automation Dev</span></div>
           <div class="spec-row"><span class="lbl">Kernel:</span> <span class="val">Linux 6.6.15-hardened</span></div>
           <div class="spec-row"><span class="lbl">Runtimes:</span> <span class="val">C++20, Python 3.12, Bash 5.2</span></div>
@@ -416,14 +415,22 @@
   }
 
   .ascii-art pre {
-    color: #f59e0b;
+    color: #ef4444;
     font-size: 0.58rem;
     line-height: 1.1;
     margin: 0;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   :global([data-theme="light"]) .ascii-art pre {
-    color: #d97706;
+    color: #dc2626;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
   }
 
   .specs-block {

@@ -50,10 +50,10 @@ const isActive = (path: string) => {
     </nav>
 
     <div class="nav-actions">
-      <!-- Command Palette Trigger Button -->
-      <button class="nav-cmd-trigger" id="nav-cmd-trigger" title="Command Telemetry Palette (Ctrl+K or /)" aria-label="Open Command Palette">
-        <i class="fas fa-terminal"></i>
-        <span class="cmd-kbd">Ctrl K</span>
+      <!-- Search & Command Palette Trigger Button -->
+      <button class="nav-cmd-trigger" id="nav-cmd-trigger" title="Search & Commands (Press / or Ctrl+K)" aria-label="Open Search & Command Palette">
+        <i class="fas fa-search"></i>
+        <span class="cmd-kbd">/</span>
       </button>
 
       <a href={`${base}me/`} class="cockpit-personal-pill" aria-label="Switch to Creative & Personal Space">
@@ -279,15 +279,17 @@ const isActive = (path: string) => {
   .nav-cmd-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(1, 172, 106, 0.28);
     border-radius: 4px;
-    padding: 0.32rem 0.6rem;
+    padding: 0.32rem 0.55rem;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.72rem;
     color: #9ca3af;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: all 0.15s ease;
   }
 
@@ -311,28 +313,20 @@ const isActive = (path: string) => {
   }
 
   .cmd-kbd {
-    font-size: 0.65rem;
-    font-weight: 700;
+    font-size: 0.68rem;
+    font-weight: 800;
     padding: 1px 5px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 3px;
-    color: #d1d5db;
+    color: var(--primary, #01ac6a);
+    line-height: 1;
   }
 
   :global([data-theme="light"]) .cmd-kbd {
     background: #e2e8f0;
     border-color: rgba(0, 0, 0, 0.1);
-    color: #334155;
-  }
-
-  @media (max-width: 600px) {
-    .cmd-kbd {
-      display: none;
-    }
-    .nav-cmd-trigger {
-      padding: 0.35rem 0.45rem;
-    }
+    color: #017a4b;
   }
 
   .cockpit-personal-pill {
@@ -341,33 +335,37 @@ const isActive = (path: string) => {
     gap: 5px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.03em;
     padding: 0.32rem 0.65rem;
     border-radius: 4px;
     text-decoration: none;
-    background: rgba(1, 172, 106, 0.1);
-    border: 1px solid rgba(1, 172, 106, 0.3);
-    color: var(--primary, #01ac6a);
+    background: transparent;
+    border: 1px solid rgba(1, 172, 106, 0.25);
+    color: #9ca3af;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: all 0.18s ease;
   }
 
   :global([data-theme="light"]) .cockpit-personal-pill {
-    background: rgba(1, 172, 106, 0.12);
-    border: 1px solid rgba(1, 172, 106, 0.35);
-    color: #017a4b;
+    background: transparent;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    color: #4b5563;
   }
 
   .cockpit-personal-pill:hover {
-    background: var(--primary, #01ac6a);
-    color: #ffffff;
+    background: rgba(1, 172, 106, 0.12);
+    color: var(--primary, #01ac6a);
     border-color: var(--primary, #01ac6a);
     transform: translateY(-1px);
-    box-shadow: 0 0 12px rgba(1, 172, 106, 0.35);
+    box-shadow: 0 0 10px rgba(1, 172, 106, 0.25);
   }
 
   :global([data-theme="light"]) .cockpit-personal-pill:hover {
-    color: #ffffff;
+    background: rgba(1, 172, 106, 0.1);
+    color: #017a4b;
+    border-color: #01ac6a;
   }
 
   .cockpit-personal-pill i {
