@@ -216,6 +216,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://arehman-dev.github.io/projects/blossom-recovery-engine/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://arehman-dev.github.io/projects/gnome-extension-prayer-notifier/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -237,6 +242,16 @@
   </url>
   <url>
     <loc>https://arehman-dev.github.io/projects/portfolio-website/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://arehman-dev.github.io/projects/quran-study-tafsir-reader/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://arehman-dev.github.io/projects/shadowsocks-rust-proxy/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

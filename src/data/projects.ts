@@ -134,6 +134,60 @@ export const projects: Project[] = [
       "Bilingual Editorial & Visual Storytelling (/me/): Open-canvas essays, RTL Noto Nastaliq Urdu poetry typography, keyboard navigation (h/p/t/a), and a filterable fullscreen lightbox gallery ('Tasweer-Kahani')",
       "Zero-Bloat Version Archiving: Complete historical preservation of v1 (Vanilla JS) and v2 (pre-merger Astro) via annotated Git tags and archive branches with 0 KB working-tree overhead"
     ]
-  }
+  },
+  {
+    title: "📖 Quran Study App & Comparative Tafsir Station",
+    description: "A modern, desktop-first, offline-capable study station designed for comparative reading of the Holy Quran, linguistic morphology, and classical Urdu Tafasir.",
+    slug: "quran-study-tafsir-reader",
+    tags: ["TypeScript", "React 19", "Vite", "SQLite", "Tailwind CSS", "Offline-First"],
+    status: "Completed",
+    link: "#",
+    longDescription: "A high-performance desktop-first Quranic study application built with React 19, TypeScript, and Vite, backed by an embedded local SQLite database running via Node.js built-in node:sqlite for zero-dependency, sub-millisecond query execution. It features a stacked comparative commentary layout that allows researchers and students of knowledge to view the original Arabic verse alongside authentic Urdu translations (Mufti Taqi Usmani) and vertically aligned classical commentaries (Tafheem-ul-Quran, Maarif-ul-Quran, Tafsir Ibn Kathir, and Tayseer-ul-Quran) with synchronized ayah stepping and zero page reloads.",
+    problem: "Existing online Quran study portals are heavily reliant on active cloud APIs, suffer from sluggish UI transitions when toggling multiple classical commentaries, and rarely offer synchronized comparative side-by-side analysis across both Indo-Pak and Uthmani scripts.",
+    solution: "Engineered a local-first study environment with an embedded SQLite engine holding all 114 Surahs, complete word-by-word grammatical corpora, root concordances, and pre-indexed Urdu Tafasir texts, allowing instantaneous offline cross-referencing and Tajweed color-coding.",
+    features: [
+      "Stacked multi-Tafsir comparative reader supporting simultaneous analysis of 4 classical Urdu commentaries",
+      "Dual-script Mushaf engine toggling between 15-line Indo-Pak standard and 604-page Madani Uthmani layout",
+      "Interactive Tajweed rules engine with color-coded phonetic guides (Madd, Ghunnah, Ikhfa, Qalqalah)",
+      "Word-by-word interlinear grammatical corpus with root concordance mapping all 1,570 Quranic roots",
+      "Zero-latency local SQLite query pipeline utilizing built-in node:sqlite with zero external C++ dependencies"
+    ]
+  },
+  {
+    title: "🌸 Blossom — Local-First Recovery & Habit Discipline Engine",
+    description: "A private, 100% offline-first native Android application built in Kotlin & Jetpack Compose for habit discipline, relapse profiling, and recovery tracking with zero network permissions.",
+    slug: "blossom-recovery-engine",
+    tags: ["Kotlin", "Jetpack Compose", "Room SQLite", "Android", "Hilt", "Offline-First"],
+    status: "Completed",
+    link: "#",
+    longDescription: "Blossom is a private, local-first Android application architected in 100% Kotlin with Jetpack Compose (Material Design 3) and Room Database persistence, dedicated to personal recovery, self-discipline habit tracking, and spiritual betterment. Built on the core principle of radical data ownership, the app operates with zero internet permissions, guaranteeing that all sensitive psychological conditions, triggers, journal reflections, and streak telemetry remain strictly encrypted on the physical device.",
+    problem: "Most digital wellness and habit tracking applications require mandatory cloud accounts, harvest private psychological and emotional logs to third-party ad networks, and lack nuanced relapse trigger profiling.",
+    solution: "Developed an entirely offline, MVVM-driven Android application utilizing Hilt dependency injection, Room SQLite transactions, background WorkManager automated JSON backups, and multi-factor condition logging with interactive risk heatmaps.",
+    features: [
+      "Real-time clean time counter and milestone countdown engine with trophy achievement unlocks",
+      "Nuanced condition logger tracking mood ratings (1-5) and urge intensity (0-10) with contextual trigger tagging",
+      "Time-of-day analytics and risk heatmaps identifying peak vulnerability windows across daily schedules",
+      "Personal playbook with customizable urge-surfing distraction decks, commitment oaths, and preloaded guides",
+      "Automated 24-hour JSON data backups via Android WorkManager with clipboard-based instant disaster recovery"
+    ]
+  },
+  {
+    title: "🛡️ Sovereign Proxy & Encrypted Tunnel Infrastructure (Shadowsocks-Rust & Outline)",
+    description: "High-throughput sovereign encrypted proxy nodes deployed on Linux with Shadowsocks-Rust, AEAD ciphers, kernel sysctl socket tuning, and automated systemd daemons.",
+    slug: "shadowsocks-rust-proxy",
+    tags: ["Rust", "Linux", "Networking", "Systemd", "Cryptography", "Docker"],
+    status: "Completed",
+    link: "#",
+    longDescription: "A sovereign, censorship-resilient proxy infrastructure built using Shadowsocks-Rust—the asynchronous, memory-safe Rust implementation of the Shadowsocks protocol. Deployed across cloud Linux servers, this project provides low-latency, tamper-resistant internet connectivity by wrapping TCP/UDP traffic in modern Authenticated Encryption with Associated Data (AEAD) ciphers. The server stack is hardened through systemd service isolation, automated crash restarts, and kernel-level socket optimizations.",
+    problem: "Standard VPN protocols (OpenVPN, WireGuard) produce recognizable packet signatures vulnerable to active probing and Deep Packet Inspection (DPI) throttling on restrictive networks, leading to severe packet drops and degraded latency.",
+    solution: "Provisioned and tuned high-performance Shadowsocks-Rust server instances utilizing ChaCha20-IETF-Poly1305 and AES-256-GCM ciphers, enabled BBR congestion control, increased socket buffer limits, and configured Outline management APIs for secure key rotation.",
+    features: [
+      "Asynchronous non-blocking network I/O powered by Tokio and Mio, achieving sub-millisecond cryptographic overhead",
+      "Hardened Linux systemd unit configurations with Sandboxed userspace execution, ProtectSystem=strict, and auto-restart policies",
+      "Kernel TCP socket tuning including TCP BBR congestion control, TCP Fast Open (TFO), and optimized window sizes",
+      "Multi-client access key provisioning, bandwidth quota tracking, and automated port allocation via REST APIs",
+      "Full interoperability across cross-platform Outline Clients on Android, Linux, macOS, and Windows"
+    ]
+  },
 ];
 
