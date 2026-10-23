@@ -1,10 +1,10 @@
 <svg xmlns='http://www.w3.org/2000/svg' width='690' height='1104' viewBox='0 0 690 1104'>
   <style>
     text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: 0.5px; }
-    .dim { fill: rgba(1, 172, 106, 0.05); }
-    .base { fill: rgba(1, 172, 106, 0.095); }
-    .subaccent { fill: rgba(1, 172, 106, 0.25); font-weight: 500; }
-    .accent { fill: rgba(1, 172, 106, 0.52); font-weight: 700; }
+    .dim { fill: rgba(1, 172, 106, 0.08); }
+    .base { fill: rgba(1, 172, 106, 0.16); }
+    .subaccent { fill: rgba(1, 172, 106, 0.36); font-weight: 500; }
+    .accent { fill: rgba(1, 172, 106, 0.72); font-weight: 700; }
   </style>
   <text x='10' y='17' class='dim'>00000000</text>
   <text x='92' y='17'><tspan class='accent'>7f 45 4c 46</tspan><tspan class='base'> 02 01 01 00  00 00 00 00 00 00 00 00</tspan></text>
