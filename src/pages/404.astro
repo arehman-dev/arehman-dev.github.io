@@ -34,7 +34,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
       <div class="fault-body">
         <div class="fault-code-display">
-          <span class="err-num">404</span>
+          <h1 class="err-num">404</h1>
           <span class="err-type">SEGMENTATION_FAULT: UNMAPPED_VIRTUAL_ADDRESS</span>
         </div>
 
@@ -191,6 +191,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 5.5rem;
     font-weight: 800;
     line-height: 1;
+    margin: 0;
     color: #ef4444;
     text-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
     letter-spacing: -0.04em;

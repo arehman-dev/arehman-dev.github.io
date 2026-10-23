@@ -39,14 +39,41 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content="https://arehman-dev.github.io/portfolio/assets/images/og-image.jpg" />
+    <meta property="og:image" content="https://arehman-dev.github.io/assets/images/og-image.jpg" />
     <meta property="og:site_name" content="arehman-dev Portfolio" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://arehman-dev.github.io/portfolio/assets/images/og-image.jpg" />
+    <meta name="twitter:image" content="https://arehman-dev.github.io/assets/images/og-image.jpg" />
+
+    <!-- JSON-LD Structured Data Schema (Person) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Abdul Rehman",
+      "url": "https://arehman-dev.github.io/",
+      "image": "https://arehman-dev.github.io/assets/images/og-image.jpg",
+      "jobTitle": "Systems & Automation Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "InfraLayers"
+      },
+      "sameAs": [
+        "https://github.com/arehman-dev",
+        "https://linkedin.com/in/arehman-dev",
+        "https://x.com/arehman_dev"
+      ],
+      "knowsAbout": [
+        "Linux", "Python", "C++", "Docker", "DevOps", "System Administration", "Automation", "POSIX"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Islamabad",
+        "addressCountry": "Pakistan"
+      }
+    })} />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2301ac6a'><text x='2' y='20' font-size='20' font-family='monospace' font-weight='bold' fill='%2301ac6a'>%3E_</text></svg>" />

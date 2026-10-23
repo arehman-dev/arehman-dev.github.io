@@ -13,6 +13,252 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    title: "Architecting a Resilient Debian Linux Home Server: Docker, WireGuard, Reverse Proxies & Storage",
+    excerpt: "A battle-tested blueprint for transforming modest x86 hardware into a high-availability, self-hosted Linux home server with containerized media stacks, local DNS sinkholes, and automated off-site backups.",
+    date: "October 18, 2026",
+    publishDate: "2026-10-18",
+    readTime: "12 min read",
+    coverImage: "/assets/images/articles/linux-server.jpg",
+    category: "SysAdmin",
+    slug: "architecting-linux-home-server-docker-storage-vpn",
+    content: `
+      <p>Relying exclusively on commercial cloud providers for personal data storage and compute inevitably introduces vendor lock-in, recurring subscription costs, and privacy tradeoffs. Building a sovereign <strong>Debian Linux Home Server</strong> running on dedicated local hardware grants complete control over your data lifecycle, storage pooling, and network security policies.</p>
+
+      <h3>1. Base System Hardening & Storage Topologies</h3>
+      <p>The foundation begins with a minimal <strong>Debian 12 (Bookworm)</strong> netinst installation—free of desktop environments or superfluous display managers. Boot storage is isolated on a dedicated NVMe SSD, while mass storage utilizes mirrored multi-terabyte drives with <code>ext4</code> and periodic <code>smartctl</code> health scans.</p>
+      <pre><code># Install essential system administration and storage tools
+sudo apt update && sudo apt install -y   smartmontools ufw fail2ban curl git   htop iotop btop unattended-upgrades
+
+# Enable daily SMART health monitoring for storage drives
+sudo smartctl -s on /dev/sda
+sudo smartctl -H /dev/sda</code></pre>
+
+      <h3>2. Docker Containerization with Isolated Bridge Networks</h3>
+      <p>Services should never run directly on the host OS userspace. Instead, every application runs inside isolated Docker containers bound to an internal Docker bridge network. A standardized <code>docker-compose.yml</code> file orchestrates the entire home server stack:</p>
+      <ul>
+        <li><strong>AdGuard Home / Pi-hole:</strong> Network-wide DNS sinkhole blocking trackers and telemetry across all household devices.</li>
+        <li><strong>Nextcloud:</strong> Self-hosted, end-to-end encrypted file synchronization with automated camera uploads.</li>
+        <li><strong>Jellyfin:</strong> Open-source hardware-accelerated media streaming pipeline.</li>
+      </ul>
+      <pre><code># Sample production docker-compose snippet
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "3000:3000/tcp"
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
+    networks:
+      - srv-network
+
+networks:
+  srv-network:
+    driver: bridge</code></pre>
+
+      <h3>3. Encrypted Ingress: WireGuard VPN & Reverse Proxy</h3>
+      <p>Never expose administrative ports (like SSH or Nextcloud HTTP) directly to the public internet via port forwarding. Ingress is restricted via an encrypted <strong>WireGuard VPN tunnel</strong>, allowing remote management from mobile devices as if on the local LAN.</p>
+      <pre><code># Restrict UFW firewall to local subnet and WireGuard UDP port
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow in on eth0 to any port 22 proto tcp
+sudo ufw allow 51820/udp comment 'WireGuard VPN Ingress'
+sudo ufw enable</code></pre>
+
+      <h3>4. The 3-2-1 Automated Backup Pipeline</h3>
+      <p>A server without automated verification is a single hardware failure away from catastrophe. We enforce a strict 3-2-1 backup rotation using <strong>BorgBackup</strong> and encrypted <strong>Rsync over SSH</strong>, executed via an automated systemd timer.</p>
+      <pre><code># Automated snapshot retention script (/usr/local/bin/server-backup.sh)
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPOSITORY="/mnt/backup-drive/borg-repo"
+borg create --stats --progress   "\${REPOSITORY}::home-server-{now:%Y-%m-%d_%H:%M}"   /opt/docker-stacks /etc/systemd/system
+
+# Prune archives older than 30 days
+borg prune -v --list "\${REPOSITORY}" --keep-daily=7 --keep-weekly=4 --keep-monthly=6</code></pre>
+
+      <h3>Key Takeaways</h3>
+      <p>A properly hardened Debian home server operates silently with near-zero maintenance, offering superior throughput, zero telemetry, and true sovereign control over your digital infrastructure.</p>
+    `
+  },
+  {
+    title: "Building Native GNOME Desktop Extensions with GJS, D-Bus, and Linux Systemd Clocks",
+    excerpt: "An engineering deep-dive into developing lightweight, leak-free GNOME 45+ panel extensions in JavaScript (GJS), interfacing with desktop D-Bus daemons, and running offline astronomical prayer calculations.",
+    date: "October 20, 2026",
+    publishDate: "2026-10-20",
+    readTime: "11 min read",
+    coverImage: "/assets/images/articles/gnome-extension.jpg",
+    category: "Linux",
+    slug: "building-native-gnome-shell-extension-gjs-dbus",
+    content: `
+      <p>Desktop utilities often rely on heavyweight Electron runtimes or persistent background Python daemons that consume hundreds of megabytes of RAM just to display an indicator icon. For developers on Linux using the GNOME desktop environment, <strong>GNOME Shell Extensions</strong> written in <strong>GJS (GNOME JavaScript / SpiderMonkey)</strong> run directly inside the window manager compositor process (<code>gnome-shell</code>), consuming virtually zero additional memory overhead.</p>
+
+      <h3>1. The GNOME 45+ ESM Architecture</h3>
+      <p>Starting with GNOME 45, the extension ecosystem transitioned fully to modern ECMAScript Modules (ESM). Extensions now declare explicit imports from GNOME’s GObject Introspection libraries:</p>
+      <pre><code>import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import St from 'gi://St';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';</code></pre>
+
+      <h3>2. Constructing the Indicator Button & Clutter Actor Hierarchy</h3>
+      <p>The indicator widget inherits from <code>PanelMenu.Button</code>, attaching a container actor (<code>St.BoxLayout</code>) that houses the icon and countdown label:</p>
+      <pre><code>const PrayerIndicator = GObject.registerClass(
+  class PrayerIndicator extends PanelMenu.Button {
+    _init() {
+      super._init(0.0, 'Prayer Time Notifier', false);
+
+      const box = new St.BoxLayout({
+        style_class: 'prayer-indicator-box',
+        reactive: true,
+        can_focus: true,
+        track_hover: true
+      });
+
+      this._icon = new St.Icon({
+        icon_name: 'alarm-symbolic',
+        style_class: 'system-status-icon'
+      });
+
+      this._label = new St.Label({
+        text: '00:00:00',
+        y_align: Clutter.ActorAlign.CENTER
+      });
+
+      box.add_child(this._icon);
+      box.add_child(this._label);
+      this.add_child(box);
+    }
+  }
+);</code></pre>
+
+      <h3>3. Deterministic Astronomical Calculations Offline</h3>
+      <p>Rather than pinging external HTTP REST endpoints that introduce network latency, battery drain, and privacy leaks, prayer times are calculated mathematically directly on the CPU using solar coordinates based on latitude, longitude, and elevation. Standard astronomical formulas determine the solar zenith angle for Fajr, Dhuhr, Asr (Shafi/Hanafi shadow ratios), Maghrib, and Isha.</p>
+
+      <h3>4. Interfacing with Desktop D-Bus for Native Notifications</h3>
+      <p>When prayer time arrives, the extension dispatches high-priority desktop notifications through the system notification daemon via <code>org.freedesktop.Notifications</code>:</p>
+      <pre><code>import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
+
+function triggerPrayerAlert(prayerName) {
+  const source = new MessageTray.Source('Prayer Notifier', 'alarm-symbolic');
+  Main.messageTray.add(source);
+
+  const notification = new MessageTray.Notification(
+    source,
+    'Time for ' + prayerName + ' Prayer',
+    'Hayya alal-Salah. Success awaits.'
+  );
+  notification.setTransient(false);
+  notification.setUrgency(MessageTray.Urgency.CRITICAL);
+  source.showNotification(notification);
+}</code></pre>
+
+      <h3>5. Preventing Memory Leaks in Long-Running Compositors</h3>
+      <p>Because extensions run inside the <code>gnome-shell</code> compositor process, any dangling timeout, signal listener, or GLib source will cause a permanent memory leak. Cleaning up all timers and disconnecting GObject signals inside <code>disable()</code> is mandatory:</p>
+      <pre><code>export default class PrayerNotifierExtension extends Extension {
+  enable() {
+    this._indicator = new PrayerIndicator();
+    Main.panel.addToStatusArea(this.uuid, this._indicator);
+  }
+
+  disable() {
+    if (this._indicator) {
+      this._indicator.destroy();
+      this._indicator = null;
+    }
+  }
+}</code></pre>
+
+      <h3>Conclusion</h3>
+      <p>Developing native GNOME extensions demonstrates that high-performance, beautifully integrated Linux desktop tooling can be achieved without bloating your system with multi-gigabyte browser runtimes.</p>
+    `
+  },
+  {
+    title: "Architecting an Academic Operations & Attendance Sync Engine with Python, Flask, and Google Sheets API",
+    excerpt: "How I architected the Tanzeem Course Manager backend: unifying relational SQLite models with asynchronous Google Sheets API sync pipelines, atomic transaction guards, and role-based coordinator workflows.",
+    date: "October 22, 2026",
+    publishDate: "2026-10-22",
+    readTime: "14 min read",
+    coverImage: "/assets/images/articles/python-flask-sync.jpg",
+    category: "Python",
+    slug: "full-stack-python-flask-sheets-sync-engine",
+    content: `
+      <p>Managing live student attendance, fee compliance, and coordinator tasks across distributed educational institutions frequently runs into a classic friction point: administrators demand the familiar, collaborative interface of <strong>Google Sheets</strong>, while systems developers require the relational integrity, authentication safeguards, and atomic transactions of a <strong>SQL database</strong>.</p>
+      <p>In developing <strong>Tanzeem Course Manager</strong>, I engineered a robust hybrid operational backend combining <strong>Python</strong>, <strong>Flask Blueprints</strong>, <strong>SQLAlchemy ORM</strong>, and an asynchronous <strong>Google Sheets API</strong> bidirectional sync engine that reconciles disparate data models automatically.</p>
+
+      <h3>1. Architecture & Blueprint Domain Separation</h3>
+      <p>A monolithic Flask script quickly becomes unmaintainable as operational complexity expands. The platform is modularized into discrete domain-driven Blueprints with strict separation of concerns:</p>
+      <ul>
+        <li><code>auth_bp</code>: Session-based authentication, PBKDF2 password hashing, and role-based permissions (Admin, Coordinator, Viewer).</li>
+        <li><code>attendance_bp</code>: Daily roll-call logging with automated compliance threshold checks.</li>
+        <li><code>coordinators_bp</code>: Task assignment, delegation queues, and performance metrics.</li>
+        <li><code>finance_bp</code>: Tuition record verification and automated fee reconciliation.</li>
+      </ul>
+      <pre><code># Application factory with Blueprint registration (app.py)
+from flask import Flask
+from extensions import db, login_manager
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    from routes.auth import auth_bp
+    from routes.dashboard import dashboard_bp
+    from routes.attendance import attendance_bp
+
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(attendance_bp, url_prefix='/attendance')
+
+    return app</code></pre>
+
+      <h3>2. Bidirectional Google Sheets Sync Engine</h3>
+      <p>The primary architectural challenge was ensuring that edits in Google Sheets do not overwrite conflicting records in SQLite, and vice versa. The synchronization engine (<code>google_sync.py</code>) utilizes OAuth2 service account credentials and enforces atomic batch transactions:</p>
+      <pre><code># Atomic sheet synchronization pipeline (google_sync.py)
+import gspread
+from google.oauth2.service_account import Credentials
+
+SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+]
+
+def get_sheet_client():
+    creds = Credentials.from_service_account_file('credentials.json', scopes=SCOPES)
+    return gspread.authorize(creds)
+
+def sync_attendance_records(course_id, target_sheet_id):
+    client = get_sheet_client()
+    sheet = client.open_by_key(target_sheet_id).worksheet('Attendance')
+
+    # Query local database state
+    records = AttendanceRecord.query.filter_by(course_id=course_id).all()
+    payload = [[r.student_name, r.roll_no, r.date.isoformat(), r.status] for r in records]
+
+    # Atomic batch update to avoid Google API rate limits
+    sheet.clear()
+    sheet.update('A1', [['Name', 'Roll No', 'Date', 'Status']] + payload)</code></pre>
+
+      <h3>3. Preventing Concurrency Collisions & Rate Limiting</h3>
+      <p>Google’s Sheets API enforces strict quota limits (300 requests per minute per project). To prevent API quota exhaustion during peak attendance marking hours, the sync engine introduces an in-memory debouncing queue: changes are staged locally in SQLite immediately, and synchronization workers flush batches every 60 seconds with exponential backoff retries.</p>
+
+      <h3>4. Hardened Security & Deployment Considerations</h3>
+      <p>The application runs behind a <strong>Gunicorn</strong> WSGI multi-worker server reverse-proxied by <strong>Nginx</strong> with TLS termination. Sensitive database credentials, Google Service Account JSON keys, and session cookies are managed strictly via environment variables.</p>
+
+      <h3>Conclusion</h3>
+      <p>By treating Google Sheets as an external synchronized view rather than an unreliable primary datastore, the Tanzeem Course Manager achieved real-time collaboration for non-technical coordinators without sacrificing relational database integrity or server security.</p>
+    `
+  },
+  {
     title: "Isolating Linux Network Topologies with ip netns, veth Pairs, and QEMU",
     excerpt: "How to construct a 100% sandboxed multi-node virtual network environment on Ubuntu Linux using kernel network namespaces and virtual ethernet pairs to test routing scripts safely.",
     date: "October 12, 2026",

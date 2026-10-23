@@ -30,8 +30,8 @@
   --gray-800: #212529;
   --gray-900: #121212;
 
-  /* Semantic Aliases */
-  --primary: var(--green-500);
+  /* Semantic Aliases (Light mode high-contrast WCAG AA) */
+  --primary: #027a48;
   --primary-light: var(--green-50);
   --primary-dark: var(--green-900);
   --secondary: var(--blue-500);
@@ -68,6 +68,7 @@
 }
 
 [data-theme="dark"] {
+  --primary: #01ac6a;
   --bg-main: #000000;
   --bg-sidebar: #0a0a0a;
   --bg-card: rgba(14, 14, 14, 0.75);
