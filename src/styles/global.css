@@ -114,30 +114,23 @@ body {
   transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* Light Theme Drafting Blueprint Background */
+/* Concept 1: Stealth Dot Matrix / Coordinate Radar (Light) */
 body {
   background-color: #f8fafc;
   background-image: 
-    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.05) 0%, transparent 50%),
-    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-    linear-gradient(rgba(1, 172, 106, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1, 172, 106, 0.028) 1px, transparent 1px);
-  background-size: 100% 100%, 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.06) 0%, transparent 55%),
+    radial-gradient(rgba(1, 172, 106, 0.18) 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 28px 28px;
   background-attachment: fixed;
 }
 
-/* Pitch Black OLED Stealth CAD Blueprint Grid + Cathode Glow */
+/* Concept 1: Stealth Dot Matrix / Coordinate Radar (Dark) */
 [data-theme="dark"] body {
-  background-color: #000000;
+  background-color: #06080a;
   background-image: 
-    radial-gradient(circle at 18% -10%, rgba(1, 172, 106, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 82% -10%, rgba(57, 123, 201, 0.07) 0%, transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(rgba(1, 172, 106, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1, 172, 106, 0.025) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+    radial-gradient(circle at 50% -10%, rgba(1, 172, 106, 0.10) 0%, transparent 55%),
+    radial-gradient(rgba(1, 172, 106, 0.16) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
   background-attachment: fixed;
 }
 
