@@ -53,7 +53,6 @@ const isActive = (path: string) => {
       <!-- Search & Command Palette Trigger Button -->
       <button class="nav-cmd-trigger" id="nav-cmd-trigger" title="Search & Commands (Press / or Ctrl+K)" aria-label="Open Search & Command Palette">
         <span class="cmd-symbol">⌘</span>
-        <span class="cmd-kbd">/</span>
       </button>
 
       <a href={`${base}me/`} class="cockpit-personal-pill" aria-label="Switch to Creative & Personal Space">
@@ -279,11 +278,11 @@ const isActive = (path: string) => {
   .nav-cmd-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(1, 172, 106, 0.28);
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(1, 172, 106, 0.25);
     border-radius: 4px;
-    padding: 0.32rem 0.55rem;
+    padding: 0.32rem 0.65rem;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.72rem;
     color: #9ca3af;
@@ -294,8 +293,8 @@ const isActive = (path: string) => {
   }
 
   :global([data-theme="light"]) .nav-cmd-trigger {
-    background: #f8fafc;
-    border-color: rgba(1, 172, 106, 0.35);
+    background: transparent;
+    border: 1px solid rgba(1, 172, 106, 0.3);
     color: #4b5563;
   }
 
@@ -308,7 +307,7 @@ const isActive = (path: string) => {
   }
 
   .cmd-symbol {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     line-height: 1;
     color: var(--primary, #01ac6a);
   }
@@ -320,23 +319,6 @@ const isActive = (path: string) => {
   :global([data-theme="light"]) .nav-cmd-trigger:hover {
     color: #017a4b;
     background: rgba(1, 172, 106, 0.08);
-  }
-
-  .cmd-kbd {
-    font-size: 0.68rem;
-    font-weight: 800;
-    padding: 1px 5px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 3px;
-    color: var(--primary, #01ac6a);
-    line-height: 1;
-  }
-
-  :global([data-theme="light"]) .cmd-kbd {
-    background: #e2e8f0;
-    border-color: rgba(0, 0, 0, 0.1);
-    color: #017a4b;
   }
 
   .cockpit-personal-pill {

@@ -62,17 +62,15 @@
       </div>
       <div class="terminal-output neofetch-output">
         <div class="ascii-art">
-          <pre class="ascii-block">
-        ,'''''.
-       |   ,.  |
-       |  |  '_'
-  ,....|  |..
+          <pre class="ascii-block">      ,'''''.
+     |   ,.  |
+     |  |  '_'
+,....|  |..
 .'  ,_;|   ..'
 |  |   |  |
 |  ',_,'  |
  '.     ,'
-   '''''
-          </pre>
+   '''''</pre>
         </div>
         <div class="specs-block">
           <div class="spec-head"><span class="highlight">arehman</span>@<span class="host">systems-core</span></div>
@@ -411,6 +409,11 @@
     margin-bottom: 0.5rem;
   }
 
+  .ascii-art {
+    overflow: hidden !important;
+    flex-shrink: 0;
+  }
+
   .ascii-art pre {
     color: #51a2da;
     font-size: 0.72rem;
@@ -421,6 +424,18 @@
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    user-select: none;
+  }
+
+  .ascii-art pre::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   :global([data-theme="light"]) .ascii-art pre {
@@ -429,6 +444,7 @@
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
+    overflow: hidden !important;
   }
 
   .specs-block {
