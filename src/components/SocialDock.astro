@@ -37,7 +37,7 @@
   .social-bar {
     position: fixed;
     bottom: 2.25rem;
-    left: 2rem;
+    right: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,14 +151,14 @@
     transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Cockpit Hover State: Horizontal Glide & Phosphor Accent */
+  /* Cockpit Hover State: Horizontal Inward Glide & Phosphor Accent */
   .social-link:hover {
     background: rgba(1, 172, 106, 0.12);
     color: #00c47a;
   }
 
   .social-link:hover i {
-    transform: translateX(1.5px);
+    transform: translateX(-1.5px);
   }
 
   :global([data-theme="light"]) .social-link:hover {
@@ -167,13 +167,14 @@
   }
 
   /* ==========================================================================
-     MONOSPACE FLYOUT TOOLTIPS
+     MONOSPACE FLYOUT TOOLTIPS (INWARD TO THE LEFT)
      ========================================================================== */
   .social-tooltip {
     position: absolute;
-    left: calc(100% + 10px);
+    right: calc(100% + 10px);
+    left: auto;
     top: 50%;
-    transform: translateY(-50%) translateX(-4px);
+    transform: translateY(-50%) translateX(4px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -192,16 +193,17 @@
     z-index: 101;
   }
 
-  /* Micro Arrow Indicator */
+  /* Micro Arrow Indicator (Pointing Right toward Icon) */
   .social-tooltip::before {
     content: "";
     position: absolute;
-    right: 100%;
+    left: 100%;
+    right: auto;
     top: 50%;
     transform: translateY(-50%);
-    border-width: 4px 5px 4px 0;
+    border-width: 4px 0 4px 5px;
     border-style: solid;
-    border-color: transparent rgba(1, 172, 106, 0.35) transparent transparent;
+    border-color: transparent transparent transparent rgba(1, 172, 106, 0.35);
   }
 
   :global([data-theme="light"]) .social-tooltip {
@@ -212,7 +214,7 @@
   }
 
   :global([data-theme="light"]) .social-tooltip::before {
-    border-color: transparent rgba(1, 172, 106, 0.45) transparent transparent;
+    border-color: transparent transparent transparent rgba(1, 172, 106, 0.45);
   }
 
   .social-link:hover .social-tooltip {
