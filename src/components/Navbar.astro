@@ -281,10 +281,11 @@ const isActive = (path: string) => {
     justify-content: center;
     background: transparent;
     border: 1px solid rgba(1, 172, 106, 0.25);
-    border-radius: 4px;
-    padding: 0.32rem 0.65rem;
+    border-radius: 5px;
+    width: 32px;
+    height: 32px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     color: #9ca3af;
     cursor: pointer;
     white-space: nowrap;
@@ -307,7 +308,7 @@ const isActive = (path: string) => {
   }
 
   .cmd-symbol {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     line-height: 1;
     color: var(--primary, #01ac6a);
   }
@@ -324,13 +325,15 @@ const isActive = (path: string) => {
   .cockpit-personal-pill {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.03em;
-    padding: 0.32rem 0.65rem;
-    border-radius: 4px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 5px;
     text-decoration: none;
     background: transparent;
     border: 1px solid rgba(1, 172, 106, 0.25);
