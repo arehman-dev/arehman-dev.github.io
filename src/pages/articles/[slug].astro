@@ -357,6 +357,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     font-size: 2.25rem;
     font-weight: 800;
     color: #f3f4f6;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: currentColor !important;
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     line-height: 1.25;
@@ -364,6 +368,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
   :global([data-theme="light"]) .reader-title {
     color: #111827;
+    -webkit-text-fill-color: #111827 !important;
   }
 
   .reader-meta-row {
@@ -558,7 +563,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border-color: rgba(180, 140, 80, 0.3);
   }
   .reader-surface[data-reader-theme="sepia"] .reader-title {
-    color: #2c251d;
+    color: #2c251d !important;
+    -webkit-text-fill-color: #2c251d !important;
+    background: none !important;
   }
   .reader-surface[data-reader-theme="sepia"] .article-body-content {
     color: #3d352a;
@@ -570,7 +577,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border-color: rgba(217, 119, 6, 0.3);
   }
   .reader-surface[data-reader-theme="sepia-contrast"] .reader-title {
-    color: #f3ece4;
+    color: #f5ede4 !important;
+    -webkit-text-fill-color: #f5ede4 !important;
+    background: none !important;
   }
   .reader-surface[data-reader-theme="sepia-contrast"] .article-body-content {
     color: #d6cbbe;
@@ -582,7 +591,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border-color: rgba(100, 116, 139, 0.3);
   }
   .reader-surface[data-reader-theme="soft-contrast"] .reader-title {
-    color: #030712;
+    color: #030712 !important;
+    -webkit-text-fill-color: #030712 !important;
+    background: none !important;
   }
   .reader-surface[data-reader-theme="soft-contrast"] .article-body-content {
     color: #111827;

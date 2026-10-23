@@ -555,10 +555,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-row {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.footer-col-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.62rem;
 }
 
 .footer-col-telemetry {
@@ -673,40 +687,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 860px) {
-  .footer-cockpit-inner {
+  .footer-row {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
-}
-
-/* Footer Shortcuts Strip */
-.footer-shortcuts-strip {
-  border-top: 1px dashed rgba(255, 255, 255, 0.08);
-  margin-top: 0.5rem;
-  padding-top: 0.45rem;
-}
-
-[data-theme="light"] .footer-shortcuts-strip {
-  border-top: 1px dashed rgba(0, 0, 0, 0.08);
-}
-
-.footer-shortcuts-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.62rem;
-  color: #6b7280;
-}
-
-[data-theme="light"] .footer-shortcuts-inner {
-  color: #64748b;
 }
 
 .shortcuts-lead {

@@ -25,49 +25,48 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <p class="catalog-tagline">
         Open for systems programming, multithreaded automation pipelines, and hardened Linux infrastructure engineering roles.
       </p>
+
+      <!-- Personal Credentials Strip -->
+      <div class="credentials-bar">
+        <div class="credential-item">
+          <span class="cred-label"><i class="fas fa-user-gear"></i> NAME:</span>
+          <span class="cred-val">Abdul Rehman</span>
+        </div>
+        <span class="cred-div">&bull;</span>
+        <div class="credential-item">
+          <span class="cred-label"><i class="fas fa-location-dot"></i> LOCATION:</span>
+          <span class="cred-val">Islamabad, Pakistan (UTC+5) / Remote</span>
+        </div>
+        <span class="cred-div">&bull;</span>
+        <div class="credential-item">
+          <span class="cred-label"><i class="fas fa-microchip"></i> NICHE:</span>
+          <span class="cred-val">Systems Developer &amp; Linux Infrastructure Automation</span>
+        </div>
+      </div>
     </header>
 
     <div class="handshake-layout">
-      <!-- Left Column: Dual-Mode Resume Viewport (Terminal Spec + PDF Document) -->
+      <!-- Left Column: Official PDF Document Viewport -->
       <div class="cv-column">
         <div class="cv-card">
-          <!-- CV Header with View Mode Switcher -->
+          <!-- CV Header -->
           <div class="cv-header">
             <div class="cv-title-group">
-              <span class="cv-tag"><i class="fas fa-file-code text-primary"></i> SPECIFICATION: CV</span>
-              <h2 class="cv-title">Curriculum Vitae</h2>
+              <span class="cv-tag"><i class="fas fa-file-pdf text-primary"></i> SPECIFICATION: CURRICULUM VITAE</span>
+              <h2 class="cv-title">Official Document Viewport</h2>
             </div>
 
             <div class="cv-header-actions">
-              <!-- View Mode Tabs -->
-              <div class="cv-mode-tabs" role="tablist" aria-label="Resume View Modes">
-                <button 
-                  type="button" 
-                  class="cv-mode-btn active" 
-                  id="tab-terminal-btn"
-                  data-view="terminal" 
-                  role="tab" 
-                  aria-selected="true"
-                  title="Interactive Terminal Resume Spec"
-                >
-                  <i class="fas fa-terminal"></i>
-                  <span>Terminal Spec</span>
-                </button>
-                <button 
-                  type="button" 
-                  class="cv-mode-btn" 
-                  id="tab-pdf-btn"
-                  data-view="pdf" 
-                  role="tab" 
-                  aria-selected="false"
-                  title="PDF Document Viewport"
-                >
-                  <i class="fas fa-file-pdf"></i>
-                  <span>PDF Viewport</span>
-                </button>
-              </div>
-
-              <!-- Direct PDF Download Button -->
+              <a 
+                href={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="download-cv-btn cv-ghost-btn"
+                title="Open PDF in New Browser Tab"
+              >
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                <span>Open in Tab</span>
+              </a>
               <a 
                 href={`${base}assets/documents/resume-abdulrehman.pdf`} 
                 download="resume-abdulrehman.pdf" 
@@ -81,176 +80,27 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             </div>
           </div>
 
-          <!-- VIEW A: LIVE TERMINAL RESUME SPEC -->
-          <div class="cv-view-pane active" id="view-terminal" role="tabpanel" aria-labelledby="tab-terminal-btn">
-            <div class="terminal-cv-wrapper">
-              <div class="terminal-cv-bar">
-                <div class="terminal-cv-dots">
-                  <span class="term-dot dot-red"></span>
-                  <span class="term-dot dot-yellow"></span>
-                  <span class="term-dot dot-green"></span>
-                </div>
-                <div class="terminal-cv-title">
-                  <i class="fas fa-folder-open"></i>
-                  <span>arehman@dev:~/curriculum-vitae.sh</span>
-                </div>
-                <button type="button" class="term-copy-btn" id="copy-terminal-cv-btn" title="Copy Resume Plain Text">
-                  <i class="fas fa-copy"></i>
-                  <span id="copy-btn-label">Copy Raw</span>
-                </button>
-              </div>
-
-              <div class="terminal-cv-body" id="raw-cv-content">
-                <div class="term-cmd-line">
-                  <span class="term-prompt">arehman@dev:~$</span>
-                  <span class="term-command">cat ~/profile/curriculum-vitae.md</span>
-                </div>
-
-                <div class="cv-raw-output">
-                  <div class="cv-section-block cv-identity">
-================================================================================
-# ABDUL REHMAN
-Systems Developer &amp; Linux Infrastructure Automation Engineer
-Islamabad, Pakistan (UTC+5) | arehman.dev@proton.me | https://arehman-dev.github.io
-GitHub: @arehman-dev | LinkedIn: /in/arehman-dev
-================================================================================
-                  </div>
-
-                  <div class="cv-section-block">
-                    <span class="term-section-tag">[01 // EXECUTIVE SUMMARY]</span>
-<p class="term-text">
-Deterministic, hands-on Systems Developer and Linux Administrator with 2+ years of production experience at InfraLayers. Specializing in high-performance C++ systems programming, automated Python data engines, and hardened Linux environments. Relentless focus on compile-time verification, POSIX compliance, PEP 8 standards, and eliminating manual infrastructure toil.
-</p>
-                  </div>
-
-                  <div class="cv-section-block">
-                    <span class="term-section-tag">[02 // CORE SYSTEMS COMPETENCIES]</span>
-                    <div class="term-spec-table">
-                      <div class="term-row"><span class="t-key">Kernel &amp; Systems :</span> <span class="t-val">C++ (C++20, STL, RAII, Valgrind, Memory Profiling), POSIX APIs, GDB, Make/CMake, Linux Namespaces (ip-netns), Sockets</span></div>
-                      <div class="term-row"><span class="t-key">Automation &amp; API:</span> <span class="t-val">Python 3.12 (FastAPI, Multiprocessing, OpenCV, BeautifulSoup), Bash Scripting, Cron, Systemd daemons</span></div>
-                      <div class="term-row"><span class="t-key">Infrastructure  :</span> <span class="t-val">Debian, Ubuntu, RHEL Administration, Docker containerization, Outline VPN, UFW/IPTables, NTFS file recovery</span></div>
-                      <div class="term-row"><span class="t-key">Database &amp; Storage:</span> <span class="t-val">PostgreSQL, SQLite, Redis caching, Local-first Room / Jetpack Compose architectures</span></div>
-                      <div class="term-row"><span class="t-key">Directives      :</span> <span class="t-val">Idempotent workflows, zero-fluff engineering, continuous test assertions, strict error handling</span></div>
-                    </div>
-                  </div>
-
-                  <div class="cv-section-block">
-                    <span class="term-section-tag">[03 // PRODUCTION EXPERIENCE]</span>
-                    <div class="exp-entry">
-                      <div class="exp-entry-head">
-                        <span class="exp-role">Python Developer &amp; Systems Administrator</span>
-                        <span class="exp-period">2023 &mdash; PRESENT (ACTIVE DAEMON)</span>
-                      </div>
-                      <div class="exp-company"><i class="far fa-building"></i> InfraLayers &bull; Systems Operations &amp; Server Administration</div>
-                      <ul class="term-bullet-list">
-                        <li>Architected custom Python automation daemons and deployment scripts, reducing bare-metal server provisioning latency by <strong>60%</strong>.</li>
-                        <li>Hardened and maintained multi-node production Linux instances (Debian, Ubuntu) with strict systemd unit sandboxing and firewall rules.</li>
-                        <li>Designed automated multithreaded log parsers and real-time security telemetry monitors with instant alert webhooks.</li>
-                        <li>Standardized CI unit test coverage, strict PEP 8 linters, and scheduled automated backup rotations across operational nodes.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="cv-section-block">
-                    <span class="term-section-tag">[04 // KEY VERIFIED SCHEMATICS &amp; BUILDS]</span>
-                    <div class="project-entry">
-                      <span class="p-bullet">&gt;</span> <strong>Linux Home Server:</strong> 24/7 dedicated self-hosted server running Nextcloud, Jellyfin, and automated Borg/Restic backup routines with zero external reliance.
-                    </div>
-                    <div class="project-entry">
-                      <span class="p-bullet">&gt;</span> <strong>Multimodal Arabic &amp; Urdu OCR Pipeline:</strong> High-throughput Python image processing engine with adaptive thresholding and multi-core OCR batching.
-                    </div>
-                    <div class="project-entry">
-                      <span class="p-bullet">&gt;</span> <strong>Virtual Network Testing Sandbox:</strong> Isolated Linux network topology simulator utilizing <code>ip-netns</code>, virtual ethernet pairs (veth), and iptables routing.
-                    </div>
-                    <div class="project-entry">
-                      <span class="p-bullet">&gt;</span> <strong>The Blue Orbit:</strong> High-efficiency Shadowsocks GUI client built for secure, low-latency encrypted network tunneling.
-                    </div>
-                  </div>
-
-                  <div class="cv-section-block">
-                    <span class="term-section-tag">[05 // ACCREDITED CREDENTIALS &amp; CERTIFICATIONS]</span>
-                    <ul class="term-bullet-list">
-                      <li><strong>Google IT Automation with Python Specialization</strong> &mdash; Google / Coursera (6-Course Professional Program)</li>
-                      <li><strong>Scientific Computing with Python</strong> &mdash; freeCodeCamp (Accredited Certification)</li>
-                      <li><strong>Google Cybersecurity Specialization</strong> &mdash; Google / Coursera (Security &amp; Network Defense)</li>
-                      <li><strong>Microsoft C++ Foundations Specialization</strong> &mdash; Microsoft / Coursera</li>
-                      <li><strong>Python for Everybody (PY4E)</strong> &mdash; University of Michigan</li>
-                    </ul>
-                  </div>
-
-                  <div class="term-cmd-line term-end-line">
-                    <span class="term-prompt">arehman@dev:~$</span>
-                    <span class="term-command">echo $STATUS</span>
-                    <span class="term-response">&gt;&gt; [READY FOR OPERATIONAL HANDSHAKE]</span>
-                    <span class="cursor-block">_</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- VIEW B: PDF DOCUMENT VIEWPORT & DROPDOWN -->
-          <div class="cv-view-pane" id="view-pdf" role="tabpanel" aria-labelledby="tab-pdf-btn">
-            <div class="pdf-viewer-container">
-              <!-- Notice Banner for PDF Status -->
-              <div class="pdf-status-banner">
-                <div class="pdf-status-left">
-                  <i class="fas fa-file-pdf pdf-status-icon"></i>
-                  <div>
-                    <span class="pdf-status-title">Official Document Viewport</span>
-                    <span class="pdf-status-desc">Target: <code>/assets/documents/resume-abdulrehman.pdf</code></span>
-                  </div>
-                </div>
-                <div class="pdf-status-actions">
-                  <a 
-                    href={`${base}assets/documents/resume-abdulrehman.pdf`} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="pdf-action-link"
-                  >
-                    <i class="fas fa-arrow-up-right-from-square"></i>
-                    <span>Open in New Tab</span>
-                  </a>
-                  <a 
-                    href={`${base}assets/documents/resume-abdulrehman.pdf`} 
-                    download="resume-abdulrehman.pdf" 
-                    class="pdf-action-link"
-                  >
-                    <i class="fas fa-download"></i>
-                    <span>Download</span>
+          <!-- Dedicated PDF Document Viewport -->
+          <div class="pdf-viewer-container">
+            <div class="pdf-frame-wrapper">
+              <iframe 
+                src={`${base}assets/documents/resume-abdulrehman.pdf`} 
+                title="Abdul Rehman's Curriculum Vitae" 
+                width="100%" 
+                height="680px"
+                class="pdf-iframe"
+              >
+                <div class="pdf-fallback-box">
+                  <p>Your browser does not embed PDFs inline.</p>
+                  <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="download-cv-btn">
+                    <i class="fas fa-download"></i> Download PDF directly
                   </a>
                 </div>
-              </div>
-
-              <!-- PDF Iframe Box with Fallback Prompt -->
-              <div class="pdf-frame-wrapper">
-                <iframe 
-                  src={`${base}assets/documents/resume-abdulrehman.pdf`} 
-                  title="Abdul Rehman's Curriculum Vitae" 
-                  width="100%" 
-                  height="640px"
-                  class="pdf-iframe"
-                >
-                  <div class="pdf-fallback-box">
-                    <p>Your browser does not embed PDFs inline.</p>
-                    <a href={`${base}assets/documents/resume-abdulrehman.pdf`} class="download-cv-btn">
-                      <i class="fas fa-download"></i> Download PDF directly
-                    </a>
-                  </div>
-                </iframe>
-
-                <!-- Standby Queue Notice if physical PDF is not yet replaced -->
-                <div class="pdf-standby-note">
-                  <i class="fas fa-info-circle text-primary"></i>
-                  <span>
-                    <strong>Note:</strong> The verified live specification is always current in the 
-                    <button type="button" class="inline-switch-btn" id="inline-switch-to-term">Terminal Spec view</button>. 
-                    Official PDF uploads sync directly to this viewport.
-                  </span>
-                </div>
-              </div>
+              </iframe>
             </div>
           </div>
+        </div>
+      </div>
 
         </div>
       </div>
@@ -388,11 +238,83 @@ Deterministic, hands-on Systems Developer and Linux Administrator with 2+ years 
     color: #9ca3af;
     max-width: 760px;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 1rem 0;
   }
 
   :global([data-theme="light"]) .catalog-tagline {
     color: #4b5563;
+  }
+
+  /* Personal Credentials Strip */
+  .credentials-bar {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.5rem 0.85rem;
+    background: rgba(13, 15, 18, 0.75);
+    border: 1px solid rgba(1, 172, 106, 0.22);
+    border-radius: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  :global([data-theme="light"]) .credentials-bar {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .credential-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cred-label {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  :global([data-theme="light"]) .cred-label {
+    color: #017a4b;
+  }
+
+  .cred-val {
+    color: #e5e7eb;
+    font-weight: 500;
+  }
+
+  :global([data-theme="light"]) .cred-val {
+    color: #1f2937;
+  }
+
+  .cred-div {
+    color: rgba(1, 172, 106, 0.4);
+    font-size: 0.65rem;
+  }
+
+  .cv-ghost-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #d1d5db;
+  }
+
+  :global([data-theme="light"]) .cv-ghost-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #374151;
+  }
+
+  .cv-ghost-btn:hover {
+    background: rgba(1, 172, 106, 0.15);
+    border-color: var(--primary, #01ac6a);
+    color: var(--primary, #01ac6a);
   }
 
   /* Layout */
@@ -1161,66 +1083,3 @@ Deterministic, hands-on Systems Developer and Linux Administrator with 2+ years 
     }
   }
 </style>
-
-<script>
-  function setupResumeViewer() {
-    const modeBtns = document.querySelectorAll('.cv-mode-btn');
-    const viewPanes = document.querySelectorAll('.cv-view-pane');
-    const inlineSwitch = document.getElementById('inline-switch-to-term');
-
-    function switchView(targetView: string) {
-      modeBtns.forEach(btn => {
-        const isTarget = btn.getAttribute('data-view') === targetView;
-        btn.classList.toggle('active', isTarget);
-        btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
-      });
-
-      viewPanes.forEach(pane => {
-        pane.classList.toggle('active', pane.id === `view-${targetView}`);
-      });
-    }
-
-    modeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetView = btn.getAttribute('data-view') || 'terminal';
-        switchView(targetView);
-      });
-    });
-
-    if (inlineSwitch) {
-      inlineSwitch.addEventListener('click', () => {
-        switchView('terminal');
-      });
-    }
-
-    // Copy Raw Plain Text Handler
-    const copyBtn = document.getElementById('copy-terminal-cv-btn');
-    const copyLabel = document.getElementById('copy-btn-label');
-    const cvBody = document.getElementById('raw-cv-content');
-
-    if (copyBtn && cvBody && copyLabel) {
-      copyBtn.addEventListener('click', async () => {
-        const textToCopy = cvBody.innerText.replace(/arehman@dev:~\$/g, '$');
-        try {
-          await navigator.clipboard.writeText(textToCopy);
-          const original = copyLabel.textContent;
-          copyLabel.textContent = 'Copied!';
-          copyBtn.style.color = '#10b981';
-          setTimeout(() => {
-            copyLabel.textContent = original;
-            copyBtn.style.color = '';
-          }, 2000);
-        } catch {
-          // Fallback if clipboard API is restricted
-          copyLabel.textContent = 'Press Ctrl+C';
-          setTimeout(() => {
-            copyLabel.textContent = 'Copy Raw';
-          }, 2000);
-        }
-      });
-    }
-  }
-
-  setupResumeViewer();
-  document.addEventListener('astro:page-load', setupResumeViewer);
-</script>
