@@ -10,8 +10,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title="Historical Incident Logs Archive | Abdul Rehman"
-  description="Chronological repository of systems incident logs, network topologies, and Linux technical papers written by Abdul Rehman."
+  title="Technical Articles Archive | Abdul Rehman"
+  description="Chronological repository of engineering articles, Linux guides, and systems architectures written by Abdul Rehman."
 >
   <div class="archive-cockpit-container">
     
@@ -19,10 +19,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <div class="caliper-bar">
       <a href={`${base}articles/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO SYSTEM LOGS</span>
+        <span>RETURN TO ARTICLES</span>
       </a>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">[INDEX: CHRONOLOGICAL-LOG-RECORDS]</span>
+      <span class="caliper-tag">[INDEX: ALL ARTICLES]</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">COUNT: {sortedArticles.length} ENTRIES</span>
       <span class="caliper-div">&bull;</span>
@@ -31,30 +31,29 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
     <!-- Header Block -->
     <header class="archive-page-header">
-      <span class="archive-eyebrow">01 // CHRONOLOGICAL AUDIT TRAIL &amp; TECHNICAL REPOSITORY</span>
-      <h1 class="archive-title">Historical Incident Logs</h1>
+      <span class="archive-eyebrow">01 // CHRONOLOGICAL INDEX &amp; TECHNICAL ARCHIVE</span>
+      <h1 class="archive-title">Articles Archive</h1>
       <p class="archive-tagline">
-        Complete chronological index of all published runbooks, root-cause postmortems, network isolation guides, and systems automation notes.
+        Complete chronological index of all published engineering runbooks, architectural guides, network isolation tutorials, and systems automation notes.
       </p>
     </header>
 
     <!-- Chronological Table List -->
     <div class="archive-table-card">
       <div class="archive-table-head">
-        <span class="th-cell th-id">LOG ID</span>
-        <span class="th-cell th-date">TIMELINE</span>
-        <span class="th-cell th-title">INCIDENT LOG SPECIFICATION</span>
+        <span class="th-cell th-id">ID</span>
+        <span class="th-cell th-date">DATE</span>
+        <span class="th-cell th-title">ARTICLE TITLE &amp; TOPIC</span>
         <span class="th-cell th-cat">CATEGORY</span>
         <span class="th-cell th-act">ACTION</span>
       </div>
 
       <div class="archive-rows-list">
         {sortedArticles.map((article, idx) => {
-          const hexId = `0x${((idx + 1) * 73).toString(16).toUpperCase()}`;
           return (
             <article class="archive-item-row">
               <div class="row-cell cell-id">
-                <span class="hex-badge">LOG-{hexId}</span>
+                <span class="hex-badge">#{String(idx + 1).padStart(2, '0')}</span>
               </div>
               <div class="row-cell cell-date">
                 <i class="far fa-calendar-alt text-primary"></i>
@@ -69,8 +68,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
                 <span class="cat-chip">#{article.category.toLowerCase()}</span>
               </div>
               <div class="row-cell cell-act">
-                <a href={`${base}articles/${article.slug}/`} class="inspect-btn" title="Inspect Runbook">
-                  <span>open</span>
+                <a href={`${base}articles/${article.slug}/`} class="inspect-btn" title="Read Article">
+                  <span>read</span>
                   <i class="fas fa-arrow-right"></i>
                 </a>
               </div>

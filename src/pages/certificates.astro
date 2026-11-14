@@ -6,31 +6,31 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title="Verified Credentials & Standards | Abdul Rehman"
-  description="View the professional engineering certifications and accredited credentials earned by Abdul Rehman."
+  title="Certifications & Professional Credentials | Abdul Rehman"
+  description="View the professional certifications and accredited credentials earned by Abdul Rehman."
 >
   <div class="credentials-catalog-container">
     <!-- Caliper Bar -->
     <div class="caliper-bar">
-      <span class="caliper-tag">[REGISTRY: AR-CERT-VERIFIED]</span>
+      <span class="caliper-tag">[CREDENTIALS: PROFESSIONAL CERTIFICATIONS]</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">STANDARDS: GOOGLE / PYTHON / LINUX</span>
+      <span class="caliper-tag">ACCREDITED: GOOGLE / PYTHON / LINUX</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">COUNT: {certificates.length} ACCREDITED STANDARDS</span>
+      <span class="caliper-tag">{certificates.length} TOTAL CREDENTIALS</span>
     </div>
 
     <header class="catalog-page-header">
-      <span class="catalog-eyebrow">01 // VERIFIED CRYPTOGRAPHIC &amp; TECHNICAL CREDENTIALS</span>
-      <h1 class="catalog-title">Credentials Registry</h1>
+      <span class="catalog-eyebrow">01 // ACCREDITED CERTIFICATIONS &amp; CONTINUING EDUCATION</span>
+      <h1 class="catalog-title">Certifications &amp; Credentials</h1>
       <p class="catalog-tagline">
-        Accredited specializations covering Google IT Automation with Python, Scientific Computing, systems administration, and software verification standards.
+        Professional specializations covering Google IT Automation with Python, systems administration, scientific computing, and software verification standards.
       </p>
     </header>
 
     <!-- Credentials Grid -->
     <div class="credentials-grid">
       {certificates.map((cert, idx) => {
-        const regId = `REG-0x${(idx + 1).toString(16).padStart(2, '0').toUpperCase()}`;
+        const regId = `CERT-${String(idx + 1).padStart(2, '0')}`;
         const isCompleted = cert.status.toLowerCase() === 'completed';
 
         return (
@@ -60,8 +60,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
                   <span class="cred-duration"><i class="far fa-clock"></i> {cert.duration}</span>
                 )}
               </div>
-              <a href={`${base}certificates/${cert.slug}/`} class="inspect-cred-btn" title="Inspect Credential Verification">
-                <span>inspect credential</span>
+              <a href={`${base}certificates/${cert.slug}/`} class="inspect-cred-btn" title="View Certificate Details">
+                <span>view certificate</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>

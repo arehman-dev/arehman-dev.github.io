@@ -16,68 +16,62 @@ const featuredProjects = projects.slice(0, 4);
 const recentArticles = articles.slice(0, 3);
 ---
 
-<BaseLayout title="Abdul Rehman - Systems & Automation Engineer | C++ · Python · Linux">
+<BaseLayout title="Abdul Rehman - Software & Automation Engineer | C++ · Python · Linux">
   <div class="cockpit-container">
     
     <!-- 01: Top Coordinates & Spec Header -->
     <div class="spec-caliper-bar">
       <div class="caliper-item">
-        <span class="caliper-bracket">[</span>
-        <span class="caliper-code">SPEC-ID: AR-SYS-2026</span>
-        <span class="caliper-bracket">]</span>
+        <span class="caliper-code">Abdul Rehman</span>
       </div>
       <div class="caliper-divider"></div>
       <div class="caliper-item">
-        <span class="caliper-bracket">[</span>
-        <span class="caliper-code">NODE: ISLAMABAD, PK (33.6844° N, 73.0479° E)</span>
-        <span class="caliper-bracket">]</span>
+        <span class="caliper-code">Software Engineer &bull; Systems &amp; Automation</span>
       </div>
       <div class="caliper-divider"></div>
       <div class="caliper-item">
-        <span class="caliper-bracket">[</span>
-        <span class="caliper-code">REVISION: v4.0-STABLE</span>
-        <span class="caliper-bracket">]</span>
+        <span class="caliper-code">Islamabad, PK (Remote &amp; Hybrid)</span>
       </div>
     </div>
 
-    <!-- 02: HERO BENTO GRID (Linear/Railway Systems Telemetry) -->
+    <!-- 02: HERO BENTO GRID (Identity & Highlights) -->
     <section class="cockpit-hero-grid">
       <!-- Left Bento Tile: Identity & Engineering Mission -->
       <div class="bento-tile bento-hero-main">
         <div class="hero-status-beacon">
           <span class="beacon-pulse"></span>
-          <span class="beacon-text">SYSTEMS &amp; AUTOMATION ENGINEER</span>
+          <span class="beacon-text">SOFTWARE &amp; AUTOMATION ENGINEER</span>
         </div>
 
         <h1 class="hero-name">Abdul Rehman</h1>
-        <h2 class="hero-tagline">Compile-Time Precision &bull; Linux Pipelines</h2>
+        <h2 class="hero-tagline">Systems Programming in C++ &bull; Python Automation &bull; Linux Infrastructure</h2>
 
         <p class="hero-manifesto">
-          I engineer reliable software at the intersection of compile-time performance in <strong>C++</strong> and automated operational pipelines in <strong>Python</strong>. Grounded in hands-on Linux system administration at <strong>InfraLayers</strong>, I build secure, zero-fluff solutions that eliminate manual toil and scale deterministically.
+          I build performant software in <strong>C++</strong> and reliable automation pipelines in <strong>Python</strong>. Grounded in hands-on Linux system administration at <strong>InfraLayers</strong>, I design clean, maintainable tools that automate workflows and solve real engineering problems.
         </p>
 
         <!-- Quick CTAs -->
         <div class="cockpit-actions">
           <a href="#schematics-section" class="cockpit-btn btn-emerald">
-            <i class="fas fa-terminal"></i>
-            <span>Inspect Schematics</span>
+            <i class="fas fa-folder-open"></i>
+            <span>View Projects</span>
           </a>
           <a href="#process-monitor" class="cockpit-btn btn-ghost">
-            <i class="fas fa-microchip"></i>
-            <span>Process Tree</span>
+            <i class="fas fa-layer-group"></i>
+            <span>Skills &amp; Technologies</span>
           </a>
           <a href={`${base}hire-me/`} class="cockpit-btn btn-outline">
-            <i class="fas fa-handshake"></i>
-            <span>Handshake Protocol</span>
+            <i class="fas fa-envelope"></i>
+            <span>Get in Touch</span>
           </a>
         </div>
 
         <!-- Telemetry Chips -->
         <div class="telemetry-chips-row">
-          <span class="telemetry-chip"><i class="fab fa-linux"></i> 100% Linux Native</span>
-          <span class="telemetry-chip"><i class="fas fa-server"></i> InfraLayers Tested</span>
-          <span class="telemetry-chip"><i class="fas fa-shield-halved"></i> POSIX &amp; PEP 8</span>
-          <span class="telemetry-chip"><i class="fas fa-bolt"></i> Zero Fluff</span>
+          <span class="telemetry-chip"><i class="fab fa-linux"></i> Linux Native</span>
+          <span class="telemetry-chip"><i class="fas fa-server"></i> InfraLayers Experience</span>
+          <span class="telemetry-chip"><i class="fas fa-code"></i> Modern C++ &amp; Python</span>
+          <span class="telemetry-chip"><i class="fas fa-check-circle"></i> Clean Architecture</span>
         </div>
       </div>
 
@@ -87,12 +81,12 @@ const recentArticles = articles.slice(0, 3);
       </div>
     </section>
 
-    <!-- 03: LIVE PROCESS TREE (btop style skills) -->
+    <!-- 03: LIVE PROCESS TREE (Skills & Capabilities) -->
     <section class="cockpit-section" id="process-monitor">
       <div class="section-caliper-head">
         <span class="section-num">01 //</span>
-        <h2 class="section-title">ACTIVE SUBSYSTEMS &amp; PROCESS MONITOR</h2>
-        <span class="section-tag">[STATUS: ALL DAEMONS OPERATIONAL]</span>
+        <h2 class="section-title">CORE SKILLS &amp; ACTIVE DOMAINS</h2>
+        <span class="section-tag">[CAPABILITIES OVERVIEW]</span>
       </div>
 
       <ProcessTree />
@@ -102,8 +96,8 @@ const recentArticles = articles.slice(0, 3);
     <section class="cockpit-section" id="schematics-section">
       <div class="section-caliper-head">
         <span class="section-num">02 //</span>
-        <h2 class="section-title">VERIFIED SYSTEMS SCHEMATICS &amp; BUILDS</h2>
-        <span class="section-tag">[SELECTED RUNBOOKS]</span>
+        <h2 class="section-title">FEATURED PROJECTS &amp; CASE STUDIES</h2>
+        <span class="section-tag">[ENGINEERING WORK]</span>
       </div>
 
       <div class="schematics-grid">
@@ -114,7 +108,7 @@ const recentArticles = articles.slice(0, 3);
 
       <div class="section-footer-action">
         <a href={`${base}projects/`} class="catalog-btn">
-          <span>View Complete Schematics Catalog ({projects.length} Total Builds)</span>
+          <span>View All Projects ({projects.length} Total)</span>
           <i class="fas fa-arrow-right"></i>
         </a>
       </div>
@@ -124,15 +118,15 @@ const recentArticles = articles.slice(0, 3);
     <section class="cockpit-section" id="logs-section">
       <div class="section-caliper-head">
         <span class="section-num">03 //</span>
-        <h2 class="section-title">SYSTEM INCIDENT LOGS &amp; TECHNICAL PAPERS</h2>
-        <span class="section-tag">[KERNEL &amp; AUTOMATION ARCHIVE]</span>
+        <h2 class="section-title">TECHNICAL ARTICLES &amp; ENGINEERING GUIDES</h2>
+        <span class="section-tag">[WRITINGS &amp; RUNBOOKS]</span>
       </div>
 
       <div class="incident-logs-list">
         {recentArticles.map((art, idx) => (
           <article class="incident-log-row">
             <div class="log-left-col">
-              <span class="log-hex-id">LOG-0x{((idx + 1) * 73).toString(16).toUpperCase()}</span>
+              <span class="log-hex-id">#{String(idx + 1).padStart(2, '0')}</span>
               <span class="log-date">{art.date}</span>
               <span class="log-category-pill">#{art.category.toLowerCase()}</span>
             </div>
@@ -144,8 +138,8 @@ const recentArticles = articles.slice(0, 3);
             </div>
             <div class="log-right-col">
               <span class="log-read-time">{art.readTime}</span>
-              <a href={`${base}articles/${art.slug}/`} class="log-inspect-link" title="Open Log Paper">
-                <span>inspect log</span>
+              <a href={`${base}articles/${art.slug}/`} class="log-inspect-link" title="Read Article">
+                <span>read article</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
@@ -155,7 +149,7 @@ const recentArticles = articles.slice(0, 3);
 
       <div class="section-footer-action">
         <a href={`${base}articles/`} class="catalog-btn">
-          <span>View All System Incident Logs ({articles.length} Published)</span>
+          <span>View All Technical Articles ({articles.length} Published)</span>
           <i class="fas fa-arrow-right"></i>
         </a>
       </div>
@@ -165,8 +159,8 @@ const recentArticles = articles.slice(0, 3);
     <section class="cockpit-section" id="toolbelt-section">
       <div class="section-caliper-head">
         <span class="section-num">04 //</span>
-        <h2 class="section-title">TOOLBELT &amp; RUNTIME COMPILER SPECS</h2>
-        <span class="section-tag">[USERSPACE &amp; KERNEL TOOLING]</span>
+        <h2 class="section-title">TECHNICAL STACK &amp; TOOLING</h2>
+        <span class="section-tag">[DEVELOPER ENVIRONMENT]</span>
       </div>
 
       <TechStack />

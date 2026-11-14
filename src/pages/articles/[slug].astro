@@ -27,7 +27,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <BaseLayout 
-  title={`${article.title} | System Log ${hexId}`}
+  title={`${article.title} | Technical Article`}
   description={article.excerpt}
 >
   <!-- JSON-LD TechArticle Schema -->
@@ -56,14 +56,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <div class="caliper-bar">
       <a href={`${base}articles/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO SYSTEM LOGS ARCHIVE</span>
+        <span>RETURN TO ARTICLES</span>
       </a>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">[LOG-{hexId}]</span>
+      <span class="caliper-tag">[ARTICLE: {article.category.toUpperCase()}]</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">PUBLISHED: {article.date}</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">FORMAT: LINUX RUNBOOK</span>
+      <span class="caliper-tag">ENGINEERING RUNBOOK</span>
     </div>
 
     <!-- Article Reader Surface -->
@@ -71,7 +71,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <header class="reader-header">
         <div class="reader-top-bar">
           <div class="tag-meta-group">
-            <span class="log-hex-badge">LOG-{hexId}</span>
+            <span class="log-hex-badge">{article.category}</span>
             <span class="category-pill">#{article.category.toLowerCase()}</span>
           </div>
 
@@ -90,7 +90,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <div class="reader-meta-row">
           <span class="meta-item"><i class="far fa-calendar-alt"></i> {article.date}</span>
           <span class="meta-item"><i class="far fa-clock"></i> {article.readTime}</span>
-          <span class="meta-item text-primary"><i class="fas fa-check-shield"></i> Verified Technical Content</span>
+          <span class="meta-item text-primary"><i class="fas fa-check-shield"></i> Technical Guide</span>
         </div>
       </header>
 
@@ -102,7 +102,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <div class="nav-prev-box">
           {prevArticle ? (
             <a href={`${base}articles/${prevArticle.slug}/`} class="log-nav-link prev-link">
-              <span class="nav-sub">&larr; PREVIOUS INCIDENT LOG</span>
+              <span class="nav-sub">&larr; PREVIOUS ARTICLE</span>
               <strong class="nav-title">{prevArticle.title}</strong>
             </a>
           ) : (
@@ -113,7 +113,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <div class="nav-next-box">
           {nextArticle ? (
             <a href={`${base}articles/${nextArticle.slug}/`} class="log-nav-link next-link">
-              <span class="nav-sub">NEXT INCIDENT LOG &rarr;</span>
+              <span class="nav-sub">NEXT ARTICLE &rarr;</span>
               <strong class="nav-title">{nextArticle.title}</strong>
             </a>
           ) : (

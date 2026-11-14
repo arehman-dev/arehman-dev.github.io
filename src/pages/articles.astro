@@ -7,39 +7,39 @@ const categories = Array.from(new Set(articles.map(a => a.category)));
 ---
 
 <BaseLayout 
-  title="System Logs & Technical Papers | Abdul Rehman"
-  description="Read technical incident logs, kernel network guides, and Linux automation architectures written by Abdul Rehman."
+  title="Technical Articles & Guides | Abdul Rehman"
+  description="Read technical guides, Linux automation architectures, and systems programming runbooks written by Abdul Rehman."
 >
   <div class="articles-catalog-container">
     <!-- Caliper Header -->
     <div class="caliper-bar">
-      <span class="caliper-tag">[ARCHIVE: AR-SYS-LOGS]</span>
+      <span class="caliper-tag">[ARTICLES &amp; GUIDES]</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">COUNT: {articles.length} PUBLISHED PAPERS</span>
+      <span class="caliper-tag">COUNT: {articles.length} PUBLISHED ARTICLES</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">FORMAT: TECHNICAL RUNBOOKS</span>
+      <span class="caliper-tag">SYSTEMS &amp; AUTOMATION</span>
     </div>
 
     <header class="catalog-page-header">
       <div class="header-split">
         <div>
-          <span class="catalog-eyebrow">01 // INCIDENT LOGS &amp; SYSTEMS ARCHITECTURE</span>
-          <h1 class="catalog-title">Technical Papers &amp; Logs</h1>
+          <span class="catalog-eyebrow">01 // ENGINEERING WRITINGS &amp; GUIDES</span>
+          <h1 class="catalog-title">Technical Articles &amp; Guides</h1>
         </div>
-        <a href={`${base}articles/archive/`} class="archive-toggle-btn" title="View Compact Archive Index">
+        <a href={`${base}articles/archive/`} class="archive-toggle-btn" title="View Chronological Archive Index">
           <i class="fas fa-box-archive"></i>
           <span>Archive Index Mode</span>
         </a>
       </div>
       <p class="catalog-tagline">
-        Hands-on operational runbooks, kernel namespace isolation guides, multithreaded OCR pipelines, and Linux security hardening manuals.
+        Hands-on architectural runbooks, Linux systems administration guides, Python automation workflows, and software engineering deep dives.
       </p>
     </header>
 
     <!-- Filter Bar -->
     <div class="filter-controls" id="articles-filter-bar">
       <button type="button" class="filter-btn active" data-filter="all">
-        <i class="fas fa-layer-group"></i> All Logs ({articles.length})
+        <i class="fas fa-layer-group"></i> All Articles ({articles.length})
       </button>
       {categories.map((cat) => (
         <button type="button" class="filter-btn" data-filter={cat.toLowerCase()}>
@@ -55,7 +55,7 @@ const categories = Array.from(new Set(articles.map(a => a.category)));
         return (
           <article class="incident-log-card" data-category={art.category.toLowerCase()}>
             <div class="log-meta-pane">
-              <span class="log-hex">LOG-{hexId}</span>
+              <span class="log-hex">#{String(idx + 1).padStart(2, '0')}</span>
               <span class="log-date">{art.date}</span>
               <span class="log-cat">#{art.category.toLowerCase()}</span>
               <span class="log-time"><i class="far fa-clock"></i> {art.readTime}</span>
@@ -69,8 +69,8 @@ const categories = Array.from(new Set(articles.map(a => a.category)));
             </div>
 
             <div class="log-action-pane">
-              <a href={`${base}articles/${art.slug}/`} class="inspect-log-btn" title="Open Full Technical Log">
-                <span>inspect paper</span>
+              <a href={`${base}articles/${art.slug}/`} class="inspect-log-btn" title="Read Full Article">
+                <span>read article</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>

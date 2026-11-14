@@ -39,7 +39,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
 ---
 
 <BaseLayout 
-  title={`${certificate.title} | Verified Credential ${regId}`}
+  title={`${certificate.title} | Certification Details`}
   description={certificate.description}
 >
   <div class="credential-dossier-container">
@@ -48,7 +48,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
     <div class="caliper-bar">
       <a href={`${base}certificates/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO CREDENTIALS REGISTRY</span>
+        <span>RETURN TO CERTIFICATIONS</span>
       </a>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">[{regId}]</span>
@@ -62,7 +62,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
     <header class="dossier-header-unit">
       <div class="dossier-header-top">
         <span class="dossier-spec-tag">
-          <i class="fas fa-certificate"></i> ACCREDITED STANDARDS SPECIFICATION
+          <i class="fas fa-certificate"></i> ACCREDITED CERTIFICATION
         </span>
         <span class={`status-chip ${isCompleted ? 'status-completed' : 'status-in-progress'}`}>
           <span class="status-indicator"></span>
@@ -80,7 +80,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
         </div>
         <div class="telemetry-pill">
           <i class="far fa-calendar-alt"></i>
-          <span>TIMELINE: <strong>{certificate.date}</strong></span>
+          <span>COMPLETED: <strong>{certificate.date}</strong></span>
         </div>
         {certificate.duration && (
           <div class="telemetry-pill">
@@ -91,7 +91,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
         {certificate.difficulty && (
           <div class="telemetry-pill">
             <i class="fas fa-signal"></i>
-            <span>RIGOR: <strong>{certificate.difficulty.toUpperCase()}</strong></span>
+            <span>LEVEL: <strong>{certificate.difficulty.toUpperCase()}</strong></span>
           </div>
         )}
       </div>
@@ -115,7 +115,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
         <section class="dossier-section">
           <div class="section-caliper-head">
             <span class="sec-num">01 //</span>
-            <h2 class="sec-title">CURRICULUM SPECIFICATION &amp; AUDIT SCOPE</h2>
+            <h2 class="sec-title">COURSEWORK &amp; CURRICULUM OVERVIEW</h2>
           </div>
           <div class="section-card">
             <p class="body-narrative">{certificate.overview}</p>
@@ -127,7 +127,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
           <section class="dossier-section">
             <div class="section-caliper-head">
               <span class="sec-num">02 //</span>
-              <h2 class="sec-title">VERIFIED CAPABILITIES &amp; COMPETENCIES</h2>
+              <h2 class="sec-title">SKILLS &amp; COMPETENCIES COVERED</h2>
             </div>
             
             <div class="capabilities-grid">
@@ -148,8 +148,8 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
         <section class="dossier-section">
           <div class="section-caliper-head">
             <span class="sec-num">03 //</span>
-            <h2 class="sec-title">DIGITAL CREDENTIAL SPECIMEN</h2>
-            <span class="sec-badge">ENCRYPTED WATERMARK</span>
+            <h2 class="sec-title">DIGITAL CREDENTIAL RECORD</h2>
+            <span class="sec-badge">VERIFIED</span>
           </div>
 
           <div class="specimen-frame">

@@ -70,7 +70,7 @@ const cardId = `schem-card-${project.slug}`;
     <!-- Tab 1: Architecture / Problem -->
     <div class="s-tab-pane active" id={`${cardId}-overview`} role="tabpanel">
       <div class="pane-content">
-        <span class="pane-label"><i class="fas fa-triangle-exclamation"></i> Problem Statement:</span>
+        <span class="pane-label"><i class="fas fa-triangle-exclamation"></i> Problem &amp; Context:</span>
         <p class="pane-text">{project.problem || "Architected for high reliability, strict isolation, and automated execution in production Linux environments."}</p>
       </div>
     </div>
@@ -78,7 +78,7 @@ const cardId = `schem-card-${project.slug}`;
     <!-- Tab 2: Solution -->
     <div class="s-tab-pane" id={`${cardId}-solution`} role="tabpanel">
       <div class="pane-content">
-        <span class="pane-label"><i class="fas fa-wrench"></i> Systems Implementation:</span>
+        <span class="pane-label"><i class="fas fa-wrench"></i> Technical Solution:</span>
         <p class="pane-text">{project.solution || project.longDescription}</p>
       </div>
     </div>
@@ -106,8 +106,8 @@ const cardId = `schem-card-${project.slug}`;
           <i class="fab fa-github"></i> <span>source</span>
         </a>
       )}
-      <a href={`${base}projects/${project.slug}/`} class="action-btn inspect-btn" title="Inspect Full Technical Dossier">
-        <span>inspect spec</span> <i class="fas fa-arrow-right"></i>
+      <a href={`${base}projects/${project.slug}/`} class="action-btn inspect-btn" title="View Project Case Study">
+        <span>view details</span> <i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </div>

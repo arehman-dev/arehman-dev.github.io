@@ -5,13 +5,13 @@ import { articles } from '../data/articles';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 
 const systemNav = [
-  { id: 'nav-home', label: 'Home Cockpit', path: base, category: 'Navigation', icon: 'fas fa-terminal', desc: 'Main systems cockpit & live telemetry runner' },
-  { id: 'nav-about', label: 'About Engineer', path: `${base}about/`, category: 'Navigation', icon: 'fas fa-user-gear', desc: 'Engineering dossier, background & systems philosophy' },
-  { id: 'nav-projects', label: 'Schematics Catalog', path: `${base}projects/`, category: 'Navigation', icon: 'fas fa-microchip', desc: 'All verified engineering builds & system schematics' },
-  { id: 'nav-certs', label: 'Credentials Registry', path: `${base}certificates/`, category: 'Navigation', icon: 'fas fa-certificate', desc: 'Google, Python, and Linux accredited credentials' },
-  { id: 'nav-skills', label: 'System Competencies', path: `${base}skills-experience/`, category: 'Navigation', icon: 'fas fa-chart-line', desc: 'Live btop process monitor & toolbelt capability matrix' },
-  { id: 'nav-articles', label: 'Incident Logs & Runbooks', path: `${base}articles/`, category: 'Navigation', icon: 'fas fa-book', desc: 'Technical incident logs, Linux networking & security papers' },
-  { id: 'nav-hire', label: 'Engineering Handshake', path: `${base}hire-me/`, category: 'Navigation', icon: 'fas fa-handshake', desc: 'Curriculum Vitae, terminal resume spec & direct email' },
+  { id: 'nav-home', label: 'Home', path: base, category: 'Navigation', icon: 'fas fa-home', desc: 'Main engineering portfolio & featured work' },
+  { id: 'nav-about', label: 'About Me', path: `${base}about/`, category: 'Navigation', icon: 'fas fa-user-gear', desc: 'Engineering background, philosophy & approach' },
+  { id: 'nav-projects', label: 'Projects & Case Studies', path: `${base}projects/`, category: 'Navigation', icon: 'fas fa-folder-open', desc: 'All software projects, systems in C++, and Python automation' },
+  { id: 'nav-certs', label: 'Certifications', path: `${base}certificates/`, category: 'Navigation', icon: 'fas fa-certificate', desc: 'Google, Python, and Linux professional credentials' },
+  { id: 'nav-skills', label: 'Skills & Experience', path: `${base}skills-experience/`, category: 'Navigation', icon: 'fas fa-chart-line', desc: 'Technical capabilities, toolbelt & professional experience' },
+  { id: 'nav-articles', label: 'Articles & Guides', path: `${base}articles/`, category: 'Navigation', icon: 'fas fa-book-open', desc: 'Technical articles, Linux networking, and engineering runbooks' },
+  { id: 'nav-hire', label: 'Hire Me & Contact', path: `${base}hire-me/`, category: 'Navigation', icon: 'fas fa-envelope', desc: 'Curriculum Vitae, availability & direct contact' },
   { id: 'nav-personal', label: 'Personal Creative Space', path: `${base}me/`, category: 'Navigation', icon: 'fas fa-pen-nib', desc: 'Urdu literature, poetry, and photography (/me ↗)' }
 ];
 ---
@@ -42,7 +42,7 @@ const systemNav = [
       <div class="cmd-group" data-group="navigation">
         <div class="cmd-group-title">
           <span class="cmd-group-bracket">[</span>
-          <span>ROUTING &bull; SYSTEM RUNBOOKS</span>
+          <span>MAIN NAVIGATION &bull; PAGES</span>
           <span class="cmd-group-bracket">]</span>
         </div>
         <ul class="cmd-list">
@@ -65,7 +65,7 @@ const systemNav = [
       <div class="cmd-group" data-group="actions">
         <div class="cmd-group-title">
           <span class="cmd-group-bracket">[</span>
-          <span>SYSTEM CONTROLS &bull; DAEMON ACTIONS</span>
+          <span>SHORTCUTS &amp; ACTIONS</span>
           <span class="cmd-group-bracket">]</span>
         </div>
         <ul class="cmd-list">
@@ -74,17 +74,17 @@ const systemNav = [
               <i class="fas fa-circle-half-stroke"></i>
             </div>
             <div class="cmd-item-meta">
-              <span class="cmd-item-title">Toggle Display Theme</span>
-              <span class="cmd-item-desc">Switch between OLED Stealth and Paper Slate modes</span>
+              <span class="cmd-item-title">Toggle Theme</span>
+              <span class="cmd-item-desc">Switch between dark and light modes</span>
             </div>
             <kbd class="cmd-kbd-tag">Action</kbd>
           </li>
-          <li class="cmd-item" data-type="action" data-action="copy-email" data-search="copy email contact proton handshake">
+          <li class="cmd-item" data-type="action" data-action="copy-email" data-search="copy email contact proton">
             <div class="cmd-item-icon">
               <i class="fas fa-envelope"></i>
             </div>
             <div class="cmd-item-meta">
-              <span class="cmd-item-title">Copy Encrypted Email</span>
+              <span class="cmd-item-title">Copy Email Address</span>
               <span class="cmd-item-desc">Copies arehman.dev@proton.me to clipboard</span>
             </div>
             <kbd class="cmd-kbd-tag">Copy</kbd>
@@ -94,7 +94,7 @@ const systemNav = [
               <i class="fab fa-github"></i>
             </div>
             <div class="cmd-item-meta">
-              <span class="cmd-item-title">Inspect Source Repository</span>
+              <span class="cmd-item-title">Source Repository</span>
               <span class="cmd-item-desc">View the open source Astro codebase on GitHub</span>
             </div>
             <span class="cmd-item-arrow">↗</span>
@@ -106,14 +106,14 @@ const systemNav = [
       <div class="cmd-group" data-group="schematics">
         <div class="cmd-group-title">
           <span class="cmd-group-bracket">[</span>
-          <span>ENGINEERING SCHEMATICS &bull; VERIFIED BUILDS</span>
+          <span>FEATURED PROJECTS &bull; CASE STUDIES</span>
           <span class="cmd-group-bracket">]</span>
         </div>
         <ul class="cmd-list">
           {projects.map((proj) => (
             <li class="cmd-item" data-type="link" data-url={`${base}projects/${proj.slug}/`} data-search={`${proj.title} ${proj.description} ${proj.tags.join(' ')}`}>
               <div class="cmd-item-icon">
-                <i class="fas fa-microchip text-primary"></i>
+                <i class="fas fa-folder-open text-primary"></i>
               </div>
               <div class="cmd-item-meta">
                 <span class="cmd-item-title">{proj.title}</span>
@@ -129,7 +129,7 @@ const systemNav = [
       <div class="cmd-group" data-group="articles">
         <div class="cmd-group-title">
           <span class="cmd-group-bracket">[</span>
-          <span>INCIDENT LOGS &bull; TECHNICAL RUNBOOKS</span>
+          <span>TECHNICAL ARTICLES &bull; RUNBOOKS</span>
           <span class="cmd-group-bracket">]</span>
         </div>
         <ul class="cmd-list">
