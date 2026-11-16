@@ -42,6 +42,23 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
   title={`${certificate.title} | Certification Details`}
   description={certificate.description}
 >
+  <!-- JSON-LD EducationalOccupationalCredential Schema -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "EducationalOccupationalCredential",
+    "name": certificate.title,
+    "description": certificate.description,
+    "credentialCategory": "Certificate",
+    "recognizedBy": {
+      "@type": "Organization",
+      "name": certificate.issuer
+    },
+    "about": {
+      "@type": "Person",
+      "name": "Abdul Rehman"
+    }
+  })} />
+
   <div class="credential-dossier-container">
     
     <!-- Top Caliper Navigation Bar -->

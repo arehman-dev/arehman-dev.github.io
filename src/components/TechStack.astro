@@ -38,14 +38,6 @@ const corePillars = [
     tag: "High Performance",
     description: "Memory layouts, compile-time optimization, deterministic algorithms, and low-level CLI utilities.",
     tools: ["Modern C++20", "STL", "CMake", "GCC / Clang", "GDB", "Valgrind"]
-  },
-  {
-    name: "Data & Persistence",
-    icon: "fas fa-database",
-    color: "#14b8a6",
-    tag: "Persistence & ETL",
-    description: "Structured storage, Google Sheets API synchronization engines, ETL, and local-first SQLite.",
-    tools: ["SQLite", "PostgreSQL", "Google Sheets API", "SQLAlchemy", "JSON Streams"]
   }
 ];
 ---
@@ -88,12 +80,24 @@ const corePillars = [
     font-family: var(--font-sans, system-ui, sans-serif);
   }
 
-  /* 01: Core Pillars Grid */
+  /* 01: Core Pillars Grid (4 Pillars) */
   .pillars-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin-bottom: 1.75rem;
+  }
+
+  @media (max-width: 960px) {
+    .pillars-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 580px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .pillar-card {

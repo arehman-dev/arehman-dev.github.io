@@ -33,6 +33,25 @@ const isCompleted = project.status.toLowerCase() === 'completed' || project.stat
   title={`${project.title} | Project Case Study`}
   description={project.description}
 >
+  <!-- JSON-LD SoftwareSourceCode Schema -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": project.title,
+    "description": project.description,
+    "programmingLanguage": project.tags[0] || "Python",
+    "keywords": project.tags.join(", "),
+    "author": {
+      "@type": "Person",
+      "name": "Abdul Rehman",
+      "url": "https://arehman-dev.github.io/"
+    },
+    "maintainer": {
+      "@type": "Person",
+      "name": "Abdul Rehman"
+    }
+  })} />
+
   <div class="schematic-dossier-container">
     
     <!-- Top Caliper & Breadcrumb Navigation -->

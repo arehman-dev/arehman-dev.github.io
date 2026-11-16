@@ -26,21 +26,11 @@ else if (pathname.includes('/about')) currentModule = 'about';
       </span>
     </div>
 
-    <!-- Center Section: Developer Specs (Desktop only) -->
+    <!-- Center Section: Engineering Motto / Operational Quote -->
     <div class="waybar-group waybar-center">
-      <span class="waybar-item">
-        <span class="waybar-label">DEV:</span>
-        <span class="waybar-val">Python · Linux · AI · C++</span>
-      </span>
-      <span class="waybar-sep">·</span>
-      <span class="waybar-item">
-        <span class="waybar-label">DATA:</span>
-        <span class="waybar-val">Pipelines</span>
-      </span>
-      <span class="waybar-sep">·</span>
-      <span class="waybar-item">
-        <span class="waybar-label">ENV:</span>
-        <span class="waybar-val">POSIX</span>
+      <span class="waybar-quote">
+        <i class="fas fa-terminal text-primary"></i>
+        <span class="quote-text">&ldquo;Code is a liability; execution is leverage.&rdquo;</span>
       </span>
     </div>
 
@@ -190,26 +180,32 @@ else if (pathname.includes('/about')) currentModule = 'about';
     letter-spacing: 0.02em;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
     white-space: nowrap;
   }
 
-  .waybar-label {
-    color: #6b7280;
-    margin-right: 3px;
-  }
-  :global([data-theme="light"]) .waybar-label {
-    color: #4b5563;
-    font-weight: 600;
+  .waybar-quote {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #d1d5db;
+    font-style: italic;
+    opacity: 0.92;
+    transition: opacity 0.2s ease;
   }
 
-  .waybar-val {
-    color: #e5e7eb;
-    font-weight: 500;
+  .waybar-quote:hover {
+    opacity: 1;
   }
-  :global([data-theme="light"]) .waybar-val {
-    color: #111827;
-    font-weight: 600;
+
+  :global([data-theme="light"]) .waybar-quote {
+    color: #374151;
+  }
+
+  .quote-text {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.69rem;
+    letter-spacing: 0.015em;
   }
 
   .waybar-sep {
