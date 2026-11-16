@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TelemetryConsole from '../components/TelemetryConsole.astro';
 import CoreSkills from '../components/CoreSkills.astro';
 import SchematicCard from '../components/SchematicCard.astro';
-import TechStack from '../components/TechStack.astro';
 import { projects } from '../data/projects';
 import { articles } from '../data/articles';
 
@@ -161,15 +160,30 @@ const recentArticles = articles.slice(0, 3);
       </div>
     </section>
 
-    <!-- 06: OPERATIONAL TOOLBELT -->
-    <section class="cockpit-section" id="toolbelt-section">
-      <div class="section-caliper-head">
-        <span class="section-num">04 //</span>
-        <h2 class="section-title">TECHNICAL STACK &amp; TOOLING</h2>
-        <span class="section-tag">[DEVELOPER ENVIRONMENT]</span>
+    <!-- 04: HANDSHAKE COLLABORATION BANNER -->
+    <section class="cockpit-handshake-banner" aria-label="Collaboration & Engagement">
+      <div class="handshake-banner-inner">
+        <div class="handshake-left">
+          <div class="handshake-badge">
+            <span class="status-pulse-dot"></span>
+            <span>AVAILABLE FOR FULL-TIME ROLES &amp; CONTRACTS</span>
+          </div>
+          <h2 class="handshake-title">Interested in building together?</h2>
+          <p class="handshake-desc">
+            Open for software development roles, Python automation pipelines, Linux infrastructure projects, and applied AI systems.
+          </p>
+        </div>
+        <div class="handshake-actions">
+          <a href="mailto:arehman.dev@proton.me" class="cockpit-btn btn-emerald">
+            <i class="fas fa-paper-plane"></i>
+            <span>Send an Email</span>
+          </a>
+          <a href={`${base}hire-me/`} class="cockpit-btn btn-ghost">
+            <i class="fas fa-id-card"></i>
+            <span>Hire Me &amp; Details</span>
+          </a>
+        </div>
       </div>
-
-      <TechStack />
     </section>
 
   </div>
@@ -727,6 +741,80 @@ const recentArticles = articles.slice(0, 3);
 
   .log-inspect-link:hover i {
     transform: translateX(2px);
+  }
+
+  /* 04: Cockpit Handshake Collaboration Banner */
+  .cockpit-handshake-banner {
+    margin: 2.75rem 0 1rem 0;
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.28);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(1, 172, 106, 0.08);
+  }
+
+  :global([data-theme="light"]) .cockpit-handshake-banner {
+    background: #ffffff;
+    border: 1px solid rgba(1, 172, 106, 0.32);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .handshake-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .handshake-left {
+    max-width: 620px;
+  }
+
+  .handshake-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--primary, #01ac6a);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  :global([data-theme="light"]) .handshake-badge {
+    color: #017a4b;
+  }
+
+  .handshake-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin: 0 0 0.35rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  :global([data-theme="light"]) .handshake-title {
+    color: #111827;
+  }
+
+  .handshake-desc {
+    font-size: 0.88rem;
+    color: #9ca3af;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  :global([data-theme="light"]) .handshake-desc {
+    color: #4b5563;
+  }
+
+  .handshake-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   /* Responsive Rules */
