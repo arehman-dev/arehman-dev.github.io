@@ -112,9 +112,17 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           <!-- Row 1: Status (left) and Copyright info (right) -->
           <div class="footer-row footer-row-primary">
             <div class="footer-col-telemetry">
-              <span class="footer-led" title="Active"></span>
-              <span class="footer-node-tag">Islamabad, PK (Remote &amp; Hybrid)</span>
-              <span class="footer-status-tag">Available for Full-time Roles</span>
+              <span class="footer-node-badge">
+                <i class="fas fa-terminal text-primary"></i>
+                <span>NODE: ISLAMABAD, PK</span>
+              </span>
+              <span class="footer-telemetry-sep">&bull;</span>
+              <span class="footer-tz-tag">UTC+5</span>
+              <span class="footer-telemetry-sep">&bull;</span>
+              <span class="footer-avail-chip">
+                <span class="status-pulse-dot"></span>
+                <span>AVAILABLE (REMOTE / HYBRID)</span>
+              </span>
             </div>
 
             <div class="footer-col-copy">

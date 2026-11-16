@@ -1,6 +1,4 @@
 ---
-import { techStackData } from '../data/skills';
-
 interface Props {
   className?: string;
 }
@@ -74,98 +72,15 @@ const corePillars = [
     ))}
   </div>
 
-  <!-- 02: Full Ecosystem Shelf Toggle Box -->
-  <div class="ecosystem-container">
-    <div class="ecosystem-header">
-      <div class="eco-title-group">
-        <span class="eco-badge">TOOLCHAIN DIRECTORY</span>
-        <h3 id="tech-stack-heading" class="eco-title">
-          <i class="fas fa-layer-group text-primary"></i> Complete Developer Toolchain ({techStackData.length} Runtimes &amp; Tools)
-        </h3>
-      </div>
-
-      <!-- Domain Filter Bar -->
-      <div class="toolbelt-filter-row" role="tablist" aria-label="Filter toolbelt by domain">
-        <button class="domain-tab-btn active" data-domain-filter="all" role="tab" aria-selected="true">
-          <span>ALL ({techStackData.length})</span>
-        </button>
-        <button class="domain-tab-btn" data-domain-filter="ai" role="tab" aria-selected="false">
-          <span class="dot-ai">●</span> <span>PYTHON &amp; AI</span>
-        </button>
-        <button class="domain-tab-btn" data-domain-filter="kernel" role="tab" aria-selected="false">
-          <span class="dot-kernel">●</span> <span>LINUX &amp; C++</span>
-        </button>
-        <button class="domain-tab-btn" data-domain-filter="devops" role="tab" aria-selected="false">
-          <span class="dot-devops">●</span> <span>DEVOPS &amp; CLOUD</span>
-        </button>
-        <button class="domain-tab-btn" data-domain-filter="network" role="tab" aria-selected="false">
-          <span class="dot-network">●</span> <span>NETWORKING &amp; SEC</span>
-        </button>
-        <button class="domain-tab-btn" data-domain-filter="interface" role="tab" aria-selected="false">
-          <span class="dot-interface">●</span> <span>DATA &amp; UI</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Chip Wall -->
-    <div class="tech-chip-grid" id="tech-chip-wall">
-      {techStackData.map((tech) => (
-        <div 
-          class={`tech-spec-chip chip-domain-${tech.domain} ${tech.isCore ? 'chip-core' : 'chip-regular'}`}
-          data-domain={tech.domain}
-          title={`${tech.name} • ${tech.domain.toUpperCase()}${tech.isCore ? ' (Core daily driver)' : ''}`}
-        >
-          <span class={`spec-dot dot-${tech.domain} ${tech.isCore ? 'dot-core-ring' : ''}`}></span>
-          <i class={`${tech.icon} chip-icon icon-${tech.domain}`} aria-hidden="true"></i>
-          <span class="chip-name">{tech.name}</span>
-          {tech.isCore && <span class="core-mini-tag">CORE</span>}
-        </div>
-      ))}
-    </div>
-
-    <div class="ecosystem-footer">
-      <a href={`${base}skills-experience/`} class="view-skills-btn">
-        <span>Explore Detailed Developer Capabilities &amp; Experience</span>
-        <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
+  <!-- 02: Explore Full Toolchain & Experience CTA -->
+  <div class="pillars-footer-action">
+    <a href={`${base}skills-experience/`} class="toolbelt-explore-btn">
+      <i class="fas fa-layer-group text-primary"></i>
+      <span>Explore Full 40+ Toolchain Directory on Skills Page</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
   </div>
 </div>
-
-<script>
-  function initToolbeltFilters() {
-    const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-domain-filter]');
-    const chips = document.querySelectorAll<HTMLElement>('#tech-chip-wall .tech-spec-chip');
-
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-domain-filter');
-        if (!filter) return;
-
-        filterButtons.forEach((b) => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-
-        chips.forEach((chip) => {
-          const chipDomain = chip.getAttribute('data-domain');
-          if (filter === 'all' || chipDomain === filter) {
-            chip.style.display = 'inline-flex';
-            chip.style.opacity = '1';
-            chip.style.transform = 'scale(1)';
-          } else {
-            chip.style.display = 'none';
-          }
-        });
-      });
-    });
-  }
-
-  initToolbeltFilters();
-  document.addEventListener('astro:page-load', initToolbeltFilters);
-</script>
 
 <style>
   .developer-toolbelt-wrapper {
@@ -286,228 +201,59 @@ const corePillars = [
     border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  /* 02: Ecosystem Container */
-  .ecosystem-container {
-    background: #08090b;
-    border: 1px solid rgba(1, 172, 106, 0.25);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  }
-
-  :global([data-theme="light"]) .ecosystem-container {
-    background: #ffffff;
-    border: 1px solid rgba(1, 172, 106, 0.3);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  }
-
-  .ecosystem-header {
+  /* 02: Pillars Footer Action */
+  .pillars-footer-action {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .toolbelt-explore-btn {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  :global([data-theme="light"]) .ecosystem-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .eco-badge {
+    gap: 10px;
+    padding: 0.75rem 1.6rem;
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.32);
+    border-radius: 6px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.65rem;
-    color: var(--primary, #01ac6a);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    display: block;
-    margin-bottom: 0.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
-  .eco-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #f3f4f6;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .toolbelt-explore-btn:hover {
+    background: rgba(1, 172, 106, 0.16);
+    border-color: var(--primary, #01ac6a);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(1, 172, 106, 0.2);
   }
 
-  :global([data-theme="light"]) .eco-title {
+  :global([data-theme="light"]) .toolbelt-explore-btn {
+    background: rgba(1, 172, 106, 0.08);
+    border: 1px solid rgba(1, 172, 106, 0.35);
     color: #111827;
   }
 
-  /* Domain Filters */
-  .toolbelt-filter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-
-  .domain-tab-btn {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
-    color: #9ca3af;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.68rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.15s ease;
-  }
-
-  :global([data-theme="light"]) .domain-tab-btn {
-    background: #f1f5f9;
-    border-color: rgba(0, 0, 0, 0.09);
-    color: #4b5563;
-  }
-
-  .domain-tab-btn:hover {
-    color: #f3f4f6;
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  :global([data-theme="light"]) .domain-tab-btn:hover {
-    color: #0f172a;
-    border-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .domain-tab-btn.active {
+  :global([data-theme="light"]) .toolbelt-explore-btn:hover {
     background: rgba(1, 172, 106, 0.14);
-    border-color: var(--primary, #01ac6a);
-    color: var(--primary, #01ac6a);
-  }
-
-  :global([data-theme="light"]) .domain-tab-btn.active {
-    background: rgba(1, 172, 106, 0.12);
-    border-color: #01ac6a;
     color: #017a4b;
-    font-weight: 700;
   }
 
-  .dot-kernel { color: #01ac6a; font-size: 0.6rem; }
-  .dot-network { color: #38bdf8; font-size: 0.6rem; }
-  .dot-ai { color: #f59e0b; font-size: 0.6rem; }
-  .dot-devops { color: #a855f7; font-size: 0.6rem; }
-  .dot-interface { color: #14b8a6; font-size: 0.6rem; }
 
-  /* Grid of Chips */
-  .tech-chip-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-  }
 
-  .tech-spec-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.32rem 0.65rem;
-    border-radius: 4px;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.74rem;
-    font-weight: 500;
-    transition: all 0.15s ease;
-    user-select: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.02);
-    color: #d1d5db;
-  }
 
-  :global([data-theme="light"]) .tech-spec-chip {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #1f2937;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  }
 
-  .chip-domain-kernel { border-left: 2.5px solid #01ac6a; }
-  .chip-domain-network { border-left: 2.5px solid #38bdf8; }
-  .chip-domain-ai { border-left: 2.5px solid #f59e0b; }
-  .chip-domain-devops { border-left: 2.5px solid #a855f7; }
-  .chip-domain-interface { border-left: 2.5px solid #14b8a6; }
 
-  .chip-core {
-    background: rgba(1, 172, 106, 0.08);
-    font-weight: 600;
-  }
 
-  :global([data-theme="light"]) .chip-core {
-    background: rgba(1, 172, 106, 0.05);
-    font-weight: 700;
-  }
 
-  .core-mini-tag {
-    font-size: 0.55rem;
-    font-weight: 800;
-    color: var(--primary, #01ac6a);
-    background: rgba(1, 172, 106, 0.15);
-    padding: 1px 4px;
-    border-radius: 2px;
-    letter-spacing: 0.04em;
-    margin-left: 2px;
-  }
 
-  .spec-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
 
-  .dot-core-ring {
-    box-shadow: 0 0 0 1.5px rgba(1, 172, 106, 0.4);
-  }
 
-  .chip-icon {
-    font-size: 0.8rem;
-  }
 
-  .icon-kernel { color: #01ac6a; }
-  .icon-network { color: #38bdf8; }
-  .icon-ai { color: #f59e0b; }
-  .icon-devops { color: #a855f7; }
-  .icon-interface { color: #14b8a6; }
-
-  .ecosystem-footer {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  :global([data-theme="light"]) .ecosystem-footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-  }
-
-  .view-skills-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: var(--primary, #01ac6a);
-    text-decoration: none;
-    transition: all 0.15s ease;
-  }
-
-  :global([data-theme="light"]) .view-skills-btn {
-    color: #027a48;
-  }
-
-  .view-skills-btn:hover {
-    color: #00c47a;
-    transform: translateX(3px);
-  }
 
   .text-primary {
     color: var(--primary, #01ac6a);

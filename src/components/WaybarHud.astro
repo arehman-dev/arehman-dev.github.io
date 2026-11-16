@@ -29,18 +29,18 @@ else if (pathname.includes('/about')) currentModule = 'about';
     <!-- Center Section: Developer Specs (Desktop only) -->
     <div class="waybar-group waybar-center">
       <span class="waybar-item">
-        <span class="waybar-label">FOCUS:</span>
+        <span class="waybar-label">DEV:</span>
         <span class="waybar-val">Python · Linux · AI · C++</span>
       </span>
       <span class="waybar-sep">·</span>
       <span class="waybar-item">
         <span class="waybar-label">DATA:</span>
-        <span class="waybar-val">Pipelines &amp; ML</span>
+        <span class="waybar-val">Pipelines</span>
       </span>
       <span class="waybar-sep">·</span>
       <span class="waybar-item">
         <span class="waybar-label">ENV:</span>
-        <span class="waybar-val">Debian / POSIX</span>
+        <span class="waybar-val">POSIX</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@ else if (pathname.includes('/about')) currentModule = 'about';
       </span>
       <span class="waybar-pill waybar-status">
         <span class="status-dot"></span>
-        <span class="status-text">AVAILABLE FOR ROLES</span>
+        <span class="status-text">AVAILABLE</span>
       </span>
     </div>
   </div>
@@ -188,6 +188,10 @@ else if (pathname.includes('/about')) currentModule = 'about';
   .waybar-center {
     font-size: 0.7rem;
     letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
   }
 
   .waybar-label {
