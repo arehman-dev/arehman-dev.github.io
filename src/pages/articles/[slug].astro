@@ -56,14 +56,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <div class="caliper-bar">
       <a href={`${base}articles/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO ARTICLES</span>
+        <span>ALL ARTICLES (10+)</span>
       </a>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">[ARTICLE: {article.category.toUpperCase()}]</span>
+      <span class="caliper-tag">TOPIC: {article.category.toUpperCase()}</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">READ: {article.readTime.toUpperCase()}</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">PUBLISHED: {article.date}</span>
-      <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">ENGINEERING RUNBOOK</span>
     </div>
 
     <!-- Article Reader Surface -->

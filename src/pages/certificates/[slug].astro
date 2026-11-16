@@ -48,14 +48,14 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
     <div class="caliper-bar">
       <a href={`${base}certificates/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO CERTIFICATIONS</span>
+        <span>ALL CERTIFICATIONS</span>
       </a>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">[{regId}]</span>
+      <span class="caliper-tag">CREDENTIAL: {certificate.title.toUpperCase()}</span>
       <span class="caliper-div">&bull;</span>
       <span class="caliper-tag">ISSUER: {certificate.issuer.toUpperCase()}</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">STATUS: {certificate.status.toUpperCase()}</span>
+      <span class="caliper-tag">STATUS: {certificate.status.toUpperCase()} &bull; VERIFIED</span>
     </div>
 
     <!-- Dossier Header Unit -->
@@ -175,7 +175,7 @@ const isCompleted = certificate.status.toLowerCase() === 'completed';
               <div class="specimen-presentation">
                 <span class="pres-sub">THIS VERIFIES THAT</span>
                 <h3 class="pres-name">Abdul Rehman</h3>
-                <span class="pres-role">Systems &amp; Software Engineer</span>
+                <span class="pres-role">Software Developer (Python &bull; Linux &bull; AI &bull; C++)</span>
                 <span class="pres-body">
                   has undertaken and demonstrated rigorous engineering mastery in the curriculum:
                 </span>

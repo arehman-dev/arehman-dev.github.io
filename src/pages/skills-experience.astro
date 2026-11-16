@@ -1,209 +1,307 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TechStack from '../components/TechStack.astro';
-import ProcessTree from '../components/ProcessTree.astro';
-import { skillsData } from '../data/skills';
+import { techStackData } from '../data/skills';
 
-const engineeringTenets = [
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+const developerDomains = [
   {
-    code: "TENET-01",
-    name: "Analytical Systems Deconstruction",
-    description: "Deconstructing complex programmatic bottlenecks and systemic infrastructure errors into isolated, deterministic components to guarantee optimal root-cause remediation.",
-    icon: "fas fa-microchip"
+    id: "python",
+    title: "Python & Automation",
+    badge: "PRIMARY STACK",
+    icon: "fab fa-python",
+    color: "#f59e0b",
+    summary: "Building asynchronous daemons, high-throughput ingestion pipelines, RESTful APIs, web scrapers, and bidirectional Google Sheets sync engines.",
+    skills: [
+      { name: "AsyncIO & Multithreading", context: "Concurrent worker pools, event loops, non-blocking I/O" },
+      { name: "FastAPI & REST APIs", context: "Lightweight, OpenAPI-documented web services" },
+      { name: "Data Ingestion & Scraping", context: "Requests, BeautifulSoup4, HTTP streaming, payload normalization" },
+      { name: "Automation Daemons", context: "Cron, systemd-managed worker daemons, headless routines" },
+      { name: "Unit Testing & QA", context: "unittest, pytest, mock assertions, test-driven validation" }
+    ],
+    tools: ["Python 3.12", "FastAPI", "AsyncIO", "Requests", "BeautifulSoup4", "Pytest", "SQLAlchemy"]
   },
   {
-    code: "TENET-02",
-    name: "Continuous Toolchain Mastery",
-    description: "Driven by technical curiosity into compiler internals, memory boundaries, POSIX standards, and autonomous systems orchestration across Linux servers.",
-    icon: "fas fa-terminal"
+    id: "linux",
+    title: "Linux & Environments",
+    badge: "INFRASTRUCTURE",
+    icon: "fab fa-linux",
+    color: "#01ac6a",
+    summary: "Hardening Debian and Ubuntu environments, writing idempotent POSIX shell scripts, and configuring containerized services.",
+    skills: [
+      { name: "Linux System Administration", context: "Debian & Ubuntu server provisioning, storage, and security" },
+      { name: "Bash & POSIX Shell", context: "Idempotent backup scripts, text processing, pipe streams" },
+      { name: "systemd & Service Units", context: "Custom daemon orchestration, auto-restart, security sandboxing" },
+      { name: "Docker Containerization", context: "Dockerfile multi-stage builds, rootless containers, bridge networking" },
+      { name: "Networking & Security", context: "WireGuard VPN, UFW/iptables, SSH keys, network namespace isolation" }
+    ],
+    tools: ["Debian", "Ubuntu", "Bash", "Docker", "systemd", "WireGuard", "SSH", "ip netns"]
   },
   {
-    code: "TENET-03",
-    name: "Operational Pressure Resilience",
-    description: "Calm, structured decision-making under live production incident loads. Debugging distributed logs, network sockets, and permission anomalies in real-time.",
-    icon: "fas fa-shield-halved"
+    id: "ai",
+    title: "Applied AI & Vision",
+    badge: "AI & ML",
+    icon: "fas fa-brain",
+    color: "#38bdf8",
+    summary: "Engineering computer vision pipelines, multi-lingual OCR extraction (Arabic/Urdu), document classification, and LLM agent toolchains.",
+    skills: [
+      { name: "Computer Vision & OCR", context: "OpenCV preprocessing, Tesseract / EasyOCR stacked recognition" },
+      { name: "Data Analysis & Science", context: "Pandas dataframes, NumPy arrays, Matplotlib visualization" },
+      { name: "Machine Learning Fundamentals", context: "Supervised pipelines, regression, classification, PyTorch basics" },
+      { name: "LLM Agent Toolchains", context: "Context window engineering, prompt orchestration, local model testing" }
+    ],
+    tools: ["OpenCV", "Tesseract / EasyOCR", "PyTorch", "NumPy", "Pandas", "Local LLMs", "Gemini API"]
   },
   {
-    code: "TENET-04",
-    name: "Zero-Fluff & Meticulous Verification",
-    description: "Strict unit assertions, PEP 8 compliance, memory leak profiling with Valgrind, and building deterministic software with zero unnecessary dependencies.",
-    icon: "fas fa-check-double"
+    id: "cpp",
+    title: "Modern C++ & Performance",
+    badge: "SYSTEMS",
+    icon: "fas fa-code",
+    color: "#a855f7",
+    summary: "Writing compute-efficient, deterministic code with compile-time verification, custom memory management, and POSIX system call bindings.",
+    skills: [
+      { name: "Modern C++ Standards", context: "C++17/20, STL algorithms, smart pointers, RAII semantics" },
+      { name: "Memory Management & Profiling", context: "Valgrind leak diagnostics, cache alignment, deterministic execution" },
+      { name: "Build Toolchains & Debugging", context: "CMake, GCC, Clang, GDB breakpoints, core dump analysis" },
+      { name: "POSIX Sockets & IPC", context: "Unix domain sockets, file descriptor multiplexing" }
+    ],
+    tools: ["Modern C++20", "STL", "CMake", "GCC / Clang", "GDB", "Valgrind"]
+  },
+  {
+    id: "data",
+    title: "Data & Persistence",
+    badge: "DATA PIPELINES",
+    icon: "fas fa-database",
+    color: "#14b8a6",
+    summary: "Designing deterministic storage layers, relational models, cloud API synchronizations, and offline-first mobile databases.",
+    skills: [
+      { name: "Relational Modeling", context: "Normalized schemas, indexed queries, foreign key integrity" },
+      { name: "SQLite & Local-First", context: "Embedded databases, WAL mode, rapid zero-network queries" },
+      { name: "Google Sheets Sync Engine", context: "OAuth2, bidirectional cell synchronization, batch API mutations" },
+      { name: "ETL & File Streams", context: "JSONLines streams, CSV serialization, tabular transformations" }
+    ],
+    tools: ["SQLite", "PostgreSQL", "Google Sheets API", "SQLAlchemy", "Room (Android)", "JSON Streams"]
   }
 ];
 
-const getProficiencyPercentage = (lvl: string) => {
-  switch (lvl.toLowerCase()) {
-    case 'advanced': return 92;
-    case 'intermediate': return 80;
-    case 'beginner': return 65;
-    case 'learning': return 75;
-    case 'exam prep': return 85;
-    default: return 70;
+const toolchainGroups = [
+  {
+    title: "Programming Languages",
+    icon: "fas fa-code",
+    items: ["Python 3.12", "Modern C++20", "Bash / Shell", "Kotlin", "TypeScript", "JavaScript", "HTML5 & CSS3", "Markdown"]
+  },
+  {
+    title: "Linux & Infrastructure",
+    icon: "fab fa-linux",
+    items: ["Debian Linux", "Ubuntu Linux", "systemd", "Docker", "Git & GitHub", "WireGuard", "SSH & Firewalld", "tmux", "GDB & Valgrind"]
+  },
+  {
+    title: "Applied AI, ML & Data",
+    icon: "fas fa-brain",
+    items: ["OpenCV", "Tesseract OCR", "EasyOCR", "PyTorch", "NumPy", "Pandas", "Matplotlib", "BeautifulSoup4", "Requests", "Local LLMs"]
+  },
+  {
+    title: "Databases & Frameworks",
+    icon: "fas fa-database",
+    items: ["SQLite", "PostgreSQL", "FastAPI", "SQLAlchemy", "Google Sheets API", "Jetpack Compose", "Room DB", "Astro"]
   }
-};
+];
+
+const principles = [
+  {
+    num: "01",
+    title: "Execution Over Excess",
+    text: "Code is a liability; execution is leverage. Every line written must justify its existence in performance, maintainability, and clarity with zero unnecessary fluff."
+  },
+  {
+    num: "02",
+    title: "Pragmatic Automation",
+    text: "Manual toil is eliminated through deterministic, idempotent scripts in Python and Bash. If a task is performed more than twice, it deserves an automated pipeline."
+  },
+  {
+    num: "03",
+    title: "Continuous Verification",
+    text: "Reliability is verified through strict unit assertions, PEP 8 styling, memory profiling with Valgrind, and building software that fails gracefully with clear logs."
+  }
+];
 ---
 
 <BaseLayout 
   title="Skills & Experience | Abdul Rehman"
-  description="Explore the technical skill matrix, toolchain proficiencies, professional experience at InfraLayers, and core engineering principles of Abdul Rehman."
+  description="Explore Abdul Rehman's software developer capabilities across Python, Linux, applied AI, modern C++, and production experience at InfraLayers."
 >
   <div class="skills-page-container">
     
     <!-- Caliper Top Coordinates Bar -->
     <div class="caliper-bar">
-      <span class="caliper-tag">SOFTWARE ENGINEER</span>
+      <span class="caliper-tag">DEVELOPER PROFILE</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">SYSTEMS &amp; AUTOMATION</span>
+      <span class="caliper-tag">PYTHON · LINUX · AI/ML · C++ · DATA PIPELINES</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">INFRALAYERS EXPERIENCE</span>
+      <span class="caliper-tag">INFRALAYERS PROVEN</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">ISLAMABAD, PK</span>
+      <span class="caliper-tag">CAPABILITIES &amp; TOOLCHAIN</span>
     </div>
 
     <!-- Page Header -->
-    <header class="cockpit-page-header">
-      <span class="cockpit-eyebrow">01 // TECHNICAL PROFICIENCY &amp; PROFESSIONAL BACKGROUND</span>
-      <h1 class="cockpit-title">Skills &amp; Professional Experience</h1>
-      <p class="cockpit-tagline">
-        Categorized systems proficiencies, complete developer toolchain matrix, interactive capabilities monitor, and verified production service at InfraLayers.
+    <header class="skills-hero-header">
+      <span class="skills-eyebrow">01 // TECHNICAL PROFICIENCY &amp; PROFESSIONAL BACKGROUND</span>
+      <h1 class="skills-title">Skills &amp; Professional Experience</h1>
+      <p class="skills-tagline">
+        Specializing in Python automation pipelines, Linux environment engineering, applied AI &amp; vision systems, compute-efficient C++, and production infrastructure at InfraLayers.
       </p>
     </header>
 
-    <!-- SECTION 1: LIVE PROCESS TREE (btop style) -->
-    <section class="profiler-section">
-      <div class="section-caliper-head">
+    <!-- SECTION 1: 5 CORE DEVELOPER DOMAINS (Open, Airy, Modern Layout) -->
+    <section class="skills-section" id="domains-section">
+      <div class="section-lead-head">
         <span class="sec-num">01 //</span>
-        <h2 class="sec-title">ACTIVE ENVIRONMENT &amp; PROCESS MONITOR</h2>
-        <span class="sec-badge">[INTERACTIVE CAPABILITIES DEMO]</span>
-      </div>
-      <ProcessTree />
-    </section>
-
-    <!-- SECTION 2: CATEGORIZED CAPABILITY MATRIX -->
-    <section class="profiler-section">
-      <div class="section-caliper-head">
-        <span class="sec-num">02 //</span>
-        <h2 class="sec-title">TECHNICAL SKILLS &amp; PROFICIENCY MATRIX</h2>
-        <span class="sec-badge">[CATEGORIZED DOMAINS]</span>
+        <h2 class="sec-title">Core Developer Domains</h2>
+        <span class="sec-subtitle">Hands-on technical pillars and application areas</span>
       </div>
 
-      <div class="matrix-categories-grid">
-        {skillsData.map((category, cIdx) => (
-          <div class="category-panel">
-            <div class="category-panel-head">
-              <span class="cat-idx">0{cIdx + 1} //</span>
-              <h3 class="cat-title">{category.title}</h3>
+      <div class="domains-list">
+        {developerDomains.map((domain) => (
+          <div class="domain-card">
+            <div class="domain-header">
+              <div class="domain-title-group">
+                <div class="domain-icon-box" style={`color: ${domain.color}; background: ${domain.color}15; border-color: ${domain.color}35;`}>
+                  <i class={domain.icon}></i>
+                </div>
+                <div>
+                  <h3 class="domain-heading">{domain.title}</h3>
+                  <span class="domain-badge-tag">{domain.badge}</span>
+                </div>
+              </div>
+              <p class="domain-summary">{domain.summary}</p>
             </div>
 
-            <div class="skills-spec-grid">
-              {category.skills.map((skill) => {
-                const pct = getProficiencyPercentage(skill.level);
-                const isAdvanced = skill.level.toLowerCase() === 'advanced';
-                const isLearning = skill.level.toLowerCase() === 'learning';
-                return (
-                  <div class="skill-spec-row">
-                    <div class="skill-name-col">
-                      <span class="skill-icon-terminal">&gt;</span>
-                      <span class="skill-name">{skill.name}</span>
-                    </div>
-
-                    <div class="skill-telemetry-col">
-                      <div class="skill-track-bar">
-                        <div class="skill-fill-bar" style={`width: ${pct}%;`}></div>
-                      </div>
-                      <span class={`skill-level-pill ${isAdvanced ? 'pill-adv' : isLearning ? 'pill-learn' : 'pill-mid'}`}>
-                        {skill.level.toUpperCase()}
-                      </span>
-                    </div>
+            <div class="domain-body">
+              <div class="domain-skills-grid">
+                {domain.skills.map((s) => (
+                  <div class="skill-item">
+                    <span class="skill-name"><i class="fas fa-check-circle" style={`color: ${domain.color};`}></i> {s.name}</span>
+                    <span class="skill-context">{s.context}</span>
                   </div>
-                );
-              })}
+                ))}
+              </div>
+
+              <div class="domain-tools-footer">
+                <span class="tools-label">PRIMARY TOOLS:</span>
+                <div class="tools-chips-row">
+                  {domain.tools.map((t) => (
+                    <span class="tool-tag">{t}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- SECTION 3: COMPLETE TECH STACK & TOOLBELT -->
-    <section class="profiler-section">
-      <div class="section-caliper-head">
+    <!-- SECTION 2: DEVELOPER TOOLCHAIN DIRECTORY -->
+    <section class="skills-section" id="toolchain-section">
+      <div class="section-lead-head">
+        <span class="sec-num">02 //</span>
+        <h2 class="sec-title">Developer Toolchain &amp; Runtimes</h2>
+        <span class="sec-subtitle">Languages, developer tooling, Linux utilities, and frameworks</span>
+      </div>
+
+      <div class="toolchain-cards-grid">
+        {toolchainGroups.map((group) => (
+          <div class="toolchain-card">
+            <div class="toolchain-card-head">
+              <i class={`${group.icon} text-primary`}></i>
+              <h4>{group.title}</h4>
+            </div>
+            <div class="toolchain-pills-row">
+              {group.items.map((item) => (
+                <span class="tech-pill">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SECTION 3: WORK EXPERIENCE (InfraLayers Editorial Timeline) -->
+    <section class="skills-section" id="experience-section">
+      <div class="section-lead-head">
         <span class="sec-num">03 //</span>
-        <h2 class="sec-title">TOOLS, FRAMEWORKS &amp; DEVELOPMENT ENVIRONMENT</h2>
-        <span class="sec-badge">[DEVELOPER ECOSYSTEM]</span>
-      </div>
-      <TechStack />
-    </section>
-
-    <!-- SECTION 4: WORK EXPERIENCE (InfraLayers Systems Engineering Log) -->
-    <section class="profiler-section">
-      <div class="section-caliper-head">
-        <span class="sec-num">04 //</span>
-        <h2 class="sec-title">PROFESSIONAL EXPERIENCE &amp; SERVICE RECORD</h2>
-        <span class="sec-badge">[INFRALAYERS]</span>
+        <h2 class="sec-title">Professional Experience</h2>
+        <span class="sec-subtitle">Software development, Python automation, and Linux infrastructure</span>
       </div>
 
-      <div class="experience-cockpit-unit">
-        <div class="exp-top-banner">
-          <div class="exp-head-left">
-            <span class="exp-caliper-id">PROFESSIONAL ROLE</span>
-            <h3 class="exp-role-title">Python Developer &amp; Systems Administrator</h3>
-            <span class="exp-entity-sub">
-              <i class="far fa-building text-primary"></i> <strong>InfraLayers</strong> &bull; Server Administration &amp; Automation Engineering
-            </span>
-          </div>
-
-          <div class="exp-status-chip">
-            <span class="status-pulse-dot"></span>
-            <span>2023 &mdash; PRESENT (ACTIVE)</span>
-          </div>
-        </div>
-
-        <div class="exp-body-content">
-          <p class="exp-summary-text">
-            Leading the engineering and deployment of secure Python automation workflows, hardened server configurations, and infrastructure monitoring suites. Designed modular RESTful pipelines and custom systemd units for continuous log aggregation and system maintenance.
-          </p>
-
-          <div class="exp-bullet-log">
-            <div class="log-entry-item">
-              <span class="bullet-prompt">[01]</span>
-              <p>Architected internal Python deployment automation libraries, cutting manual bare-metal server provisioning latency by <strong>60%</strong>.</p>
-            </div>
-            <div class="log-entry-item">
-              <span class="bullet-prompt">[02]</span>
-              <p>Configured, maintained, and hardened container configurations with Docker across Debian, Ubuntu, and RedHat production nodes.</p>
-            </div>
-            <div class="log-entry-item">
-              <span class="bullet-prompt">[03]</span>
-              <p>Designed custom multithreaded log parsers, intrusion metrics scanners, and automated alerting channels integrated via secure webhooks.</p>
-            </div>
-            <div class="log-entry-item">
-              <span class="bullet-prompt">[04]</span>
-              <p>Enforced strict PEP 8 compliance, CI unit test quality assertions, and automated backup dump rotation routines.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 5: ENGINEERING DIRECTIVES (Attributes & Principles) -->
-    <section class="profiler-section">
-      <div class="section-caliper-head">
-        <span class="sec-num">05 //</span>
-        <h2 class="sec-title">CORE ENGINEERING PRINCIPLES</h2>
-        <span class="sec-badge">[PHILOSOPHY &amp; VALUES]</span>
-      </div>
-
-      <div class="tenets-cockpit-grid">
-        {engineeringTenets.map((tenet) => (
-          <div class="tenet-card">
-            <div class="tenet-head">
-              <span class="tenet-code">[{tenet.code}]</span>
-              <div class="tenet-icon-wrap">
-                <i class={tenet.icon}></i>
+      <div class="experience-timeline">
+        <div class="exp-entry">
+          <div class="exp-timeline-dot"></div>
+          
+          <div class="exp-card">
+            <div class="exp-card-header">
+              <div>
+                <span class="exp-company-tag"><i class="far fa-building text-primary"></i> INFRALAYERS</span>
+                <h3 class="exp-role">Software Developer &amp; Linux Automation Engineer</h3>
+                <span class="exp-meta">Software Development &bull; Linux Infrastructure &bull; Islamabad, PK / Remote</span>
+              </div>
+              <div class="exp-period-badge">
+                <span class="status-pulse-dot"></span>
+                <span>2023 &mdash; PRESENT (ACTIVE)</span>
               </div>
             </div>
-            <h3 class="tenet-title">{tenet.name}</h3>
-            <p class="tenet-desc">{tenet.description}</p>
+
+            <p class="exp-summary">
+              Leading the development of secure Python automation daemons, server configurations, and infrastructure monitoring workflows. Designed modular RESTful pipelines and custom systemd units for continuous log aggregation, alerting, and operational maintenance.
+            </p>
+
+            <ul class="exp-achievements">
+              <li>
+                <i class="fas fa-arrow-right text-primary"></i>
+                <span>Architected internal Python deployment automation libraries, cutting bare-metal server provisioning latency by <strong>60%</strong>.</span>
+              </li>
+              <li>
+                <i class="fas fa-arrow-right text-primary"></i>
+                <span>Configured, maintained, and hardened container configurations with Docker across Debian, Ubuntu, and RedHat production nodes.</span>
+              </li>
+              <li>
+                <i class="fas fa-arrow-right text-primary"></i>
+                <span>Designed custom multithreaded log parsers, intrusion metrics monitors, and automated alerting channels integrated via secure webhooks.</span>
+              </li>
+              <li>
+                <i class="fas fa-arrow-right text-primary"></i>
+                <span>Enforced strict PEP 8 compliance, CI unit test quality assertions, and automated backup dump rotation routines.</span>
+              </li>
+            </ul>
+
+            <div class="exp-stack-tags">
+              <span class="exp-tag">Python 3.12</span>
+              <span class="exp-tag">Linux / Debian</span>
+              <span class="exp-tag">Bash Automation</span>
+              <span class="exp-tag">Docker</span>
+              <span class="exp-tag">systemd</span>
+              <span class="exp-tag">FastAPI</span>
+              <span class="exp-tag">REST APIs</span>
+              <span class="exp-tag">WireGuard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CORE ENGINEERING PRINCIPLES -->
+    <section class="skills-section" id="principles-section">
+      <div class="section-lead-head">
+        <span class="sec-num">04 //</span>
+        <h2 class="sec-title">Core Engineering Principles</h2>
+        <span class="sec-subtitle">The standards and methodology that guide every implementation</span>
+      </div>
+
+      <div class="principles-grid">
+        {principles.map((p) => (
+          <div class="principle-card">
+            <span class="principle-num">{p.num}</span>
+            <h4 class="principle-title">{p.title}</h4>
+            <p class="principle-text">{p.text}</p>
           </div>
         ))}
       </div>
@@ -216,7 +314,7 @@ const getProficiencyPercentage = (lvl: string) => {
   .skills-page-container {
     max-width: 1140px;
     margin: 0 auto;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-sans, system-ui, sans-serif);
     color: #e5e7eb;
   }
 
@@ -234,9 +332,10 @@ const getProficiencyPercentage = (lvl: string) => {
     background: rgba(13, 15, 18, 0.75);
     border: 1px solid rgba(1, 172, 106, 0.22);
     border-radius: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.7rem;
     color: #9ca3af;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   }
 
@@ -256,21 +355,21 @@ const getProficiencyPercentage = (lvl: string) => {
   }
 
   /* Header */
-  .cockpit-page-header {
-    margin-bottom: 2.25rem;
+  .skills-hero-header {
+    margin-bottom: 2.75rem;
   }
 
-  .cockpit-eyebrow {
+  .skills-eyebrow {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.8rem;
-    color: var(--primary, #01ac6a);
     font-weight: 700;
+    color: var(--primary, #01ac6a);
     letter-spacing: 0.05em;
     display: block;
     margin-bottom: 0.4rem;
   }
 
-  .cockpit-title {
-    font-family: var(--font-sans, system-ui, sans-serif);
+  .skills-title {
     font-size: 2.25rem;
     font-weight: 800;
     color: #f3f4f6;
@@ -278,12 +377,11 @@ const getProficiencyPercentage = (lvl: string) => {
     letter-spacing: -0.02em;
   }
 
-  :global([data-theme="light"]) .cockpit-title {
+  :global([data-theme="light"]) .skills-title {
     color: #111827;
   }
 
-  .cockpit-tagline {
-    font-family: var(--font-sans, system-ui, sans-serif);
+  .skills-tagline {
     font-size: 1rem;
     color: #9ca3af;
     max-width: 780px;
@@ -291,296 +389,395 @@ const getProficiencyPercentage = (lvl: string) => {
     margin: 0;
   }
 
-  :global([data-theme="light"]) .cockpit-tagline {
+  :global([data-theme="light"]) .skills-tagline {
     color: #4b5563;
   }
 
-  /* Sections */
-  .profiler-section {
-    margin: 3rem 0;
+  /* Section Common Styling */
+  .skills-section {
+    margin-bottom: 3.5rem;
   }
 
-  .section-caliper-head {
+  .section-lead-head {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(1, 172, 106, 0.2);
+    align-items: baseline;
+    gap: 10px;
     flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme="light"]) .section-lead-head {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .sec-num {
-    color: var(--primary, #01ac6a);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.82rem;
     font-weight: 700;
-    font-size: 0.88rem;
+    color: var(--primary, #01ac6a);
   }
 
   .sec-title {
-    font-size: 0.88rem;
-    letter-spacing: 0.08em;
+    font-size: 1.35rem;
     font-weight: 700;
-    color: #e5e7eb;
+    color: #f3f4f6;
     margin: 0;
-    text-transform: uppercase;
   }
 
   :global([data-theme="light"]) .sec-title {
     color: #111827;
   }
 
-  .sec-badge {
-    margin-left: auto;
-    font-size: 0.68rem;
-    color: #6b7280;
-    letter-spacing: 0.06em;
+  .sec-subtitle {
+    font-size: 0.82rem;
+    color: #9ca3af;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  :global([data-theme="light"]) .sec-badge {
-    color: #4b5563;
+  :global([data-theme="light"]) .sec-subtitle {
+    color: #64748b;
   }
 
-  /* Capability Matrix */
-  .matrix-categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  /* 01: Core Domains List */
+  .domains-list {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
 
-  .category-panel {
-    background: #080808;
+  .domain-card {
+    background: #0d0f12;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  :global([data-theme="light"]) .category-panel {
+  :global([data-theme="light"]) .domain-card {
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   }
 
-  .category-panel-head {
+  .domain-card:hover {
+    border-color: rgba(1, 172, 106, 0.35);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  :global([data-theme="light"]) .domain-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .domain-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .domain-title-group {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 12px;
   }
 
-  :global([data-theme="light"]) .category-panel-head {
+  .domain-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .domain-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 2px 0;
+  }
+
+  :global([data-theme="light"]) .domain-heading {
+    color: #111827;
+  }
+
+  .domain-badge-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  :global([data-theme="light"]) .domain-badge-tag {
+    color: #4b5563;
+    background: #f1f5f9;
+  }
+
+  .domain-summary {
+    font-size: 0.88rem;
+    color: #9ca3af;
+    max-width: 580px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  :global([data-theme="light"]) .domain-summary {
+    color: #4b5563;
+  }
+
+  .domain-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem 1.25rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1rem;
+  }
+
+  :global([data-theme="light"]) .domain-skills-grid {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  .cat-idx {
-    color: var(--primary, #01ac6a);
-    font-weight: 700;
-    font-size: 0.8rem;
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
-  .cat-title {
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 1.05rem;
+  .skill-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  :global([data-theme="light"]) .skill-name {
+    color: #111827;
+  }
+
+  .skill-context {
+    font-size: 0.74rem;
+    color: #9ca3af;
+    padding-left: 18px;
+    line-height: 1.4;
+  }
+
+  :global([data-theme="light"]) .skill-context {
+    color: #64748b;
+  }
+
+  .domain-tools-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tools-label {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #6b7280;
+    letter-spacing: 0.04em;
+  }
+
+  .tools-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tool-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  :global([data-theme="light"]) .tool-tag {
+    color: #374151;
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /* 02: Toolchain Cards Grid */
+  .toolchain-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .toolchain-card {
+    background: #0d0f12;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  :global([data-theme="light"]) .toolchain-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .toolchain-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  :global([data-theme="light"]) .toolchain-card-head {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .toolchain-card-head h4 {
+    font-size: 0.95rem;
     font-weight: 700;
     color: #f3f4f6;
     margin: 0;
   }
 
-  :global([data-theme="light"]) .cat-title {
+  :global([data-theme="light"]) .toolchain-card-head h4 {
     color: #111827;
   }
 
-  .skills-spec-grid {
+  .toolchain-pills-row {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
-  .skill-spec-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem 0.65rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  .tech-pill {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 3px 8px;
     border-radius: 4px;
     transition: all 0.15s ease;
   }
 
-  :global([data-theme="light"]) .skill-spec-row {
-    background: #f9fafb;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+  :global([data-theme="light"]) .tech-pill {
+    color: #374151;
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .skill-spec-row:hover {
-    border-color: rgba(1, 172, 106, 0.35);
-    background: rgba(1, 172, 106, 0.04);
-  }
-
-  .skill-name-col {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.82rem;
-    font-weight: 500;
-  }
-
-  .skill-icon-terminal {
+  .tech-pill:hover {
+    border-color: var(--primary, #01ac6a);
     color: var(--primary, #01ac6a);
-    font-weight: 700;
   }
 
-  .skill-telemetry-col {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
+  /* 03: Experience Timeline */
+  .experience-timeline {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid rgba(1, 172, 106, 0.3);
+    margin-left: 10px;
   }
 
-  .skill-track-bar {
-    width: 65px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 3px;
-    overflow: hidden;
+  .exp-entry {
+    position: relative;
   }
 
-  :global([data-theme="light"]) .skill-track-bar {
-    background: rgba(0, 0, 0, 0.08);
-  }
-
-  .skill-fill-bar {
-    height: 100%;
+  .exp-timeline-dot {
+    position: absolute;
+    left: -27px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     background: var(--primary, #01ac6a);
-    border-radius: 3px;
+    box-shadow: 0 0 10px var(--primary, #01ac6a);
   }
 
-  .skill-level-pill {
-    font-size: 0.62rem;
-    font-weight: 700;
-    padding: 2px 5px;
-    border-radius: 3px;
-    letter-spacing: 0.04em;
-    min-width: 60px;
-    text-align: center;
-  }
-
-  .pill-adv {
-    background: rgba(1, 172, 106, 0.12);
-    color: var(--primary, #01ac6a);
-    border: 1px solid rgba(1, 172, 106, 0.3);
-  }
-  :global([data-theme="light"]) .pill-adv {
-    color: #017a4b;
-    border-color: rgba(1, 172, 106, 0.35);
-  }
-
-  .pill-mid {
-    background: rgba(59, 130, 246, 0.12);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.3);
-  }
-  :global([data-theme="light"]) .pill-mid {
-    color: #1d4ed8;
-    border-color: rgba(37, 99, 235, 0.35);
-  }
-
-  .pill-learn {
-    background: rgba(245, 158, 11, 0.12);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.3);
-  }
-  :global([data-theme="light"]) .pill-learn {
-    color: #b45309;
-    border-color: rgba(217, 119, 6, 0.35);
-  }
-
-  /* Work Experience Unit */
-  .experience-cockpit-unit {
-    background: #080808;
-    border: 1px solid rgba(1, 172, 106, 0.28);
+  .exp-card {
+    background: #0d0f12;
+    border: 1px solid rgba(1, 172, 106, 0.25);
     border-radius: 8px;
     padding: 1.75rem;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
   }
 
-  :global([data-theme="light"]) .experience-cockpit-unit {
+  :global([data-theme="light"]) .exp-card {
     background: #ffffff;
     border: 1px solid rgba(1, 172, 106, 0.35);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
 
-  .exp-top-banner {
+  .exp-card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 1rem;
     flex-wrap: wrap;
   }
 
-  :global([data-theme="light"]) .exp-top-banner {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .exp-caliper-id {
+  .exp-company-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
     font-size: 0.72rem;
+    font-weight: 700;
     color: var(--primary, #01ac6a);
-    font-weight: 700;
+    letter-spacing: 0.05em;
     display: block;
-    margin-bottom: 0.35rem;
+    margin-bottom: 2px;
   }
 
-  .exp-role-title {
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 1.4rem;
-    font-weight: 700;
+  .exp-role {
+    font-size: 1.35rem;
+    font-weight: 800;
     color: #f3f4f6;
-    margin: 0 0 0.4rem 0;
+    margin: 0 0 4px 0;
   }
 
-  :global([data-theme="light"]) .exp-role-title {
+  :global([data-theme="light"]) .exp-role {
     color: #111827;
   }
 
-  .exp-entity-sub {
-    font-size: 0.88rem;
+  .exp-meta {
+    font-size: 0.8rem;
     color: #9ca3af;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
   }
 
-  :global([data-theme="light"]) .exp-entity-sub {
-    color: #4b5563;
+  :global([data-theme="light"]) .exp-meta {
+    color: #64748b;
   }
 
-  .exp-entity-sub strong {
-    color: #e5e7eb;
-  }
-
-  :global([data-theme="light"]) .exp-entity-sub strong {
-    color: #111827;
-  }
-
-  .exp-status-chip {
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 4px;
+  .exp-period-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(1, 172, 106, 0.1);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--primary, #01ac6a);
+    background: rgba(1, 172, 106, 0.1);
     border: 1px solid rgba(1, 172, 106, 0.3);
-  }
-
-  :global([data-theme="light"]) .exp-status-chip {
-    color: #017a4b;
-    border-color: rgba(1, 172, 106, 0.35);
+    padding: 4px 10px;
+    border-radius: 4px;
   }
 
   .status-pulse-dot {
@@ -588,150 +785,129 @@ const getProficiencyPercentage = (lvl: string) => {
     height: 6px;
     border-radius: 50%;
     background: var(--primary, #01ac6a);
-    box-shadow: 0 0 6px var(--primary, #01ac6a);
-    animation: ledPulse 2s infinite ease-in-out;
+    box-shadow: 0 0 8px var(--primary, #01ac6a);
+    animation: statusPulse 2s infinite ease-in-out;
   }
 
-  @keyframes ledPulse {
+  @keyframes statusPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 0.3; transform: scale(0.85); }
   }
 
-  .exp-summary-text {
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 0.95rem;
-    line-height: 1.65;
+  .exp-summary {
+    font-size: 0.92rem;
+    line-height: 1.6;
     color: #d1d5db;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  :global([data-theme="light"]) .exp-summary-text {
+  :global([data-theme="light"]) .exp-summary {
     color: #374151;
   }
 
-  .exp-bullet-log {
+  .exp-achievements {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
-  .log-entry-item {
+  .exp-achievements li {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     gap: 10px;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
-  }
-
-  :global([data-theme="light"]) .log-entry-item {
-    background: #f9fafb;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-  }
-
-  .bullet-prompt {
-    font-size: 0.72rem;
-    color: var(--primary, #01ac6a);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .log-entry-item p {
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.86rem;
     color: #d1d5db;
-    margin: 0;
+    line-height: 1.5;
   }
 
-  :global([data-theme="light"]) .log-entry-item p {
+  :global([data-theme="light"]) .exp-achievements li {
     color: #374151;
   }
 
-  .log-entry-item strong {
-    color: #ffffff;
+  .exp-stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  :global([data-theme="light"]) .log-entry-item strong {
-    color: #111827;
+  :global([data-theme="light"]) .exp-stack-tags {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  /* Engineering Tenets Grid */
-  .tenets-cockpit-grid {
+  .exp-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  :global([data-theme="light"]) .exp-tag {
+    color: #4b5563;
+    background: #f1f5f9;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /* 04: Principles Grid */
+  .principles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.25rem;
   }
 
-  .tenet-card {
-    background: #080808;
+  .principle-card {
+    background: #0d0f12;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease;
   }
 
-  :global([data-theme="light"]) .tenet-card {
+  :global([data-theme="light"]) .principle-card {
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
-  .tenet-card:hover {
-    border-color: rgba(1, 172, 106, 0.4);
-    transform: translateY(-2px);
+  .principle-card:hover {
+    border-color: rgba(1, 172, 106, 0.35);
   }
 
-  .tenet-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.85rem;
-  }
-
-  .tenet-code {
-    font-size: 0.68rem;
-    color: var(--primary, #01ac6a);
+  .principle-num {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
     font-weight: 700;
-  }
-
-  .tenet-icon-wrap {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: rgba(1, 172, 106, 0.1);
     color: var(--primary, #01ac6a);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.5rem;
   }
 
-  .tenet-title {
-    font-family: var(--font-sans, system-ui, sans-serif);
+  .principle-title {
     font-size: 1.05rem;
     font-weight: 700;
     color: #f3f4f6;
     margin: 0 0 0.5rem 0;
   }
 
-  :global([data-theme="light"]) .tenet-title {
+  :global([data-theme="light"]) .principle-title {
     color: #111827;
   }
 
-  .tenet-desc {
-    font-family: var(--font-sans, system-ui, sans-serif);
+  .principle-text {
     font-size: 0.85rem;
-    line-height: 1.55;
     color: #9ca3af;
+    line-height: 1.55;
     margin: 0;
   }
 
-  :global([data-theme="light"]) .tenet-desc {
+  :global([data-theme="light"]) .principle-text {
     color: #4b5563;
   }
 
@@ -740,11 +916,15 @@ const getProficiencyPercentage = (lvl: string) => {
   }
 
   @media (max-width: 768px) {
-    .cockpit-title {
-      font-size: 1.85rem;
-    }
-    .matrix-categories-grid {
+    .domain-skills-grid {
       grid-template-columns: 1fr;
+    }
+    .experience-timeline {
+      padding-left: 14px;
+      margin-left: 6px;
+    }
+    .exp-timeline-dot {
+      left: -20px;
     }
   }
 </style>

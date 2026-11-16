@@ -16,21 +16,26 @@ const featuredProjects = projects.slice(0, 4);
 const recentArticles = articles.slice(0, 3);
 ---
 
-<BaseLayout title="Abdul Rehman - Software & Automation Engineer | C++ · Python · Linux">
+<BaseLayout title="Abdul Rehman - Software Developer | Python · Linux · AI · C++ · Data">
   <div class="cockpit-container">
     
     <!-- 01: Top Coordinates & Spec Header -->
     <div class="spec-caliper-bar">
       <div class="caliper-item">
-        <span class="caliper-code">Abdul Rehman</span>
+        <span class="caliper-code">ABDUL REHMAN</span>
       </div>
       <div class="caliper-divider"></div>
       <div class="caliper-item">
-        <span class="caliper-code">Software Engineer &bull; Systems &amp; Automation</span>
+        <span class="caliper-code">PYTHON &bull; LINUX &bull; APPLIED AI &bull; C++ &bull; DATA</span>
       </div>
       <div class="caliper-divider"></div>
       <div class="caliper-item">
-        <span class="caliper-code">Islamabad, PK (Remote &amp; Hybrid)</span>
+        <span class="caliper-code">ISLAMABAD, PK (UTC+5 / REMOTE)</span>
+      </div>
+      <div class="caliper-divider"></div>
+      <div class="caliper-item status-item">
+        <span class="status-pulse-dot"></span>
+        <span class="caliper-code text-accent">AVAILABLE FOR WORK</span>
       </div>
     </div>
 
@@ -40,14 +45,14 @@ const recentArticles = articles.slice(0, 3);
       <div class="bento-tile bento-hero-main">
         <div class="hero-status-beacon">
           <span class="beacon-pulse"></span>
-          <span class="beacon-text">SOFTWARE &amp; AUTOMATION ENGINEER</span>
+          <span class="beacon-text">SOFTWARE DEVELOPER &bull; PYTHON · LINUX · AI · C++</span>
         </div>
 
         <h1 class="hero-name">Abdul Rehman</h1>
-        <h2 class="hero-tagline">Systems Programming in C++ &bull; Python Automation &bull; Linux Infrastructure</h2>
+        <h2 class="hero-tagline">Python Automation &bull; Linux Infrastructure &bull; Applied AI &bull; C++ Systems</h2>
 
         <p class="hero-manifesto">
-          I build performant software in <strong>C++</strong> and reliable automation pipelines in <strong>Python</strong>. Grounded in hands-on Linux system administration at <strong>InfraLayers</strong>, I design clean, maintainable tools that automate workflows and solve real engineering problems.
+          I am a <strong>software developer</strong> building at the intersection of <strong>Python automation</strong>, <strong>Linux infrastructure</strong>, <strong>applied AI</strong>, and high-performance <strong>C++</strong>. Grounded in hands-on engineering at <strong>InfraLayers</strong>, I build intelligent data pipelines, custom OCR engines, and resilient tools designed for deterministic performance and long-term maintainability.
         </p>
 
         <!-- Quick CTAs -->
@@ -68,10 +73,11 @@ const recentArticles = articles.slice(0, 3);
 
         <!-- Telemetry Chips -->
         <div class="telemetry-chips-row">
-          <span class="telemetry-chip"><i class="fab fa-linux"></i> Linux Native</span>
-          <span class="telemetry-chip"><i class="fas fa-server"></i> InfraLayers Experience</span>
-          <span class="telemetry-chip"><i class="fas fa-code"></i> Modern C++ &amp; Python</span>
-          <span class="telemetry-chip"><i class="fas fa-check-circle"></i> Clean Architecture</span>
+          <span class="telemetry-chip"><i class="fab fa-python"></i> Python &amp; AsyncIO</span>
+          <span class="telemetry-chip"><i class="fab fa-linux"></i> Linux &amp; DevOps</span>
+          <span class="telemetry-chip"><i class="fas fa-brain"></i> Applied AI &amp; Vision</span>
+          <span class="telemetry-chip"><i class="fas fa-microchip"></i> Modern C++</span>
+          <span class="telemetry-chip"><i class="fas fa-database"></i> Data Pipelines</span>
         </div>
       </div>
 
@@ -208,6 +214,26 @@ const recentArticles = articles.slice(0, 3);
 
   .caliper-code {
     letter-spacing: 0.04em;
+  }
+
+  .status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary, #01ac6a);
+    box-shadow: 0 0 8px var(--primary, #01ac6a);
+    animation: statusPulse 2s infinite ease-in-out;
+  }
+
+  .text-accent {
+    color: var(--primary, #01ac6a);
+    font-weight: 700;
   }
 
   .caliper-divider {

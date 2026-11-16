@@ -3,21 +3,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { articles } from '../data/articles';
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const categories = Array.from(new Set(articles.map(a => a.category)));
+
+// Compute top 8 categories sorted by frequency
+const categoryCounts = articles.reduce<Record<string, number>>((acc, a) => {
+  acc[a.category] = (acc[a.category] || 0) + 1;
+  return acc;
+}, {});
+const categories = Object.keys(categoryCounts)
+  .sort((a, b) => categoryCounts[b] - categoryCounts[a])
+  .slice(0, 8);
 ---
 
 <BaseLayout 
   title="Technical Articles & Guides | Abdul Rehman"
-  description="Read technical guides, Linux automation architectures, and systems programming runbooks written by Abdul Rehman."
+  description="Read technical guides, Linux automation architectures, and software engineering runbooks written by Abdul Rehman."
 >
   <div class="articles-catalog-container">
     <!-- Caliper Header -->
     <div class="caliper-bar">
-      <span class="caliper-tag">[ARTICLES &amp; GUIDES]</span>
+      <span class="caliper-tag">ENGINEERING PUBLICATIONS</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">COUNT: {articles.length} PUBLISHED ARTICLES</span>
+      <span class="caliper-tag">10+ GUIDES, RUNBOOKS &amp; PAPERS</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">SYSTEMS &amp; AUTOMATION</span>
+      <span class="caliper-tag">PYTHON &bull; LINUX &bull; AUTOMATION &bull; DEVOPS</span>
     </div>
 
     <header class="catalog-page-header">
@@ -32,14 +40,14 @@ const categories = Array.from(new Set(articles.map(a => a.category)));
         </a>
       </div>
       <p class="catalog-tagline">
-        Hands-on architectural runbooks, Linux systems administration guides, Python automation workflows, and software engineering deep dives.
+        Hands-on architectural runbooks, Linux infrastructure guides, Python automation workflows, and software engineering deep dives.
       </p>
     </header>
 
-    <!-- Filter Bar -->
+    <!-- Filter Bar (Top 8 Tags) -->
     <div class="filter-controls" id="articles-filter-bar">
       <button type="button" class="filter-btn active" data-filter="all">
-        <i class="fas fa-layer-group"></i> All Articles ({articles.length})
+        <i class="fas fa-layer-group"></i> All Articles (10+)
       </button>
       {categories.map((cat) => (
         <button type="button" class="filter-btn" data-filter={cat.toLowerCase()}>

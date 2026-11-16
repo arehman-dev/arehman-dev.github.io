@@ -39,12 +39,14 @@ const isCompleted = project.status.toLowerCase() === 'completed' || project.stat
     <div class="caliper-bar">
       <a href={`${base}projects/`} class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span>RETURN TO PROJECTS</span>
+        <span>ALL PROJECTS (10+)</span>
       </a>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">[{schematicId}]</span>
+      <span class="caliper-tag">ID: {schematicId}</span>
       <span class="caliper-div">&bull;</span>
-      <span class="caliper-tag">STATUS: {project.status.toUpperCase()}</span>
+      <span class="caliper-tag">STACK: {project.tags[0]?.toUpperCase() || 'DEVELOPER'}</span>
+      <span class="caliper-div">&bull;</span>
+      <span class="caliper-tag">STATUS: {project.status.toUpperCase()} &bull; ACTIVE</span>
     </div>
 
     <!-- Dossier Header Unit -->
