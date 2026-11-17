@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 48" width="100%" height="100%">
+  <defs>
+    <filter id="emerald-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <style>
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.5; r: 4; }
+      50% { opacity: 1; r: 5; }
+    }
+    .mono {
+      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    }
+    .live-dot {
+      animation: pulse-dot 2.2s infinite ease-in-out;
+    }
+  </style>
+
+  <!-- Capsule Canvas -->
+  <rect width="1200" height="48" rx="8" fill="#030712" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- Left: Live Status -->
+  <g transform="translate(24, 24)">
+    <circle cx="0" cy="0" r="4.5" fill="#10b981" filter="url(#emerald-glow)" class="live-dot" />
+    <text x="14" y="4" class="mono" font-size="12px" fill="#10b981" font-weight="700" letter-spacing="0.5px">
+      STATUS: AVAILABLE (REMOTE / HYBRID)
+    </text>
+  </g>
+
+  <!-- Center subtle divider pip -->
+  <circle cx="560" cy="24" r="2" fill="#334155" />
+
+  <!-- Right: Core Disciplines -->
+  <g transform="translate(1176, 24)">
+    <text x="0" y="4" text-anchor="end" class="mono" font-size="12px" fill="#94a3b8" font-weight="500" letter-spacing="0.3px">
+      <tspan fill="#64748b">CORE:</tspan> <tspan fill="#e2e8f0" font-weight="600">PYTHON</tspan> <tspan fill="#334155">•</tspan> <tspan fill="#e2e8f0" font-weight="600">LINUX &amp; RHEL</tspan> <tspan fill="#334155">•</tspan> <tspan fill="#e2e8f0" font-weight="600">APPLIED AI</tspan> <tspan fill="#334155">•</tspan> <tspan fill="#e2e8f0" font-weight="600">MODERN C++</tspan>
+    </text>
+  </g>
+</svg>
